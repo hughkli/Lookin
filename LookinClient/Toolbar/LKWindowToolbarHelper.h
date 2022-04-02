@@ -15,7 +15,6 @@ extern NSToolbarItemIdentifier const LKToolBarIdentifier_Setting;
 extern NSToolbarItemIdentifier const LKToolBarIdentifier_Reload;
 extern NSToolbarItemIdentifier const LKToolBarIdentifier_App;
 extern NSToolbarItemIdentifier const LKToolBarIdentifier_AppInReadMode;
-extern NSToolbarItemIdentifier const LKToolBarIdentifier_MethodTrace;
 extern NSToolbarItemIdentifier const LKToolBarIdentifier_Console;
 extern NSToolbarItemIdentifier const LKToolBarIdentifier_Add;
 extern NSToolbarItemIdentifier const LKToolBarIdentifier_Remove;

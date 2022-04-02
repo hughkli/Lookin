@@ -19,7 +19,6 @@ NSToolbarItemIdentifier const LKToolBarIdentifier_Scale = @"1";
 NSToolbarItemIdentifier const LKToolBarIdentifier_Setting = @"2";
 NSToolbarItemIdentifier const LKToolBarIdentifier_Reload = @"3";
 NSToolbarItemIdentifier const LKToolBarIdentifier_App = @"5";
-NSToolbarItemIdentifier const LKToolBarIdentifier_MethodTrace = @"9";
 NSToolbarItemIdentifier const LKToolBarIdentifier_AppInReadMode = @"12";
 NSToolbarItemIdentifier const LKToolBarIdentifier_Add = @"13";
 NSToolbarItemIdentifier const LKToolBarIdentifier_Remove = @"14";
@@ -224,23 +223,6 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
         return item;
     }
     
-    if ([identifier isEqualToString:LKToolBarIdentifier_MethodTrace]) {
-        NSImage *image = NSImageMake(@"icon_toolbar_method");
-        image.template = YES;
-        
-        NSButton *button = [NSButton new];
-        [button setImage:image];
-        button.bezelStyle = NSBezelStyleTexturedRounded;
-        
-        NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:LKToolBarIdentifier_MethodTrace];
-        item.label = NSLocalizedString(@"Method Trace", nil);
-        item.view = button;
-        item.minSize = NSMakeSize(48, 34);
-        item.target = self;
-        item.action = @selector(_handleMethodTrace);
-        return item;
-    }
-    
     if ([identifier isEqualToString:LKToolBarIdentifier_Console]) {
         NSImage *image = NSImageMake(@"icon_console");
         image.template = YES;
@@ -367,10 +349,6 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
 
 - (void)_handleAppInReadMode:(NSButton *)button {
 //    LookinAppInfo *appInfo = [button lookin_getBindObjectForKey:LKToolBarIdentifier_AppInReadMode];
-}
-
-- (void)_handleMethodTrace {
-    [[LKNavigationManager sharedInstance] showMethodTrace];
 }
 
 - (void)_handleFreeRotationDidChange:(LookinMsgActionParams *)param {

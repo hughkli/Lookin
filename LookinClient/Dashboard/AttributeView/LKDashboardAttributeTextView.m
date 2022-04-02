@@ -36,12 +36,6 @@
 - (void)layout {
     [super layout];
     $(self.scrollView).fullFrame;
-    
-    if (@available(macOS 10.14, *)) {
-    } else {
-        /// 10.14 之前的系统，scrollableTextView 是我们自己实现的简单版本，需要业务自己负责这里的布局
-        $(self.textView).fullWidth.heightToFit;
-    }
 }
 
 - (void)renderWithAttribute {

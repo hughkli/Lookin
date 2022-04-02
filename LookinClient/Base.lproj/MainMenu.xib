@@ -141,6 +141,10 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="fae-2U-koj"/>
+                            <menuItem title="Method Trace" tag="55" id="bHZ-OY-nHf">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>

@@ -27,22 +27,20 @@
 - (void)applicationWillFinishLaunching:(NSNotification *)notification {
     [[LKAppMenuManager sharedInstance] setup];
     
-    if (@available(macOS 10.14, *)) {
-        [RACObserve([LKPreferenceManager mainManager], appearanceType) subscribeNext:^(NSNumber *number) {
-            LookinPreferredAppeanranceType type = [number integerValue];
-            switch (type) {
-                case LookinPreferredAppeanranceTypeDark:
-                    NSApp.appearance = [NSAppearance appearanceNamed:NSAppearanceNameDarkAqua];
-                    break;
-                case LookinPreferredAppeanranceTypeLight:
-                    NSApp.appearance = [NSAppearance appearanceNamed:NSAppearanceNameAqua];
-                    break;
-                default:
-                    NSApp.appearance = nil;
-                    break;
-            }
-        }];
-    }
+    [RACObserve([LKPreferenceManager mainManager], appearanceType) subscribeNext:^(NSNumber *number) {
+        LookinPreferredAppeanranceType type = [number integerValue];
+        switch (type) {
+            case LookinPreferredAppeanranceTypeDark:
+                NSApp.appearance = [NSAppearance appearanceNamed:NSAppearanceNameDarkAqua];
+                break;
+            case LookinPreferredAppeanranceTypeLight:
+                NSApp.appearance = [NSAppearance appearanceNamed:NSAppearanceNameAqua];
+                break;
+            default:
+                NSApp.appearance = nil;
+                break;
+        }
+    }];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {

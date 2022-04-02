@@ -23,6 +23,7 @@
 - (void)appMenuManagerDidSelectExpansionIndex:(NSUInteger)index;
 - (void)appMenuManagerDidSelectFilter;
 - (void)appMenuManagerDidSelectDelayReload;
+- (void)appMenuManagerDidSelectMethodTrace;
 
 - (void)appMenuManagerDidSelectExport;
 - (void)appMenuManagerDidSelectOpenInNewWindow;

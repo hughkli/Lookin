@@ -32,7 +32,6 @@ static NSUInteger const kTag_IncreaseInterspace = 26;
 static NSUInteger const kTag_Expansion = 27;
 static NSUInteger const kTag_Filter = 28;
 static NSUInteger const kTag_DelayReload = 29;
-
 static NSUInteger const kTag_OpenInNewWindow = 31;
 static NSUInteger const kTag_Export = 32;
 
@@ -41,6 +40,7 @@ static NSUInteger const kTag_CocoaPods = 51;
 static NSUInteger const kTag_ShowWebsite = 52;
 static NSUInteger const kTag_ShowConfig = 53;
 static NSUInteger const kTag_ShowLookiniOS = 54;
+static NSUInteger const kTag_MethodTrace = 55;
 
 @interface LKAppMenuManager ()
 
@@ -75,7 +75,8 @@ static NSUInteger const kTag_ShowLookiniOS = 54;
                                    @(kTag_Export):NSStringFromSelector(@selector(appMenuManagerDidSelectExport)),
                                    @(kTag_OpenInNewWindow):NSStringFromSelector(@selector(appMenuManagerDidSelectOpenInNewWindow)),
                                    @(kTag_Filter):NSStringFromSelector(@selector(appMenuManagerDidSelectFilter)),
-                                   @(kTag_DelayReload):NSStringFromSelector(@selector(appMenuManagerDidSelectDelayReload))
+                                   @(kTag_DelayReload):NSStringFromSelector(@selector(appMenuManagerDidSelectDelayReload)),
+                                   @(kTag_MethodTrace):NSStringFromSelector(@selector(appMenuManagerDidSelectMethodTrace)),
     };
     
     NSMenu *menu = [NSApp mainMenu];

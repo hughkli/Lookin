@@ -97,7 +97,7 @@
         [[[RACSignal combineLatest:@[RACObserve(self, isFetchingHierarchy),
                                      RACObserve(self, isSyncingScreenshots)]] distinctUntilChanged] subscribeNext:^(RACTuple * _Nullable x) {
             @strongify(self);
-            [@[LKToolBarIdentifier_App, LKToolBarIdentifier_MethodTrace, LKToolBarIdentifier_Console] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [@[LKToolBarIdentifier_App, LKToolBarIdentifier_Console] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 NSToolbarItem *item = self.toolbarItemsMap[obj];
                 if (self.isFetchingHierarchy || self.isSyncingScreenshots) {
                     item.enabled = NO;
@@ -185,7 +185,7 @@
 }
 
 - (NSArray<NSToolbarItemIdentifier> *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar {
-    return @[LKToolBarIdentifier_Reload, LKToolBarIdentifier_App, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Dimension, LKToolBarIdentifier_Rotation, LKToolBarIdentifier_Setting, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Scale, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Measure, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_MethodTrace, LKToolBarIdentifier_Console];
+    return @[LKToolBarIdentifier_Reload, LKToolBarIdentifier_App, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Dimension, LKToolBarIdentifier_Rotation, LKToolBarIdentifier_Setting, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Scale, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Measure, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Console];
 }
 
 - (nullable NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSToolbarItemIdentifier)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {
@@ -437,6 +437,10 @@
             [self.viewController showDelayReloadTipWithSeconds:seconds];
         }
     }];
+}
+
+- (void)appMenuManagerDidSelectMethodTrace {
+    [[LKNavigationManager sharedInstance] showMethodTrace];
 }
 
 @end

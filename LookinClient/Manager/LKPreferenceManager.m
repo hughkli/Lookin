@@ -229,11 +229,7 @@ static NSString * const Key_ServerSetupType = @"serverSetupType";
 }
 
 + (BOOL)canAdjustAppearance {
-    if (@available(macOS 10.14, *)) {
-        return YES;
-    } else {
-        return NO;
-    }
+    return YES;
 }
 
 - (void)setExpansionIndex:(NSInteger)expansionIndex {

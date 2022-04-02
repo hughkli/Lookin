@@ -72,11 +72,7 @@ const CGFloat ZoomSliderMaxValue = 2.8;
 }
 
 + (NSColor *)accentColor {
-    if (@available(macOS 10.14, *)) {
-        return [NSColor controlAccentColor];
-    } else {
-        return [NSColor systemBlueColor];
-    }
+    return [NSColor controlAccentColor];
 }
 
 + (NSArray<NSString *> *)bestMatchesInCandidates:(NSArray<NSString *> *)candidates input:(NSString *)input maxResultsCount:(NSUInteger)maxResultsCount {
@@ -169,15 +165,7 @@ const CGFloat ZoomSliderMaxValue = 2.8;
 }
 
 + (NSScrollView *)scrollableTextView {
-    if (@available(macOS 10.14, *)) {
-        return [NSTextView scrollableTextView];
-    } else {
-        NSTextView *textView = [NSTextView new];
-        NSScrollView *scrollView = [NSScrollView new];
-        scrollView.drawsBackground = NO;
-        scrollView.documentView = textView;
-        return scrollView;        
-    }
+    return [NSTextView scrollableTextView];
 }
 
 @end
