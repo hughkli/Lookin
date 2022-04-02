@@ -33,9 +33,11 @@
 
 - (instancetype)initWithFile:(LookinHierarchyFile *)file {
     NSSize screenSize = [NSScreen mainScreen].frame.size;
-    LKWindow *window = [[LKWindow alloc] initWithContentRect:NSMakeRect(0, 0, screenSize.width * .7, screenSize.height * .7) styleMask:NSWindowStyleMaskFullSizeContentView|NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskMiniaturizable|NSWindowStyleMaskResizable|NSWindowStyleMaskUnifiedTitleAndToolbar backing:NSBackingStoreBuffered defer:YES];
-    window.backgroundColor = [NSColor clearColor];
+    LKWindow *window = [[LKWindow alloc] initWithContentRect:NSMakeRect(0, 0, screenSize.width * .7, screenSize.height * .7) styleMask:NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskMiniaturizable|NSWindowStyleMaskResizable|NSWindowStyleMaskFullSizeContentView backing:NSBackingStoreBuffered defer:YES];
     window.tabbingMode = NSWindowTabbingModeDisallowed;
+    if (@available(macOS 11.0, *)) {
+        window.toolbarStyle = NSWindowToolbarStyleUnified;
+    }
     window.minSize = NSMakeSize(800, 500);
     [window center];
     
