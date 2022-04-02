@@ -52,8 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
-
 /**
  便利的 ShortCocoa 初始化方法，该参数的第一个传入值 something 可以为对象也可以为 Class，从而实现了 $(UIView) 这种写法
  @note 该方法因为有 ShortCocoa 的前缀命名空间因此更加安全，主要在 ShortCocoa 内部使用。外部请使用更便利的 $(...) 方法
@@ -88,3 +86,5 @@ _61,_62,_63,N,...) N
  如果传入 Class 则返回该 Class 的一个实例，否则直接将传入的参数返回
  */
 id ShortCocoaMakeInstance(id object);
+
+NS_ASSUME_NONNULL_END

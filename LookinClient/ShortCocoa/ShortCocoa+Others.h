@@ -13,6 +13,8 @@
 #import <Appkit/Appkit.h>
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ShortCocoa (Others)
 
 /**
@@ -89,3 +91,5 @@
 - (NSArray *)array;
 
 @end
+
+NS_ASSUME_NONNULL_END

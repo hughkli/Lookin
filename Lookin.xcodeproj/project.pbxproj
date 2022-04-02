@@ -14,7 +14,7 @@
 		A26EF69727F89F83005A9E4E /* ShortCocoa+String.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68C27F89F83005A9E4E /* ShortCocoa+String.m */; };
 		A26EF69827F89F83005A9E4E /* ShortCocoa+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68F27F89F83005A9E4E /* ShortCocoa+Layout.m */; };
 		A26EF69927F89F83005A9E4E /* ShortCocoa+UIToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF69127F89F83005A9E4E /* ShortCocoa+UIToolkit.m */; };
-		A2DF3B1827F8B3E4004AFC2A /* LookinServer.zip in CopyFiles */ = {isa = PBXBuildFile; fileRef = A2DF3B1727F8B3E4004AFC2A /* LookinServer.zip */; };
+		A2B5537827F8BDD100FCA139 /* LookinServer.zip in Resources */ = {isa = PBXBuildFile; fileRef = A2B5537727F8BDD100FCA139 /* LookinServer.zip */; };
 		AA01EF2722DD0D26002A2E06 /* LKHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AA01EF2522DD0D26002A2E06 /* LKHelper.m */; };
 		AA049A1721E61B85008C6366 /* LKMenuPopoverSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA049A1621E61B85008C6366 /* LKMenuPopoverSettingController.m */; };
 		AA05CCD4221ED5CA0086CDD1 /* LKDashboardAttributeNumberInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05CCD3221ED5CA0086CDD1 /* LKDashboardAttributeNumberInputView.m */; };
@@ -178,7 +178,6 @@
 			dstPath = LookinServerFramework;
 			dstSubfolderSpec = 7;
 			files = (
-				A2DF3B1827F8B3E4004AFC2A /* LookinServer.zip in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +210,7 @@
 		A26EF69127F89F83005A9E4E /* ShortCocoa+UIToolkit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShortCocoa+UIToolkit.m"; sourceTree = "<group>"; };
 		A26EF69227F89F83005A9E4E /* ShortCocoa+Others.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShortCocoa+Others.h"; sourceTree = "<group>"; };
 		A26EF69327F89F83005A9E4E /* ShortCocoaCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortCocoaCore.h; sourceTree = "<group>"; };
-		A2DF3B1727F8B3E4004AFC2A /* LookinServer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = LookinServer.zip; sourceTree = "<group>"; };
+		A2B5537727F8BDD100FCA139 /* LookinServer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = LookinServer.zip; sourceTree = "<group>"; };
 		AA01EF2522DD0D26002A2E06 /* LKHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKHelper.m; sourceTree = "<group>"; };
 		AA01EF2622DD0D26002A2E06 /* LKHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKHelper.h; sourceTree = "<group>"; };
 		AA049A1521E61B85008C6366 /* LKMenuPopoverSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMenuPopoverSettingController.h; sourceTree = "<group>"; };
@@ -558,6 +557,14 @@
 			path = ShortCocoa;
 			sourceTree = "<group>";
 		};
+		A2B5537627F8BDD100FCA139 /* LookinServerFramework */ = {
+			isa = PBXGroup;
+			children = (
+				A2B5537727F8BDD100FCA139 /* LookinServer.zip */,
+			);
+			path = LookinServerFramework;
+			sourceTree = "<group>";
+		};
 		AA05CCD1221ED50B0086CDD1 /* AttributeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -689,7 +696,6 @@
 		AA48F29221CC0CA50032EC2C = {
 			isa = PBXGroup;
 			children = (
-				A2DF3B1727F8B3E4004AFC2A /* LookinServer.zip */,
 				AA48F29D21CC0CA50032EC2C /* LookinClient */,
 				AA48F29C21CC0CA50032EC2C /* Products */,
 				5D159F647DFD4AA3F8E7F9E7 /* Pods */,
@@ -708,6 +714,7 @@
 		AA48F29D21CC0CA50032EC2C /* LookinClient */ = {
 			isa = PBXGroup;
 			children = (
+				A2B5537627F8BDD100FCA139 /* LookinServerFramework */,
 				AA6E0D8322E1D5BD00948877 /* Localizable.strings */,
 				AA48F2A921CC0CA60032EC2C /* Lookin.entitlements */,
 				AAA8C11C21CC17680017A345 /* AppDelegate.h */,
@@ -1127,6 +1134,7 @@
 				AA6E0D8122E1D5BD00948877 /* Localizable.strings in Resources */,
 				AA66488C23696D220043B50A /* logo_jump.gif in Resources */,
 				AA48F2A521CC0CA60032EC2C /* MainMenu.xib in Resources */,
+				A2B5537827F8BDD100FCA139 /* LookinServer.zip in Resources */,
 				AA77A32D22CE0E7100C73721 /* lookin_icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
