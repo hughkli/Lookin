@@ -1,0 +1,22 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "dashboard_bounds.pdf"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "LookinClient_Assets.xcassets_Dashboard_dashboard_bounds.imageset_dashboard_bounds_dark_Before_10ca4721b4bc2b2619da35416527f9bcbfcd7bae.pdf",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ]
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

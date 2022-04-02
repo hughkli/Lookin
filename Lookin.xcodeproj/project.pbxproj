@@ -1,0 +1,1557 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		094E413CB04F29F94551D070 /* Pods_LookinClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A3B0CB06C22A05EDC913F3 /* Pods_LookinClient.framework */; };
+		A26EF69427F89F83005A9E4E /* ShortCocoa+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68827F89F83005A9E4E /* ShortCocoa+Private.m */; };
+		A26EF69527F89F83005A9E4E /* ShortCocoaCore.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68927F89F83005A9E4E /* ShortCocoaCore.m */; };
+		A26EF69627F89F83005A9E4E /* ShortCocoa+Others.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68A27F89F83005A9E4E /* ShortCocoa+Others.m */; };
+		A26EF69727F89F83005A9E4E /* ShortCocoa+String.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68C27F89F83005A9E4E /* ShortCocoa+String.m */; };
+		A26EF69827F89F83005A9E4E /* ShortCocoa+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68F27F89F83005A9E4E /* ShortCocoa+Layout.m */; };
+		A26EF69927F89F83005A9E4E /* ShortCocoa+UIToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF69127F89F83005A9E4E /* ShortCocoa+UIToolkit.m */; };
+		A2DF3B1827F8B3E4004AFC2A /* LookinServer.zip in CopyFiles */ = {isa = PBXBuildFile; fileRef = A2DF3B1727F8B3E4004AFC2A /* LookinServer.zip */; };
+		AA01EF2722DD0D26002A2E06 /* LKHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AA01EF2522DD0D26002A2E06 /* LKHelper.m */; };
+		AA049A1721E61B85008C6366 /* LKMenuPopoverSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA049A1621E61B85008C6366 /* LKMenuPopoverSettingController.m */; };
+		AA05CCD4221ED5CA0086CDD1 /* LKDashboardAttributeNumberInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05CCD3221ED5CA0086CDD1 /* LKDashboardAttributeNumberInputView.m */; };
+		AA05CCD7221ED5E80086CDD1 /* LKDashboardAttributeSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05CCD6221ED5E80086CDD1 /* LKDashboardAttributeSwitchView.m */; };
+		AA05CCDA221ED5F60086CDD1 /* LKDashboardAttributeColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05CCD9221ED5F60086CDD1 /* LKDashboardAttributeColorView.m */; };
+		AA05CCDD221ED6110086CDD1 /* LKDashboardAttributeEnumsView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05CCDC221ED6110086CDD1 /* LKDashboardAttributeEnumsView.m */; };
+		AA0A2DCD233F6AE4008BF946 /* LKDashboardAttributeConstraintsItemControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0A2DCC233F6AE4008BF946 /* LKDashboardAttributeConstraintsItemControl.m */; };
+		AA0A2DDB233F81D9008BF946 /* LKPopPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0A2DDA233F81D9008BF946 /* LKPopPanel.m */; };
+		AA13691E22C3DA6F00B8AE87 /* LKTutorialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA13691D22C3DA6F00B8AE87 /* LKTutorialManager.m */; };
+		AA17857E22DE65D20042C8F0 /* LKTutorialPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA17857D22DE65D20042C8F0 /* LKTutorialPopoverController.m */; };
+		AA17F390232FBD710082F393 /* LKDashboardAttributeTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA17F38F232FBD710082F393 /* LKDashboardAttributeTextView.m */; };
+		AA1BE2502237D6A700DB38E6 /* LKTextControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1BE24F2237D6A700DB38E6 /* LKTextControl.m */; };
+		AA1CAA3E22E471EC006D9285 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1CAA3D22E471EC006D9285 /* Security.framework */; };
+		AA20A499232A2A2300AC80AA /* LKDashboardAttributeConstraintsView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA20A498232A2A2300AC80AA /* LKDashboardAttributeConstraintsView.m */; };
+		AA22310D22AA717E00A5A975 /* LKDashboardSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA22310C22AA717E00A5A975 /* LKDashboardSectionView.m */; };
+		AA22A0ED2276D65B00356E70 /* LKHierarchyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA22A0EC2276D65B00356E70 /* LKHierarchyItem.m */; };
+		AA23624B222C67C1008FE069 /* NSAppearance+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AA23624A222C67C1008FE069 /* NSAppearance+LookinClient.m */; };
+		AA28179F22B0305400A0874C /* LKDashboardAttributeRowsCountView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA28179E22B0305400A0874C /* LKDashboardAttributeRowsCountView.m */; };
+		AA290358229824A400073B65 /* LKPanelContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA290357229824A400073B65 /* LKPanelContentView.m */; };
+		AA2F1AF32303F34B004725D6 /* LKTextsMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2F1AF22303F34B004725D6 /* LKTextsMenuView.m */; };
+		AA2F1AF623040552004725D6 /* NSArray+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2F1AF523040552004725D6 /* NSArray+LookinClient.m */; };
+		AA30216021F32908000B0084 /* LKColorIndicatorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AA30215F21F32908000B0084 /* LKColorIndicatorLayer.m */; };
+		AA34A15E233F884D00513829 /* LKConstraintPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA34A15D233F884D00513829 /* LKConstraintPopoverController.m */; };
+		AA356AF5228EE6A3005C3969 /* NSColor+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AA356AF4228EE6A3005C3969 /* NSColor+LookinClient.m */; };
+		AA39054D23694C3100CA7646 /* LKAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA39054C23694C3100CA7646 /* LKAboutWindowController.m */; };
+		AA39055123694D5D00CA7646 /* LKAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA39055023694D5D00CA7646 /* LKAboutViewController.m */; };
+		AA3A7D0523003D7A00997887 /* LKHierarchyHandlersPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A7D0323003D7A00997887 /* LKHierarchyHandlersPopoverController.m */; };
+		AA3A7D0923003F5800997887 /* LKHierarchyHandlersPopoverItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A7D0823003F5800997887 /* LKHierarchyHandlersPopoverItemView.m */; };
+		AA3D51AA2289E57C00E4E6B7 /* LKExportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3D51A92289E57C00E4E6B7 /* LKExportManager.m */; };
+		AA443BA322C40354009543D1 /* LKMethodTraceLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA443BA222C40354009543D1 /* LKMethodTraceLaunchView.m */; };
+		AA48F2A221CC0CA60032EC2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA48F2A121CC0CA60032EC2C /* Assets.xcassets */; };
+		AA48F2A521CC0CA60032EC2C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA48F2A321CC0CA60032EC2C /* MainMenu.xib */; };
+		AA48F2A821CC0CA60032EC2C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA48F2A721CC0CA60032EC2C /* main.m */; };
+		AA50753A22A27CC500D2A5AC /* LKConsoleDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AA50753922A27CC500D2A5AC /* LKConsoleDataSource.m */; };
+		AA50753D22A27EAD00D2A5AC /* LKConsoleDataSourceRowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA50753C22A27EAD00D2A5AC /* LKConsoleDataSourceRowItem.m */; };
+		AA50754322A2844400D2A5AC /* LKConsoleInputRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA50754222A2844400D2A5AC /* LKConsoleInputRowView.m */; };
+		AA50755122A28A0A00D2A5AC /* LKConsoleSubmitRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA50755022A28A0A00D2A5AC /* LKConsoleSubmitRowView.m */; };
+		AA50755422A28A1600D2A5AC /* LKConsoleReturnRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA50755322A28A1600D2A5AC /* LKConsoleReturnRowView.m */; };
+		AA50755722A3E76A00D2A5AC /* LKInputSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA50755622A3E76A00D2A5AC /* LKInputSearchView.m */; };
+		AA50755E22A3EE4A00D2A5AC /* LKInputSearchSuggestionWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA50755D22A3EE4A00D2A5AC /* LKInputSearchSuggestionWindowController.m */; };
+		AA56062D2322A733008C82CF /* LKDashboardSearchMethodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA56062C2322A733008C82CF /* LKDashboardSearchMethodsView.m */; };
+		AA5606302322AEA7008C82CF /* LKDashboardSearchMethodsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AA56062F2322AEA7008C82CF /* LKDashboardSearchMethodsDataSource.m */; };
+		AA5AE70622C2B2E50064D41B /* LookinDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5AE70522C2B2E50064D41B /* LookinDocument.m */; };
+		AA5C54DB2289DF97004E09F4 /* LKWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5C54DA2289DF97004E09F4 /* LKWindow.m */; };
+		AA65ED492341FE8300F0BF34 /* LKTwoColors.m in Sources */ = {isa = PBXBuildFile; fileRef = AA65ED482341FE8300F0BF34 /* LKTwoColors.m */; };
+		AA66488C23696D220043B50A /* logo_jump.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA66488B23696D220043B50A /* logo_jump.gif */; };
+		AA66645F22DBBAC7009E05CC /* NSString+Score.m in Sources */ = {isa = PBXBuildFile; fileRef = AA66645D22DBBAC7009E05CC /* NSString+Score.m */; };
+		AA66C5A1231924BD00085C76 /* LKDashboardAccessoryWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA66C5A0231924BD00085C76 /* LKDashboardAccessoryWindowController.m */; };
+		AA66C5A7231965EE00085C76 /* LKUserActionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA66C5A6231965EE00085C76 /* LKUserActionManager.m */; };
+		AA6CC488221FE7DE00CA6D54 /* LKNumberInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6CC487221FE7DE00CA6D54 /* LKNumberInputView.m */; };
+		AA6E0D8122E1D5BD00948877 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA6E0D8322E1D5BD00948877 /* Localizable.strings */; };
+		AA74B1CC22897C9400366865 /* LKReadHierarchyController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA74B1CB22897C9400366865 /* LKReadHierarchyController.m */; };
+		AA77A32D22CE0E7100C73721 /* lookin_icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA77A32C22CE0E7100C73721 /* lookin_icon.icns */; };
+		AA7F157822C0F2B9004436AD /* LKConnectionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7F157722C0F2B9004436AD /* LKConnectionRequest.m */; };
+		AA8133F022AFAEA1000A9D40 /* LKDashboardAttributePointView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8133EF22AFAEA1000A9D40 /* LKDashboardAttributePointView.m */; };
+		AA8CFE212296DD5300B98BA2 /* LKMethodTraceWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8CFE202296DD5300B98BA2 /* LKMethodTraceWindowController.m */; };
+		AA8CFE252296DD7F00B98BA2 /* LKMethodTraceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8CFE242296DD7F00B98BA2 /* LKMethodTraceViewController.m */; };
+		AA98EC96222703CC0083348D /* LKPreferenceSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA98EC95222703CC0083348D /* LKPreferenceSwitchView.m */; };
+		AA98EC9C22270B800083348D /* LKPreferencePopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA98EC9A22270B800083348D /* LKPreferencePopupView.m */; };
+		AA9A3D732269DDCE00BE46C7 /* LKConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9A3D6D2269DDCD00BE46C7 /* LKConsoleViewController.m */; };
+		AA9CC2C522891EA20014D13B /* LKExportAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9CC2C422891EA20014D13B /* LKExportAccessoryView.m */; };
+		AAA2C6142297D5CF005CBA10 /* LKMethodTraceDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA2C6132297D5CF005CBA10 /* LKMethodTraceDataSource.m */; };
+		AAA8C11D21CC17680017A345 /* LKInspectableApp.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C08A21CC17670017A345 /* LKInspectableApp.m */; };
+		AAA8C11E21CC17680017A345 /* LKAppsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C08B21CC17670017A345 /* LKAppsManager.m */; };
+		AAA8C11F21CC17680017A345 /* LKConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C08C21CC17670017A345 /* LKConnectionManager.m */; };
+		AAA8C12021CC17680017A345 /* LKNavigationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C08E21CC17670017A345 /* LKNavigationManager.m */; };
+		AAA8C12221CC17680017A345 /* LKLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C09221CC17670017A345 /* LKLabel.m */; };
+		AAA8C12421CC17680017A345 /* ShortCocoa+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C09621CC17670017A345 /* ShortCocoa+LookinClient.m */; };
+		AAA8C12621CC17680017A345 /* LKProgressIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C09A21CC17670017A345 /* LKProgressIndicatorView.m */; };
+		AAA8C12721CC17680017A345 /* LKImageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C09B21CC17670017A345 /* LKImageControl.m */; };
+		AAA8C12821CC17680017A345 /* LKBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C09C21CC17670017A345 /* LKBaseViewController.m */; };
+		AAA8C12A21CC17680017A345 /* LKBaseControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C0A021CC17670017A345 /* LKBaseControl.m */; };
+		AAA8C12B21CC17680017A345 /* LKBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C0A321CC17670017A345 /* LKBaseView.m */; };
+		AAA8C12E21CC17680017A345 /* LKHierarchyView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C0AD21CC17670017A345 /* LKHierarchyView.m */; };
+		AAA8C12F21CC17680017A345 /* LKHierarchyRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C0AE21CC17670017A345 /* LKHierarchyRowView.m */; };
+		AAA8C13421CC17680017A345 /* NSView+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C0B421CC17670017A345 /* NSView+LookinClient.m */; };
+		AAA8C13A21CC17680017A345 /* LKStaticHierarchyController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C0CA21CC17670017A345 /* LKStaticHierarchyController.m */; };
+		AAA8C14021CC17680017A345 /* LKDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C0DF21CC17680017A345 /* LKDashboardViewController.m */; };
+		AAA8C14221CC17680017A345 /* LKEnumListRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C0E621CC17680017A345 /* LKEnumListRegistry.m */; };
+		AAA8C14621CC17680017A345 /* LKDashboardCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C0EA21CC17680017A345 /* LKDashboardCardView.m */; };
+		AAA8C14A21CC17680017A345 /* LKDashboardAttributeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C0EF21CC17680017A345 /* LKDashboardAttributeView.m */; };
+		AAA8C14F21CC17680017A345 /* LKMenuPopoverAppsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C0F821CC17680017A345 /* LKMenuPopoverAppsListController.m */; };
+		AAA8C15721CC17680017A345 /* LKPreviewPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C10C21CC17680017A345 /* LKPreviewPanGestureRecognizer.m */; };
+		AAA8C15821CC17680017A345 /* LKPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C10E21CC17680017A345 /* LKPreviewController.m */; };
+		AAA8C15921CC17680017A345 /* LKPreviewStageView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C10F21CC17680017A345 /* LKPreviewStageView.m */; };
+		AAA8C15A21CC17680017A345 /* LKSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C11021CC17680017A345 /* LKSplitView.m */; };
+		AAA8C15B21CC17680017A345 /* LKStaticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C11121CC17680017A345 /* LKStaticViewController.m */; };
+		AAA8C15C21CC17680017A345 /* LKStaticWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C11221CC17680017A345 /* LKStaticWindowController.m */; };
+		AAA8C15D21CC17680017A345 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C11321CC17680017A345 /* AppDelegate.m */; };
+		AAA8C15E21CC17680017A345 /* LKLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C11621CC17680017A345 /* LKLaunchViewController.m */; };
+		AAA8C15F21CC17680017A345 /* LKLaunchAppView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C11821CC17680017A345 /* LKLaunchAppView.m */; };
+		AAA8C16021CC17680017A345 /* LKLaunchWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C11A21CC17680017A345 /* LKLaunchWindowController.m */; };
+		AAA9638D228428EE0047F707 /* NSPointerArray+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA9638C228428EE0047F707 /* NSPointerArray+LookinClient.m */; };
+		AAAEB36E22B408DF00A3DDE7 /* LKDashboardAttributeStringArrayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAEB36D22B408DF00A3DDE7 /* LKDashboardAttributeStringArrayView.m */; };
+		AAAF21152226BD4D00975C95 /* LKTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAF21142226BD4D00975C95 /* LKTextFieldView.m */; };
+		AAB09025229D736F00159B15 /* LKOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB09024229D736F00159B15 /* LKOutlineView.m */; };
+		AAB09028229D74F000159B15 /* LKOutlineItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB09027229D74F000159B15 /* LKOutlineItem.m */; };
+		AAB636C022B3854100885A2C /* LKDashboardAttributeClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB636BF22B3854100885A2C /* LKDashboardAttributeClassView.m */; };
+		AAB636C322B3981200885A2C /* LKDashboardAttributeRelationView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB636C222B3981200885A2C /* LKDashboardAttributeRelationView.m */; };
+		AAB636C622B3BA0F00885A2C /* LKDashboardCardTitleControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB636C522B3BA0F00885A2C /* LKDashboardCardTitleControl.m */; };
+		AAB65C062320ED56001E4299 /* LKDashboardSearchInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB65C052320ED56001E4299 /* LKDashboardSearchInputView.m */; };
+		AAB65C092320FC30001E4299 /* LKDashboardSearchCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB65C082320FC30001E4299 /* LKDashboardSearchCardView.m */; };
+		AAB65C0C2320FCF0001E4299 /* LKDashboardSearchPropView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB65C0B2320FCF0001E4299 /* LKDashboardSearchPropView.m */; };
+		AAB872E6221C26B600C25294 /* LKStaticAsyncUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB872E5221C26B600C25294 /* LKStaticAsyncUpdateManager.m */; };
+		AABE9005224169D200030361 /* LKAppMenuManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE9004224169D200030361 /* LKAppMenuManager.m */; };
+		AABEE3EC22970CCF0042EC5A /* LKMethodTraceMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = AABEE3EB22970CCF0042EC5A /* LKMethodTraceMenuView.m */; };
+		AABEE3EF22970CE80042EC5A /* LKMethodTraceMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AABEE3EE22970CE80042EC5A /* LKMethodTraceMenuItemView.m */; };
+		AABEE3FC22970DF80042EC5A /* LKMethodTraceDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = AABEE3FB22970DF80042EC5A /* LKMethodTraceDetailView.m */; };
+		AABEE405229721CE0042EC5A /* LKMethodTraceSelectMethodContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AABEE404229721CE0042EC5A /* LKMethodTraceSelectMethodContentView.m */; };
+		AAC16CDA2282B5F400E67E0A /* LKTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC16CD92282B5F400E67E0A /* LKTipsView.m */; };
+		AAC1FB212282EDC6000A3653 /* LKWindowToolbarHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC1FB202282EDC6000A3653 /* LKWindowToolbarHelper.m */; };
+		AAC323172267ABD200BACA67 /* LKWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC323162267ABD200BACA67 /* LKWindowController.m */; };
+		AAC41E1722686A28005CDD6E /* LKStaticHierarchyDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC41E1522686A28005CDD6E /* LKStaticHierarchyDataSource.m */; };
+		AAC5E2DE228034DC0081A810 /* LKHierarchyDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC5E2DD228034DC0081A810 /* LKHierarchyDataSource.m */; };
+		AACBACAF22AE983F00A8F89D /* LKDashboardAttributeRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBACAE22AE983F00A8F89D /* LKDashboardAttributeRectView.m */; };
+		AACBACB222AEA6EA00A8F89D /* LKDashboardAttributeInsetsView.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBACB122AEA6E900A8F89D /* LKDashboardAttributeInsetsView.m */; };
+		AAD2BECE226B1ED500E83D01 /* LKTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD2BECD226B1ED500E83D01 /* LKTableView.m */; };
+		AAD2BED1226B280B00E83D01 /* LKTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD2BED0226B280B00E83D01 /* LKTableRowView.m */; };
+		AAD2BED7226B327000E83D01 /* LKOutlineRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD2BED6226B327000E83D01 /* LKOutlineRowView.m */; };
+		AAD3872D2288614300042229 /* LKReadWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD3872C2288614300042229 /* LKReadWindowController.m */; };
+		AAD387312288624600042229 /* LKReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD387302288624600042229 /* LKReadViewController.m */; };
+		AAD387342288632100042229 /* LKHierarchyController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD387332288632100042229 /* LKHierarchyController.m */; };
+		AAD8C02C22C60E06009253F4 /* LKReadHierarchyDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD8C02A22C60E06009253F4 /* LKReadHierarchyDataSource.m */; };
+		AADD181A2302FB5B00AF79A4 /* NSControl+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD18192302FB5B00AF79A4 /* NSControl+LookinClient.m */; };
+		AAE61CC822A4F7B100B3FB9F /* LKInputSearchSuggestionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE61CC722A4F7B100B3FB9F /* LKInputSearchSuggestionItem.m */; };
+		AAE61CCB22A5023000B3FB9F /* LKInputSearchSuggestionsContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE61CCA22A5023000B3FB9F /* LKInputSearchSuggestionsContentView.m */; };
+		AAE61CCE22A5063F00B3FB9F /* LKInputSearchSuggestionsRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE61CCD22A5063F00B3FB9F /* LKInputSearchSuggestionsRowView.m */; };
+		AAE649332299462200232880 /* NSButton+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE649322299462200232880 /* NSButton+LookinClient.m */; };
+		AAEC35A52340EAB3009E5040 /* NSString+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEC35A42340EAB3009E5040 /* NSString+LookinClient.m */; };
+		AAEC732022A6E4830011B147 /* LKPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEC731F22A6E4820011B147 /* LKPreferenceManager.m */; };
+		AAED8ED822AFED490051242B /* LKDashboardAttributeSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAED8ED722AFED490051242B /* LKDashboardAttributeSizeView.m */; };
+		AAEE450721DF81C300BF2650 /* LKPreferenceWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEE450621DF81C300BF2650 /* LKPreferenceWindowController.m */; };
+		AAEE450B21DF820100BF2650 /* LKPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEE450A21DF820100BF2650 /* LKPreferenceViewController.m */; };
+		AAEF2C112308420400CFAC53 /* LookinPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2C0D2308420300CFAC53 /* LookinPreviewView.m */; };
+		AAEF2C122308420400CFAC53 /* LookinDisplayItemNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2C0F2308420400CFAC53 /* LookinDisplayItemNode.m */; };
+		AAF418C222BA2AF000111554 /* LKConsoleSelectPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF418C122BA2AF000111554 /* LKConsoleSelectPopoverController.m */; };
+		AAF418C522BA2C9600111554 /* LKConsoleSelectPopoverItemControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF418C422BA2C9600111554 /* LKConsoleSelectPopoverItemControl.m */; };
+		AAF418C822BA2D1300111554 /* LKImageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF418C722BA2D1300111554 /* LKImageTextView.m */; };
+		D4052AC9235CBD090033C961 /* LKMeasureTutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4052AC8235CBD090033C961 /* LKMeasureTutorialView.m */; };
+		D4052ACC235CE2300033C961 /* LKMeasureResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4052ACB235CE2300033C961 /* LKMeasureResultView.m */; };
+		D41874D4234B68AE004D68A2 /* LKDashboardAttributeOpenImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D41874D3234B68AE004D68A2 /* LKDashboardAttributeOpenImageView.m */; };
+		D4224EEF2358ED3400ED9626 /* LKMeasureController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4224EEE2358ED3400ED9626 /* LKMeasureController.m */; };
+		D4D1B2D32353975A002A5071 /* LKWindowToolbarScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D1B2D22353975A002A5071 /* LKWindowToolbarScaleView.m */; };
+		D4E1FD66236169130070DFB8 /* LKMeasureResultLineData.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E1FD65236169130070DFB8 /* LKMeasureResultLineData.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AA1CAA3722E4713C006D9285 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA4B08D322F7040C00BE3989 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = LookinServerFramework;
+			dstSubfolderSpec = 7;
+			files = (
+				A2DF3B1827F8B3E4004AFC2A /* LookinServer.zip in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAB9518822C3AECA00A5F958 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		607BE4658FF90E8DCB8EC923 /* Pods-LookinClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookinClient.debug.xcconfig"; path = "Target Support Files/Pods-LookinClient/Pods-LookinClient.debug.xcconfig"; sourceTree = "<group>"; };
+		81A3B0CB06C22A05EDC913F3 /* Pods_LookinClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LookinClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A26EF68627F89F83005A9E4E /* ShortCocoa+String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShortCocoa+String.h"; sourceTree = "<group>"; };
+		A26EF68727F89F83005A9E4E /* ShortCocoa+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShortCocoa+Layout.h"; sourceTree = "<group>"; };
+		A26EF68827F89F83005A9E4E /* ShortCocoa+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShortCocoa+Private.m"; sourceTree = "<group>"; };
+		A26EF68927F89F83005A9E4E /* ShortCocoaCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortCocoaCore.m; sourceTree = "<group>"; };
+		A26EF68A27F89F83005A9E4E /* ShortCocoa+Others.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShortCocoa+Others.m"; sourceTree = "<group>"; };
+		A26EF68B27F89F83005A9E4E /* ShortCocoa+UIToolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShortCocoa+UIToolkit.h"; sourceTree = "<group>"; };
+		A26EF68C27F89F83005A9E4E /* ShortCocoa+String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShortCocoa+String.m"; sourceTree = "<group>"; };
+		A26EF68D27F89F83005A9E4E /* ShortCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortCocoa.h; sourceTree = "<group>"; };
+		A26EF68E27F89F83005A9E4E /* ShortCocoa+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShortCocoa+Private.h"; sourceTree = "<group>"; };
+		A26EF68F27F89F83005A9E4E /* ShortCocoa+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShortCocoa+Layout.m"; sourceTree = "<group>"; };
+		A26EF69027F89F83005A9E4E /* ShortCocoaDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortCocoaDefines.h; sourceTree = "<group>"; };
+		A26EF69127F89F83005A9E4E /* ShortCocoa+UIToolkit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShortCocoa+UIToolkit.m"; sourceTree = "<group>"; };
+		A26EF69227F89F83005A9E4E /* ShortCocoa+Others.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShortCocoa+Others.h"; sourceTree = "<group>"; };
+		A26EF69327F89F83005A9E4E /* ShortCocoaCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortCocoaCore.h; sourceTree = "<group>"; };
+		A2DF3B1727F8B3E4004AFC2A /* LookinServer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = LookinServer.zip; sourceTree = "<group>"; };
+		AA01EF2522DD0D26002A2E06 /* LKHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKHelper.m; sourceTree = "<group>"; };
+		AA01EF2622DD0D26002A2E06 /* LKHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKHelper.h; sourceTree = "<group>"; };
+		AA049A1521E61B85008C6366 /* LKMenuPopoverSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMenuPopoverSettingController.h; sourceTree = "<group>"; };
+		AA049A1621E61B85008C6366 /* LKMenuPopoverSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMenuPopoverSettingController.m; sourceTree = "<group>"; };
+		AA05CCD2221ED5CA0086CDD1 /* LKDashboardAttributeNumberInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeNumberInputView.h; sourceTree = "<group>"; };
+		AA05CCD3221ED5CA0086CDD1 /* LKDashboardAttributeNumberInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeNumberInputView.m; sourceTree = "<group>"; };
+		AA05CCD5221ED5E80086CDD1 /* LKDashboardAttributeSwitchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeSwitchView.h; sourceTree = "<group>"; };
+		AA05CCD6221ED5E80086CDD1 /* LKDashboardAttributeSwitchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeSwitchView.m; sourceTree = "<group>"; };
+		AA05CCD8221ED5F60086CDD1 /* LKDashboardAttributeColorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeColorView.h; sourceTree = "<group>"; };
+		AA05CCD9221ED5F60086CDD1 /* LKDashboardAttributeColorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeColorView.m; sourceTree = "<group>"; };
+		AA05CCDB221ED6110086CDD1 /* LKDashboardAttributeEnumsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeEnumsView.h; sourceTree = "<group>"; };
+		AA05CCDC221ED6110086CDD1 /* LKDashboardAttributeEnumsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeEnumsView.m; sourceTree = "<group>"; };
+		AA0A2DCB233F6AE4008BF946 /* LKDashboardAttributeConstraintsItemControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeConstraintsItemControl.h; sourceTree = "<group>"; };
+		AA0A2DCC233F6AE4008BF946 /* LKDashboardAttributeConstraintsItemControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeConstraintsItemControl.m; sourceTree = "<group>"; };
+		AA0A2DD9233F81D9008BF946 /* LKPopPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKPopPanel.h; sourceTree = "<group>"; };
+		AA0A2DDA233F81D9008BF946 /* LKPopPanel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKPopPanel.m; sourceTree = "<group>"; };
+		AA13691C22C3DA6F00B8AE87 /* LKTutorialManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKTutorialManager.h; sourceTree = "<group>"; };
+		AA13691D22C3DA6F00B8AE87 /* LKTutorialManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKTutorialManager.m; sourceTree = "<group>"; };
+		AA17857C22DE65D20042C8F0 /* LKTutorialPopoverController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKTutorialPopoverController.h; sourceTree = "<group>"; };
+		AA17857D22DE65D20042C8F0 /* LKTutorialPopoverController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKTutorialPopoverController.m; sourceTree = "<group>"; };
+		AA17F38E232FBD710082F393 /* LKDashboardAttributeTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeTextView.h; sourceTree = "<group>"; };
+		AA17F38F232FBD710082F393 /* LKDashboardAttributeTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeTextView.m; sourceTree = "<group>"; };
+		AA1BE24E2237D6A700DB38E6 /* LKTextControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKTextControl.h; sourceTree = "<group>"; };
+		AA1BE24F2237D6A700DB38E6 /* LKTextControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKTextControl.m; sourceTree = "<group>"; };
+		AA1CAA3D22E471EC006D9285 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		AA20A497232A2A2300AC80AA /* LKDashboardAttributeConstraintsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeConstraintsView.h; sourceTree = "<group>"; };
+		AA20A498232A2A2300AC80AA /* LKDashboardAttributeConstraintsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeConstraintsView.m; sourceTree = "<group>"; };
+		AA22310B22AA717E00A5A975 /* LKDashboardSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardSectionView.h; sourceTree = "<group>"; };
+		AA22310C22AA717E00A5A975 /* LKDashboardSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardSectionView.m; sourceTree = "<group>"; };
+		AA22A0EB2276D65B00356E70 /* LKHierarchyItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKHierarchyItem.h; sourceTree = "<group>"; };
+		AA22A0EC2276D65B00356E70 /* LKHierarchyItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKHierarchyItem.m; sourceTree = "<group>"; };
+		AA236249222C67C1008FE069 /* NSAppearance+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSAppearance+LookinClient.h"; sourceTree = "<group>"; };
+		AA23624A222C67C1008FE069 /* NSAppearance+LookinClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSAppearance+LookinClient.m"; sourceTree = "<group>"; };
+		AA28179D22B0305400A0874C /* LKDashboardAttributeRowsCountView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeRowsCountView.h; sourceTree = "<group>"; };
+		AA28179E22B0305400A0874C /* LKDashboardAttributeRowsCountView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeRowsCountView.m; sourceTree = "<group>"; };
+		AA290356229824A400073B65 /* LKPanelContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKPanelContentView.h; sourceTree = "<group>"; };
+		AA290357229824A400073B65 /* LKPanelContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKPanelContentView.m; sourceTree = "<group>"; };
+		AA2F1AF12303F34B004725D6 /* LKTextsMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKTextsMenuView.h; sourceTree = "<group>"; };
+		AA2F1AF22303F34B004725D6 /* LKTextsMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKTextsMenuView.m; sourceTree = "<group>"; };
+		AA2F1AF423040552004725D6 /* NSArray+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+LookinClient.h"; sourceTree = "<group>"; };
+		AA2F1AF523040552004725D6 /* NSArray+LookinClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+LookinClient.m"; sourceTree = "<group>"; };
+		AA30215E21F32908000B0084 /* LKColorIndicatorLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKColorIndicatorLayer.h; sourceTree = "<group>"; };
+		AA30215F21F32908000B0084 /* LKColorIndicatorLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKColorIndicatorLayer.m; sourceTree = "<group>"; };
+		AA34A15C233F884D00513829 /* LKConstraintPopoverController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKConstraintPopoverController.h; sourceTree = "<group>"; };
+		AA34A15D233F884D00513829 /* LKConstraintPopoverController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKConstraintPopoverController.m; sourceTree = "<group>"; };
+		AA356AF3228EE6A3005C3969 /* NSColor+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSColor+LookinClient.h"; sourceTree = "<group>"; };
+		AA356AF4228EE6A3005C3969 /* NSColor+LookinClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSColor+LookinClient.m"; sourceTree = "<group>"; };
+		AA39054B23694C3100CA7646 /* LKAboutWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKAboutWindowController.h; sourceTree = "<group>"; };
+		AA39054C23694C3100CA7646 /* LKAboutWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKAboutWindowController.m; sourceTree = "<group>"; };
+		AA39054F23694D5D00CA7646 /* LKAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKAboutViewController.h; sourceTree = "<group>"; };
+		AA39055023694D5D00CA7646 /* LKAboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKAboutViewController.m; sourceTree = "<group>"; };
+		AA3A7D0223003D7A00997887 /* LKHierarchyHandlersPopoverController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKHierarchyHandlersPopoverController.h; sourceTree = "<group>"; };
+		AA3A7D0323003D7A00997887 /* LKHierarchyHandlersPopoverController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKHierarchyHandlersPopoverController.m; sourceTree = "<group>"; };
+		AA3A7D0723003F5800997887 /* LKHierarchyHandlersPopoverItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKHierarchyHandlersPopoverItemView.h; sourceTree = "<group>"; };
+		AA3A7D0823003F5800997887 /* LKHierarchyHandlersPopoverItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKHierarchyHandlersPopoverItemView.m; sourceTree = "<group>"; };
+		AA3D51A82289E57C00E4E6B7 /* LKExportManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKExportManager.h; sourceTree = "<group>"; };
+		AA3D51A92289E57C00E4E6B7 /* LKExportManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKExportManager.m; sourceTree = "<group>"; };
+		AA443BA122C40354009543D1 /* LKMethodTraceLaunchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMethodTraceLaunchView.h; sourceTree = "<group>"; };
+		AA443BA222C40354009543D1 /* LKMethodTraceLaunchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMethodTraceLaunchView.m; sourceTree = "<group>"; };
+		AA48F29B21CC0CA50032EC2C /* Lookin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lookin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA48F2A121CC0CA60032EC2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA48F2A421CC0CA60032EC2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		AA48F2A621CC0CA60032EC2C /* LookinClient_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = LookinClient_Info.plist; sourceTree = "<group>"; };
+		AA48F2A721CC0CA60032EC2C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AA48F2A921CC0CA60032EC2C /* Lookin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lookin.entitlements; sourceTree = "<group>"; };
+		AA50753822A27CC500D2A5AC /* LKConsoleDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKConsoleDataSource.h; sourceTree = "<group>"; };
+		AA50753922A27CC500D2A5AC /* LKConsoleDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKConsoleDataSource.m; sourceTree = "<group>"; };
+		AA50753B22A27EAD00D2A5AC /* LKConsoleDataSourceRowItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKConsoleDataSourceRowItem.h; sourceTree = "<group>"; };
+		AA50753C22A27EAD00D2A5AC /* LKConsoleDataSourceRowItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKConsoleDataSourceRowItem.m; sourceTree = "<group>"; };
+		AA50754122A2844400D2A5AC /* LKConsoleInputRowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKConsoleInputRowView.h; sourceTree = "<group>"; };
+		AA50754222A2844400D2A5AC /* LKConsoleInputRowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKConsoleInputRowView.m; sourceTree = "<group>"; };
+		AA50754F22A28A0A00D2A5AC /* LKConsoleSubmitRowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKConsoleSubmitRowView.h; sourceTree = "<group>"; };
+		AA50755022A28A0A00D2A5AC /* LKConsoleSubmitRowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKConsoleSubmitRowView.m; sourceTree = "<group>"; };
+		AA50755222A28A1600D2A5AC /* LKConsoleReturnRowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKConsoleReturnRowView.h; sourceTree = "<group>"; };
+		AA50755322A28A1600D2A5AC /* LKConsoleReturnRowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKConsoleReturnRowView.m; sourceTree = "<group>"; };
+		AA50755522A3E76A00D2A5AC /* LKInputSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKInputSearchView.h; sourceTree = "<group>"; };
+		AA50755622A3E76A00D2A5AC /* LKInputSearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKInputSearchView.m; sourceTree = "<group>"; };
+		AA50755C22A3EE4A00D2A5AC /* LKInputSearchSuggestionWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKInputSearchSuggestionWindowController.h; sourceTree = "<group>"; };
+		AA50755D22A3EE4A00D2A5AC /* LKInputSearchSuggestionWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKInputSearchSuggestionWindowController.m; sourceTree = "<group>"; };
+		AA56062B2322A733008C82CF /* LKDashboardSearchMethodsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardSearchMethodsView.h; sourceTree = "<group>"; };
+		AA56062C2322A733008C82CF /* LKDashboardSearchMethodsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardSearchMethodsView.m; sourceTree = "<group>"; };
+		AA56062E2322AEA7008C82CF /* LKDashboardSearchMethodsDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardSearchMethodsDataSource.h; sourceTree = "<group>"; };
+		AA56062F2322AEA7008C82CF /* LKDashboardSearchMethodsDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardSearchMethodsDataSource.m; sourceTree = "<group>"; };
+		AA5AE70422C2B2E50064D41B /* LookinDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LookinDocument.h; sourceTree = "<group>"; };
+		AA5AE70522C2B2E50064D41B /* LookinDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LookinDocument.m; sourceTree = "<group>"; };
+		AA5C54D92289DF97004E09F4 /* LKWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKWindow.h; sourceTree = "<group>"; };
+		AA5C54DA2289DF97004E09F4 /* LKWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKWindow.m; sourceTree = "<group>"; };
+		AA65ED472341FE8300F0BF34 /* LKTwoColors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKTwoColors.h; sourceTree = "<group>"; };
+		AA65ED482341FE8300F0BF34 /* LKTwoColors.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKTwoColors.m; sourceTree = "<group>"; };
+		AA66488B23696D220043B50A /* logo_jump.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = logo_jump.gif; sourceTree = "<group>"; };
+		AA66645D22DBBAC7009E05CC /* NSString+Score.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Score.m"; sourceTree = "<group>"; };
+		AA66645E22DBBAC7009E05CC /* NSString+Score.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Score.h"; sourceTree = "<group>"; };
+		AA66C59F231924BD00085C76 /* LKDashboardAccessoryWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAccessoryWindowController.h; sourceTree = "<group>"; };
+		AA66C5A0231924BD00085C76 /* LKDashboardAccessoryWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAccessoryWindowController.m; sourceTree = "<group>"; };
+		AA66C5A5231965EE00085C76 /* LKUserActionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKUserActionManager.h; sourceTree = "<group>"; };
+		AA66C5A6231965EE00085C76 /* LKUserActionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKUserActionManager.m; sourceTree = "<group>"; };
+		AA6CC486221FE7DE00CA6D54 /* LKNumberInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKNumberInputView.h; sourceTree = "<group>"; };
+		AA6CC487221FE7DE00CA6D54 /* LKNumberInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKNumberInputView.m; sourceTree = "<group>"; };
+		AA6E0D8422E1D5C600948877 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AA74B1CA22897C9400366865 /* LKReadHierarchyController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKReadHierarchyController.h; sourceTree = "<group>"; };
+		AA74B1CB22897C9400366865 /* LKReadHierarchyController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKReadHierarchyController.m; sourceTree = "<group>"; };
+		AA77A32C22CE0E7100C73721 /* lookin_icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = lookin_icon.icns; sourceTree = "<group>"; };
+		AA7F157622C0F2B9004436AD /* LKConnectionRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKConnectionRequest.h; sourceTree = "<group>"; };
+		AA7F157722C0F2B9004436AD /* LKConnectionRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKConnectionRequest.m; sourceTree = "<group>"; };
+		AA8133EE22AFAEA1000A9D40 /* LKDashboardAttributePointView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributePointView.h; sourceTree = "<group>"; };
+		AA8133EF22AFAEA1000A9D40 /* LKDashboardAttributePointView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributePointView.m; sourceTree = "<group>"; };
+		AA8CFE1F2296DD5300B98BA2 /* LKMethodTraceWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMethodTraceWindowController.h; sourceTree = "<group>"; };
+		AA8CFE202296DD5300B98BA2 /* LKMethodTraceWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMethodTraceWindowController.m; sourceTree = "<group>"; };
+		AA8CFE232296DD7F00B98BA2 /* LKMethodTraceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMethodTraceViewController.h; sourceTree = "<group>"; };
+		AA8CFE242296DD7F00B98BA2 /* LKMethodTraceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMethodTraceViewController.m; sourceTree = "<group>"; };
+		AA98EC94222703CC0083348D /* LKPreferenceSwitchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKPreferenceSwitchView.h; sourceTree = "<group>"; };
+		AA98EC95222703CC0083348D /* LKPreferenceSwitchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKPreferenceSwitchView.m; sourceTree = "<group>"; };
+		AA98EC9A22270B800083348D /* LKPreferencePopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKPreferencePopupView.m; sourceTree = "<group>"; };
+		AA98EC9B22270B800083348D /* LKPreferencePopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKPreferencePopupView.h; sourceTree = "<group>"; };
+		AA9A3D642269DDCC00BE46C7 /* LKConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKConsoleViewController.h; sourceTree = "<group>"; };
+		AA9A3D6D2269DDCD00BE46C7 /* LKConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKConsoleViewController.m; sourceTree = "<group>"; };
+		AA9CC2C322891EA20014D13B /* LKExportAccessoryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKExportAccessoryView.h; sourceTree = "<group>"; };
+		AA9CC2C422891EA20014D13B /* LKExportAccessoryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKExportAccessoryView.m; sourceTree = "<group>"; };
+		AAA2497222E216C700595E9B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AAA2C6122297D5CF005CBA10 /* LKMethodTraceDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMethodTraceDataSource.h; sourceTree = "<group>"; };
+		AAA2C6132297D5CF005CBA10 /* LKMethodTraceDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMethodTraceDataSource.m; sourceTree = "<group>"; };
+		AAA8C08821CC17670017A345 /* LKAppsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKAppsManager.h; sourceTree = "<group>"; };
+		AAA8C08921CC17670017A345 /* LKConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKConnectionManager.h; sourceTree = "<group>"; };
+		AAA8C08A21CC17670017A345 /* LKInspectableApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKInspectableApp.m; sourceTree = "<group>"; };
+		AAA8C08B21CC17670017A345 /* LKAppsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKAppsManager.m; sourceTree = "<group>"; };
+		AAA8C08C21CC17670017A345 /* LKConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKConnectionManager.m; sourceTree = "<group>"; };
+		AAA8C08D21CC17670017A345 /* LKInspectableApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKInspectableApp.h; sourceTree = "<group>"; };
+		AAA8C08E21CC17670017A345 /* LKNavigationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKNavigationManager.m; sourceTree = "<group>"; };
+		AAA8C09221CC17670017A345 /* LKLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKLabel.m; sourceTree = "<group>"; };
+		AAA8C09321CC17670017A345 /* LKBaseControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKBaseControl.h; sourceTree = "<group>"; };
+		AAA8C09621CC17670017A345 /* ShortCocoa+LookinClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShortCocoa+LookinClient.m"; sourceTree = "<group>"; };
+		AAA8C09721CC17670017A345 /* LKBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKBaseView.h; sourceTree = "<group>"; };
+		AAA8C09A21CC17670017A345 /* LKProgressIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKProgressIndicatorView.m; sourceTree = "<group>"; };
+		AAA8C09B21CC17670017A345 /* LKImageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKImageControl.m; sourceTree = "<group>"; };
+		AAA8C09C21CC17670017A345 /* LKBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKBaseViewController.m; sourceTree = "<group>"; };
+		AAA8C0A021CC17670017A345 /* LKBaseControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKBaseControl.m; sourceTree = "<group>"; };
+		AAA8C0A121CC17670017A345 /* LKLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKLabel.h; sourceTree = "<group>"; };
+		AAA8C0A321CC17670017A345 /* LKBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKBaseView.m; sourceTree = "<group>"; };
+		AAA8C0A421CC17670017A345 /* ShortCocoa+LookinClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShortCocoa+LookinClient.h"; sourceTree = "<group>"; };
+		AAA8C0A521CC17670017A345 /* LKBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKBaseViewController.h; sourceTree = "<group>"; };
+		AAA8C0A621CC17670017A345 /* LKImageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKImageControl.h; sourceTree = "<group>"; };
+		AAA8C0A721CC17670017A345 /* LKProgressIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKProgressIndicatorView.h; sourceTree = "<group>"; };
+		AAA8C0AB21CC17670017A345 /* LKHierarchyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKHierarchyView.h; sourceTree = "<group>"; };
+		AAA8C0AC21CC17670017A345 /* LKHierarchyRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LKHierarchyRowView.h; path = ../Base/Hierarchy/LKHierarchyRowView.h; sourceTree = "<group>"; };
+		AAA8C0AD21CC17670017A345 /* LKHierarchyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKHierarchyView.m; sourceTree = "<group>"; };
+		AAA8C0AE21CC17670017A345 /* LKHierarchyRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKHierarchyRowView.m; sourceTree = "<group>"; };
+		AAA8C0B421CC17670017A345 /* NSView+LookinClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+LookinClient.m"; sourceTree = "<group>"; };
+		AAA8C0B821CC17670017A345 /* NSView+LookinClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+LookinClient.h"; sourceTree = "<group>"; };
+		AAA8C0C021CC17670017A345 /* LookinClient_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookinClient_PrefixHeader.pch; sourceTree = "<group>"; };
+		AAA8C0CA21CC17670017A345 /* LKStaticHierarchyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKStaticHierarchyController.m; sourceTree = "<group>"; };
+		AAA8C0D121CC17670017A345 /* LKStaticHierarchyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKStaticHierarchyController.h; sourceTree = "<group>"; };
+		AAA8C0D321CC17680017A345 /* LKSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKSplitView.h; sourceTree = "<group>"; };
+		AAA8C0D421CC17680017A345 /* LKStaticWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKStaticWindowController.h; sourceTree = "<group>"; };
+		AAA8C0D521CC17680017A345 /* LKStaticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKStaticViewController.h; sourceTree = "<group>"; };
+		AAA8C0DA21CC17680017A345 /* LKDashboardCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKDashboardCardView.h; sourceTree = "<group>"; };
+		AAA8C0DF21CC17680017A345 /* LKDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKDashboardViewController.m; sourceTree = "<group>"; };
+		AAA8C0E021CC17680017A345 /* LKDashboardAttributeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeView.h; sourceTree = "<group>"; };
+		AAA8C0E621CC17680017A345 /* LKEnumListRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKEnumListRegistry.m; sourceTree = "<group>"; };
+		AAA8C0EA21CC17680017A345 /* LKDashboardCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKDashboardCardView.m; sourceTree = "<group>"; };
+		AAA8C0EF21CC17680017A345 /* LKDashboardAttributeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeView.m; sourceTree = "<group>"; };
+		AAA8C0F121CC17680017A345 /* LKDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKDashboardViewController.h; sourceTree = "<group>"; };
+		AAA8C0F521CC17680017A345 /* LKEnumListRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKEnumListRegistry.h; sourceTree = "<group>"; };
+		AAA8C0F821CC17680017A345 /* LKMenuPopoverAppsListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKMenuPopoverAppsListController.m; sourceTree = "<group>"; };
+		AAA8C10521CC17680017A345 /* LKMenuPopoverAppsListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKMenuPopoverAppsListController.h; sourceTree = "<group>"; };
+		AAA8C10921CC17680017A345 /* LKPreviewPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKPreviewPanGestureRecognizer.h; sourceTree = "<group>"; };
+		AAA8C10A21CC17680017A345 /* LKPreviewStageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKPreviewStageView.h; sourceTree = "<group>"; };
+		AAA8C10B21CC17680017A345 /* LKPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKPreviewController.h; sourceTree = "<group>"; };
+		AAA8C10C21CC17680017A345 /* LKPreviewPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKPreviewPanGestureRecognizer.m; sourceTree = "<group>"; };
+		AAA8C10E21CC17680017A345 /* LKPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKPreviewController.m; sourceTree = "<group>"; };
+		AAA8C10F21CC17680017A345 /* LKPreviewStageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKPreviewStageView.m; sourceTree = "<group>"; };
+		AAA8C11021CC17680017A345 /* LKSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKSplitView.m; sourceTree = "<group>"; };
+		AAA8C11121CC17680017A345 /* LKStaticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKStaticViewController.m; sourceTree = "<group>"; };
+		AAA8C11221CC17680017A345 /* LKStaticWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKStaticWindowController.m; sourceTree = "<group>"; };
+		AAA8C11321CC17680017A345 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		AAA8C11521CC17680017A345 /* LKLaunchAppView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKLaunchAppView.h; sourceTree = "<group>"; };
+		AAA8C11621CC17680017A345 /* LKLaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKLaunchViewController.m; sourceTree = "<group>"; };
+		AAA8C11721CC17680017A345 /* LKLaunchWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKLaunchWindowController.h; sourceTree = "<group>"; };
+		AAA8C11821CC17680017A345 /* LKLaunchAppView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKLaunchAppView.m; sourceTree = "<group>"; };
+		AAA8C11921CC17680017A345 /* LKLaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKLaunchViewController.h; sourceTree = "<group>"; };
+		AAA8C11A21CC17680017A345 /* LKLaunchWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKLaunchWindowController.m; sourceTree = "<group>"; };
+		AAA8C11B21CC17680017A345 /* LKNavigationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKNavigationManager.h; sourceTree = "<group>"; };
+		AAA8C11C21CC17680017A345 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		AAA9638B228428EE0047F707 /* NSPointerArray+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSPointerArray+LookinClient.h"; sourceTree = "<group>"; };
+		AAA9638C228428EE0047F707 /* NSPointerArray+LookinClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSPointerArray+LookinClient.m"; sourceTree = "<group>"; };
+		AAAEB36C22B408DF00A3DDE7 /* LKDashboardAttributeStringArrayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeStringArrayView.h; sourceTree = "<group>"; };
+		AAAEB36D22B408DF00A3DDE7 /* LKDashboardAttributeStringArrayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeStringArrayView.m; sourceTree = "<group>"; };
+		AAAF21132226BD4D00975C95 /* LKTextFieldView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKTextFieldView.h; sourceTree = "<group>"; };
+		AAAF21142226BD4D00975C95 /* LKTextFieldView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKTextFieldView.m; sourceTree = "<group>"; };
+		AAB09023229D736F00159B15 /* LKOutlineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKOutlineView.h; sourceTree = "<group>"; };
+		AAB09024229D736F00159B15 /* LKOutlineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKOutlineView.m; sourceTree = "<group>"; };
+		AAB09026229D74F000159B15 /* LKOutlineItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKOutlineItem.h; sourceTree = "<group>"; };
+		AAB09027229D74F000159B15 /* LKOutlineItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKOutlineItem.m; sourceTree = "<group>"; };
+		AAB4C85422415F75002D2B06 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		AAB636BE22B3854100885A2C /* LKDashboardAttributeClassView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeClassView.h; sourceTree = "<group>"; };
+		AAB636BF22B3854100885A2C /* LKDashboardAttributeClassView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeClassView.m; sourceTree = "<group>"; };
+		AAB636C122B3981200885A2C /* LKDashboardAttributeRelationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeRelationView.h; sourceTree = "<group>"; };
+		AAB636C222B3981200885A2C /* LKDashboardAttributeRelationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeRelationView.m; sourceTree = "<group>"; };
+		AAB636C422B3BA0F00885A2C /* LKDashboardCardTitleControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardCardTitleControl.h; sourceTree = "<group>"; };
+		AAB636C522B3BA0F00885A2C /* LKDashboardCardTitleControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardCardTitleControl.m; sourceTree = "<group>"; };
+		AAB65C042320ED56001E4299 /* LKDashboardSearchInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardSearchInputView.h; sourceTree = "<group>"; };
+		AAB65C052320ED56001E4299 /* LKDashboardSearchInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardSearchInputView.m; sourceTree = "<group>"; };
+		AAB65C072320FC30001E4299 /* LKDashboardSearchCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardSearchCardView.h; sourceTree = "<group>"; };
+		AAB65C082320FC30001E4299 /* LKDashboardSearchCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardSearchCardView.m; sourceTree = "<group>"; };
+		AAB65C0A2320FCF0001E4299 /* LKDashboardSearchPropView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardSearchPropView.h; sourceTree = "<group>"; };
+		AAB65C0B2320FCF0001E4299 /* LKDashboardSearchPropView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardSearchPropView.m; sourceTree = "<group>"; };
+		AAB872E4221C26B600C25294 /* LKStaticAsyncUpdateManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKStaticAsyncUpdateManager.h; sourceTree = "<group>"; };
+		AAB872E5221C26B600C25294 /* LKStaticAsyncUpdateManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKStaticAsyncUpdateManager.m; sourceTree = "<group>"; };
+		AAB9517A22C3AECA00A5F958 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		AAB9519122C3BDC900A5F958 /* QuickLookThumbnailing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLookThumbnailing.framework; path = System/Library/Frameworks/QuickLookThumbnailing.framework; sourceTree = SDKROOT; };
+		AABE9003224169D200030361 /* LKAppMenuManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKAppMenuManager.h; sourceTree = "<group>"; };
+		AABE9004224169D200030361 /* LKAppMenuManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKAppMenuManager.m; sourceTree = "<group>"; };
+		AABEE3EA22970CCF0042EC5A /* LKMethodTraceMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMethodTraceMenuView.h; sourceTree = "<group>"; };
+		AABEE3EB22970CCF0042EC5A /* LKMethodTraceMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMethodTraceMenuView.m; sourceTree = "<group>"; };
+		AABEE3ED22970CE80042EC5A /* LKMethodTraceMenuItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMethodTraceMenuItemView.h; sourceTree = "<group>"; };
+		AABEE3EE22970CE80042EC5A /* LKMethodTraceMenuItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMethodTraceMenuItemView.m; sourceTree = "<group>"; };
+		AABEE3FA22970DF80042EC5A /* LKMethodTraceDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMethodTraceDetailView.h; sourceTree = "<group>"; };
+		AABEE3FB22970DF80042EC5A /* LKMethodTraceDetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMethodTraceDetailView.m; sourceTree = "<group>"; };
+		AABEE403229721CE0042EC5A /* LKMethodTraceSelectMethodContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMethodTraceSelectMethodContentView.h; sourceTree = "<group>"; };
+		AABEE404229721CE0042EC5A /* LKMethodTraceSelectMethodContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMethodTraceSelectMethodContentView.m; sourceTree = "<group>"; };
+		AAC16CD82282B5F400E67E0A /* LKTipsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKTipsView.h; sourceTree = "<group>"; };
+		AAC16CD92282B5F400E67E0A /* LKTipsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKTipsView.m; sourceTree = "<group>"; };
+		AAC1FB1F2282EDC6000A3653 /* LKWindowToolbarHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKWindowToolbarHelper.h; sourceTree = "<group>"; };
+		AAC1FB202282EDC6000A3653 /* LKWindowToolbarHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKWindowToolbarHelper.m; sourceTree = "<group>"; };
+		AAC323152267ABD200BACA67 /* LKWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKWindowController.h; sourceTree = "<group>"; };
+		AAC323162267ABD200BACA67 /* LKWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKWindowController.m; sourceTree = "<group>"; };
+		AAC41E1522686A28005CDD6E /* LKStaticHierarchyDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKStaticHierarchyDataSource.m; sourceTree = "<group>"; };
+		AAC41E1622686A28005CDD6E /* LKStaticHierarchyDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKStaticHierarchyDataSource.h; sourceTree = "<group>"; };
+		AAC5E2DC228034DC0081A810 /* LKHierarchyDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LKHierarchyDataSource.h; path = LookinClient/Hierarchy/LKHierarchyDataSource.h; sourceTree = SOURCE_ROOT; };
+		AAC5E2DD228034DC0081A810 /* LKHierarchyDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LKHierarchyDataSource.m; path = LookinClient/Hierarchy/LKHierarchyDataSource.m; sourceTree = SOURCE_ROOT; };
+		AACBACAD22AE983F00A8F89D /* LKDashboardAttributeRectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeRectView.h; sourceTree = "<group>"; };
+		AACBACAE22AE983F00A8F89D /* LKDashboardAttributeRectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeRectView.m; sourceTree = "<group>"; };
+		AACBACB022AEA6E900A8F89D /* LKDashboardAttributeInsetsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeInsetsView.h; sourceTree = "<group>"; };
+		AACBACB122AEA6E900A8F89D /* LKDashboardAttributeInsetsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeInsetsView.m; sourceTree = "<group>"; };
+		AAD2BECC226B1ED500E83D01 /* LKTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKTableView.h; sourceTree = "<group>"; };
+		AAD2BECD226B1ED500E83D01 /* LKTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKTableView.m; sourceTree = "<group>"; };
+		AAD2BECF226B280B00E83D01 /* LKTableRowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKTableRowView.h; sourceTree = "<group>"; };
+		AAD2BED0226B280B00E83D01 /* LKTableRowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKTableRowView.m; sourceTree = "<group>"; };
+		AAD2BED5226B327000E83D01 /* LKOutlineRowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKOutlineRowView.h; sourceTree = "<group>"; };
+		AAD2BED6226B327000E83D01 /* LKOutlineRowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKOutlineRowView.m; sourceTree = "<group>"; };
+		AAD3872B2288614300042229 /* LKReadWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKReadWindowController.h; sourceTree = "<group>"; };
+		AAD3872C2288614300042229 /* LKReadWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKReadWindowController.m; sourceTree = "<group>"; };
+		AAD3872F2288624600042229 /* LKReadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKReadViewController.h; sourceTree = "<group>"; };
+		AAD387302288624600042229 /* LKReadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKReadViewController.m; sourceTree = "<group>"; };
+		AAD387322288632100042229 /* LKHierarchyController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKHierarchyController.h; sourceTree = "<group>"; };
+		AAD387332288632100042229 /* LKHierarchyController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKHierarchyController.m; sourceTree = "<group>"; };
+		AAD8C02A22C60E06009253F4 /* LKReadHierarchyDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKReadHierarchyDataSource.m; sourceTree = "<group>"; };
+		AAD8C02B22C60E06009253F4 /* LKReadHierarchyDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKReadHierarchyDataSource.h; sourceTree = "<group>"; };
+		AADD18182302FB5B00AF79A4 /* NSControl+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSControl+LookinClient.h"; sourceTree = "<group>"; };
+		AADD18192302FB5B00AF79A4 /* NSControl+LookinClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSControl+LookinClient.m"; sourceTree = "<group>"; };
+		AAE61CC622A4F7B100B3FB9F /* LKInputSearchSuggestionItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKInputSearchSuggestionItem.h; sourceTree = "<group>"; };
+		AAE61CC722A4F7B100B3FB9F /* LKInputSearchSuggestionItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKInputSearchSuggestionItem.m; sourceTree = "<group>"; };
+		AAE61CC922A5023000B3FB9F /* LKInputSearchSuggestionsContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKInputSearchSuggestionsContentView.h; sourceTree = "<group>"; };
+		AAE61CCA22A5023000B3FB9F /* LKInputSearchSuggestionsContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKInputSearchSuggestionsContentView.m; sourceTree = "<group>"; };
+		AAE61CCC22A5063F00B3FB9F /* LKInputSearchSuggestionsRowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKInputSearchSuggestionsRowView.h; sourceTree = "<group>"; };
+		AAE61CCD22A5063F00B3FB9F /* LKInputSearchSuggestionsRowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKInputSearchSuggestionsRowView.m; sourceTree = "<group>"; };
+		AAE649312299462200232880 /* NSButton+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSButton+LookinClient.h"; sourceTree = "<group>"; };
+		AAE649322299462200232880 /* NSButton+LookinClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSButton+LookinClient.m"; sourceTree = "<group>"; };
+		AAEC35A32340EAB3009E5040 /* NSString+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+LookinClient.h"; sourceTree = "<group>"; };
+		AAEC35A42340EAB3009E5040 /* NSString+LookinClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+LookinClient.m"; sourceTree = "<group>"; };
+		AAEC731E22A6E4820011B147 /* LKPreferenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKPreferenceManager.h; sourceTree = "<group>"; };
+		AAEC731F22A6E4820011B147 /* LKPreferenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKPreferenceManager.m; sourceTree = "<group>"; };
+		AAED8ED622AFED490051242B /* LKDashboardAttributeSizeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeSizeView.h; sourceTree = "<group>"; };
+		AAED8ED722AFED490051242B /* LKDashboardAttributeSizeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeSizeView.m; sourceTree = "<group>"; };
+		AAEE450521DF81C300BF2650 /* LKPreferenceWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKPreferenceWindowController.h; sourceTree = "<group>"; };
+		AAEE450621DF81C300BF2650 /* LKPreferenceWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKPreferenceWindowController.m; sourceTree = "<group>"; };
+		AAEE450921DF820100BF2650 /* LKPreferenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKPreferenceViewController.h; sourceTree = "<group>"; };
+		AAEE450A21DF820100BF2650 /* LKPreferenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKPreferenceViewController.m; sourceTree = "<group>"; };
+		AAEF2C0D2308420300CFAC53 /* LookinPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookinPreviewView.m; sourceTree = "<group>"; };
+		AAEF2C0E2308420300CFAC53 /* LookinPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookinPreviewView.h; sourceTree = "<group>"; };
+		AAEF2C0F2308420400CFAC53 /* LookinDisplayItemNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookinDisplayItemNode.m; sourceTree = "<group>"; };
+		AAEF2C102308420400CFAC53 /* LookinDisplayItemNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookinDisplayItemNode.h; sourceTree = "<group>"; };
+		AAF418C022BA2AF000111554 /* LKConsoleSelectPopoverController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKConsoleSelectPopoverController.h; sourceTree = "<group>"; };
+		AAF418C122BA2AF000111554 /* LKConsoleSelectPopoverController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKConsoleSelectPopoverController.m; sourceTree = "<group>"; };
+		AAF418C322BA2C9600111554 /* LKConsoleSelectPopoverItemControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKConsoleSelectPopoverItemControl.h; sourceTree = "<group>"; };
+		AAF418C422BA2C9600111554 /* LKConsoleSelectPopoverItemControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKConsoleSelectPopoverItemControl.m; sourceTree = "<group>"; };
+		AAF418C622BA2D1300111554 /* LKImageTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKImageTextView.h; sourceTree = "<group>"; };
+		AAF418C722BA2D1300111554 /* LKImageTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKImageTextView.m; sourceTree = "<group>"; };
+		D4052AC7235CBD090033C961 /* LKMeasureTutorialView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMeasureTutorialView.h; sourceTree = "<group>"; };
+		D4052AC8235CBD090033C961 /* LKMeasureTutorialView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMeasureTutorialView.m; sourceTree = "<group>"; };
+		D4052ACA235CE2300033C961 /* LKMeasureResultView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMeasureResultView.h; sourceTree = "<group>"; };
+		D4052ACB235CE2300033C961 /* LKMeasureResultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMeasureResultView.m; sourceTree = "<group>"; };
+		D41874D2234B68AE004D68A2 /* LKDashboardAttributeOpenImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeOpenImageView.h; sourceTree = "<group>"; };
+		D41874D3234B68AE004D68A2 /* LKDashboardAttributeOpenImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeOpenImageView.m; sourceTree = "<group>"; };
+		D4224EED2358ED3400ED9626 /* LKMeasureController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMeasureController.h; sourceTree = "<group>"; };
+		D4224EEE2358ED3400ED9626 /* LKMeasureController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMeasureController.m; sourceTree = "<group>"; };
+		D4D1B2D12353975A002A5071 /* LKWindowToolbarScaleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKWindowToolbarScaleView.h; sourceTree = "<group>"; };
+		D4D1B2D22353975A002A5071 /* LKWindowToolbarScaleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKWindowToolbarScaleView.m; sourceTree = "<group>"; };
+		D4E1FD64236169130070DFB8 /* LKMeasureResultLineData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMeasureResultLineData.h; sourceTree = "<group>"; };
+		D4E1FD65236169130070DFB8 /* LKMeasureResultLineData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMeasureResultLineData.m; sourceTree = "<group>"; };
+		FFDAAD6EFCBEBC7B6B348031 /* Pods-LookinClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookinClient.release.xcconfig"; path = "Target Support Files/Pods-LookinClient/Pods-LookinClient.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA48F29821CC0CA50032EC2C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA1CAA3E22E471EC006D9285 /* Security.framework in Frameworks */,
+				094E413CB04F29F94551D070 /* Pods_LookinClient.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0A9FB6E904476A1F9D0BB82E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AA1CAA3D22E471EC006D9285 /* Security.framework */,
+				AAB9517A22C3AECA00A5F958 /* Quartz.framework */,
+				AAB9519122C3BDC900A5F958 /* QuickLookThumbnailing.framework */,
+				81A3B0CB06C22A05EDC913F3 /* Pods_LookinClient.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5D159F647DFD4AA3F8E7F9E7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				607BE4658FF90E8DCB8EC923 /* Pods-LookinClient.debug.xcconfig */,
+				FFDAAD6EFCBEBC7B6B348031 /* Pods-LookinClient.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A26EF68527F89F83005A9E4E /* ShortCocoa */ = {
+			isa = PBXGroup;
+			children = (
+				A26EF68627F89F83005A9E4E /* ShortCocoa+String.h */,
+				A26EF68727F89F83005A9E4E /* ShortCocoa+Layout.h */,
+				A26EF68827F89F83005A9E4E /* ShortCocoa+Private.m */,
+				A26EF68927F89F83005A9E4E /* ShortCocoaCore.m */,
+				A26EF68A27F89F83005A9E4E /* ShortCocoa+Others.m */,
+				A26EF68B27F89F83005A9E4E /* ShortCocoa+UIToolkit.h */,
+				A26EF68C27F89F83005A9E4E /* ShortCocoa+String.m */,
+				A26EF68D27F89F83005A9E4E /* ShortCocoa.h */,
+				A26EF68E27F89F83005A9E4E /* ShortCocoa+Private.h */,
+				A26EF68F27F89F83005A9E4E /* ShortCocoa+Layout.m */,
+				A26EF69027F89F83005A9E4E /* ShortCocoaDefines.h */,
+				A26EF69127F89F83005A9E4E /* ShortCocoa+UIToolkit.m */,
+				A26EF69227F89F83005A9E4E /* ShortCocoa+Others.h */,
+				A26EF69327F89F83005A9E4E /* ShortCocoaCore.h */,
+			);
+			path = ShortCocoa;
+			sourceTree = "<group>";
+		};
+		AA05CCD1221ED50B0086CDD1 /* AttributeView */ = {
+			isa = PBXGroup;
+			children = (
+				AA05CCD8221ED5F60086CDD1 /* LKDashboardAttributeColorView.h */,
+				AAB636BE22B3854100885A2C /* LKDashboardAttributeClassView.h */,
+				AAB636BF22B3854100885A2C /* LKDashboardAttributeClassView.m */,
+				AAB636C122B3981200885A2C /* LKDashboardAttributeRelationView.h */,
+				AAB636C222B3981200885A2C /* LKDashboardAttributeRelationView.m */,
+				AAAEB36C22B408DF00A3DDE7 /* LKDashboardAttributeStringArrayView.h */,
+				D41874D2234B68AE004D68A2 /* LKDashboardAttributeOpenImageView.h */,
+				D41874D3234B68AE004D68A2 /* LKDashboardAttributeOpenImageView.m */,
+				AA0A2DD3233F7D2B008BF946 /* Constraint */,
+				AAAEB36D22B408DF00A3DDE7 /* LKDashboardAttributeStringArrayView.m */,
+				AA05CCD9221ED5F60086CDD1 /* LKDashboardAttributeColorView.m */,
+				AA05CCDB221ED6110086CDD1 /* LKDashboardAttributeEnumsView.h */,
+				AA05CCDC221ED6110086CDD1 /* LKDashboardAttributeEnumsView.m */,
+				AACBACB022AEA6E900A8F89D /* LKDashboardAttributeInsetsView.h */,
+				AACBACB122AEA6E900A8F89D /* LKDashboardAttributeInsetsView.m */,
+				AA05CCD2221ED5CA0086CDD1 /* LKDashboardAttributeNumberInputView.h */,
+				AA05CCD3221ED5CA0086CDD1 /* LKDashboardAttributeNumberInputView.m */,
+				AA8133EE22AFAEA1000A9D40 /* LKDashboardAttributePointView.h */,
+				AA8133EF22AFAEA1000A9D40 /* LKDashboardAttributePointView.m */,
+				AACBACAD22AE983F00A8F89D /* LKDashboardAttributeRectView.h */,
+				AACBACAE22AE983F00A8F89D /* LKDashboardAttributeRectView.m */,
+				AA28179D22B0305400A0874C /* LKDashboardAttributeRowsCountView.h */,
+				AA28179E22B0305400A0874C /* LKDashboardAttributeRowsCountView.m */,
+				AAED8ED622AFED490051242B /* LKDashboardAttributeSizeView.h */,
+				AA17F38E232FBD710082F393 /* LKDashboardAttributeTextView.h */,
+				AA17F38F232FBD710082F393 /* LKDashboardAttributeTextView.m */,
+				AAED8ED722AFED490051242B /* LKDashboardAttributeSizeView.m */,
+				AA05CCD5221ED5E80086CDD1 /* LKDashboardAttributeSwitchView.h */,
+				AA05CCD6221ED5E80086CDD1 /* LKDashboardAttributeSwitchView.m */,
+				AAA8C0E021CC17680017A345 /* LKDashboardAttributeView.h */,
+				AAA8C0EF21CC17680017A345 /* LKDashboardAttributeView.m */,
+			);
+			path = AttributeView;
+			sourceTree = "<group>";
+		};
+		AA0757B922C606F3005535DC /* Export */ = {
+			isa = PBXGroup;
+			children = (
+				AA5AE70422C2B2E50064D41B /* LookinDocument.h */,
+				AA5AE70522C2B2E50064D41B /* LookinDocument.m */,
+				AA9CC2C322891EA20014D13B /* LKExportAccessoryView.h */,
+				AA9CC2C422891EA20014D13B /* LKExportAccessoryView.m */,
+				AA3D51A82289E57C00E4E6B7 /* LKExportManager.h */,
+				AA3D51A92289E57C00E4E6B7 /* LKExportManager.m */,
+			);
+			path = Export;
+			sourceTree = "<group>";
+		};
+		AA0757C122C607D7005535DC /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				AA01EF2622DD0D26002A2E06 /* LKHelper.h */,
+				AA01EF2522DD0D26002A2E06 /* LKHelper.m */,
+				AABE9003224169D200030361 /* LKAppMenuManager.h */,
+				AABE9004224169D200030361 /* LKAppMenuManager.m */,
+				AAEC731E22A6E4820011B147 /* LKPreferenceManager.h */,
+				AAEC731F22A6E4820011B147 /* LKPreferenceManager.m */,
+				AAA8C11B21CC17680017A345 /* LKNavigationManager.h */,
+				AAA8C08E21CC17670017A345 /* LKNavigationManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		AA0757C322C6084A005535DC /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				AA66645E22DBBAC7009E05CC /* NSString+Score.h */,
+				AA66645D22DBBAC7009E05CC /* NSString+Score.m */,
+				AAEC35A32340EAB3009E5040 /* NSString+LookinClient.h */,
+				AAEC35A42340EAB3009E5040 /* NSString+LookinClient.m */,
+				AA236249222C67C1008FE069 /* NSAppearance+LookinClient.h */,
+				AA23624A222C67C1008FE069 /* NSAppearance+LookinClient.m */,
+				AAE649312299462200232880 /* NSButton+LookinClient.h */,
+				AAE649322299462200232880 /* NSButton+LookinClient.m */,
+				AA356AF3228EE6A3005C3969 /* NSColor+LookinClient.h */,
+				AA356AF4228EE6A3005C3969 /* NSColor+LookinClient.m */,
+				AAA9638B228428EE0047F707 /* NSPointerArray+LookinClient.h */,
+				AAA9638C228428EE0047F707 /* NSPointerArray+LookinClient.m */,
+				AA2F1AF423040552004725D6 /* NSArray+LookinClient.h */,
+				AA2F1AF523040552004725D6 /* NSArray+LookinClient.m */,
+				AAA8C0B821CC17670017A345 /* NSView+LookinClient.h */,
+				AADD18182302FB5B00AF79A4 /* NSControl+LookinClient.h */,
+				AADD18192302FB5B00AF79A4 /* NSControl+LookinClient.m */,
+				AAA8C0B421CC17670017A345 /* NSView+LookinClient.m */,
+				AAA8C0A421CC17670017A345 /* ShortCocoa+LookinClient.h */,
+				AAA8C09621CC17670017A345 /* ShortCocoa+LookinClient.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		AA08FC9322DF99E700F65B20 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				AA13691C22C3DA6F00B8AE87 /* LKTutorialManager.h */,
+				AA13691D22C3DA6F00B8AE87 /* LKTutorialManager.m */,
+				AA17857C22DE65D20042C8F0 /* LKTutorialPopoverController.h */,
+				AA17857D22DE65D20042C8F0 /* LKTutorialPopoverController.m */,
+			);
+			path = Tutorial;
+			sourceTree = "<group>";
+		};
+		AA0A2DD3233F7D2B008BF946 /* Constraint */ = {
+			isa = PBXGroup;
+			children = (
+				AA20A497232A2A2300AC80AA /* LKDashboardAttributeConstraintsView.h */,
+				AA20A498232A2A2300AC80AA /* LKDashboardAttributeConstraintsView.m */,
+				AA34A15C233F884D00513829 /* LKConstraintPopoverController.h */,
+				AA34A15D233F884D00513829 /* LKConstraintPopoverController.m */,
+				AA0A2DCB233F6AE4008BF946 /* LKDashboardAttributeConstraintsItemControl.h */,
+				AA0A2DCC233F6AE4008BF946 /* LKDashboardAttributeConstraintsItemControl.m */,
+			);
+			path = Constraint;
+			sourceTree = "<group>";
+		};
+		AA39054E23694C3800CA7646 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				AA39054B23694C3100CA7646 /* LKAboutWindowController.h */,
+				AA39054C23694C3100CA7646 /* LKAboutWindowController.m */,
+				AA39054F23694D5D00CA7646 /* LKAboutViewController.h */,
+				AA39055023694D5D00CA7646 /* LKAboutViewController.m */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		AA48F29221CC0CA50032EC2C = {
+			isa = PBXGroup;
+			children = (
+				A2DF3B1727F8B3E4004AFC2A /* LookinServer.zip */,
+				AA48F29D21CC0CA50032EC2C /* LookinClient */,
+				AA48F29C21CC0CA50032EC2C /* Products */,
+				5D159F647DFD4AA3F8E7F9E7 /* Pods */,
+				0A9FB6E904476A1F9D0BB82E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		AA48F29C21CC0CA50032EC2C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA48F29B21CC0CA50032EC2C /* Lookin.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA48F29D21CC0CA50032EC2C /* LookinClient */ = {
+			isa = PBXGroup;
+			children = (
+				AA6E0D8322E1D5BD00948877 /* Localizable.strings */,
+				AA48F2A921CC0CA60032EC2C /* Lookin.entitlements */,
+				AAA8C11C21CC17680017A345 /* AppDelegate.h */,
+				AAA8C11321CC17680017A345 /* AppDelegate.m */,
+				AA48F2A721CC0CA60032EC2C /* main.m */,
+				AA66488B23696D220043B50A /* logo_jump.gif */,
+				AA48F2A621CC0CA60032EC2C /* LookinClient_Info.plist */,
+				AA48F2A121CC0CA60032EC2C /* Assets.xcassets */,
+				AAA8C0C021CC17670017A345 /* LookinClient_PrefixHeader.pch */,
+				AA77A32C22CE0E7100C73721 /* lookin_icon.icns */,
+				A26EF68527F89F83005A9E4E /* ShortCocoa */,
+				AA39054E23694C3800CA7646 /* About */,
+				AAA8C08F21CC17670017A345 /* Base */,
+				AA08FC9322DF99E700F65B20 /* Tutorial */,
+				AA0757B922C606F3005535DC /* Export */,
+				AA0757C122C607D7005535DC /* Manager */,
+				AA8CFE222296DD5800B98BA2 /* MethodTrace */,
+				AA50753722A269F600D2A5AC /* Console */,
+				AAA8C08721CC17670017A345 /* Connection */,
+				AAA8C0F721CC17680017A345 /* Toolbar */,
+				D4224EF02358ED3A00ED9626 /* Measure */,
+				AAA8C0D621CC17680017A345 /* Dashboard */,
+				AAA8C0C221CC17670017A345 /* Hierarchy */,
+				AAA8C11421CC17680017A345 /* Launch */,
+				AAA8C0D221CC17680017A345 /* Static */,
+				AAD3872E2288614B00042229 /* Read */,
+				AAEE450821DF81C800BF2650 /* Preference */,
+				AA48F2A321CC0CA60032EC2C /* MainMenu.xib */,
+			);
+			path = LookinClient;
+			sourceTree = "<group>";
+		};
+		AA50753722A269F600D2A5AC /* Console */ = {
+			isa = PBXGroup;
+			children = (
+				AA9A3D642269DDCC00BE46C7 /* LKConsoleViewController.h */,
+				AA9A3D6D2269DDCD00BE46C7 /* LKConsoleViewController.m */,
+				AA50754122A2844400D2A5AC /* LKConsoleInputRowView.h */,
+				AA50754F22A28A0A00D2A5AC /* LKConsoleSubmitRowView.h */,
+				AA50755022A28A0A00D2A5AC /* LKConsoleSubmitRowView.m */,
+				AA50755222A28A1600D2A5AC /* LKConsoleReturnRowView.h */,
+				AA50755322A28A1600D2A5AC /* LKConsoleReturnRowView.m */,
+				AA50754222A2844400D2A5AC /* LKConsoleInputRowView.m */,
+				AA50753822A27CC500D2A5AC /* LKConsoleDataSource.h */,
+				AA50753B22A27EAD00D2A5AC /* LKConsoleDataSourceRowItem.h */,
+				AA50753C22A27EAD00D2A5AC /* LKConsoleDataSourceRowItem.m */,
+				AA50753922A27CC500D2A5AC /* LKConsoleDataSource.m */,
+				AAF418C022BA2AF000111554 /* LKConsoleSelectPopoverController.h */,
+				AAF418C122BA2AF000111554 /* LKConsoleSelectPopoverController.m */,
+				AAF418C322BA2C9600111554 /* LKConsoleSelectPopoverItemControl.h */,
+				AAF418C422BA2C9600111554 /* LKConsoleSelectPopoverItemControl.m */,
+			);
+			path = Console;
+			sourceTree = "<group>";
+		};
+		AA50755822A3ED9B00D2A5AC /* InputSearch */ = {
+			isa = PBXGroup;
+			children = (
+				AA50755522A3E76A00D2A5AC /* LKInputSearchView.h */,
+				AA50755622A3E76A00D2A5AC /* LKInputSearchView.m */,
+				AA50755C22A3EE4A00D2A5AC /* LKInputSearchSuggestionWindowController.h */,
+				AA50755D22A3EE4A00D2A5AC /* LKInputSearchSuggestionWindowController.m */,
+				AAE61CCC22A5063F00B3FB9F /* LKInputSearchSuggestionsRowView.h */,
+				AAE61CCD22A5063F00B3FB9F /* LKInputSearchSuggestionsRowView.m */,
+				AAE61CC922A5023000B3FB9F /* LKInputSearchSuggestionsContentView.h */,
+				AAE61CCA22A5023000B3FB9F /* LKInputSearchSuggestionsContentView.m */,
+				AAE61CC622A4F7B100B3FB9F /* LKInputSearchSuggestionItem.h */,
+				AAE61CC722A4F7B100B3FB9F /* LKInputSearchSuggestionItem.m */,
+			);
+			path = InputSearch;
+			sourceTree = "<group>";
+		};
+		AA8CFE222296DD5800B98BA2 /* MethodTrace */ = {
+			isa = PBXGroup;
+			children = (
+				AA8CFE1F2296DD5300B98BA2 /* LKMethodTraceWindowController.h */,
+				AA8CFE202296DD5300B98BA2 /* LKMethodTraceWindowController.m */,
+				AABEE3FA22970DF80042EC5A /* LKMethodTraceDetailView.h */,
+				AABEE3FB22970DF80042EC5A /* LKMethodTraceDetailView.m */,
+				AA8CFE232296DD7F00B98BA2 /* LKMethodTraceViewController.h */,
+				AA8CFE242296DD7F00B98BA2 /* LKMethodTraceViewController.m */,
+				AA443BA122C40354009543D1 /* LKMethodTraceLaunchView.h */,
+				AA443BA222C40354009543D1 /* LKMethodTraceLaunchView.m */,
+				AAA2C6122297D5CF005CBA10 /* LKMethodTraceDataSource.h */,
+				AAA2C6132297D5CF005CBA10 /* LKMethodTraceDataSource.m */,
+				AABEE3EA22970CCF0042EC5A /* LKMethodTraceMenuView.h */,
+				AABEE3EB22970CCF0042EC5A /* LKMethodTraceMenuView.m */,
+				AABEE403229721CE0042EC5A /* LKMethodTraceSelectMethodContentView.h */,
+				AABEE404229721CE0042EC5A /* LKMethodTraceSelectMethodContentView.m */,
+				AABEE3ED22970CE80042EC5A /* LKMethodTraceMenuItemView.h */,
+				AABEE3EE22970CE80042EC5A /* LKMethodTraceMenuItemView.m */,
+			);
+			path = MethodTrace;
+			sourceTree = "<group>";
+		};
+		AAA8C08721CC17670017A345 /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+				AAA8C08B21CC17670017A345 /* LKAppsManager.m */,
+				AAA8C08821CC17670017A345 /* LKAppsManager.h */,
+				AAA8C08C21CC17670017A345 /* LKConnectionManager.m */,
+				AA7F157622C0F2B9004436AD /* LKConnectionRequest.h */,
+				AA7F157722C0F2B9004436AD /* LKConnectionRequest.m */,
+				AAA8C08921CC17670017A345 /* LKConnectionManager.h */,
+				AAA8C08D21CC17670017A345 /* LKInspectableApp.h */,
+				AAA8C08A21CC17670017A345 /* LKInspectableApp.m */,
+			);
+			path = Connection;
+			sourceTree = "<group>";
+		};
+		AAA8C08F21CC17670017A345 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				AA0757C322C6084A005535DC /* Category */,
+				AA50755822A3ED9B00D2A5AC /* InputSearch */,
+				AAB09026229D74F000159B15 /* LKOutlineItem.h */,
+				AA65ED472341FE8300F0BF34 /* LKTwoColors.h */,
+				AA65ED482341FE8300F0BF34 /* LKTwoColors.m */,
+				AAB09027229D74F000159B15 /* LKOutlineItem.m */,
+				AA66C5A5231965EE00085C76 /* LKUserActionManager.h */,
+				AA66C5A6231965EE00085C76 /* LKUserActionManager.m */,
+				AA2F1AF12303F34B004725D6 /* LKTextsMenuView.h */,
+				AA2F1AF22303F34B004725D6 /* LKTextsMenuView.m */,
+				AAC323152267ABD200BACA67 /* LKWindowController.h */,
+				AAC323162267ABD200BACA67 /* LKWindowController.m */,
+				AA0A2DD9233F81D9008BF946 /* LKPopPanel.h */,
+				AA0A2DDA233F81D9008BF946 /* LKPopPanel.m */,
+				AA5C54D92289DF97004E09F4 /* LKWindow.h */,
+				AA5C54DA2289DF97004E09F4 /* LKWindow.m */,
+				AAA8C0D321CC17680017A345 /* LKSplitView.h */,
+				AAA8C11021CC17680017A345 /* LKSplitView.m */,
+				AAD2BECF226B280B00E83D01 /* LKTableRowView.h */,
+				AAD2BED0226B280B00E83D01 /* LKTableRowView.m */,
+				AAD2BECC226B1ED500E83D01 /* LKTableView.h */,
+				AAD2BECD226B1ED500E83D01 /* LKTableView.m */,
+				AAAF21132226BD4D00975C95 /* LKTextFieldView.h */,
+				AAAF21142226BD4D00975C95 /* LKTextFieldView.m */,
+				AAC16CD82282B5F400E67E0A /* LKTipsView.h */,
+				AAC16CD92282B5F400E67E0A /* LKTipsView.m */,
+				AA1BE24E2237D6A700DB38E6 /* LKTextControl.h */,
+				AA1BE24F2237D6A700DB38E6 /* LKTextControl.m */,
+				AAA8C0A721CC17670017A345 /* LKProgressIndicatorView.h */,
+				AAA8C09A21CC17670017A345 /* LKProgressIndicatorView.m */,
+				AA290356229824A400073B65 /* LKPanelContentView.h */,
+				AA290357229824A400073B65 /* LKPanelContentView.m */,
+				AAD2BED5226B327000E83D01 /* LKOutlineRowView.h */,
+				AAD2BED6226B327000E83D01 /* LKOutlineRowView.m */,
+				AA30215E21F32908000B0084 /* LKColorIndicatorLayer.h */,
+				AA30215F21F32908000B0084 /* LKColorIndicatorLayer.m */,
+				AAB09023229D736F00159B15 /* LKOutlineView.h */,
+				AAB09024229D736F00159B15 /* LKOutlineView.m */,
+				AA6CC486221FE7DE00CA6D54 /* LKNumberInputView.h */,
+				AA6CC487221FE7DE00CA6D54 /* LKNumberInputView.m */,
+				AAA8C0A621CC17670017A345 /* LKImageControl.h */,
+				AAA8C09B21CC17670017A345 /* LKImageControl.m */,
+				AAF418C622BA2D1300111554 /* LKImageTextView.h */,
+				AAF418C722BA2D1300111554 /* LKImageTextView.m */,
+				AAA8C0A121CC17670017A345 /* LKLabel.h */,
+				AAA8C09221CC17670017A345 /* LKLabel.m */,
+				AAA8C09321CC17670017A345 /* LKBaseControl.h */,
+				AAA8C0A021CC17670017A345 /* LKBaseControl.m */,
+				AAA8C09721CC17670017A345 /* LKBaseView.h */,
+				AAA8C0A321CC17670017A345 /* LKBaseView.m */,
+				AAA8C0A521CC17670017A345 /* LKBaseViewController.h */,
+				AAA8C09C21CC17670017A345 /* LKBaseViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		AAA8C0C221CC17670017A345 /* Hierarchy */ = {
+			isa = PBXGroup;
+			children = (
+				AAD387322288632100042229 /* LKHierarchyController.h */,
+				AAD387332288632100042229 /* LKHierarchyController.m */,
+				AA3A7D0223003D7A00997887 /* LKHierarchyHandlersPopoverController.h */,
+				AA3A7D0323003D7A00997887 /* LKHierarchyHandlersPopoverController.m */,
+				AA3A7D0723003F5800997887 /* LKHierarchyHandlersPopoverItemView.h */,
+				AA3A7D0823003F5800997887 /* LKHierarchyHandlersPopoverItemView.m */,
+				AAC5E2DC228034DC0081A810 /* LKHierarchyDataSource.h */,
+				AAC5E2DD228034DC0081A810 /* LKHierarchyDataSource.m */,
+				AA22A0EB2276D65B00356E70 /* LKHierarchyItem.h */,
+				AA22A0EC2276D65B00356E70 /* LKHierarchyItem.m */,
+				AAA8C0AD21CC17670017A345 /* LKHierarchyView.m */,
+				AAA8C0AB21CC17670017A345 /* LKHierarchyView.h */,
+				AAA8C0AE21CC17670017A345 /* LKHierarchyRowView.m */,
+				AAA8C0AC21CC17670017A345 /* LKHierarchyRowView.h */,
+			);
+			path = Hierarchy;
+			sourceTree = "<group>";
+		};
+		AAA8C0D221CC17680017A345 /* Static */ = {
+			isa = PBXGroup;
+			children = (
+				AAA8C10721CC17680017A345 /* Preview */,
+				AAA8C0D521CC17680017A345 /* LKStaticViewController.h */,
+				AAA8C11121CC17680017A345 /* LKStaticViewController.m */,
+				AAB872E4221C26B600C25294 /* LKStaticAsyncUpdateManager.h */,
+				AAB872E5221C26B600C25294 /* LKStaticAsyncUpdateManager.m */,
+				AAC41E1622686A28005CDD6E /* LKStaticHierarchyDataSource.h */,
+				AAC41E1522686A28005CDD6E /* LKStaticHierarchyDataSource.m */,
+				AAA8C0D421CC17680017A345 /* LKStaticWindowController.h */,
+				AAA8C11221CC17680017A345 /* LKStaticWindowController.m */,
+				AAA8C0CA21CC17670017A345 /* LKStaticHierarchyController.m */,
+				AAA8C0D121CC17670017A345 /* LKStaticHierarchyController.h */,
+			);
+			path = Static;
+			sourceTree = "<group>";
+		};
+		AAA8C0D621CC17680017A345 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				AAB65C0D2320FCFA001E4299 /* Search */,
+				AA05CCD1221ED50B0086CDD1 /* AttributeView */,
+				AAA8C0DA21CC17680017A345 /* LKDashboardCardView.h */,
+				AA66C59F231924BD00085C76 /* LKDashboardAccessoryWindowController.h */,
+				AA66C5A0231924BD00085C76 /* LKDashboardAccessoryWindowController.m */,
+				AAA8C0EA21CC17680017A345 /* LKDashboardCardView.m */,
+				AAB636C422B3BA0F00885A2C /* LKDashboardCardTitleControl.h */,
+				AAB636C522B3BA0F00885A2C /* LKDashboardCardTitleControl.m */,
+				AA22310B22AA717E00A5A975 /* LKDashboardSectionView.h */,
+				AA22310C22AA717E00A5A975 /* LKDashboardSectionView.m */,
+				AAA8C0F121CC17680017A345 /* LKDashboardViewController.h */,
+				AAA8C0DF21CC17680017A345 /* LKDashboardViewController.m */,
+				AAA8C0F521CC17680017A345 /* LKEnumListRegistry.h */,
+				AAA8C0E621CC17680017A345 /* LKEnumListRegistry.m */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		AAA8C0F721CC17680017A345 /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
+				AAC1FB1F2282EDC6000A3653 /* LKWindowToolbarHelper.h */,
+				AAC1FB202282EDC6000A3653 /* LKWindowToolbarHelper.m */,
+				D4D1B2D12353975A002A5071 /* LKWindowToolbarScaleView.h */,
+				D4D1B2D22353975A002A5071 /* LKWindowToolbarScaleView.m */,
+				AAA8C0F821CC17680017A345 /* LKMenuPopoverAppsListController.m */,
+				AA049A1521E61B85008C6366 /* LKMenuPopoverSettingController.h */,
+				AA049A1621E61B85008C6366 /* LKMenuPopoverSettingController.m */,
+				AAA8C10521CC17680017A345 /* LKMenuPopoverAppsListController.h */,
+			);
+			path = Toolbar;
+			sourceTree = "<group>";
+		};
+		AAA8C10721CC17680017A345 /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				AAEF2C132308421200CFAC53 /* WillShare */,
+				AAA8C10B21CC17680017A345 /* LKPreviewController.h */,
+				AAA8C10E21CC17680017A345 /* LKPreviewController.m */,
+				AAA8C10921CC17680017A345 /* LKPreviewPanGestureRecognizer.h */,
+				AAA8C10C21CC17680017A345 /* LKPreviewPanGestureRecognizer.m */,
+				AAA8C10A21CC17680017A345 /* LKPreviewStageView.h */,
+				AAA8C10F21CC17680017A345 /* LKPreviewStageView.m */,
+			);
+			path = Preview;
+			sourceTree = "<group>";
+		};
+		AAA8C11421CC17680017A345 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				AAA8C11821CC17680017A345 /* LKLaunchAppView.m */,
+				AAA8C11521CC17680017A345 /* LKLaunchAppView.h */,
+				AAA8C11621CC17680017A345 /* LKLaunchViewController.m */,
+				AAA8C11921CC17680017A345 /* LKLaunchViewController.h */,
+				AAA8C11721CC17680017A345 /* LKLaunchWindowController.h */,
+				AAA8C11A21CC17680017A345 /* LKLaunchWindowController.m */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		AAB65C0D2320FCFA001E4299 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				AAB65C072320FC30001E4299 /* LKDashboardSearchCardView.h */,
+				AAB65C082320FC30001E4299 /* LKDashboardSearchCardView.m */,
+				AAB65C0A2320FCF0001E4299 /* LKDashboardSearchPropView.h */,
+				AAB65C0B2320FCF0001E4299 /* LKDashboardSearchPropView.m */,
+				AA56062B2322A733008C82CF /* LKDashboardSearchMethodsView.h */,
+				AA56062C2322A733008C82CF /* LKDashboardSearchMethodsView.m */,
+				AAB65C042320ED56001E4299 /* LKDashboardSearchInputView.h */,
+				AAB65C052320ED56001E4299 /* LKDashboardSearchInputView.m */,
+				AA56062E2322AEA7008C82CF /* LKDashboardSearchMethodsDataSource.h */,
+				AA56062F2322AEA7008C82CF /* LKDashboardSearchMethodsDataSource.m */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		AAD3872E2288614B00042229 /* Read */ = {
+			isa = PBXGroup;
+			children = (
+				AAD8C02B22C60E06009253F4 /* LKReadHierarchyDataSource.h */,
+				AAD8C02A22C60E06009253F4 /* LKReadHierarchyDataSource.m */,
+				AA74B1CA22897C9400366865 /* LKReadHierarchyController.h */,
+				AA74B1CB22897C9400366865 /* LKReadHierarchyController.m */,
+				AAD3872B2288614300042229 /* LKReadWindowController.h */,
+				AAD3872C2288614300042229 /* LKReadWindowController.m */,
+				AAD3872F2288624600042229 /* LKReadViewController.h */,
+				AAD387302288624600042229 /* LKReadViewController.m */,
+			);
+			path = Read;
+			sourceTree = "<group>";
+		};
+		AAEE450821DF81C800BF2650 /* Preference */ = {
+			isa = PBXGroup;
+			children = (
+				AAEE450521DF81C300BF2650 /* LKPreferenceWindowController.h */,
+				AAEE450621DF81C300BF2650 /* LKPreferenceWindowController.m */,
+				AAEE450921DF820100BF2650 /* LKPreferenceViewController.h */,
+				AAEE450A21DF820100BF2650 /* LKPreferenceViewController.m */,
+				AA98EC94222703CC0083348D /* LKPreferenceSwitchView.h */,
+				AA98EC95222703CC0083348D /* LKPreferenceSwitchView.m */,
+				AA98EC9B22270B800083348D /* LKPreferencePopupView.h */,
+				AA98EC9A22270B800083348D /* LKPreferencePopupView.m */,
+			);
+			path = Preference;
+			sourceTree = "<group>";
+		};
+		AAEF2C132308421200CFAC53 /* WillShare */ = {
+			isa = PBXGroup;
+			children = (
+				AAEF2C102308420400CFAC53 /* LookinDisplayItemNode.h */,
+				AAEF2C0F2308420400CFAC53 /* LookinDisplayItemNode.m */,
+				AAEF2C0E2308420300CFAC53 /* LookinPreviewView.h */,
+				AAEF2C0D2308420300CFAC53 /* LookinPreviewView.m */,
+			);
+			path = WillShare;
+			sourceTree = "<group>";
+		};
+		D4224EF02358ED3A00ED9626 /* Measure */ = {
+			isa = PBXGroup;
+			children = (
+				D4224EED2358ED3400ED9626 /* LKMeasureController.h */,
+				D4224EEE2358ED3400ED9626 /* LKMeasureController.m */,
+				D4052AC7235CBD090033C961 /* LKMeasureTutorialView.h */,
+				D4052AC8235CBD090033C961 /* LKMeasureTutorialView.m */,
+				D4052ACA235CE2300033C961 /* LKMeasureResultView.h */,
+				D4052ACB235CE2300033C961 /* LKMeasureResultView.m */,
+				D4E1FD64236169130070DFB8 /* LKMeasureResultLineData.h */,
+				D4E1FD65236169130070DFB8 /* LKMeasureResultLineData.m */,
+			);
+			path = Measure;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA48F29A21CC0CA50032EC2C /* LookinClient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA48F2AC21CC0CA60032EC2C /* Build configuration list for PBXNativeTarget "LookinClient" */;
+			buildPhases = (
+				136E0BEAC94630788C7DEFBE /* [CP] Check Pods Manifest.lock */,
+				AA48F29721CC0CA50032EC2C /* Sources */,
+				AA48F29821CC0CA50032EC2C /* Frameworks */,
+				AA48F29921CC0CA50032EC2C /* Resources */,
+				AAB9518822C3AECA00A5F958 /* Embed App Extensions */,
+				AA1CAA3722E4713C006D9285 /* Embed Frameworks */,
+				AA4B08D322F7040C00BE3989 /* CopyFiles */,
+				FB8F4F190F8A8870A31070AE /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LookinClient;
+			productName = Lookin;
+			productReference = AA48F29B21CC0CA50032EC2C /* Lookin.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA48F29321CC0CA50032EC2C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = hughkli;
+				TargetAttributes = {
+					AA48F29A21CC0CA50032EC2C = {
+						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.HardenedRuntime = {
+								enabled = 1;
+							};
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = AA48F29621CC0CA50032EC2C /* Build configuration list for PBXProject "Lookin" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = AA48F29221CC0CA50032EC2C;
+			productRefGroup = AA48F29C21CC0CA50032EC2C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA48F29A21CC0CA50032EC2C /* LookinClient */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA48F29921CC0CA50032EC2C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA48F2A221CC0CA60032EC2C /* Assets.xcassets in Resources */,
+				AA6E0D8122E1D5BD00948877 /* Localizable.strings in Resources */,
+				AA66488C23696D220043B50A /* logo_jump.gif in Resources */,
+				AA48F2A521CC0CA60032EC2C /* MainMenu.xib in Resources */,
+				AA77A32D22CE0E7100C73721 /* lookin_icon.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		136E0BEAC94630788C7DEFBE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LookinClient-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB8F4F190F8A8870A31070AE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LookinClient/Pods-LookinClient-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LookinClient/Pods-LookinClient-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LookinClient/Pods-LookinClient-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA48F29721CC0CA50032EC2C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAA8C13A21CC17680017A345 /* LKStaticHierarchyController.m in Sources */,
+				AAEF2C112308420400CFAC53 /* LookinPreviewView.m in Sources */,
+				AA3D51AA2289E57C00E4E6B7 /* LKExportManager.m in Sources */,
+				AAEE450721DF81C300BF2650 /* LKPreferenceWindowController.m in Sources */,
+				AA13691E22C3DA6F00B8AE87 /* LKTutorialManager.m in Sources */,
+				AAAEB36E22B408DF00A3DDE7 /* LKDashboardAttributeStringArrayView.m in Sources */,
+				AAB09025229D736F00159B15 /* LKOutlineView.m in Sources */,
+				AAC5E2DE228034DC0081A810 /* LKHierarchyDataSource.m in Sources */,
+				AAC1FB212282EDC6000A3653 /* LKWindowToolbarHelper.m in Sources */,
+				A26EF69827F89F83005A9E4E /* ShortCocoa+Layout.m in Sources */,
+				AAED8ED822AFED490051242B /* LKDashboardAttributeSizeView.m in Sources */,
+				AAA8C12821CC17680017A345 /* LKBaseViewController.m in Sources */,
+				AA05CCD7221ED5E80086CDD1 /* LKDashboardAttributeSwitchView.m in Sources */,
+				AAA8C12021CC17680017A345 /* LKNavigationManager.m in Sources */,
+				AA48F2A821CC0CA60032EC2C /* main.m in Sources */,
+				AAF418C222BA2AF000111554 /* LKConsoleSelectPopoverController.m in Sources */,
+				AA22A0ED2276D65B00356E70 /* LKHierarchyItem.m in Sources */,
+				AA66645F22DBBAC7009E05CC /* NSString+Score.m in Sources */,
+				AAA8C11F21CC17680017A345 /* LKConnectionManager.m in Sources */,
+				AAEE450B21DF820100BF2650 /* LKPreferenceViewController.m in Sources */,
+				AAAF21152226BD4D00975C95 /* LKTextFieldView.m in Sources */,
+				AAA8C15A21CC17680017A345 /* LKSplitView.m in Sources */,
+				AABEE405229721CE0042EC5A /* LKMethodTraceSelectMethodContentView.m in Sources */,
+				AA01EF2722DD0D26002A2E06 /* LKHelper.m in Sources */,
+				AA356AF5228EE6A3005C3969 /* NSColor+LookinClient.m in Sources */,
+				AA0A2DCD233F6AE4008BF946 /* LKDashboardAttributeConstraintsItemControl.m in Sources */,
+				AA5AE70622C2B2E50064D41B /* LookinDocument.m in Sources */,
+				AA20A499232A2A2300AC80AA /* LKDashboardAttributeConstraintsView.m in Sources */,
+				AAD387312288624600042229 /* LKReadViewController.m in Sources */,
+				AAA8C12221CC17680017A345 /* LKLabel.m in Sources */,
+				AABE9005224169D200030361 /* LKAppMenuManager.m in Sources */,
+				AAF418C522BA2C9600111554 /* LKConsoleSelectPopoverItemControl.m in Sources */,
+				AAA8C12721CC17680017A345 /* LKImageControl.m in Sources */,
+				A26EF69927F89F83005A9E4E /* ShortCocoa+UIToolkit.m in Sources */,
+				AA50755E22A3EE4A00D2A5AC /* LKInputSearchSuggestionWindowController.m in Sources */,
+				D41874D4234B68AE004D68A2 /* LKDashboardAttributeOpenImageView.m in Sources */,
+				AAB65C0C2320FCF0001E4299 /* LKDashboardSearchPropView.m in Sources */,
+				AA8CFE252296DD7F00B98BA2 /* LKMethodTraceViewController.m in Sources */,
+				AAD387342288632100042229 /* LKHierarchyController.m in Sources */,
+				AAA8C15F21CC17680017A345 /* LKLaunchAppView.m in Sources */,
+				AAA8C15921CC17680017A345 /* LKPreviewStageView.m in Sources */,
+				AA30216021F32908000B0084 /* LKColorIndicatorLayer.m in Sources */,
+				D4052AC9235CBD090033C961 /* LKMeasureTutorialView.m in Sources */,
+				AA049A1721E61B85008C6366 /* LKMenuPopoverSettingController.m in Sources */,
+				AAEC732022A6E4830011B147 /* LKPreferenceManager.m in Sources */,
+				D4052ACC235CE2300033C961 /* LKMeasureResultView.m in Sources */,
+				AAA8C11D21CC17680017A345 /* LKInspectableApp.m in Sources */,
+				AA17F390232FBD710082F393 /* LKDashboardAttributeTextView.m in Sources */,
+				AAA8C12B21CC17680017A345 /* LKBaseView.m in Sources */,
+				AA3A7D0923003F5800997887 /* LKHierarchyHandlersPopoverItemView.m in Sources */,
+				D4224EEF2358ED3400ED9626 /* LKMeasureController.m in Sources */,
+				AAA8C14021CC17680017A345 /* LKDashboardViewController.m in Sources */,
+				AAEF2C122308420400CFAC53 /* LookinDisplayItemNode.m in Sources */,
+				AA17857E22DE65D20042C8F0 /* LKTutorialPopoverController.m in Sources */,
+				D4D1B2D32353975A002A5071 /* LKWindowToolbarScaleView.m in Sources */,
+				AAF418C822BA2D1300111554 /* LKImageTextView.m in Sources */,
+				AAA8C15C21CC17680017A345 /* LKStaticWindowController.m in Sources */,
+				AA98EC96222703CC0083348D /* LKPreferenceSwitchView.m in Sources */,
+				AA1BE2502237D6A700DB38E6 /* LKTextControl.m in Sources */,
+				AAA8C13421CC17680017A345 /* NSView+LookinClient.m in Sources */,
+				AACBACB222AEA6EA00A8F89D /* LKDashboardAttributeInsetsView.m in Sources */,
+				AAD3872D2288614300042229 /* LKReadWindowController.m in Sources */,
+				AAA8C15721CC17680017A345 /* LKPreviewPanGestureRecognizer.m in Sources */,
+				AA50754322A2844400D2A5AC /* LKConsoleInputRowView.m in Sources */,
+				AA2F1AF32303F34B004725D6 /* LKTextsMenuView.m in Sources */,
+				AA23624B222C67C1008FE069 /* NSAppearance+LookinClient.m in Sources */,
+				AAA8C16021CC17680017A345 /* LKLaunchWindowController.m in Sources */,
+				AAC41E1722686A28005CDD6E /* LKStaticHierarchyDataSource.m in Sources */,
+				AAA8C15821CC17680017A345 /* LKPreviewController.m in Sources */,
+				AA5C54DB2289DF97004E09F4 /* LKWindow.m in Sources */,
+				AABEE3EF22970CE80042EC5A /* LKMethodTraceMenuItemView.m in Sources */,
+				AA66C5A7231965EE00085C76 /* LKUserActionManager.m in Sources */,
+				AABEE3FC22970DF80042EC5A /* LKMethodTraceDetailView.m in Sources */,
+				A26EF69627F89F83005A9E4E /* ShortCocoa+Others.m in Sources */,
+				AAE649332299462200232880 /* NSButton+LookinClient.m in Sources */,
+				AAC323172267ABD200BACA67 /* LKWindowController.m in Sources */,
+				AA3A7D0523003D7A00997887 /* LKHierarchyHandlersPopoverController.m in Sources */,
+				AAD2BED7226B327000E83D01 /* LKOutlineRowView.m in Sources */,
+				A26EF69527F89F83005A9E4E /* ShortCocoaCore.m in Sources */,
+				AA66C5A1231924BD00085C76 /* LKDashboardAccessoryWindowController.m in Sources */,
+				AA50753D22A27EAD00D2A5AC /* LKConsoleDataSourceRowItem.m in Sources */,
+				AA98EC9C22270B800083348D /* LKPreferencePopupView.m in Sources */,
+				D4E1FD66236169130070DFB8 /* LKMeasureResultLineData.m in Sources */,
+				AA8CFE212296DD5300B98BA2 /* LKMethodTraceWindowController.m in Sources */,
+				AAA8C12421CC17680017A345 /* ShortCocoa+LookinClient.m in Sources */,
+				AA8133F022AFAEA1000A9D40 /* LKDashboardAttributePointView.m in Sources */,
+				AAA8C14621CC17680017A345 /* LKDashboardCardView.m in Sources */,
+				AAE61CCB22A5023000B3FB9F /* LKInputSearchSuggestionsContentView.m in Sources */,
+				AA0A2DDB233F81D9008BF946 /* LKPopPanel.m in Sources */,
+				AAA8C15D21CC17680017A345 /* AppDelegate.m in Sources */,
+				AAB872E6221C26B600C25294 /* LKStaticAsyncUpdateManager.m in Sources */,
+				AAB636C022B3854100885A2C /* LKDashboardAttributeClassView.m in Sources */,
+				AAA8C12E21CC17680017A345 /* LKHierarchyView.m in Sources */,
+				AAA8C11E21CC17680017A345 /* LKAppsManager.m in Sources */,
+				AAE61CCE22A5063F00B3FB9F /* LKInputSearchSuggestionsRowView.m in Sources */,
+				AAA8C12621CC17680017A345 /* LKProgressIndicatorView.m in Sources */,
+				AAA8C12A21CC17680017A345 /* LKBaseControl.m in Sources */,
+				AACBACAF22AE983F00A8F89D /* LKDashboardAttributeRectView.m in Sources */,
+				AAA8C14221CC17680017A345 /* LKEnumListRegistry.m in Sources */,
+				AAD8C02C22C60E06009253F4 /* LKReadHierarchyDataSource.m in Sources */,
+				AA22310D22AA717E00A5A975 /* LKDashboardSectionView.m in Sources */,
+				AAA9638D228428EE0047F707 /* NSPointerArray+LookinClient.m in Sources */,
+				AABEE3EC22970CCF0042EC5A /* LKMethodTraceMenuView.m in Sources */,
+				AAA8C14A21CC17680017A345 /* LKDashboardAttributeView.m in Sources */,
+				AA50755722A3E76A00D2A5AC /* LKInputSearchView.m in Sources */,
+				AA65ED492341FE8300F0BF34 /* LKTwoColors.m in Sources */,
+				AA39055123694D5D00CA7646 /* LKAboutViewController.m in Sources */,
+				AAB65C092320FC30001E4299 /* LKDashboardSearchCardView.m in Sources */,
+				AA290358229824A400073B65 /* LKPanelContentView.m in Sources */,
+				AAA8C15E21CC17680017A345 /* LKLaunchViewController.m in Sources */,
+				AA7F157822C0F2B9004436AD /* LKConnectionRequest.m in Sources */,
+				AA9A3D732269DDCE00BE46C7 /* LKConsoleViewController.m in Sources */,
+				AA34A15E233F884D00513829 /* LKConstraintPopoverController.m in Sources */,
+				AAA8C15B21CC17680017A345 /* LKStaticViewController.m in Sources */,
+				AAE61CC822A4F7B100B3FB9F /* LKInputSearchSuggestionItem.m in Sources */,
+				AA05CCDA221ED5F60086CDD1 /* LKDashboardAttributeColorView.m in Sources */,
+				AA5606302322AEA7008C82CF /* LKDashboardSearchMethodsDataSource.m in Sources */,
+				AA39054D23694C3100CA7646 /* LKAboutWindowController.m in Sources */,
+				AAD2BECE226B1ED500E83D01 /* LKTableView.m in Sources */,
+				A26EF69727F89F83005A9E4E /* ShortCocoa+String.m in Sources */,
+				A26EF69427F89F83005A9E4E /* ShortCocoa+Private.m in Sources */,
+				AAB65C062320ED56001E4299 /* LKDashboardSearchInputView.m in Sources */,
+				AA28179F22B0305400A0874C /* LKDashboardAttributeRowsCountView.m in Sources */,
+				AA05CCDD221ED6110086CDD1 /* LKDashboardAttributeEnumsView.m in Sources */,
+				AA50755422A28A1600D2A5AC /* LKConsoleReturnRowView.m in Sources */,
+				AADD181A2302FB5B00AF79A4 /* NSControl+LookinClient.m in Sources */,
+				AAA2C6142297D5CF005CBA10 /* LKMethodTraceDataSource.m in Sources */,
+				AAB636C622B3BA0F00885A2C /* LKDashboardCardTitleControl.m in Sources */,
+				AA443BA322C40354009543D1 /* LKMethodTraceLaunchView.m in Sources */,
+				AAA8C12F21CC17680017A345 /* LKHierarchyRowView.m in Sources */,
+				AA50755122A28A0A00D2A5AC /* LKConsoleSubmitRowView.m in Sources */,
+				AAB636C322B3981200885A2C /* LKDashboardAttributeRelationView.m in Sources */,
+				AA6CC488221FE7DE00CA6D54 /* LKNumberInputView.m in Sources */,
+				AA50753A22A27CC500D2A5AC /* LKConsoleDataSource.m in Sources */,
+				AA74B1CC22897C9400366865 /* LKReadHierarchyController.m in Sources */,
+				AA56062D2322A733008C82CF /* LKDashboardSearchMethodsView.m in Sources */,
+				AA9CC2C522891EA20014D13B /* LKExportAccessoryView.m in Sources */,
+				AAEC35A52340EAB3009E5040 /* NSString+LookinClient.m in Sources */,
+				AA2F1AF623040552004725D6 /* NSArray+LookinClient.m in Sources */,
+				AAB09028229D74F000159B15 /* LKOutlineItem.m in Sources */,
+				AAC16CDA2282B5F400E67E0A /* LKTipsView.m in Sources */,
+				AAA8C14F21CC17680017A345 /* LKMenuPopoverAppsListController.m in Sources */,
+				AAD2BED1226B280B00E83D01 /* LKTableRowView.m in Sources */,
+				AA05CCD4221ED5CA0086CDD1 /* LKDashboardAttributeNumberInputView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AA48F2A321CC0CA60032EC2C /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA48F2A421CC0CA60032EC2C /* Base */,
+				AAB4C85422415F75002D2B06 /* zh-Hans */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		AA6E0D8322E1D5BD00948877 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA6E0D8422E1D5C600948877 /* zh-Hans */,
+				AAA2497222E216C700595E9B /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AA48F2AA21CC0CA60032EC2C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 7;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		AA48F2AB21CC0CA60032EC2C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 7;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AA48F2AD21CC0CA60032EC2C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 607BE4658FF90E8DCB8EC923 /* Pods-LookinClient.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LookinClient/Lookin.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5V3Z8FVWHU;
+				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LookinClient",
+					"$(PROJECT_DIR)/LookinClient/LookinServerFramework",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/LookinClient/LookinClient_PrefixHeader.pch";
+				INFOPLIST_FILE = LookinClient/LookinClient_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = hughkli.Lookin;
+				PRODUCT_NAME = Lookin;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Debug;
+		};
+		AA48F2AE21CC0CA60032EC2C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFDAAD6EFCBEBC7B6B348031 /* Pods-LookinClient.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LookinClient/Lookin.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5V3Z8FVWHU;
+				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LookinClient",
+					"$(PROJECT_DIR)/LookinClient/LookinServerFramework",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/LookinClient/LookinClient_PrefixHeader.pch";
+				INFOPLIST_FILE = LookinClient/LookinClient_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = hughkli.Lookin;
+				PRODUCT_NAME = Lookin;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA48F29621CC0CA50032EC2C /* Build configuration list for PBXProject "Lookin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA48F2AA21CC0CA60032EC2C /* Debug */,
+				AA48F2AB21CC0CA60032EC2C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA48F2AC21CC0CA60032EC2C /* Build configuration list for PBXNativeTarget "LookinClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA48F2AD21CC0CA60032EC2C /* Debug */,
+				AA48F2AE21CC0CA60032EC2C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA48F29321CC0CA50032EC2C /* Project object */;
+}

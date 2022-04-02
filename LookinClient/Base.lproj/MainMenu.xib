@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
+            <connections>
+                <outlet property="delegate" destination="Voe-Tx-rLC" id="GzC-gU-4Uq"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
+        <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+        <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
+            <items>
+                <menuItem title="Lookin" tag="1" id="1Xt-HY-uBw">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Lookin" systemMenu="apple" id="reQ-ix-KUg">
+                        <items>
+                            <menuItem title="About Lookin" tag="11" id="IFz-p9-h1r">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="aUj-9Z-htq"/>
+                            <menuItem title="Preferences…" tag="12" keyEquivalent="," id="XNQ-bk-Zmh"/>
+                            <menuItem isSeparatorItem="YES" id="uqd-Ho-Wgq"/>
+                            <menuItem title="Check for Updates…" tag="13" id="6je-u8-N3K">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="fdH-nj-Wf7"/>
+                            <menuItem title="Hide Lookin" keyEquivalent="h" id="dfQ-f5-8Pi">
+                                <connections>
+                                    <action selector="hide:" target="-1" id="Ejf-K9-BJ9"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Hide Others" keyEquivalent="h" id="jAC-pY-rhk">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="hideOtherApplications:" target="-1" id="tPV-YQ-ih0"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="d3a-rn-LAb"/>
+                            <menuItem title="Quit Lookin" keyEquivalent="q" id="hnm-1g-JSb">
+                                <connections>
+                                    <action selector="terminate:" target="-1" id="olu-4g-pKH"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="File" id="pd4-0l-bvQ">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="File" id="nwg-k0-yfh">
+                        <items>
+                            <menuItem title="Open…" keyEquivalent="o" id="He6-XQ-PX6">
+                                <connections>
+                                    <action selector="openDocument:" target="-1" id="fta-6j-d03"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Open Recent" id="SMq-dz-yz0">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="pNK-JM-dKX">
+                                    <items>
+                                        <menuItem title="Clear Menu" id="st8-ff-wE4">
+                                            <connections>
+                                                <action selector="clearRecentDocuments:" target="-1" id="3Qr-gM-tV4"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="0ra-1L-khm"/>
+                            <menuItem title="Copy to New Window…" tag="31" id="sY9-np-xFC">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Export…" tag="32" id="CVB-Vh-BdC">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Edit" id="iDy-U2-ulc">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Edit" id="hKi-sf-16D">
+                        <items>
+                            <menuItem title="Cut" keyEquivalent="x" id="jw4-yg-tBy">
+                                <connections>
+                                    <action selector="cut:" target="-1" id="K2B-Wz-kox"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Copy" keyEquivalent="c" id="klB-wE-cbj">
+                                <connections>
+                                    <action selector="copy:" target="-1" id="CFX-7B-b9J"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Paste" keyEquivalent="v" id="O4x-8s-uuP">
+                                <connections>
+                                    <action selector="paste:" target="-1" id="CLE-dy-gB6"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Select All" keyEquivalent="a" id="pcT-cZ-QGe">
+                                <connections>
+                                    <action selector="selectAll:" target="-1" id="MH8-HO-9Vl"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="View" id="DhD-Xi-yu7">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="View" id="uzZ-04-AJ0">
+                        <items>
+                            <menuItem title="Reload" tag="21" keyEquivalent="r" id="0ie-em-CG2" userLabel="Reload"/>
+                            <menuItem title="Reload in 5 Seconds" tag="29" id="NRl-MX-EHO">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="8pV-nI-5Iy"/>
+                            <menuItem title="Filter" tag="28" keyEquivalent="f" id="aSx-qx-mr6"/>
+                            <menuItem isSeparatorItem="YES" id="kXZ-3h-usi"/>
+                            <menuItem title="2D / 3D" tag="22" keyEquivalent="\" id="aC4-yB-HRJ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="28E-co-acm"/>
+                            <menuItem title="Zoom In" tag="23" keyEquivalent="+" id="4ra-hI-4DR"/>
+                            <menuItem title="Zoom Out" tag="24" keyEquivalent="-" id="AUG-wQ-erT"/>
+                            <menuItem isSeparatorItem="YES" id="Evx-D9-pfP"/>
+                            <menuItem title="Decrease Item Separation" tag="25" keyEquivalent="[" id="O2Y-N4-yPx"/>
+                            <menuItem title="Increase Item Separation" tag="26" keyEquivalent="]" id="fyk-vj-orz"/>
+                            <menuItem isSeparatorItem="YES" id="3xZ-sV-GCX"/>
+                            <menuItem title="Hierarchy Depth" tag="27" id="6xL-b1-L6q">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Hierarchy Depth" id="abM-ar-JR5">
+                                    <items>
+                                        <menuItem title="Level 1 (Collapse All)" tag="271" keyEquivalent="1" id="L5g-ZN-Og5"/>
+                                        <menuItem title="Level 2" tag="272" keyEquivalent="2" id="Iu8-FR-RSu"/>
+                                        <menuItem title="Level 3" tag="273" keyEquivalent="3" id="wcm-5o-aNm"/>
+                                        <menuItem title="Level 4" tag="274" keyEquivalent="4" id="k6P-yg-GMl"/>
+                                        <menuItem title="Level 5 (Expand All)" tag="275" keyEquivalent="5" id="fsS-9p-gdu"/>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Window" id="UnO-Ic-dbw">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Window" systemMenu="window" id="KZS-d6-qTN">
+                        <items>
+                            <menuItem title="Close" keyEquivalent="w" id="HyZ-cP-T4V">
+                                <connections>
+                                    <action selector="performClose:" target="-1" id="C3a-4E-BRi"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Minimize" keyEquivalent="m" id="1su-F5-8TV">
+                                <connections>
+                                    <action selector="performMiniaturize:" target="-1" id="IoG-Xh-ddo"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Zoom" id="SgI-Kf-8kY">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="performZoom:" target="-1" id="E2Y-8i-zT1"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Help" id="XeF-AN-JH1">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Help" systemMenu="help" id="1Xd-pd-BoU">
+                        <items>
+                            <menuItem title="Integration Guide…" tag="51" id="Zkf-Li-405">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Show Lookin Framework in Finder…" tag="50" id="qCv-K4-TKd">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="nzP-Te-SpU"/>
+                            <menuItem title="Create Config File in iOS App…" tag="53" id="lpQ-Y8-VBQ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Use Lookin on Your iPhone / iPad…" tag="54" id="e1A-EX-a1g">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Fvl-7l-ffN"/>
+                            <menuItem title="Official Website" tag="52" id="K9e-H9-X9Y">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="139" y="154"/>
+        </menu>
+        <userDefaultsController representsSharedInstance="YES" id="KGc-ZG-ddL"/>
+        <customObject id="ljh-qk-5vX" customClass="SUUpdater"/>
+    </objects>
+</document>
