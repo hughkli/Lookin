@@ -195,6 +195,19 @@
                             <menuItem title="Profile of the Developer" tag="56" id="hYy-NB-PWb">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
+                            <menuItem title="Source Code at GitHub" tag="57" id="hmd-Lc-rdV">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Source Code at GitHub" id="q1h-qk-yOs">
+                                    <items>
+                                        <menuItem title="Lookin (macOS App)" tag="58" id="F1N-6J-GJB">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="LookinServer" tag="59" id="jAS-fg-MOz">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>

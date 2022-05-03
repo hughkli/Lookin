@@ -45,6 +45,10 @@ static NSUInteger const kTag_ShowLookiniOS = 54;
 static NSUInteger const kTag_MethodTrace = 55;
 static NSUInteger const kTag_DeveloperProfile = 56;
 
+static NSUInteger const kTag_GitHub = 57;
+static NSUInteger const kTag_LookinClientGitHub = 58;
+static NSUInteger const kTag_LookinServerGitHub = 59;
+
 @interface LKAppMenuManager ()
 
 @property(nonatomic, copy) NSDictionary<NSNumber *, NSString *> *delegatingTagToSelMap;
@@ -146,6 +150,19 @@ static NSUInteger const kTag_DeveloperProfile = 56;
     menuItem_viewDeveloperProfile.target = self;
     menuItem_viewDeveloperProfile.action = @selector(_handleShowDeveloperProfile);
     
+    NSMenu *sourceCodeMenu = [menu_help itemWithTag:kTag_GitHub].submenu;
+    {
+        NSMenuItem *item = [sourceCodeMenu itemWithTag:kTag_LookinClientGitHub];
+        item.target = self;
+        item.action = @selector(_handleShowLookinClientGithub);
+    }
+    
+    {
+        NSMenuItem *item = [sourceCodeMenu itemWithTag:kTag_LookinServerGitHub];
+        item.target = self;
+        item.action = @selector(_handleShowLookinServerGithub);
+    }
+    
     NSArray *itemArray = [menu_file.itemArray arrayByAddingObjectsFromArray:menu_view.itemArray];
     [itemArray enumerateObjectsUsingBlock:^(NSMenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString *selString = self.delegatingTagToSelMap[@(obj.tag)];
@@ -231,6 +248,14 @@ static NSUInteger const kTag_DeveloperProfile = 56;
 
 - (void)_handleShowDeveloperProfile {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://www.linkedin.com/in/likai123"]];
+}
+
+- (void)_handleShowLookinClientGithub {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/hughkli/Lookin"]];
+}
+
+- (void)_handleShowLookinServerGithub {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/QMUI/LookinServer"]];
 }
 
 - (void)_handleShowWebsite {
