@@ -38,8 +38,6 @@ typedef NS_ENUM(NSInteger, LookinPreferredCallStackType) {
 
 /// 仅在 macOS 10.14 及以后上生效
 @property(nonatomic, assign) LookinPreferredAppeanranceType appearanceType;
-/// 10.14 及以后该方法返回 YES
-+ (BOOL)canAdjustAppearance;
 
 /// 有效值为 0 ～ 4
 @property(nonatomic, assign) NSInteger expansionIndex;

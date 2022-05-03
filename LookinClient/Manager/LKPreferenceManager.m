@@ -118,16 +118,12 @@ static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
         _zInterspace = [LookinDoubleMsgAttribute attributeWithDouble:zInterspaceValue];
         [self.zInterspace subscribe:self action:@selector(_handleZInterspaceDidChange:) relatedObject:nil];
         
-        if ([LKPreferenceManager canAdjustAppearance]) {
-            NSNumber *obj_appearanceType = [userDefaults objectForKey:Key_AppearanceType];
-            if (obj_appearanceType != nil) {
-                _appearanceType = [obj_appearanceType integerValue];
-            } else {
-                _appearanceType = LookinPreferredAppeanranceTypeSystem;
-                [userDefaults setObject:@(_appearanceType) forKey:Key_AppearanceType];
-            }
+        NSNumber *obj_appearanceType = [userDefaults objectForKey:Key_AppearanceType];
+        if (obj_appearanceType != nil) {
+            _appearanceType = [obj_appearanceType integerValue];
         } else {
             _appearanceType = LookinPreferredAppeanranceTypeSystem;
+            [userDefaults setObject:@(_appearanceType) forKey:Key_AppearanceType];
         }
         
         NSNumber *obj_expansionIndex = [userDefaults objectForKey:Key_ExpansionIndex];
@@ -214,12 +210,7 @@ static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
     }
 }
 
-- (void)setAppearanceType:(LookinPreferredAppeanranceType)appearanceType {
-    if (![LKPreferenceManager canAdjustAppearance] && appearanceType != LookinPreferredAppeanranceTypeSystem) {
-        appearanceType = LookinPreferredAppeanranceTypeSystem;
-        NSAssert(NO, @"");
-    }
-    
+- (void)setAppearanceType:(LookinPreferredAppeanranceType)appearanceType {    
     if (_appearanceType == appearanceType) {
         return;
     }
@@ -227,10 +218,6 @@ static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
     if (self.shouldStoreToLocal) {
         [[NSUserDefaults standardUserDefaults] setObject:@(appearanceType) forKey:Key_AppearanceType];
     }
-}
-
-+ (BOOL)canAdjustAppearance {
-    return YES;
 }
 
 - (void)setExpansionIndex:(NSInteger)expansionIndex {

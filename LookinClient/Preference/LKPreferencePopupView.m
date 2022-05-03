@@ -59,7 +59,8 @@
 
 - (void)layout {
     [super layout];
-    $(self.button).width(200).heightToFit.x(self.buttonX).y(0);
+    CGFloat buttonHeight = [self.button sizeThatFits:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)].height;
+    $(self.button).width(200).height(buttonHeight + 2).x(self.buttonX).y(0);
     $(self.messageLabel).x(self.button.$x).toRight(0).y(self.button.$maxY + 4).toBottom(0);
     $(self.titleLabel).sizeToFit.maxX(self.buttonX - 3).y(0);
 }

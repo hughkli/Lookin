@@ -40,13 +40,11 @@
     };
     [self.view addSubview:self.view_colorFormat];
     
-    NSString *appearanceMessage = [LKPreferenceManager canAdjustAppearance] ? nil : NSLocalizedString(@"Only available since macOS 10.14", nil);
-    self.view_appearance = [[LKPreferencePopupView alloc] initWithTitle:NSLocalizedString(@"Appearance:", nil) message:appearanceMessage options:@[NSLocalizedString(@"Dark Mode", nil), NSLocalizedString(@"Light Mode", nil), NSLocalizedString(@"System Default", nil)]];
+    self.view_appearance = [[LKPreferencePopupView alloc] initWithTitle:NSLocalizedString(@"Appearance:", nil) message:nil options:@[NSLocalizedString(@"Dark Mode", nil), NSLocalizedString(@"Light Mode", nil), NSLocalizedString(@"System Default", nil)]];
     self.view_appearance.buttonX = controlX;
     self.view_appearance.didChange = ^(NSUInteger selectedIndex) {
         [LKPreferenceManager mainManager].appearanceType = selectedIndex;
     };
-    self.view_appearance.isEnabled = [LKPreferenceManager canAdjustAppearance];
     [self.view addSubview:self.view_appearance];
     
     self.view_enableLog = [[LKPreferenceSwitchView alloc] initWithTitle:NSLocalizedString(@"Share analytics with Lookin", nil) message:NSLocalizedString(@"Help to improve Lookin by automatically sending diagnostics and usage data.", nil)];
@@ -82,8 +80,7 @@
     
     NSEdgeInsets insets = NSEdgeInsetsMake(20, 30, 10, 30);
     
-    CGFloat appearanceViewHeight = self.view_appearance.isEnabled ? 50 : 70;
-    $(self.view_appearance).x(insets.left).toRight(insets.right).y(insets.top).height(appearanceViewHeight);
+    $(self.view_appearance).x(insets.left).toRight(insets.right).y(insets.top).height(50);
 
     $(self.view_colorFormat).x(insets.left).toRight(insets.right).y(self.view_appearance.$maxY).height(80);
     
