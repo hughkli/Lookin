@@ -43,6 +43,7 @@ static NSUInteger const kTag_ShowWebsite = 52;
 static NSUInteger const kTag_ShowConfig = 53;
 static NSUInteger const kTag_ShowLookiniOS = 54;
 static NSUInteger const kTag_MethodTrace = 55;
+static NSUInteger const kTag_DeveloperProfile = 56;
 
 @interface LKAppMenuManager ()
 
@@ -141,6 +142,10 @@ static NSUInteger const kTag_MethodTrace = 55;
     menuItem_showLookiniOS.target = self;
     menuItem_showLookiniOS.action = @selector(_handleShowLookiniOS);
     
+    NSMenuItem *menuItem_viewDeveloperProfile = [menu_help itemWithTag:kTag_DeveloperProfile];
+    menuItem_viewDeveloperProfile.target = self;
+    menuItem_viewDeveloperProfile.action = @selector(_handleShowDeveloperProfile);
+    
     NSArray *itemArray = [menu_file.itemArray arrayByAddingObjectsFromArray:menu_view.itemArray];
     [itemArray enumerateObjectsUsingBlock:^(NSMenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString *selString = self.delegatingTagToSelMap[@(obj.tag)];
@@ -222,6 +227,10 @@ static NSUInteger const kTag_MethodTrace = 55;
 
 - (void)_handleShowLookiniOS {
     [LKHelper openLookinWebsiteWithPath:@"faq/lookin-ios/"];
+}
+
+- (void)_handleShowDeveloperProfile {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://www.linkedin.com/in/likai123"]];
 }
 
 - (void)_handleShowWebsite {

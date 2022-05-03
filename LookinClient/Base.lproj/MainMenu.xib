@@ -192,6 +192,9 @@
                             <menuItem title="Official Website" tag="52" id="K9e-H9-X9Y">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
+                            <menuItem title="Profile of the Developer" tag="56" id="hYy-NB-PWb">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
