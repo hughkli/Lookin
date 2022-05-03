@@ -49,6 +49,12 @@ static NSUInteger const kTag_GitHub = 57;
 static NSUInteger const kTag_LookinClientGitHub = 58;
 static NSUInteger const kTag_LookinServerGitHub = 59;
 
+static NSUInteger const kTag_ReportIssues = 60;
+static NSUInteger const kTag_Email = 61;
+static NSUInteger const kTag_LookinClientGitHubIssues = 62;
+static NSUInteger const kTag_LookinServerGitHubIssues = 63;
+static NSUInteger const kTag_Weibo = 64;
+
 @interface LKAppMenuManager ()
 
 @property(nonatomic, copy) NSDictionary<NSNumber *, NSString *> *delegatingTagToSelMap;
@@ -163,6 +169,28 @@ static NSUInteger const kTag_LookinServerGitHub = 59;
         item.action = @selector(_handleShowLookinServerGithub);
     }
     
+    NSMenu *issuesMenu = [menu_help itemWithTag:kTag_ReportIssues].submenu;
+    {
+        NSMenuItem *item = [issuesMenu itemWithTag:kTag_Email];
+        item.target = self;
+        item.action = @selector(_handleEmail);
+    }
+    {
+        NSMenuItem *item = [issuesMenu itemWithTag:kTag_LookinClientGitHubIssues];
+        item.target = self;
+        item.action = @selector(_handleClientIssues);
+    }
+    {
+        NSMenuItem *item = [issuesMenu itemWithTag:kTag_LookinServerGitHubIssues];
+        item.target = self;
+        item.action = @selector(_handleServerIssues);
+    }
+    {
+        NSMenuItem *item = [issuesMenu itemWithTag:kTag_Weibo];
+        item.target = self;
+        item.action = @selector(_handleWeibo);
+    }
+    
     NSArray *itemArray = [menu_file.itemArray arrayByAddingObjectsFromArray:menu_view.itemArray];
     [itemArray enumerateObjectsUsingBlock:^(NSMenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString *selString = self.delegatingTagToSelMap[@(obj.tag)];
@@ -256,6 +284,26 @@ static NSUInteger const kTag_LookinServerGitHub = 59;
 
 - (void)_handleShowLookinServerGithub {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/QMUI/LookinServer"]];
+}
+
+- (void)_handleEmail {
+    NSString *stringToCopy = @"lookin@lookin.work";
+    
+    NSPasteboard *paste = [NSPasteboard generalPasteboard];
+    [paste clearContents];
+    [paste writeObjects:@[stringToCopy]];
+}
+
+- (void)_handleClientIssues {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/hughkli/Lookin/issues"]];
+}
+
+- (void)_handleServerIssues {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/QMUI/LookinServer/issues"]];
+}
+
+- (void)_handleWeibo {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://weibo.com/234885306"]];
 }
 
 - (void)_handleShowWebsite {

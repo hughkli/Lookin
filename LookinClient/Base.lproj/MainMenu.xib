@@ -185,9 +185,6 @@
                             <menuItem title="Create Config File in iOS App…" tag="53" id="lpQ-Y8-VBQ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Use Lookin on Your iPhone / iPad…" tag="54" id="e1A-EX-a1g">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="Fvl-7l-ffN"/>
                             <menuItem title="Official Website" tag="52" id="K9e-H9-X9Y">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -203,6 +200,37 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                         <menuItem title="LookinServer" tag="59" id="jAS-fg-MOz">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="RHL-eM-x6M"/>
+                            <menuItem title="Report Issues" tag="60" id="h5N-Yv-Kn1">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" id="ZgS-oM-flz">
+                                    <items>
+                                        <menuItem title="Create Issues at GitHub (Recommended)" id="R8l-dM-5J7">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="https://github.com/hughkli/Lookin/issues" tag="62" id="gGJ-eo-aDM">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="https://github.com/QMUI/LookinServer/issues" tag="63" id="jcR-PK-iVE">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="5sm-PB-Pq7"/>
+                                        <menuItem title="Email (Click to Copy)" id="gPh-pf-dCp">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="lookin@lookin.work" tag="61" id="oE9-hN-SqM">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="3k2-uJ-acx"/>
+                                        <menuItem title="Send Message at Sina Weibo" id="Dln-4J-NPy">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="https://weibo.com/234885306" tag="64" id="G6D-eh-IcU">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                     </items>
