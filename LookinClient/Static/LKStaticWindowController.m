@@ -27,6 +27,9 @@
 #import "LookinHierarchyFile.h"
 #import "LookinPreviewView.h"
 #import "LKHierarchyView.h"
+#import "LKPerformanceReporter.h"
+@import AppCenter;
+@import AppCenterAnalytics;
 
 @interface LKStaticWindowController () <NSToolbarDelegate>
 
@@ -257,11 +260,15 @@
     
     [self.viewController.progressView animateToProgress:InitialIndicatorProgressWhenFetchHierarchy];
     
+    [LKPerformanceReporter.sharedInstance willStartReload];
     @weakify(self);
     [[app fetchHierarchyData] subscribeNext:^(LookinHierarchyInfo *info) {
         [self.viewController.progressView finishWithCompletion:nil];
         [[LKStaticHierarchyDataSource sharedInstance] reloadWithHierarchyInfo:info keepState:YES];
         self.isFetchingHierarchy = NO;
+        
+        [LKPerformanceReporter.sharedInstance didFetchHierarchy];
+        
     } error:^(NSError * _Nullable error) {
         // error
         @strongify(self);
@@ -410,6 +417,8 @@
             }
         }
     }];
+    
+    [MSACAnalytics trackEvent:@"Export Document"];
 }
 
 - (void)appMenuManagerDidSelectOpenInNewWindow {
@@ -418,6 +427,9 @@
     file.serverVersion = newHierarchyInfo.serverVersion;
     file.hierarchyInfo = newHierarchyInfo;
     [[LKNavigationManager sharedInstance] showReaderWithHierarchyFile:file title:nil];
+    
+    [MSACAnalytics trackEvent:@"Open New Window"];
+
 }
 
 - (void)appMenuManagerDidSelectFilter {
@@ -440,6 +452,8 @@
             [self.viewController showDelayReloadTipWithSeconds:seconds];
         }
     }];
+    
+    [MSACAnalytics trackEvent:@"Delay Reload"];
 }
 
 - (void)appMenuManagerDidSelectMethodTrace {

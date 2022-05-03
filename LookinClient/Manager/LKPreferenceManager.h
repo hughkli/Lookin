@@ -69,9 +69,6 @@ typedef NS_ENUM(NSInteger, LookinPreferredCallStackType) {
 @property(nonatomic, assign) NSTimeInterval receivingConfigTime_Color;
 @property(nonatomic, assign) NSTimeInterval receivingConfigTime_Class;
 
-/// 上次接收到的 iOS app 的 setupType，0:未知，1:CocoaPods，2:手动，3:源代码，4:断点
-@property(nonatomic, assign) NSInteger serverSetupType;
-
 /// 返回某个 section 是否应该被显示在主界面上
 - (BOOL)isSectionShowing:(LookinAttrSectionIdentifier)secID;
 /// 把某个 section 显示在主界面上

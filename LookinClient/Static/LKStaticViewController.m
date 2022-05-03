@@ -25,6 +25,8 @@
 #import "LKTutorialManager.h"
 #import "LKPreferenceManager.h"
 #import "LKMeasureController.h"
+@import AppCenter;
+@import AppCenterAnalytics;
 
 @interface LKStaticViewController () <NSSplitViewDelegate>
 
@@ -206,6 +208,8 @@
 - (void)setShowConsole:(BOOL)showConsole {
     _showConsole = showConsole;
     if (showConsole) {
+        [MSACAnalytics trackEvent:@"Launch Console"];
+        
         if (!self.consoleController) {
             self.consoleController = [[LKConsoleViewController alloc] initWithHierarchyDataSource:[LKStaticHierarchyDataSource sharedInstance]];
             [self addChildViewController:self.consoleController];

@@ -16,6 +16,7 @@
 #import "LookinHierarchyInfo.h"
 #import "LookinStaticAsyncUpdateTask.h"
 #import "LKNavigationManager.h"
+#import "LKPerformanceReporter.h"
 
 @interface LKStaticAsyncUpdateManager ()
 
@@ -100,6 +101,8 @@
         @strongify(self);
         [self.updateAll_CompletionSignal sendNext:nil];
         self.isSyncing = NO;
+        
+        [LKPerformanceReporter.sharedInstance didComplete];
     }];
 }
 

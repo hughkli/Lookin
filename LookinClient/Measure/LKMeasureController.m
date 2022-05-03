@@ -14,6 +14,8 @@
 #import "LKMeasureTutorialView.h"
 #import "LKMeasureResultView.h"
 #import "LKNavigationManager.h"
+@import AppCenter;
+@import AppCenterAnalytics;
 
 @interface LKMeasureController ()
 
@@ -68,7 +70,10 @@
 
 - (void)_isMeasuringPropertyDidChange:(LookinMsgActionParams *)params {
     if (params.boolValue) {
-        if (((NSNumber *)params.userInfo).boolValue == YES) {
+        BOOL triggerByShortcut = ((NSNumber *)params.userInfo).boolValue;
+        [MSACAnalytics trackEvent:@"Start Measure" withProperties:@{@"shortcut":(triggerByShortcut ? @"YES": @"NO")}];
+        
+        if (triggerByShortcut) {
             // 由快捷键触发
             self.shortcutLabel.hidden = YES;
         } else {

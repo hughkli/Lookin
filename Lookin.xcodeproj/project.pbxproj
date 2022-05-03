@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		094E413CB04F29F94551D070 /* Pods_LookinClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A3B0CB06C22A05EDC913F3 /* Pods_LookinClient.framework */; };
+		A213803D2821886B009BFE60 /* LKPerformanceReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = A213803C2821886B009BFE60 /* LKPerformanceReporter.m */; };
 		A26EF69427F89F83005A9E4E /* ShortCocoa+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68827F89F83005A9E4E /* ShortCocoa+Private.m */; };
 		A26EF69527F89F83005A9E4E /* ShortCocoaCore.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68927F89F83005A9E4E /* ShortCocoaCore.m */; };
 		A26EF69627F89F83005A9E4E /* ShortCocoa+Others.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68A27F89F83005A9E4E /* ShortCocoa+Others.m */; };
@@ -197,6 +198,8 @@
 /* Begin PBXFileReference section */
 		607BE4658FF90E8DCB8EC923 /* Pods-LookinClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookinClient.debug.xcconfig"; path = "Target Support Files/Pods-LookinClient/Pods-LookinClient.debug.xcconfig"; sourceTree = "<group>"; };
 		81A3B0CB06C22A05EDC913F3 /* Pods_LookinClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LookinClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A213803B2821886B009BFE60 /* LKPerformanceReporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKPerformanceReporter.h; sourceTree = "<group>"; };
+		A213803C2821886B009BFE60 /* LKPerformanceReporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKPerformanceReporter.m; sourceTree = "<group>"; };
 		A26EF68627F89F83005A9E4E /* ShortCocoa+String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShortCocoa+String.h"; sourceTree = "<group>"; };
 		A26EF68727F89F83005A9E4E /* ShortCocoa+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShortCocoa+Layout.h"; sourceTree = "<group>"; };
 		A26EF68827F89F83005A9E4E /* ShortCocoa+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShortCocoa+Private.m"; sourceTree = "<group>"; };
@@ -839,6 +842,8 @@
 				AAB09027229D74F000159B15 /* LKOutlineItem.m */,
 				AA66C5A5231965EE00085C76 /* LKUserActionManager.h */,
 				AA66C5A6231965EE00085C76 /* LKUserActionManager.m */,
+				A213803B2821886B009BFE60 /* LKPerformanceReporter.h */,
+				A213803C2821886B009BFE60 /* LKPerformanceReporter.m */,
 				AA2F1AF12303F34B004725D6 /* LKTextsMenuView.h */,
 				AA2F1AF22303F34B004725D6 /* LKTextsMenuView.m */,
 				AAC323152267ABD200BACA67 /* LKWindowController.h */,
@@ -1273,6 +1278,7 @@
 				AA3A7D0523003D7A00997887 /* LKHierarchyHandlersPopoverController.m in Sources */,
 				AAD2BED7226B327000E83D01 /* LKOutlineRowView.m in Sources */,
 				A26EF69527F89F83005A9E4E /* ShortCocoaCore.m in Sources */,
+				A213803D2821886B009BFE60 /* LKPerformanceReporter.m in Sources */,
 				AA66C5A1231924BD00085C76 /* LKDashboardAccessoryWindowController.m in Sources */,
 				AA50753D22A27EAD00D2A5AC /* LKConsoleDataSourceRowItem.m in Sources */,
 				AA98EC9C22270B800083348D /* LKPreferencePopupView.m in Sources */,

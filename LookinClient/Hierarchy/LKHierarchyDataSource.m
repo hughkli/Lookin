@@ -12,6 +12,8 @@
 #import "LKPreferenceManager.h"
 #import "LKColorIndicatorLayer.h"
 #import "LKUserActionManager.h"
+@import AppCenter;
+@import AppCenterAnalytics;
 
 @interface LKSelectColorItem : NSObject
 
@@ -124,7 +126,8 @@
     if (info.collapsedClassList.count) {
         [LKPreferenceManager mainManager].receivingConfigTime_Class = [[NSDate date] timeIntervalSince1970];
     }
-    [LKPreferenceManager mainManager].serverSetupType = info.serverSetupType;
+    
+    [MSACAnalytics trackEvent:@"Integration Type" withProperties:@{@"type":[self describeServerSetupType:info.serverSetupType]}];
     
     unsigned long prevSelectedOid = 0;
     NSMutableDictionary *prevExpansionMap = nil;
@@ -815,6 +818,22 @@
 
 - (NSInteger)customColorMenuItemTag {
     return 10;
+}
+
+- (NSString *)describeServerSetupType:(int)type {
+    switch (type) {
+    case 0:
+        return @"Unknown";
+    case 1:
+        return @"CocoaPods";
+    case 2:
+        return @"Manual";
+    case 3:
+        return @"SourceCode";
+    case 4:
+        return @"Breakpoint";
+    }
+    return @"Unknown";
 }
 
 #pragma mark - Others
