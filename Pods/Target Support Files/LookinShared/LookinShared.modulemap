@@ -1,6 +1,0 @@
-framework module LookinShared {
-  umbrella header "LookinShared-umbrella.h"
-
-  export *
-  module * { export * }
-}
