@@ -15,6 +15,7 @@
 		A26EF69827F89F83005A9E4E /* ShortCocoa+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68F27F89F83005A9E4E /* ShortCocoa+Layout.m */; };
 		A26EF69927F89F83005A9E4E /* ShortCocoa+UIToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF69127F89F83005A9E4E /* ShortCocoa+UIToolkit.m */; };
 		A2B5537827F8BDD100FCA139 /* LookinServer.zip in Resources */ = {isa = PBXBuildFile; fileRef = A2B5537727F8BDD100FCA139 /* LookinServer.zip */; };
+		A2C71CBE282165DB0056D991 /* LKWindowToolbarAppButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A2C71CBD282165DB0056D991 /* LKWindowToolbarAppButton.m */; };
 		AA01EF2722DD0D26002A2E06 /* LKHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AA01EF2522DD0D26002A2E06 /* LKHelper.m */; };
 		AA049A1721E61B85008C6366 /* LKMenuPopoverSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA049A1621E61B85008C6366 /* LKMenuPopoverSettingController.m */; };
 		AA05CCD4221ED5CA0086CDD1 /* LKDashboardAttributeNumberInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05CCD3221ED5CA0086CDD1 /* LKDashboardAttributeNumberInputView.m */; };
@@ -211,6 +212,8 @@
 		A26EF69227F89F83005A9E4E /* ShortCocoa+Others.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShortCocoa+Others.h"; sourceTree = "<group>"; };
 		A26EF69327F89F83005A9E4E /* ShortCocoaCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortCocoaCore.h; sourceTree = "<group>"; };
 		A2B5537727F8BDD100FCA139 /* LookinServer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = LookinServer.zip; sourceTree = "<group>"; };
+		A2C71CBC282165DB0056D991 /* LKWindowToolbarAppButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKWindowToolbarAppButton.h; sourceTree = "<group>"; };
+		A2C71CBD282165DB0056D991 /* LKWindowToolbarAppButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKWindowToolbarAppButton.m; sourceTree = "<group>"; };
 		AA01EF2522DD0D26002A2E06 /* LKHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKHelper.m; sourceTree = "<group>"; };
 		AA01EF2622DD0D26002A2E06 /* LKHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKHelper.h; sourceTree = "<group>"; };
 		AA049A1521E61B85008C6366 /* LKMenuPopoverSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMenuPopoverSettingController.h; sourceTree = "<group>"; };
@@ -951,6 +954,8 @@
 				AAC1FB202282EDC6000A3653 /* LKWindowToolbarHelper.m */,
 				D4D1B2D12353975A002A5071 /* LKWindowToolbarScaleView.h */,
 				D4D1B2D22353975A002A5071 /* LKWindowToolbarScaleView.m */,
+				A2C71CBC282165DB0056D991 /* LKWindowToolbarAppButton.h */,
+				A2C71CBD282165DB0056D991 /* LKWindowToolbarAppButton.m */,
 				AAA8C0F821CC17680017A345 /* LKMenuPopoverAppsListController.m */,
 				AA049A1521E61B85008C6366 /* LKMenuPopoverSettingController.h */,
 				AA049A1621E61B85008C6366 /* LKMenuPopoverSettingController.m */,
@@ -1245,6 +1250,7 @@
 				D4D1B2D32353975A002A5071 /* LKWindowToolbarScaleView.m in Sources */,
 				AAF418C822BA2D1300111554 /* LKImageTextView.m in Sources */,
 				AAA8C15C21CC17680017A345 /* LKStaticWindowController.m in Sources */,
+				A2C71CBE282165DB0056D991 /* LKWindowToolbarAppButton.m in Sources */,
 				AA98EC96222703CC0083348D /* LKPreferenceSwitchView.m in Sources */,
 				AA1BE2502237D6A700DB38E6 /* LKTextControl.m in Sources */,
 				AAA8C13421CC17680017A345 /* NSView+LookinClient.m in Sources */,

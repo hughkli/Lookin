@@ -13,6 +13,7 @@
 #import "LKNavigationManager.h"
 #import "LookinPreviewView.h"
 #import "LKWindowToolbarScaleView.h"
+#import "LKWindowToolbarAppButton.h"
 
 NSToolbarItemIdentifier const LKToolBarIdentifier_Dimension = @"0";
 NSToolbarItemIdentifier const LKToolBarIdentifier_Scale = @"1";
@@ -170,8 +171,7 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
     }
     
     if ([identifier isEqualToString:LKToolBarIdentifier_App]) {
-        NSButton *button = [NSButton new];
-        button.imagePosition = NSImageLeft;
+        LKWindowToolbarAppButton *button = [LKWindowToolbarAppButton new];
         button.bezelStyle = NSBezelStyleTexturedRounded;
         
         NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:LKToolBarIdentifier_App];
@@ -179,43 +179,11 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
         item.view = button;
         
         [[RACObserve([LKAppsManager sharedInstance], inspectingApp) takeUntil:item.rac_willDeallocSignal] subscribeNext:^(LKInspectableApp *app) {
+            button.appInfo = app.appInfo;
             if (app) {
-                NSImage *deviceIcon;
-                CGFloat deviceIconBaseline = -4;
-                if (app.appInfo.deviceType == LookinAppInfoDeviceSimulator) {
-                    deviceIcon = NSImageMake(@"icon_simulator_small");
-                    deviceIconBaseline = -2;
-                } else if (app.appInfo.deviceType == LookinAppInfoDeviceIPad) {
-                    deviceIcon = NSImageMake(@"icon_ipad_small");
-                } else {
-                    deviceIcon = NSImageMake(@"icon_iphone_small");
-                }
-                
-                NSString *appName = app.appInfo.appName ? : NSLocalizedString(@"iOS App", nil);
-                NSAttributedString *string = $(appName).addImage(@"icon_go_forward", -3, 6, 0)
-                .addImage(deviceIcon, deviceIconBaseline, 6, 5)
-                .add([NSString stringWithFormat:@"%@ (%@)", app.appInfo.deviceDescription, app.appInfo.osDescription])
-                .attrString;
-                [button setAttributedTitle:string];
-                
-                NSImage *appIcon = app.appInfo.appIcon;
-                if (!appIcon) {
-                    appIcon = NSImageMake(@"Icon_EmptyProject");
-                    appIcon.template = YES;
-                }
-                if (appIcon) {
-                    appIcon.size = NSMakeSize(15, 15);
-                    [button setImage:appIcon];
-                }
-                
-                CGFloat width = [string boundingRectWithSize:NSSizeMax options:0].size.width;
-                item.minSize = NSMakeSize(width + 44, 34);
+                item.minSize = NSMakeSize(button.bestWidth + 6, 34);
                 item.maxSize = item.minSize;
             } else {
-                NSImage *image = NSImageMake(@"icon_app");
-                image.template = YES;
-                [button setTitle:@""];
-                [button setImage:image];
                 item.minSize = NSMakeSize(42, 34);
                 item.maxSize = item.minSize;
             }
@@ -272,40 +240,16 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
 }
 
 - (NSToolbarItem *)makeAppInReadModeItemWithAppInfo:(LookinAppInfo *)appInfo {
-    NSButton *button = [NSButton new];
-    button.imagePosition = NSImageLeft;
+    LKWindowToolbarAppButton *button = [LKWindowToolbarAppButton new];
     button.bezelStyle = NSBezelStyleTexturedRounded;
     [button lookin_bindObject:appInfo forKey:Key_BindingAppInfo];
+    button.appInfo = appInfo;
     
     NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:LKToolBarIdentifier_AppInReadMode];
     item.label = @"iOS App";
     item.view = button;
-    item.target = self;
-    item.action = @selector(_handleAppInReadMode:);
+    item.minSize = NSMakeSize(button.bestWidth + 6, 34);
     
-    NSImage *deviceIcon;
-    CGFloat deviceIconBaseline = -4;
-    if (appInfo.deviceType == LookinAppInfoDeviceSimulator) {
-        deviceIcon = NSImageMake(@"icon_simulator_small");
-        deviceIconBaseline = -2;
-    } else if (appInfo.deviceType == LookinAppInfoDeviceIPad) {
-        deviceIcon = NSImageMake(@"icon_ipad_small");
-    } else {
-        deviceIcon = NSImageMake(@"icon_iphone_small");
-    }
-    
-    NSAttributedString *string = $(appInfo.appName).addImage(@"icon_go_forward", -3, 6, 0)
-    .addImage(deviceIcon, deviceIconBaseline, 6, 5)
-    .add([NSString stringWithFormat:@"%@ (%@)", appInfo.deviceDescription, appInfo.osDescription])
-    .attrString;
-    [button setAttributedTitle:string];
-    
-    NSImage *appIcon = appInfo.appIcon;
-    appIcon.size = NSMakeSize(15, 15);
-    [button setImage:appIcon];
-    
-    CGFloat width = [string boundingRectWithSize:NSSizeMax options:0].size.width;
-    item.minSize = NSMakeSize(width + 42, 34);
     item.maxSize = item.minSize;
     return item;
 }
@@ -345,10 +289,6 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
     LookinPreviewDimension newDimension = param.integerValue;
     NSSegmentedControl *control = param.relatedObject;
     control.selectedSegment = newDimension;
-}
-
-- (void)_handleAppInReadMode:(NSButton *)button {
-//    LookinAppInfo *appInfo = [button lookin_getBindObjectForKey:LKToolBarIdentifier_AppInReadMode];
 }
 
 - (void)_handleFreeRotationDidChange:(LookinMsgActionParams *)param {
