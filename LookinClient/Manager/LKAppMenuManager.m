@@ -55,6 +55,11 @@ static NSUInteger const kTag_LookinClientGitHubIssues = 62;
 static NSUInteger const kTag_LookinServerGitHubIssues = 63;
 static NSUInteger const kTag_Weibo = 64;
 
+static NSUInteger const kTag_IntegrationGuide = 65;
+static NSUInteger const kTag_CopyPod = 66;
+static NSUInteger const kTag_CopySPM = 67;
+static NSUInteger const kTag_MoreIntegrationGuide = 68;
+
 @interface LKAppMenuManager ()
 
 @property(nonatomic, copy) NSDictionary<NSNumber *, NSString *> *delegatingTagToSelMap;
@@ -124,7 +129,7 @@ static NSUInteger const kTag_Weibo = 64;
     
     // 帮助
     NSMenu *menu_help = [menu itemAtIndex:5].submenu;
-    menu_help.autoenablesItems = NO;
+    menu_help.autoenablesItems = YES;
     menu_help.delegate = self;
     
     // 帮助 - 显示 Framework
@@ -189,6 +194,22 @@ static NSUInteger const kTag_Weibo = 64;
         NSMenuItem *item = [issuesMenu itemWithTag:kTag_Weibo];
         item.target = self;
         item.action = @selector(_handleWeibo);
+    }
+    
+    {
+        NSMenuItem *item = [menu_help itemWithTag:kTag_CopyPod];
+        item.target = self;
+        item.action = @selector(_handleCopyPod);
+    }
+    {
+        NSMenuItem *item = [menu_help itemWithTag:kTag_CopySPM];
+        item.target = self;
+        item.action = @selector(_handleCopySPM);
+    }
+    {
+        NSMenuItem *item = [menu_help itemWithTag:kTag_MoreIntegrationGuide];
+        item.target = self;
+        item.action = @selector(_handleOpenMoreIntegrationGuide);
     }
     
     NSArray *itemArray = [menu_file.itemArray arrayByAddingObjectsFromArray:menu_view.itemArray];
@@ -308,6 +329,26 @@ static NSUInteger const kTag_Weibo = 64;
 
 - (void)_handleShowWebsite {
     [LKHelper openLookinOfficialWebsite];
+}
+
+- (void)_handleCopyPod {
+    NSString *stringToCopy = @"pod 'LookinServer', :configurations => ['Debug']";
+    
+    NSPasteboard *paste = [NSPasteboard generalPasteboard];
+    [paste clearContents];
+    [paste writeObjects:@[stringToCopy]];
+}
+
+- (void)_handleCopySPM {
+    NSString *stringToCopy = @"https://github.com/QMUI/LookinServer/";
+    
+    NSPasteboard *paste = [NSPasteboard generalPasteboard];
+    [paste clearContents];
+    [paste writeObjects:@[stringToCopy]];
+}
+
+- (void)_handleOpenMoreIntegrationGuide {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/QMUI/LookinServer/blob/master/README.md"]];
 }
 
 - (void)_handleCheckUpdates {

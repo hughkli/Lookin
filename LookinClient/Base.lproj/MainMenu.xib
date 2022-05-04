@@ -175,17 +175,23 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="1Xd-pd-BoU">
                         <items>
-                            <menuItem title="Integration Guide…" tag="51" id="Zkf-Li-405">
+                            <menuItem title="Integrate by CocoaPods (Click to Copy)" id="Yrs-Xq-P5S">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Show Lookin Framework in Finder…" tag="50" id="qCv-K4-TKd">
+                            <menuItem title="pod 'LookinServer', :configurations =&gt; ['Debug']" tag="66" id="xxP-d2-qU0">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="nzP-Te-SpU"/>
-                            <menuItem title="Create Config File in iOS App…" tag="53" id="lpQ-Y8-VBQ">
+                            <menuItem isSeparatorItem="YES" id="Y2C-86-yPe"/>
+                            <menuItem title="Integrate by SPM (Click to Copy)" id="tzW-YO-PTy">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="Fvl-7l-ffN"/>
+                            <menuItem title="https://github.com/QMUI/LookinServer/" tag="67" id="B9m-qb-e0j">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Q9p-dn-YRK"/>
+                            <menuItem title="Integration Guide" tag="68" id="TaG-im-Whl">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem title="Official Website" tag="52" id="K9e-H9-X9Y">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>

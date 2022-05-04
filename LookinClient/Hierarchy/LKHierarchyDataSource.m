@@ -127,8 +127,6 @@
         [LKPreferenceManager mainManager].receivingConfigTime_Class = [[NSDate date] timeIntervalSince1970];
     }
     
-    [MSACAnalytics trackEvent:@"Integration Type" withProperties:@{@"type":[self describeServerSetupType:info.serverSetupType]}];
-    
     unsigned long prevSelectedOid = 0;
     NSMutableDictionary *prevExpansionMap = nil;
     if (keepState) {
@@ -818,22 +816,6 @@
 
 - (NSInteger)customColorMenuItemTag {
     return 10;
-}
-
-- (NSString *)describeServerSetupType:(int)type {
-    switch (type) {
-    case 0:
-        return @"Unknown";
-    case 1:
-        return @"CocoaPods";
-    case 2:
-        return @"Manual";
-    case 3:
-        return @"SourceCode";
-    case 4:
-        return @"Breakpoint";
-    }
-    return @"Unknown";
 }
 
 #pragma mark - Others
