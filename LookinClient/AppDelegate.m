@@ -47,9 +47,7 @@
     }];
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    [self _extractServerFrameworkIfNeeded];
-    
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {    
     [LKConnectionManager sharedInstance];
     if (!self.launchedToOpenFile) {
         [[LKNavigationManager sharedInstance] showLaunch];
@@ -90,33 +88,6 @@
         }
     }];
     return NSTerminateNow;
-}
-
-#pragma mark - LookinServer
-
-- (void)_extractServerFrameworkIfNeeded {
-    // /Users/hughkli/Library/Developer/Xcode/DerivedData/Lookin-aakuktsqhjnrovcimtdtpcbdyqqh/Build/Products/Debug/Lookin Experimental.app
-    NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
-    NSString *frameworkDirPath = [bundlePath stringByAppendingPathComponent:@"/Contents/Resources/LookinServerFramework/"];
-    NSString *unzippedFilePath = [frameworkDirPath stringByAppendingPathComponent:@"LookinServer.framework"];
-    
-    NSFileManager *mng = [NSFileManager defaultManager];
-    BOOL alreadyZipped = [mng fileExistsAtPath:unzippedFilePath isDirectory:NULL];
-    if (alreadyZipped) {
-        return;
-    }
-    
-    NSString *zipFilePath = [frameworkDirPath stringByAppendingPathComponent:@"LookinServer.zip"];
-    if (![mng fileExistsAtPath:zipFilePath isDirectory:NULL]) {
-        // error, zip 文件不存在
-        return;
-    }
-    NSArray *arguments = [NSArray arrayWithObject:zipFilePath];
-    NSTask *unzipTask = [[NSTask alloc] init];
-    [unzipTask setLaunchPath:@"/usr/bin/unzip"];
-    [unzipTask setCurrentDirectoryPath:frameworkDirPath];
-    [unzipTask setArguments:arguments];
-    [unzipTask launch];
 }
 
 #pragma mark - Test

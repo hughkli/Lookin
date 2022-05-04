@@ -15,7 +15,6 @@
 		A26EF69727F89F83005A9E4E /* ShortCocoa+String.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68C27F89F83005A9E4E /* ShortCocoa+String.m */; };
 		A26EF69827F89F83005A9E4E /* ShortCocoa+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68F27F89F83005A9E4E /* ShortCocoa+Layout.m */; };
 		A26EF69927F89F83005A9E4E /* ShortCocoa+UIToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF69127F89F83005A9E4E /* ShortCocoa+UIToolkit.m */; };
-		A2B5537827F8BDD100FCA139 /* LookinServer.zip in Resources */ = {isa = PBXBuildFile; fileRef = A2B5537727F8BDD100FCA139 /* LookinServer.zip */; };
 		A2C71CBE282165DB0056D991 /* LKWindowToolbarAppButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A2C71CBD282165DB0056D991 /* LKWindowToolbarAppButton.m */; };
 		AA01EF2722DD0D26002A2E06 /* LKHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AA01EF2522DD0D26002A2E06 /* LKHelper.m */; };
 		AA049A1721E61B85008C6366 /* LKMenuPopoverSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA049A1621E61B85008C6366 /* LKMenuPopoverSettingController.m */; };
@@ -214,7 +213,6 @@
 		A26EF69127F89F83005A9E4E /* ShortCocoa+UIToolkit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShortCocoa+UIToolkit.m"; sourceTree = "<group>"; };
 		A26EF69227F89F83005A9E4E /* ShortCocoa+Others.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShortCocoa+Others.h"; sourceTree = "<group>"; };
 		A26EF69327F89F83005A9E4E /* ShortCocoaCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortCocoaCore.h; sourceTree = "<group>"; };
-		A2B5537727F8BDD100FCA139 /* LookinServer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = LookinServer.zip; sourceTree = "<group>"; };
 		A2C71CBC282165DB0056D991 /* LKWindowToolbarAppButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKWindowToolbarAppButton.h; sourceTree = "<group>"; };
 		A2C71CBD282165DB0056D991 /* LKWindowToolbarAppButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKWindowToolbarAppButton.m; sourceTree = "<group>"; };
 		AA01EF2522DD0D26002A2E06 /* LKHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKHelper.m; sourceTree = "<group>"; };
@@ -563,14 +561,6 @@
 			path = ShortCocoa;
 			sourceTree = "<group>";
 		};
-		A2B5537627F8BDD100FCA139 /* LookinServerFramework */ = {
-			isa = PBXGroup;
-			children = (
-				A2B5537727F8BDD100FCA139 /* LookinServer.zip */,
-			);
-			path = LookinServerFramework;
-			sourceTree = "<group>";
-		};
 		AA05CCD1221ED50B0086CDD1 /* AttributeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -720,7 +710,6 @@
 		AA48F29D21CC0CA50032EC2C /* LookinClient */ = {
 			isa = PBXGroup;
 			children = (
-				A2B5537627F8BDD100FCA139 /* LookinServerFramework */,
 				AA6E0D8322E1D5BD00948877 /* Localizable.strings */,
 				AA48F2A921CC0CA60032EC2C /* Lookin.entitlements */,
 				AAA8C11C21CC17680017A345 /* AppDelegate.h */,
@@ -1144,7 +1133,6 @@
 				AA6E0D8122E1D5BD00948877 /* Localizable.strings in Resources */,
 				AA66488C23696D220043B50A /* logo_jump.gif in Resources */,
 				AA48F2A521CC0CA60032EC2C /* MainMenu.xib in Resources */,
-				A2B5537827F8BDD100FCA139 /* LookinServer.zip in Resources */,
 				AA77A32D22CE0E7100C73721 /* lookin_icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
