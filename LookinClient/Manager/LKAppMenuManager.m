@@ -55,7 +55,6 @@ static NSUInteger const kTag_LookinClientGitHubIssues = 62;
 static NSUInteger const kTag_LookinServerGitHubIssues = 63;
 static NSUInteger const kTag_Weibo = 64;
 
-static NSUInteger const kTag_IntegrationGuide = 65;
 static NSUInteger const kTag_CopyPod = 66;
 static NSUInteger const kTag_CopySPM = 67;
 static NSUInteger const kTag_MoreIntegrationGuide = 68;
