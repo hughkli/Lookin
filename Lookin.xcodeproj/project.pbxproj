@@ -382,7 +382,6 @@
 		A213803B2821886B009BFE60 /* LKPerformanceReporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKPerformanceReporter.h; sourceTree = "<group>"; };
 		A213803C2821886B009BFE60 /* LKPerformanceReporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKPerformanceReporter.m; sourceTree = "<group>"; };
 		A22370DB2828107400585509 /* LookinTestflight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LookinTestflight.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A22370DC2828107400585509 /* LookinClient copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LookinClient copy-Info.plist"; path = "/Users/likai/dev/github/Lookin/LookinClient copy-Info.plist"; sourceTree = "<absolute>"; };
 		A22370DE2828113900585509 /* LookinTestflight_Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LookinTestflight_Info.plist; sourceTree = "<group>"; };
 		A26EF68627F89F83005A9E4E /* ShortCocoa+String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShortCocoa+String.h"; sourceTree = "<group>"; };
 		A26EF68727F89F83005A9E4E /* ShortCocoa+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShortCocoa+Layout.h"; sourceTree = "<group>"; };
@@ -890,7 +889,6 @@
 				AA48F29C21CC0CA50032EC2C /* Products */,
 				5D159F647DFD4AA3F8E7F9E7 /* Pods */,
 				0A9FB6E904476A1F9D0BB82E /* Frameworks */,
-				A22370DC2828107400585509 /* LookinClient copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
