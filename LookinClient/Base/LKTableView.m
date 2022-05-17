@@ -35,6 +35,9 @@
         self.autohidesScrollers = YES;
         
         _tableView = [[NSTableView alloc] init];
+        if (@available(macOS 11.0, *)) {
+            self.tableView.style = NSTableViewStylePlain;
+        }
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.wantsLayer = YES;
