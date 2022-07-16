@@ -53,11 +53,19 @@
         [[LKNavigationManager sharedInstance] showLaunch];
     }
     
-    [MSACAppCenter start:@"217d75fa-ecab-4eba-a0de-ef7d97fb134f" withServices:@[
-        [MSACAnalytics class],
-        [MSACCrashes class]
-    ]];
-    MSACAppCenter.enabled = LKPreferenceManager.mainManager.enableReport;
+    [self resolveAppCenterKey];
+    
+    NSString *key = [self resolveAppCenterKey];
+    if (key) {
+        [MSACAppCenter start:key withServices:@[
+            [MSACAnalytics class],
+            [MSACCrashes class]
+        ]];
+        MSACAppCenter.enabled = LKPreferenceManager.mainManager.enableReport;
+    }
+    else {
+        MSACAppCenter.enabled = NO;
+    }
     
 #ifdef DEBUG
     [self _runTests];
@@ -91,6 +99,18 @@
 }
 
 #pragma mark - Test
+
+- (NSString *)resolveAppCenterKey {
+    NSString *bundleID = [[NSBundle mainBundle] bundleIdentifier];
+    if ([bundleID isEqualToString:@"hughkli.Lookin"]) {
+        return @"fce2565c-518c-4851-be73-fa8317dd1590";
+    }
+    if ([bundleID isEqualToString:@"hughkli.LookinTestflight"]) {
+        return @"217d75fa-ecab-4eba-a0de-ef7d97fb134f";
+    }
+    NSAssert(NO, @"");
+    return nil;
+}
 
 /// 一些单元测试
 - (void)_runTests {
