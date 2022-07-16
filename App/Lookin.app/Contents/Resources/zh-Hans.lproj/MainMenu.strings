@@ -1,0 +1,83 @@
+
+/* Class = "NSMenuItem"; title = "Lookin"; ObjectID = "1Xt-HY-uBw"; */
+"1Xt-HY-uBw.title" = "Lookin";
+
+/* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "1su-F5-8TV"; */
+"1su-F5-8TV.title" = "最小化";
+
+/* Class = "NSMenuItem"; title = "Close"; ObjectID = "HyZ-cP-T4V"; */
+"HyZ-cP-T4V.title" = "关闭";
+
+/* Class = "NSMenuItem"; title = "About Lookin"; ObjectID = "IFz-p9-h1r"; */
+"IFz-p9-h1r.title" = "关于 Lookin";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "KZS-d6-qTN"; */
+"KZS-d6-qTN.title" = "窗口";
+
+"1Xd-pd-BoU.title" = "帮助";
+
+"hKi-sf-16D.title" = "编辑";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "SgI-Kf-8kY"; */
+"SgI-Kf-8kY.title" = "缩放";
+
+/* Class = "NSMenuItem"; title = "Window"; ObjectID = "UnO-Ic-dbw"; */
+"UnO-Ic-dbw.title" = "窗口";
+
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "XNQ-bk-Zmh"; */
+"XNQ-bk-Zmh.title" = "偏好设置…";
+
+/* Class = "NSMenuItem"; title = "Hide Lookin"; ObjectID = "dfQ-f5-8Pi"; */
+"dfQ-f5-8Pi.title" = "隐藏 Lookin";
+
+/* Class = "NSMenuItem"; title = "Quit Lookin"; ObjectID = "hnm-1g-JSb"; */
+"hnm-1g-JSb.title" = "退出 Lookin";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "jAC-pY-rhk"; */
+"jAC-pY-rhk.title" = "隐藏其他";
+
+/* Class = "NSMenu"; title = "Lookin"; ObjectID = "reQ-ix-KUg"; */
+"reQ-ix-KUg.title" = "Lookin";
+"nwg-k0-yfh.title" = "文件";
+"4ra-hI-4DR.title" = "放大";
+"AUG-wQ-erT.title" = "缩小";
+"uzZ-04-AJ0.title" = "视图";
+"0ie-em-CG2.title" = "刷新";
+"aC4-yB-HRJ.title" = "2D / 3D";
+"O2Y-N4-yPx.title" = "减小图层间距";
+"bHZ-OY-nHf.title" = "方法监听";
+"fyk-vj-orz.title" = "增加图层间距";
+"6xL-b1-L6q.title" = "图层数量";
+"L5g-ZN-Og5.title" = "极少（全部折叠）";
+"Iu8-FR-RSu.title" = "少";
+"wcm-5o-aNm.title" = "中等";
+"k6P-yg-GMl.title" = "多";
+"fsS-9p-gdu.title" = "极多（全部展开）";
+"nrW-OU-WjW.title" = "在 iOS 屏幕上选择图层";
+"He6-XQ-PX6.title" = "打开…";
+"SMq-dz-yz0.title" = "打开最近的文件";
+"CVB-Vh-BdC.title" = "导出为文件…";
+"sY9-np-xFC.title" = "复制到新窗口…";
+"jw4-yg-tBy.title" = "剪切";
+"klB-wE-cbj.title" = "复制";
+"O4x-8s-uuP.title" = "粘贴";
+"pcT-cZ-QGe.title" = "全选";
+"e1A-EX-a1g.title" = "在 iPhone 或 iPad 上使用 Lookin…";
+"lpQ-Y8-VBQ.title" = "在 iOS 中创建 Lookin 个性化配置文件";
+"6je-u8-N3K.title" = "检查更新…";
+"xb4-LB-T4c.title" = "意见与建议…";
+"K9e-H9-X9Y.title" = "官方网站";
+"qCv-K4-TKd.title" = "在 Finder 中显示 Lookin Framework 文件";
+"Zkf-Li-405.title" = "如何嵌入 Lookin Framework";
+"aSx-qx-mr6.title" = "搜索";
+"NRl-MX-EHO.title" = "5 秒后刷新";
+"hYy-NB-PWb.title" = "在 LinkedIn 上查看作者资料";
+"hmd-Lc-rdV.title" = "在 GitHub 上查看源代码";
+"h5N-Yv-Kn1.title" = "意见反馈";
+"gPh-pf-dCp.title" = "电子邮箱（点击复制）";
+"R8l-dM-5J7.title" = "在 GitHub 上创建 Issue（推荐）";
+"Dln-4J-NPy.title" = "微博私信";
+"Zkf-Li-405.title" = "在 iOS 端安装 LookinServer Framework";
+"Yrs-Xq-P5S.title" = "通过 CocoaPods 安装 LookinServer（点击复制）";
+"tzW-YO-PTy.title" = "通过 SPM 安装 LookinServer（点击复制）";
+"TaG-im-Whl.title" = "如何在 iOS 端安装 LookinServer";
