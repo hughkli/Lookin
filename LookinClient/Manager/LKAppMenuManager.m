@@ -58,6 +58,7 @@ static NSUInteger const kTag_Weibo = 64;
 static NSUInteger const kTag_CopyPod = 66;
 static NSUInteger const kTag_CopySPM = 67;
 static NSUInteger const kTag_MoreIntegrationGuide = 68;
+static NSUInteger const kTag_ReduceReloadTime = 69;
 
 @interface LKAppMenuManager ()
 
@@ -210,6 +211,11 @@ static NSUInteger const kTag_MoreIntegrationGuide = 68;
         item.target = self;
         item.action = @selector(_handleOpenMoreIntegrationGuide);
     }
+    {
+        NSMenuItem *item = [menu_help itemWithTag:kTag_ReduceReloadTime];
+        item.target = self;
+        item.action = @selector(_handleCustomUserConfig);
+    }
     
     NSArray *itemArray = [menu_file.itemArray arrayByAddingObjectsFromArray:menu_view.itemArray];
     [itemArray enumerateObjectsUsingBlock:^(NSMenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -348,6 +354,10 @@ static NSUInteger const kTag_MoreIntegrationGuide = 68;
 
 - (void)_handleOpenMoreIntegrationGuide {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/QMUI/LookinServer/blob/master/README.md"]];
+}
+
+- (void)_handleCustomUserConfig {
+    [LKHelper openCustomConfigWebsite];
 }
 
 - (void)_handleCheckUpdates {
