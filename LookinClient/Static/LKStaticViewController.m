@@ -35,7 +35,8 @@
 @property(nonatomic, strong) LKBaseView *splitTopView;
 
 @property(nonatomic, strong) LKTipsView *imageSyncTipsView;
-@property(nonatomic, strong) LKRedTipsView *avoidSyncScreenshotTipsView;
+@property(nonatomic, strong) LKRedTipsView *tooLargeToSyncScreenshotTipsView;
+@property(nonatomic, strong) LKTipsView *userConfigNoPreviewTipsView;
 @property(nonatomic, strong) LKTipsView *noPreviewTipView;
 @property(nonatomic, strong) LKTipsView *tutorialTipView;
 @property(nonatomic, strong) LKTipsView *delayReloadTipView;
@@ -106,11 +107,11 @@
     self.delayReloadTipView.hidden = YES;
     [self.view addSubview:self.delayReloadTipView];
     
-    self.avoidSyncScreenshotTipsView = [LKRedTipsView new];
-    self.avoidSyncScreenshotTipsView.image = NSImageMake(@"icon_info");
-    self.avoidSyncScreenshotTipsView.title = NSLocalizedString(@"Image is too large to be displayed.", nil);
-    self.avoidSyncScreenshotTipsView.hidden = YES;
-    [self.view addSubview:self.avoidSyncScreenshotTipsView];
+    self.tooLargeToSyncScreenshotTipsView = [LKRedTipsView new];
+    self.tooLargeToSyncScreenshotTipsView.image = NSImageMake(@"icon_info");
+    self.tooLargeToSyncScreenshotTipsView.title = NSLocalizedString(@"Image is too large to be displayed.", nil);
+    self.tooLargeToSyncScreenshotTipsView.hidden = YES;
+    [self.view addSubview:self.tooLargeToSyncScreenshotTipsView];
     
     self.noPreviewTipView = [LKTipsView new];
     self.noPreviewTipView.image = NSImageMake(@"icon_hide");
@@ -121,22 +122,40 @@
     self.noPreviewTipView.hidden = YES;
     [self.view addSubview:self.noPreviewTipView];
     
+    self.userConfigNoPreviewTipsView = [LKTipsView new];
+    self.userConfigNoPreviewTipsView.image = NSImageMake(@"icon_hide");
+    self.userConfigNoPreviewTipsView.title = NSLocalizedString(@"The screenshot is not displayed due to the config in iOS App.", nil);
+    self.userConfigNoPreviewTipsView.buttonText = NSLocalizedString(@"Details", nil);
+    self.userConfigNoPreviewTipsView.target = self;
+    self.userConfigNoPreviewTipsView.clickAction = @selector(_handleUserConfigNoPreviewTipView);
+    self.userConfigNoPreviewTipsView.hidden = YES;
+    [self.view addSubview:self.userConfigNoPreviewTipsView];
+    
     self.progressView = [LKProgressIndicatorView new];
     [self.view addSubview:self.progressView];
     
     @weakify(self);
     [RACObserve(dataSource, selectedItem) subscribeNext:^(LookinDisplayItem *item) {
         @strongify(self);
-        BOOL shouldHide = ([item appropriateScreenshot] || !item.avoidSyncScreenshot);
-        if (self.avoidSyncScreenshotTipsView.hidden == !shouldHide) {
-            self.avoidSyncScreenshotTipsView.hidden = shouldHide;
-            if (shouldHide) {
-                [self.avoidSyncScreenshotTipsView endAnimation];
-            } else {
-                [self.avoidSyncScreenshotTipsView startAnimation];
-            }
-            [self.view setNeedsLayout:YES];
+        BOOL showTips = (![item appropriateScreenshot] && item.doNotFetchScreenshotReason == LookinDoNotFetchScreenshotForTooLarge);
+        BOOL shouldHide = !showTips;
+        if (self.tooLargeToSyncScreenshotTipsView.hidden == shouldHide) {
+            return;
         }
+        self.tooLargeToSyncScreenshotTipsView.hidden = shouldHide;
+        if (shouldHide) {
+            [self.tooLargeToSyncScreenshotTipsView endAnimation];
+        } else {
+            [self.tooLargeToSyncScreenshotTipsView startAnimation];
+        }
+        [self.view setNeedsLayout:YES];
+    }];
+    
+    [RACObserve(dataSource, selectedItem) subscribeNext:^(LookinDisplayItem *item) {
+        @strongify(self);
+        BOOL showTips = (![item appropriateScreenshot] && item.doNotFetchScreenshotReason == LookinDoNotFetchScreenshotForUserConfig);
+        self.userConfigNoPreviewTipsView.hidden = !showTips;
+        [self.view setNeedsLayout:YES];
     }];
     
     [[[RACSignal merge:@[RACObserve(dataSource, selectedItem), dataSource.itemDidChangeNoPreview]] skip:1] subscribeNext:^(id  _Nullable x) {
@@ -198,7 +217,7 @@
     $(self.progressView).fullWidth.height(3).y(windowTitleHeight);
 
     __block CGFloat tipsY = windowTitleHeight + 10;
-    [$(self.connectionTipsView, self.imageSyncTipsView, self.avoidSyncScreenshotTipsView, self.noPreviewTipView, self.tutorialTipView, self.delayReloadTipView).visibles.array enumerateObjectsUsingBlock:^(LKTipsView *tipsView, NSUInteger idx, BOOL * _Nonnull stop) {
+    [$(self.connectionTipsView, self.imageSyncTipsView, self.tooLargeToSyncScreenshotTipsView, self.noPreviewTipView, self.userConfigNoPreviewTipsView, self.tutorialTipView, self.delayReloadTipView).visibles.array enumerateObjectsUsingBlock:^(LKTipsView *tipsView, NSUInteger idx, BOOL * _Nonnull stop) {
         CGFloat midX = self.hierarchyController.view.$width + (self.viewsPreviewController.view.$width - DashboardViewWidth) / 2.0;
         $(tipsView).sizeToFit.y(tipsY).midX(midX);
         tipsY = tipsView.$maxY + 5;
@@ -363,6 +382,10 @@
             TutorialMng.hasAlreadyShowedTipsThisLaunch = YES;
         }];
     }
+}
+
+- (void)_handleUserConfigNoPreviewTipView {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://lookin.work/faq/config-file/"]];
 }
 
 - (void)_handleTutorialTipView {

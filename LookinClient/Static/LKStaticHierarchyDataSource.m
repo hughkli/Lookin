@@ -59,12 +59,12 @@
         CGFloat widthInPx = obj.frame.size.width * screenScale;
         CGFloat heightInPx = obj.frame.size.height * screenScale;
         if (widthInPx > maxLengthInPx || heightInPx > maxLengthInPx) {
-            obj.avoidSyncScreenshot = YES;
+            obj.doNotFetchScreenshotReason = LookinDoNotFetchScreenshotForTooLarge;
         }
         
         if (!obj.shouldCaptureImage) {
             [obj enumerateSelfAndChildren:^(LookinDisplayItem *item) {
-                item.avoidSyncScreenshot = YES;
+                item.doNotFetchScreenshotReason = LookinDoNotFetchScreenshotForUserConfig;
             }];
         }
     }];

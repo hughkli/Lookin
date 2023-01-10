@@ -166,17 +166,17 @@
     NSAssert(MAX(appropriateScreenshot.representations.firstObject.pixelsWide, appropriateScreenshot.representations.firstObject.pixelsHigh) <= LookinNodeImageMaxLengthInPx , @"image is too large");
     self.contentPlane.firstMaterial.diffuse.contents = appropriateScreenshot;
     
-    BOOL noScreenshotDueToAvoidSyncing = !appropriateScreenshot && self.displayItem.avoidSyncScreenshot;
+    BOOL tooLargeToFetchScreenshot = !appropriateScreenshot && self.displayItem.doNotFetchScreenshotReason == LookinDoNotFetchScreenshotForTooLarge;
     
     // 更新 border 颜色
     if (self.displayItem.isSelected || self.displayItem.isHovered) {
-        if (noScreenshotDueToAvoidSyncing) {
+        if (tooLargeToFetchScreenshot) {
             self.borderColor = LookinColorRGBAMake(255, 38, 0, .8);
         } else {
             self.borderColor = LookinColorMake(100, 146, 199);
         }
     } else if (self.preferenceManager.showOutline.currentBOOLValue) {
-        if (noScreenshotDueToAvoidSyncing) {
+        if (tooLargeToFetchScreenshot) {
             self.borderColor = self.isDarkMode ? LookinColorRGBAMake(255, 38, 0, .5) : LookinColorRGBAMake(255, 38, 0, .6);
         } else {
             self.borderColor = self.isDarkMode ? LookinColorRGBAMake(160, 168, 189, .6) : LookinColorRGBAMake(120, 122, 124, .6);
@@ -188,7 +188,7 @@
     // 更新 mask 颜色
     NSColor *maskColor = nil;
     CGFloat maskOpacity = 0;
-    if (noScreenshotDueToAvoidSyncing) {
+    if (tooLargeToFetchScreenshot) {
         maskColor = LookinColorMake(255, 38, 0);
         if (self.displayItem.isSelected) {
             maskOpacity = .45;

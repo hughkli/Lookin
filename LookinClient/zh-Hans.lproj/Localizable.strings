@@ -70,7 +70,9 @@
 "Change App" = "切换 App";
 "Image is too large to be displayed." = "尺寸过大，无法传输和显示该图层图像";
 "The screenshot of selected item is not displayed." = "已隐藏该图层的图像";
+"The screenshot is not displayed due to the config in iOS App." = "由于 iOS 端的项目配置，已隐藏该图层的图像";
 "Display" = "取消隐藏";
+"Details" = "更多信息";
 "The screenshot of selected %@ is not displayed." = "已隐藏所选的 %@ 的图像";
 "Updating screenshots… %@ / %@" = "更新图像中… %@ / %@";
 "Do not show again" = "知道了，不再提示";

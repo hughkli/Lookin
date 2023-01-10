@@ -70,6 +70,8 @@
 "Change App" = "Change App";
 "Image is too large to be displayed." = "Image is too large to be displayed.";
 "The screenshot of selected item is not displayed." = "The screenshot of selected item is not displayed.";
+"The screenshot is not displayed due to the config in iOS App." = "The screenshot is not displayed due to the config in iOS App.";
+"Details" = "Details";
 "Display" = "Display";
 "The screenshot of selected %@ is not displayed." = "The screenshot of selected %@ is not displayed.";
 "Updating screenshots… %@ / %@" = "Updating screenshots… %@ / %@";

@@ -112,7 +112,7 @@
 
 - (NSArray<LookinStaticAsyncUpdateTask *> *)_makeScreenshotsAndAttrGroupsTasks {
     NSMutableArray<LookinStaticAsyncUpdateTask *> *tasks = [(NSArray<LookinDisplayItem *> *)self.dataSource.displayingFlatItems lookin_map:^id(NSUInteger idx, LookinDisplayItem *item) {
-        if (item.avoidSyncScreenshot) {
+        if (item.doNotFetchScreenshotReason != LookinFetchScreenshotPermitted) {
             return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
         } else if (item.isExpandable && item.isExpanded) {
             return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeSoloScreenshot];
@@ -122,7 +122,7 @@
     }].mutableCopy;
     
     [self.dataSource.flatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (item.avoidSyncScreenshot) {
+        if (item.doNotFetchScreenshotReason != LookinFetchScreenshotPermitted) {
             LookinStaticAsyncUpdateTask *task = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
             if (![tasks containsObject:task]) {
                 [tasks addObject:task];
@@ -194,7 +194,7 @@
         return;
     }
     NSArray<LookinStaticAsyncUpdateTask *> *tasks = [(NSArray<LookinDisplayItem *> *)self.dataSource.displayingFlatItems lookin_map:^id(NSUInteger idx, LookinDisplayItem *item) {
-        if (item.avoidSyncScreenshot) {
+        if (item.doNotFetchScreenshotReason != LookinFetchScreenshotPermitted) {
             return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
         } else if (item.isExpandable && item.isExpanded) {
             return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeSoloScreenshot];
@@ -218,7 +218,7 @@
     
     NSMutableArray<LookinStaticAsyncUpdateTask *> *tasks = [NSMutableArray array];
     [displayItem enumerateSelfAndAncestors:^(LookinDisplayItem *item, BOOL *stop) {
-        if (item.avoidSyncScreenshot) {
+        if (item.doNotFetchScreenshotReason != LookinFetchScreenshotPermitted) {
             return;
         }
         if (item == displayItem && item.subitems.count) {
