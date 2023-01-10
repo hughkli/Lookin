@@ -638,7 +638,7 @@
         item.enabled = YES;
         item.target = self;
         item.action = @selector(_handleCancelPreview:);
-        item.title = NSLocalizedString(@"Hide screenshot", nil);
+        item.title = NSLocalizedString(@"Hide screenshot this time", nil);
         item;
     })];
     [menu addItem:({
@@ -647,6 +647,15 @@
         item.target = self;
         item.action = @selector(_handleExportScreenshot:);
         item.title = NSLocalizedString(@"Export screenshot…", nil);
+        item;
+    })];
+    
+    [menu addItem:[NSMenuItem separatorItem]];
+    [menu addItem:({
+        NSMenuItem *item = [NSMenuItem new];
+        item.target = self;
+        item.action = @selector(_handleHideScreenshotForever);
+        item.title = NSLocalizedString(@"Hide screenshot forever…", nil);
         item;
     })];
     return menu;
@@ -706,6 +715,10 @@
 - (void)_handleExportScreenshot:(NSMenuItem *)menuItem {
     LookinDisplayItem *item = self.rightClickingDisplayItem;
     [LKExportManager exportScreenshotWithDisplayItem:item];
+}
+
+- (void)_handleHideScreenshotForever {
+    [LKHelper openCustomConfigWebsite];
 }
 
 @end

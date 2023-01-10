@@ -78,6 +78,8 @@ CG_INLINE HorizontalMargins HorizontalMarginsMake(CGFloat left, CGFloat right) {
 
 + (void)openLookinOfficialWebsite;
 
++ (void)openCustomConfigWebsite;
+
 + (BOOL)isEnglish;
 
 /// macOS 10.14 及以后返回用户的系统主题色，旧版本系统返回蓝色

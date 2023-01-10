@@ -37,7 +37,8 @@
 
 "Expand recursively" = "全部展开";
 "Collapse children" = "收起子图层";
-"Hide screenshot" = "隐藏图像";
+"Hide screenshot this time" = "隐藏图像（仅本次）";
+"Hide screenshot forever…" = "永久隐藏图像…";
 "Show screenshot" = "显示该图层的图像";
 "Show layer border" = "显示该图层的边框";
 "Copy text \"%@\"" = "复制文字 \"%@\"";

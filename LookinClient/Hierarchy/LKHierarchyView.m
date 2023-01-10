@@ -271,7 +271,7 @@ static CGFloat const kRowHeight = 28;
             NSMenuItem *item = [NSMenuItem new];
             item.target = self;
             item.action = @selector(_handleCancelPreview:);
-            item.title = NSLocalizedString(@"Hide screenshot", nil);
+            item.title = NSLocalizedString(@"Hide screenshot this time", nil);
             item;
         })];
     }
@@ -333,6 +333,17 @@ static CGFloat const kRowHeight = 28;
             item;
         })];
     }];
+    
+    if (!displayItem.inNoPreviewHierarchy) {
+        [menu addItem:[NSMenuItem separatorItem]];
+        [menu addItem:({
+            NSMenuItem *item = [NSMenuItem new];
+            item.target = self;
+            item.action = @selector(_handleHideScreenshotForever);
+            item.title = NSLocalizedString(@"Hide screenshot forever…", nil);
+            item;
+        })];
+    }
 }
 
 #pragma mark - <NSTextFieldDelegate>
@@ -420,6 +431,10 @@ static CGFloat const kRowHeight = 28;
             [self.delegate hierarchyView:self needToExpandItem:item recursively:NO];
         }
     }
+}
+
+- (void)_handleHideScreenshotForever {
+    [LKHelper openCustomConfigWebsite];
 }
 
 #pragma mark - Guides

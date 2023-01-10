@@ -37,7 +37,8 @@
 
 "Expand recursively" = "Expand recursively";
 "Collapse children" = "Collapse children";
-"Hide screenshot" = "Hide screenshot";
+"Hide screenshot this time" = "Hide screenshot this time";
+"Hide screenshot forever…" = "Hide screenshot forever…";
 "Show screenshot" = "Show screenshot";
 "Show layer border" = "Show layer border";
 "Copy text \"%@\"" = "Copy text \"%@\"";

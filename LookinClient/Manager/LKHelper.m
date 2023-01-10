@@ -60,6 +60,10 @@ const CGFloat ZoomSliderMaxValue = 2.8;
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://lookin.work"]];
 }
 
++ (void)openCustomConfigWebsite {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://lookin.work/faq/config-file/"]];
+}
+
 + (BOOL)isEnglish {
     static dispatch_once_t onceToken;
     static BOOL isEnglish = YES;

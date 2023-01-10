@@ -385,11 +385,7 @@
 }
 
 - (void)_handleUserConfigNoPreviewTipView {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://lookin.work/faq/config-file/"]];
-}
-
-- (void)_handleTutorialTipView {
-    
+    [LKHelper openCustomConfigWebsite];
 }
 
 - (void)_handleToggleMeasure:(LookinMsgActionParams *)param {
