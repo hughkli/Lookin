@@ -259,7 +259,11 @@ static CGFloat const kRowHeight = 28;
             NSMenuItem *item = [NSMenuItem new];
             item.target = self;
             item.action = @selector(_handleShowPreview:);
-            item.title = NSLocalizedString(@"Show screenshot", nil);
+            if (displayItem.doNotFetchScreenshotReason == LookinFetchScreenshotPermitted) {
+                item.title = NSLocalizedString(@"Show screenshot", nil);
+            } else {
+                item.title = NSLocalizedString(@"Show layer border", nil);
+            }
             item;
         })];
     } else {

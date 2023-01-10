@@ -39,6 +39,7 @@
 "Collapse children" = "收起子图层";
 "Hide screenshot" = "隐藏图像";
 "Show screenshot" = "显示该图层的图像";
+"Show layer border" = "显示该图层的边框";
 "Copy text \"%@\"" = "复制文字 \"%@\"";
 
 "Type property or method name here" = "可输入属性名或方法名";

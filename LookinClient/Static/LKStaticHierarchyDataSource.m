@@ -61,12 +61,6 @@
         if (widthInPx > maxLengthInPx || heightInPx > maxLengthInPx) {
             obj.doNotFetchScreenshotReason = LookinDoNotFetchScreenshotForTooLarge;
         }
-        
-        if (!obj.shouldCaptureImage) {
-            [obj enumerateSelfAndChildren:^(LookinDisplayItem *item) {
-                item.doNotFetchScreenshotReason = LookinDoNotFetchScreenshotForUserConfig;
-            }];
-        }
     }];
     
     [[LKStaticAsyncUpdateManager sharedInstance] updateAll];

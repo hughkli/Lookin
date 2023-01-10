@@ -39,6 +39,7 @@
 "Collapse children" = "Collapse children";
 "Hide screenshot" = "Hide screenshot";
 "Show screenshot" = "Show screenshot";
+"Show layer border" = "Show layer border";
 "Copy text \"%@\"" = "Copy text \"%@\"";
 
 "Type property or method name here" = "Type property or method name here";

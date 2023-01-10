@@ -161,7 +161,7 @@
     [[[RACSignal merge:@[RACObserve(dataSource, selectedItem), dataSource.itemDidChangeNoPreview]] skip:1] subscribeNext:^(id  _Nullable x) {
         @strongify(self);
         LookinDisplayItem *item = dataSource.selectedItem;
-        BOOL shouldShowNoPreviewTip = item.inNoPreviewHierarchy;
+        BOOL shouldShowNoPreviewTip = item.inNoPreviewHierarchy && item.doNotFetchScreenshotReason != LookinDoNotFetchScreenshotForUserConfig;
         if (shouldShowNoPreviewTip || !self.noPreviewTipView.hidden) {
             self.noPreviewTipView.title = [NSString stringWithFormat:NSLocalizedString(@"The screenshot of selected %@ is not displayed.", nil), item.title];
             self.noPreviewTipView.bindingObject = item;
