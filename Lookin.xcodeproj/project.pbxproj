@@ -1804,7 +1804,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LookinClient",
-					"$(PROJECT_DIR)/LookinClient/LookinServerFramework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LookinClient/LookinClient_PrefixHeader.pch";
@@ -1836,7 +1835,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LookinClient",
-					"$(PROJECT_DIR)/LookinClient/LookinServerFramework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LookinClient/LookinClient_PrefixHeader.pch";
@@ -1987,7 +1985,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LookinClient",
-					"$(PROJECT_DIR)/LookinClient/LookinServerFramework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LookinClient/LookinClient_PrefixHeader.pch";
@@ -2024,10 +2021,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LookinClient",
-					"$(PROJECT_DIR)/LookinClient/LookinServerFramework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LookinClient/LookinClient_PrefixHeader.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"SHOULD_COMPILE_LOOKIN_SERVER=1",
+				);
 				INFOPLIST_FILE = LookinClient/LookinClient_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
