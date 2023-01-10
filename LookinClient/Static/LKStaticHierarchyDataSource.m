@@ -61,6 +61,12 @@
         if (widthInPx > maxLengthInPx || heightInPx > maxLengthInPx) {
             obj.avoidSyncScreenshot = YES;
         }
+        
+        if (!obj.shouldCaptureImage) {
+            [obj enumerateSelfAndChildren:^(LookinDisplayItem *item) {
+                item.avoidSyncScreenshot = YES;
+            }];
+        }
     }];
     
     [[LKStaticAsyncUpdateManager sharedInstance] updateAll];
