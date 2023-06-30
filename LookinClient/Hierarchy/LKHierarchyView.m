@@ -16,6 +16,7 @@
 #import "LKNavigationManager.h"
 #import "LKTutorialManager.h"
 #import "LKTextFieldView.h"
+#import "LKTipsView.h"
 
 static NSString * const kMenuBindKey_RowView = @"view";
 static CGFloat const kRowHeight = 28;
@@ -30,6 +31,10 @@ static CGFloat const kRowHeight = 28;
 
 @property(nonatomic, strong) LKLabel *emptyDataLabel;
 
+@property(nonatomic, strong) LKTipsView *focusView;
+
+@property(nonatomic, assign) NSInteger minIndentLevel;
+
 @end
 
 @implementation LKHierarchyView
@@ -41,7 +46,18 @@ static CGFloat const kRowHeight = 28;
         self.backgroundEffectView.blendingMode = NSVisualEffectBlendingModeBehindWindow;
         self.backgroundEffectView.state = NSVisualEffectStateActive;
         [self addSubview:self.backgroundEffectView];
-        
+
+        _focusView = [LKTipsView new];
+        _focusView.hidden = true;
+        _focusView.title = NSLocalizedString(@"Focused", nil);
+        _focusView.buttonImage = NSImageMake(@"icon_close");
+        _focusView.backgroundColor = [NSColor clearColor];
+        _focusView.button.imagePosition = NSImageTrailing;
+        _focusView.target = self;
+        _focusView.clickAction = @selector(_handleCancelFocus);
+        [_focusView setInternalInsetsRight:12];
+        [self addSubview:self.focusView];
+
         _tableView = [LKTableView new];
         self.tableView.adjustsSelectionAutomatically = NO;
         self.tableView.delegate = self;
@@ -101,7 +117,19 @@ static CGFloat const kRowHeight = 28;
     [super layout];
     $(self.backgroundEffectView).fullFrame;
     $(self.searchTextFieldView).fullWidth.height(25).bottom(0);
-    $(self.tableView).fullFrame.toMaxY(self.searchTextFieldView.$y);
+
+    if (self.focusView.hidden) {
+        $(self.tableView).fullFrame.y(self.searchTextFieldView.$y);
+        $(self.tableView).fullFrame.toMaxY(self.searchTextFieldView.$y);
+    } else {
+        if (@available(macOS 11.0, *)) {
+            $(self.focusView).fullWidth.height(25).y(self.safeAreaInsets.top);
+        } else {
+            $(self.focusView).fullWidth.height(25).y(52);
+        }
+        $(self.tableView).fullFrame.y(self.focusView.$maxY).toMaxY(self.searchTextFieldView.$y);
+    }
+
     $(self.guidesShapeLayer).frame(CGRectZero);
     
     if (self.emptyDataLabel.isVisible) {
@@ -111,6 +139,11 @@ static CGFloat const kRowHeight = 28;
 
 - (void)setDisplayItems:(NSArray<LookinDisplayItem *> *)displayItems {
     _displayItems = displayItems.copy;
+    _minIndentLevel = [[displayItems lookin_reduce:^NSNumber *(NSNumber *accumulator, NSUInteger idx, LookinDisplayItem *obj) {
+        NSInteger res = accumulator ? MIN(accumulator.integerValue, obj.indentLevel):obj.indentLevel;
+        return @(res);
+    }] integerValue];
+    
     [self.tableView reloadData];
     
     if (displayItems.count == 0) {
@@ -157,6 +190,20 @@ static CGFloat const kRowHeight = 28;
     [self.searchTextFieldView.textField becomeFirstResponder];
 }
 
+- (void)activateFocused {
+    self.focusView.hidden = false;
+
+    self.needsLayout = true;
+    [self layoutSubtreeIfNeeded];
+}
+
+- (void)deactivateFocused {
+    self.focusView.hidden = true;
+
+    self.needsLayout = true;
+    [self layoutSubtreeIfNeeded];
+}
+
 #pragma mark - NSTableView
 
 - (void)tableView:(LKTableView *)tableView didHoverAtRow:(NSInteger)row {
@@ -196,7 +243,9 @@ static CGFloat const kRowHeight = 28;
         view.menu.delegate = self;
     }
     
+    view.minIndentLevel = self.minIndentLevel;
     view.displayItem = item;
+    
     view.disclosureButton.tag = row;
     return view;
 }
@@ -250,6 +299,15 @@ static CGFloat const kRowHeight = 28;
             item;
         })];
     }
+    
+    [menu addItem:[NSMenuItem separatorItem]];
+    [menu addItem:({
+        NSMenuItem *item = [NSMenuItem new];
+        item.target = self;
+        item.action = @selector(_handleFocusCurrentItem:);
+        item.title = NSLocalizedString(@"FocusItem", nil);
+        item;
+    })];
 
     // 显示和隐藏图像
     [menu addItem:[NSMenuItem separatorItem]];
@@ -285,7 +343,7 @@ static CGFloat const kRowHeight = 28;
             item;
         })];        
     }
-    
+
     // 复制文字
     NSMutableArray<NSString *> *stringsToCopy = [NSMutableArray array];
     
@@ -437,6 +495,21 @@ static CGFloat const kRowHeight = 28;
     [LKHelper openCustomConfigWebsite];
 }
 
+- (void)_handleFocusCurrentItem:(NSMenuItem *)menuItem {
+    LKHierarchyRowView *view = [menuItem.menu lookin_getBindObjectForKey:kMenuBindKey_RowView];
+    LookinDisplayItem *item = view.displayItem;
+    NSAssert(item, @"");
+    if ([self.delegate respondsToSelector:@selector(hierarchyView:shouldFocusItem:)]) {
+        [self.delegate hierarchyView:self shouldFocusItem:item];
+    }
+}
+
+- (void)_handleCancelFocus {
+    if ([self.delegate respondsToSelector:@selector(cancelFocusedOnHierarchyView:)]) {
+        [self.delegate cancelFocusedOnHierarchyView:self];
+    }
+}
+
 #pragma mark - Guides
 
 - (void)updateGuidesWithHoveredItem:(LookinDisplayItem *)item {
@@ -456,7 +529,7 @@ static CGFloat const kRowHeight = 28;
         return;
     }
     
-    CGFloat rootX = [LKHierarchyRowView dislosureMidXWithIndentLevel:rootItem.indentLevel];
+    CGFloat rootX = [LKHierarchyRowView dislosureMidXWithIndentLevel:rootItem.indentLevel - self.minIndentLevel];
     CGFloat rootY = kRowHeight * rootRow + kRowHeight / 2.0;
     CGFloat rootMaxY = [self.displayItems indexOfObject:childrenItems.lastObject] * kRowHeight + kRowHeight / 2.0;
 

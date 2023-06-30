@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -1089,18 +1089,18 @@
 			children = (
 				AAD387322288632100042229 /* LKHierarchyController.h */,
 				AAD387332288632100042229 /* LKHierarchyController.m */,
+				AAC5E2DC228034DC0081A810 /* LKHierarchyDataSource.h */,
+				AAC5E2DD228034DC0081A810 /* LKHierarchyDataSource.m */,
 				AA3A7D0223003D7A00997887 /* LKHierarchyHandlersPopoverController.h */,
 				AA3A7D0323003D7A00997887 /* LKHierarchyHandlersPopoverController.m */,
 				AA3A7D0723003F5800997887 /* LKHierarchyHandlersPopoverItemView.h */,
 				AA3A7D0823003F5800997887 /* LKHierarchyHandlersPopoverItemView.m */,
-				AAC5E2DC228034DC0081A810 /* LKHierarchyDataSource.h */,
-				AAC5E2DD228034DC0081A810 /* LKHierarchyDataSource.m */,
 				AA22A0EB2276D65B00356E70 /* LKHierarchyItem.h */,
 				AA22A0EC2276D65B00356E70 /* LKHierarchyItem.m */,
-				AAA8C0AD21CC17670017A345 /* LKHierarchyView.m */,
-				AAA8C0AB21CC17670017A345 /* LKHierarchyView.h */,
-				AAA8C0AE21CC17670017A345 /* LKHierarchyRowView.m */,
 				AAA8C0AC21CC17670017A345 /* LKHierarchyRowView.h */,
+				AAA8C0AE21CC17670017A345 /* LKHierarchyRowView.m */,
+				AAA8C0AB21CC17670017A345 /* LKHierarchyView.h */,
+				AAA8C0AD21CC17670017A345 /* LKHierarchyView.m */,
 			);
 			path = Hierarchy;
 			sourceTree = "<group>";

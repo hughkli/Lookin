@@ -635,6 +635,15 @@
     [menu addItem:[NSMenuItem separatorItem]];
     [menu addItem:({
         NSMenuItem *item = [NSMenuItem new];
+        item.target = self;
+        item.action = @selector(_handleFocusCurrentItem:);
+        item.title = NSLocalizedString(@"FocusItem", nil);
+        item;
+    })];
+    
+    [menu addItem:[NSMenuItem separatorItem]];
+    [menu addItem:({
+        NSMenuItem *item = [NSMenuItem new];
         item.enabled = YES;
         item.target = self;
         item.action = @selector(_handleCancelPreview:);
@@ -719,6 +728,11 @@
 
 - (void)_handleHideScreenshotForever {
     [LKHelper openCustomConfigWebsite];
+}
+
+- (void)_handleFocusCurrentItem:(NSMenuItem *)menuItem {
+    LookinDisplayItem *item = self.rightClickingDisplayItem;
+    [self.dataSource focusThisItem:item];
 }
 
 @end

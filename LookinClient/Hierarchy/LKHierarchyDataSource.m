@@ -71,6 +71,8 @@
 @end
 
 @interface LKHierarchyDataSource ()
+@property(nonatomic, strong) RACBehaviorSubject<NSNumber *> *stateSubject;
+@property(nonatomic, assign) LKHierarchyDataSourceState state;
 
 @property(nonatomic, strong, readwrite) LookinHierarchyInfo *rawHierarchyInfo;
 
@@ -94,14 +96,22 @@
  */
 @property(nonatomic, strong) NSDictionary<NSString *, NSArray<NSString *> *> *colorToAliasMap;
 
-@property(nonatomic, assign, readwrite) BOOL isSearching;
-
 @end
 
 @implementation LKHierarchyDataSource
 
+- (RACSignal<NSNumber *> *)stateSignal {
+    return [self.stateSubject distinctUntilChanged];
+}
+
+- (LKHierarchyDataSourceState)state {
+    NSNumber *currentValue = [self.stateSubject valueForKey: @"currentValue"];
+    return [currentValue unsignedIntegerValue];
+}
+
 - (instancetype)init {
     if (self = [super init]) {
+        _stateSubject = [RACBehaviorSubject behaviorSubjectWithDefaultValue:@(LKHierarchyDataSourceStateNormal)];
         _itemDidChangeHiddenAlphaValue = [RACSubject subject];
         _itemDidChangeAttrGroup = [RACSubject subject];
         _itemDidChangeNoPreview = [RACSubject subject];
@@ -112,6 +122,11 @@
         [[[RACObserve([LKPreferenceManager mainManager], rgbaFormat) skip:1] distinctUntilChanged] subscribeNext:^(id  _Nullable x) {
             @strongify(self);
             [self _setUpColors];
+        }];
+        
+        [[self.stateSubject distinctUntilChanged] subscribeNext:^(NSNumber * _Nullable x) {
+            @strongify(self);
+            self.state = x.unsignedIntegerValue;
         }];
     }
     return self;
@@ -586,11 +601,11 @@
         return;
     }
     
-    if (!self.isSearching) {
+    if (self.state != LKHierarchyDataSourceStateSearch) {
         [self.rawFlatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             obj.isExpandedBeforeSearching = obj.isExpanded;
         }];
-        self.isSearching = YES;
+        [self.stateSubject sendNext:@(LKHierarchyDataSourceStateSearch)];
     }
     
     self.selectedItem = nil;
@@ -632,11 +647,51 @@
     [self _updateDisplayingFlatItems];
 }
 
-- (void)endSearch {
-    if (!self.isSearching) {
+- (void)focusThisItem:(LookinDisplayItem *)item {
+    if (!item) {
+        NSAssert(NO, @"");
         return;
     }
-    self.isSearching = NO;
+
+    if (self.state != LKHierarchyDataSourceStateFocus) {
+        [self.rawFlatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            obj.isExpandedBeforeSearching = obj.isExpanded;
+        }];
+        [self.stateSubject sendNext:@(LKHierarchyDataSourceStateFocus)];
+    }
+
+    self.selectedItem = nil;
+
+    NSString *Key_ShouldShow = @"show";
+    [self.rawFlatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull displayItem, NSUInteger idx, BOOL * _Nonnull stop) {
+        [displayItem lookin_bindBOOL:NO forKey:Key_ShouldShow];
+        displayItem.highlightedSearchString = nil;
+    }];
+
+    for (LookinDisplayItem *displayItem in self.rawFlatItems) {
+        if (displayItem == item) {
+            [displayItem enumerateSelfAndChildren:^(LookinDisplayItem *selfOrChild) {
+                selfOrChild.isExpanded = YES;
+                [selfOrChild lookin_bindBOOL:YES forKey:Key_ShouldShow];
+            }];
+            break;
+        }
+    }
+
+    NSArray<LookinDisplayItem *> *flatItems = [self.rawFlatItems lookin_filter:^BOOL(LookinDisplayItem *displayItem) {
+        return [displayItem lookin_getBindBOOLForKey:Key_ShouldShow];
+    }];
+    self.flatItems = flatItems;
+    [self.didReloadFlatItemsWithSearch sendNext:nil];
+
+    [self _updateDisplayingFlatItems];
+}
+
+- (void)endSearch {
+    if (self.stateSubject == LKHierarchyDataSourceStateNormal) {
+        return;
+    }
+    [self.stateSubject sendNext:@(LKHierarchyDataSourceStateNormal)];
     
     [self.rawFlatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         obj.isInSearch = NO;
