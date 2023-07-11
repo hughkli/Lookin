@@ -21,6 +21,7 @@
 #import "LKStaticViewController.h"
 #import "LookinPreviewView.h"
 #import "LKUserActionManager.h"
+#import "LKHierarchyDataSource+KeyDown.h"
 
 @interface LKPreviewController () <NSGestureRecognizerDelegate, LKPreviewStageViewDelegate, NSMenuDelegate>
 
@@ -514,31 +515,10 @@
         return;
     }
 
-    if (event.keyCode == 125 || event.keyCode == 126) {
-        // 按键盘的 “上” 或 “下” 方向键时移动 hierarchy 里的 select row
-        NSInteger selectedRowIdx = [self.dataSource.displayingFlatItems indexOfObject:self.dataSource.selectedItem];
-        if (selectedRowIdx != NSNotFound) {
-            NSInteger willSelectedRow;
-            if (event.keyCode == 125) {
-                // 下
-                willSelectedRow = selectedRowIdx + 1;
-            } else {
-                // 上
-                willSelectedRow = selectedRowIdx - 1;
-            }
-            LookinDisplayItem *willSelectedItem = [self.dataSource.displayingFlatItems lookin_safeObjectAtIndex:willSelectedRow];
-            if (willSelectedItem) {
-                self.dataSource.selectedItem = willSelectedItem;
-                return;
-            }
-        }
+    if ([self.dataSource keyDown:event]) {
+        return;
     }
-    
-    if (event.keyCode == 123) {
-        [self.dataSource collapseItem:self.dataSource.selectedItem];
-    } else if (event.keyCode == 124) {
-        [self.dataSource expandItem:self.dataSource.selectedItem];
-    }
+
     [super keyDown:event];
 }
 

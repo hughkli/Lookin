@@ -11,6 +11,7 @@
 #import "LookinDisplayItem.h"
 #import "LKTableView.h"
 #import "LKTutorialManager.h"
+#import "LKHierarchyDataSource+KeyDown.h"
 
 @interface LKHierarchyController ()
 
@@ -93,6 +94,19 @@
         return nil;
     }
     return [self.hierarchyView.tableView.tableView rowViewAtRow:row makeIfNecessary:NO];
+}
+
+- (BOOL)acceptsFirstResponder {
+    return true;
+}
+
+
+- (void)keyDown:(NSEvent *)event {
+    if ([self.dataSource keyDown:event]) {
+        return;
+    }
+
+    [super keyDown:event];
 }
 
 #pragma mark - <LKHierarchyViewDelegate>

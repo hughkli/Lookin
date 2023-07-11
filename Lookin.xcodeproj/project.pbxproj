@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		094E413CB04F29F94551D070 /* Pods_LookinClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A3B0CB06C22A05EDC913F3 /* Pods_LookinClient.framework */; };
 		113B2F55E5BE571AC938D898 /* Pods_LookinTestflight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89555EC46A276B7FD0CB65FA /* Pods_LookinTestflight.framework */; };
+		601AD5E52A64D6110013F490 /* LKHierarchyDataSource+KeyDown.m in Sources */ = {isa = PBXBuildFile; fileRef = 601AD5E42A64D6110013F490 /* LKHierarchyDataSource+KeyDown.m */; };
 		A213803D2821886B009BFE60 /* LKPerformanceReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = A213803C2821886B009BFE60 /* LKPerformanceReporter.m */; };
 		A22370392828107400585509 /* LKStaticHierarchyController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA8C0CA21CC17670017A345 /* LKStaticHierarchyController.m */; };
 		A223703A2828107400585509 /* LookinPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2C0D2308420300CFAC53 /* LookinPreviewView.m */; };
@@ -381,6 +382,8 @@
 		07695A2606130B23B91F553C /* Pods-LookinTestflight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookinTestflight.release.xcconfig"; path = "Target Support Files/Pods-LookinTestflight/Pods-LookinTestflight.release.xcconfig"; sourceTree = "<group>"; };
 		4225D6261428134154CB341E /* Pods-LookinTestflight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookinTestflight.debug.xcconfig"; path = "Target Support Files/Pods-LookinTestflight/Pods-LookinTestflight.debug.xcconfig"; sourceTree = "<group>"; };
 		5E8E4C9C392BAAF93643C21E /* Pods-LookinClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookinClient.release.xcconfig"; path = "Target Support Files/Pods-LookinClient/Pods-LookinClient.release.xcconfig"; sourceTree = "<group>"; };
+		601AD5E32A64D6110013F490 /* LKHierarchyDataSource+KeyDown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LKHierarchyDataSource+KeyDown.h"; sourceTree = "<group>"; };
+		601AD5E42A64D6110013F490 /* LKHierarchyDataSource+KeyDown.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LKHierarchyDataSource+KeyDown.m"; sourceTree = "<group>"; };
 		81A3B0CB06C22A05EDC913F3 /* Pods_LookinClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LookinClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89555EC46A276B7FD0CB65FA /* Pods_LookinTestflight.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LookinTestflight.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A213803B2821886B009BFE60 /* LKPerformanceReporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKPerformanceReporter.h; sourceTree = "<group>"; };
@@ -1091,6 +1094,8 @@
 				AAD387332288632100042229 /* LKHierarchyController.m */,
 				AAC5E2DC228034DC0081A810 /* LKHierarchyDataSource.h */,
 				AAC5E2DD228034DC0081A810 /* LKHierarchyDataSource.m */,
+				601AD5E32A64D6110013F490 /* LKHierarchyDataSource+KeyDown.h */,
+				601AD5E42A64D6110013F490 /* LKHierarchyDataSource+KeyDown.m */,
 				AA3A7D0223003D7A00997887 /* LKHierarchyHandlersPopoverController.h */,
 				AA3A7D0323003D7A00997887 /* LKHierarchyHandlersPopoverController.m */,
 				AA3A7D0723003F5800997887 /* LKHierarchyHandlersPopoverItemView.h */,
@@ -1685,6 +1690,7 @@
 				AA23624B222C67C1008FE069 /* NSAppearance+LookinClient.m in Sources */,
 				AAA8C16021CC17680017A345 /* LKLaunchWindowController.m in Sources */,
 				AAC41E1722686A28005CDD6E /* LKStaticHierarchyDataSource.m in Sources */,
+				601AD5E52A64D6110013F490 /* LKHierarchyDataSource+KeyDown.m in Sources */,
 				AAA8C15821CC17680017A345 /* LKPreviewController.m in Sources */,
 				AA5C54DB2289DF97004E09F4 /* LKWindow.m in Sources */,
 				AABEE3EF22970CE80042EC5A /* LKMethodTraceMenuItemView.m in Sources */,
