@@ -310,14 +310,16 @@
     if (TutorialMng.hasAlreadyShowedTipsThisLaunch || TutorialMng.USBLowSpeed) {
         return;
     }
-    if (!InspectingApp || InspectingApp.appInfo.deviceType == LookinAppInfoDeviceSimulator || [LKStaticHierarchyDataSource sharedInstance].flatItems.count < 170) {
+    if (!InspectingApp || InspectingApp.appInfo.isWireless || InspectingApp.appInfo.deviceType == LookinAppInfoDeviceSimulator || [LKStaticHierarchyDataSource sharedInstance].flatItems.count < 170) {
         return;
     }
     
     TutorialMng.hasAlreadyShowedTipsThisLaunch = YES;
-    [[LKTutorialManager sharedInstance] showPopoverOfView:self.toolbarItemsMap[LKToolBarIdentifier_Reload].view text:NSLocalizedString(@"Inspecting via USB is slower than inspecting a Xcode simulator.", nil) learned:^{
-        [LKTutorialManager sharedInstance].USBLowSpeed = YES;
-    }];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[[LKTutorialManager sharedInstance] showPopoverOfView:self.toolbarItemsMap[LKToolBarIdentifier_Reload].view text:NSLocalizedString(@"Inspecting via USB is slower than inspecting a Xcode simulator.", nil) learned:^{
+			[LKTutorialManager sharedInstance].USBLowSpeed = YES;
+		}];
+	});
 }
 
 #pragma mark - <LKAppMenuManagerDelegate>

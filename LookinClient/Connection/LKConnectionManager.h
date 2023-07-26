@@ -7,8 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ECOChannelManager.h"
+#import "Lookin_PTChannel.h"
 
-@class Lookin_PTChannel;
+@class LKConnectionRequest;
+
+@protocol LookinChannelProtocol <NSObject>
+
+@property (readonly) BOOL isConnected;
+
+@property(nonatomic, strong) NSMutableSet<LKConnectionRequest *> *activeRequests;
+
+@end
 
 /**
  iOS 是 Server 端，macOS 是 Client 端
@@ -44,5 +54,19 @@
 
 /// 收到了 server 端发送的 push 消息，tuple 分别为 channel, pushType, data
 @property(nonatomic, strong, readonly) RACSubject *didReceivePush;
+
+@end
+
+@interface Lookin_PTChannel (LKConnection) <LookinChannelProtocol>
+
+/// 已经发送但尚未收到全部回复的请求
+@property(nonatomic, strong) NSMutableSet<LKConnectionRequest *> *activeRequests;
+
+@end
+
+@interface ECOChannelDeviceInfo (LKConnection) <LookinChannelProtocol>
+
+/// 已经发送但尚未收到全部回复的请求
+@property(nonatomic, strong) NSMutableSet<LKConnectionRequest *> *activeRequests;
 
 @end
