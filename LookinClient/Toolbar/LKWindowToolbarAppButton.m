@@ -66,6 +66,11 @@
 }
 
 - (void)setAppInfo:(LookinAppInfo *)appInfo {
+	if (!NSThread.isMainThread) {
+		[self performSelectorOnMainThread:_cmd withObject:appInfo waitUntilDone:NO];
+		return;
+	}
+	
     _appInfo = appInfo;
     
     if (appInfo) {
