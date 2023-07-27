@@ -504,10 +504,14 @@ static NSIndexSet * PushFrameTypeList() {
 	self.wirelessChannel.deviceBlock = ^(ECOChannelDeviceInfo *device, BOOL isConnected) {
 		NSLog(@"🚀 Lookin deviceBlock device:%@", device);
 		if (isConnected && ![self_weak_.allWirelessDevices containsObject:device]) {
-			NSString *uniId = [NSString stringWithFormat:@"%@_%@",device.uuid, device.appInfo.appId];
-			[self_weak_.wirelessChannel sendAuthorizationMessageToDevice:device
-																   state:ECOAuthorizeResponseType_AllowAlways
-														   showAuthAlert:![self_weak_.wirelessChannel.whitelistDevices containsObject:uniId]];
+			if (!device.authorizedType) {
+				NSString *uniId = [NSString stringWithFormat:@"%@_%@",device.uuid, device.appInfo.appId];
+				[self_weak_.wirelessChannel sendAuthorizationMessageToDevice:device
+																	   state:ECOAuthorizeResponseType_AllowAlways
+															   showAuthAlert:![self_weak_.wirelessChannel.whitelistDevices containsObject:uniId]];
+			} else {
+				[self_weak_ _connectToWirelessDevice:device];
+			}
 		} else if (!isConnected) {
 			[self_weak_.allWirelessDevices removeObject:device];
 			[self_weak_.channelWillEnd sendNext:device];
@@ -517,17 +521,7 @@ static NSIndexSet * PushFrameTypeList() {
 	self.wirelessChannel.authStateChangedBlock = ^(ECOChannelDeviceInfo *device, ECOAuthorizeResponseType authState) {
 		NSLog(@"🚀 Lookin authStateChangedBlock device:%@", device);
 		if (authState) {
-			if (![self_weak_.allWirelessDevices containsObject:device]) {
-				// Ping测试
-				[self_weak_ _requestWithType:LookinRequestTypePing channel:device data:nil timeoutInterval:2 succ:^(LookinConnectionResponseAttachment *pingResponse) {
-					// ping 成功了
-					// NSLog(@"LookinClient, level1 - ping succ, will send request:%@, port:%@", @(type), @(channel.portNumber));
-					
-					[self_weak_.allWirelessDevices addObject:device];
-				} fail:^(NSError *error) {
-					// ping 失败了
-				} completion:nil];
-			}
+			[self_weak_ _connectToWirelessDevice:device];
 		} else if ([self_weak_.allWirelessDevices containsObject:device]) {
 			[self_weak_.allWirelessDevices removeObject:device];
 			[self_weak_.channelWillEnd sendNext:device];
@@ -537,6 +531,21 @@ static NSIndexSet * PushFrameTypeList() {
 	self.wirelessChannel.requestAuthBlock = ^(ECOChannelDeviceInfo *device, ECOAuthorizeResponseType authState) {
 		NSLog(@"🚀 Lookin requestAuthBlock device:%@ authState:%ld", device, authState);
 	};
+}
+
+- (void)_connectToWirelessDevice:(ECOChannelDeviceInfo *)device {
+	if (device.isConnected && ![self.allWirelessDevices containsObject:device]) {
+		// Ping测试
+		@weakify(self);
+		[self _requestWithType:LookinRequestTypePing channel:device data:nil timeoutInterval:2 succ:^(LookinConnectionResponseAttachment *pingResponse) {
+			// ping 成功了
+			// NSLog(@"LookinClient, level1 - ping succ, will send request:%@, port:%@", @(type), @(channel.portNumber));
+			
+			[self_weak_.allWirelessDevices addObject:device];
+		} fail:^(NSError *error) {
+			// ping 失败了
+		} completion:nil];
+	}
 }
 
 #pragma mark - <Lookin_PTChannelDelegate>
