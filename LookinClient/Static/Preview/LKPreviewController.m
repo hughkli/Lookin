@@ -23,6 +23,8 @@
 #import "LKUserActionManager.h"
 #import "LKHierarchyDataSource+KeyDown.h"
 
+extern NSString *const LKAppShowConsoleNotificationName;
+
 @interface LKPreviewController () <NSGestureRecognizerDelegate, LKPreviewStageViewDelegate, NSMenuDelegate>
 
 @property(nonatomic, strong) NSClickGestureRecognizer *clickRecognizer;
@@ -604,6 +606,23 @@
     NSMenu *menu = [NSMenu new];
     menu.autoenablesItems = NO;
     menu.delegate = self;
+
+    [menu addItem:({
+        NSMenuItem *item = [NSMenuItem new];
+        item.target = self;
+        item.action = @selector(_handlePrintItem:);
+        item.title = NSLocalizedString(@"PrintItem", nil);
+        item;
+    })];
+    [menu addItem:({
+        NSMenuItem *item = [NSMenuItem new];
+        item.target = self;
+        item.action = @selector(_handleFocusCurrentItem:);
+        item.title = NSLocalizedString(@"FocusItem", nil);
+        item;
+    })];
+    [menu addItem:[NSMenuItem separatorItem]];
+
     [menu addItem:({
         NSMenuItem *item = [NSMenuItem new];
         item.target = self;
@@ -616,15 +635,6 @@
         item.target = self;
         item.action = @selector(_handleCollapseChildren:);
         item.title = NSLocalizedString(@"Collapse children", nil);
-        item;
-    })];
-    
-    [menu addItem:[NSMenuItem separatorItem]];
-    [menu addItem:({
-        NSMenuItem *item = [NSMenuItem new];
-        item.target = self;
-        item.action = @selector(_handleFocusCurrentItem:);
-        item.title = NSLocalizedString(@"FocusItem", nil);
         item;
     })];
     
@@ -688,6 +698,16 @@
     }
 }
 
+- (void)_handlePrintItem:(NSMenuItem *)menuItem {
+    LookinDisplayItem *item = self.rightClickingDisplayItem;
+    [[NSNotificationCenter defaultCenter] postNotificationName:LKAppShowConsoleNotificationName object:item];
+}
+
+- (void)_handleFocusCurrentItem:(NSMenuItem *)menuItem {
+    LookinDisplayItem *item = self.rightClickingDisplayItem;
+    [self.dataSource focusThisItem:item];
+}
+
 - (void)_handleExpandRecursively:(NSMenuItem *)menuItem {
     LookinDisplayItem *item = self.rightClickingDisplayItem;
     NSAssert(item, @"");
@@ -715,11 +735,6 @@
 
 - (void)_handleHideScreenshotForever {
     [LKHelper openCustomConfigWebsite];
-}
-
-- (void)_handleFocusCurrentItem:(NSMenuItem *)menuItem {
-    LookinDisplayItem *item = self.rightClickingDisplayItem;
-    [self.dataSource focusThisItem:item];
 }
 
 @end

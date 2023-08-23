@@ -28,6 +28,8 @@
 @import AppCenter;
 @import AppCenterAnalytics;
 
+NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificationName";
+
 @interface LKStaticViewController () <NSSplitViewDelegate>
 
 @property(nonatomic, strong) LKSplitView *mainSplitView;
@@ -221,6 +223,14 @@
         CGFloat midX = self.hierarchyController.view.$width + (self.viewsPreviewController.view.$width - DashboardViewWidth) / 2.0;
         $(tipsView).sizeToFit.y(tipsY).midX(midX);
         tipsY = tipsView.$maxY + 5;
+    }];
+
+    @weakify(self);
+    [[NSNotificationCenter.defaultCenter rac_addObserverForName:LKAppShowConsoleNotificationName object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+        @strongify(self);
+        self.showConsole = true;
+        LookinDisplayItem *item = x.object;
+        [self.consoleController submitWithObj:item.viewObject text:@"self"];
     }];
 }
 

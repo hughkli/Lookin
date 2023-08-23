@@ -20,6 +20,7 @@
 
 static NSString * const kMenuBindKey_RowView = @"view";
 static CGFloat const kRowHeight = 28;
+extern NSString *const LKAppShowConsoleNotificationName;
 
 @interface LKHierarchyView () <LKTableViewDelegate, LKTableViewDataSource, NSMenuDelegate, NSTextFieldDelegate>
 
@@ -282,7 +283,24 @@ static CGFloat const kRowHeight = 28;
     LookinDisplayItem *displayItem = rowView.displayItem;
     
     [menu removeAllItems];
-    
+
+    [menu addItem:({
+        NSMenuItem *item = [NSMenuItem new];
+        item.target = self;
+        item.action = @selector(_handlePrintItem:);
+        item.title = NSLocalizedString(@"PrintItem", nil);
+        item;
+    })];
+
+    [menu addItem:({
+        NSMenuItem *item = [NSMenuItem new];
+        item.target = self;
+        item.action = @selector(_handleFocusCurrentItem:);
+        item.title = NSLocalizedString(@"FocusItem", nil);
+        item;
+    })];
+    [menu addItem:[NSMenuItem separatorItem]];
+
     if (displayItem.isExpandable) {
         [menu addItem:({
             NSMenuItem *item = [NSMenuItem new];
@@ -299,15 +317,6 @@ static CGFloat const kRowHeight = 28;
             item;
         })];
     }
-    
-    [menu addItem:[NSMenuItem separatorItem]];
-    [menu addItem:({
-        NSMenuItem *item = [NSMenuItem new];
-        item.target = self;
-        item.action = @selector(_handleFocusCurrentItem:);
-        item.title = NSLocalizedString(@"FocusItem", nil);
-        item;
-    })];
 
     // 显示和隐藏图像
     [menu addItem:[NSMenuItem separatorItem]];
@@ -415,8 +424,21 @@ static CGFloat const kRowHeight = 28;
     return NO;
 }
 
-
 #pragma mark - Events Handler
+- (void)_handlePrintItem:(NSMenuItem *)menuItem {
+    LKHierarchyRowView *view = [menuItem.menu lookin_getBindObjectForKey:kMenuBindKey_RowView];
+    LookinDisplayItem *item = view.displayItem;
+    [[NSNotificationCenter defaultCenter] postNotificationName:LKAppShowConsoleNotificationName object:item];
+}
+
+- (void)_handleFocusCurrentItem:(NSMenuItem *)menuItem {
+    LKHierarchyRowView *view = [menuItem.menu lookin_getBindObjectForKey:kMenuBindKey_RowView];
+    LookinDisplayItem *item = view.displayItem;
+    NSAssert(item, @"");
+    if ([self.delegate respondsToSelector:@selector(hierarchyView:shouldFocusItem:)]) {
+        [self.delegate hierarchyView:self shouldFocusItem:item];
+    }
+}
 
 - (void)_handleSearchCloseButton {
     [self _exitAndClearSearch];
@@ -493,15 +515,6 @@ static CGFloat const kRowHeight = 28;
 
 - (void)_handleHideScreenshotForever {
     [LKHelper openCustomConfigWebsite];
-}
-
-- (void)_handleFocusCurrentItem:(NSMenuItem *)menuItem {
-    LKHierarchyRowView *view = [menuItem.menu lookin_getBindObjectForKey:kMenuBindKey_RowView];
-    LookinDisplayItem *item = view.displayItem;
-    NSAssert(item, @"");
-    if ([self.delegate respondsToSelector:@selector(hierarchyView:shouldFocusItem:)]) {
-        [self.delegate hierarchyView:self shouldFocusItem:item];
-    }
 }
 
 - (void)_handleCancelFocus {

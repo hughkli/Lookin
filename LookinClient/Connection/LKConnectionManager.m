@@ -480,6 +480,7 @@ static NSIndexSet * PushFrameTypeList() {
     NSError *unarchiveError = nil;
     LookinConnectionResponseAttachment *attachment = [NSKeyedUnarchiver unarchivedObjectOfClass:[NSObject class] fromData:data error:&unarchiveError];
     if (unarchiveError) {
+        NSLog(@"Error:%@", unarchiveError);
 //        NSAssert(NO, @"");
     }
     

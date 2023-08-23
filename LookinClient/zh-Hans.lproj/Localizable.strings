@@ -38,6 +38,7 @@
 "Expand recursively" = "全部展开";
 "Collapse children" = "收起子图层";
 "FocusItem" = "聚焦此图层";
+"PrintItem" = "打印此图层";
 "Hide screenshot this time" = "隐藏图像（仅本次）";
 "Hide screenshot forever…" = "永久隐藏图像…";
 "Show screenshot" = "显示该图层的图像";

@@ -38,6 +38,7 @@
 "Expand recursively" = "Expand recursively";
 "Collapse children" = "Collapse children";
 "FocusItem" = "Focus this item";
+"PrintItem" = "Print this item";
 "Hide screenshot this time" = "Hide screenshot this time";
 "Hide screenshot forever…" = "Hide screenshot forever…";
 "Show screenshot" = "Show screenshot";

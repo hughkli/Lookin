@@ -125,6 +125,13 @@
     return self.dataSource.isShowingConsole;
 }
 
+- (void)submitWithObj:(LookinObject *)obj text:(NSString *)text {
+    [[self.dataSource submitWithObj:obj text:text] subscribeNext:^(id  _Nullable x) {
+    } error:^(NSError * _Nullable error) {
+        NSLog(@"Submit error: %@", error);
+    }];
+}
+
 #pragma mark - LKTableView
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
