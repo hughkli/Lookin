@@ -11,6 +11,7 @@
 #import "LookinDisplayItem.h"
 #import "LKTableView.h"
 #import "LKTutorialManager.h"
+#import "LKHierarchyDataSource+KeyDown.h"
 
 @interface LKHierarchyController ()
 
@@ -37,7 +38,16 @@
         }];
         
         [[RACObserve(self.dataSource, hoveredItem) distinctUntilChanged] subscribeNext:^(LookinDisplayItem * _Nullable x) {
+            @strongify(self);
             [self.hierarchyView updateGuidesWithHoveredItem:x];
+        }];
+        
+        [[[self.dataSource.stateSignal filter:^BOOL(NSNumber * _Nullable value) {
+            LKHierarchyDataSourceState state = value.unsignedIntegerValue;
+            return state == LKHierarchyDataSourceStateFocus;
+        }] deliverOnMainThread] subscribeNext:^(id  _Nullable x) {
+            @strongify(self);
+            [self.hierarchyView activateFocused];
         }];
     }
     return self;
@@ -84,6 +94,19 @@
         return nil;
     }
     return [self.hierarchyView.tableView.tableView rowViewAtRow:row makeIfNecessary:NO];
+}
+
+- (BOOL)acceptsFirstResponder {
+    return true;
+}
+
+
+- (void)keyDown:(NSEvent *)event {
+    if ([self.dataSource keyDown:event]) {
+        return;
+    }
+
+    [super keyDown:event];
 }
 
 #pragma mark - <LKHierarchyViewDelegate>
@@ -136,6 +159,23 @@
                 [self.hierarchyView scrollToMakeItemVisible:self.dataSource.selectedItem];
             });
         }
+    }
+}
+
+- (void)hierarchyView:(LKHierarchyView *)view shouldFocusItem:(LookinDisplayItem *)item {
+    if (item) {
+        [self.dataSource focusThisItem:item];
+    }
+}
+
+- (void)cancelFocusedOnHierarchyView:(LKHierarchyView *)view {
+    [self.hierarchyView deactivateFocused];
+    [self.dataSource endSearch];
+    if (self.dataSource.selectedItem) {
+        // 结束搜索，滚动到选中的 item
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.hierarchyView scrollToMakeItemVisible:self.dataSource.selectedItem];
+        });
     }
 }
 

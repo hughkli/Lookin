@@ -16,4 +16,6 @@
 
 @property(nonatomic, assign) BOOL isControllerShowing;
 
+- (void)submitWithObj:(LookinObject *)obj text:(NSString *)text;
+
 @end

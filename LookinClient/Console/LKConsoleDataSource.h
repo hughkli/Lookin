@@ -21,6 +21,7 @@
 - (NSArray<NSString *> *)currentObjectSelectorNameList;
 
 - (RACSignal *)submit:(NSString *)text;
+- (RACSignal *)submitWithObj:(LookinObject *)obj text:(NSString *)text;
 
 /// 越晚被加入的 object 在 recentObjects 数组中的 idx 越小，tuple.first 是 LookinObject，tuple.second 是当初返回这个对象时输入的命令文字
 @property(nonatomic, strong, readonly) NSMutableArray<RACTwoTuple *> *recentObjects;

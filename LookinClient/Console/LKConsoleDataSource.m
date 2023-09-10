@@ -57,6 +57,10 @@
 }
 
 - (RACSignal *)submit:(NSString *)text {
+    return [self submitWithObj:self.currentObject text:text];
+}
+
+- (RACSignal *)submitWithObj:(LookinObject *)obj text:(NSString *)text {
     if (!self.currentObject) {
         return [RACSignal error:LookinErr_Inner];
     }
@@ -67,8 +71,8 @@
         return [RACSignal error:LookinErr_NoConnect];
     }
     if ([text containsString:@":"]) {
-        NSString *className = self.currentObject.completedSelfClassName;
-        NSString *address = self.currentObject.memoryAddress;
+        NSString *className = obj.completedSelfClassName;
+        NSString *address = obj.memoryAddress;
         NSString *errDesc = [NSString stringWithFormat:NSLocalizedString(@"You can click \"Pause\" button near the bottom-left corner in Xcode to pause your iOS app, and input in Xcode console like the contents below:\nexpr [((%@ *)%@) %@]", nil), className, address, text];
         return [RACSignal error:LookinErrorMake(NSLocalizedString(@"Lookin doesn't support invoking methods with arguments yet.", nil), errDesc)];
     }
@@ -76,8 +80,8 @@
         return [RACSignal error:LookinErrorMake(NSLocalizedString(@"Lookin doesn't support this syntax yet. Please input a method or property name.", nil), @"")];
     }
     @weakify(self);
-    return [[[LKAppsManager sharedInstance].inspectingApp invokeMethodWithOid:self.currentObject.oid text:text] doNext:^(NSDictionary *dict) {
-        NSString *returnDescription = dict[@"description"];        
+    return [[[LKAppsManager sharedInstance].inspectingApp invokeMethodWithOid:obj.oid text:text] doNext:^(NSDictionary *dict) {
+        NSString *returnDescription = dict[@"description"];
         LookinObject *returnObject = dict[@"object"];
 
         @strongify(self);
@@ -86,7 +90,7 @@
             LKConsoleDataSourceRowItem *item = [LKConsoleDataSourceRowItem new];
             item.type = LKConsoleDataSourceRowItemTypeSubmit;
             item.normalText = text;
-            item.highlightText = [NSString stringWithFormat:@"<%@: %@>", self.currentObject.shortSelfClassName, self.currentObject.memoryAddress];
+            item.highlightText = [NSString stringWithFormat:@"<%@: %@>", obj.shortSelfClassName, obj.memoryAddress];
             item;
         }) atIndex:(rowItems.count - 1)];
         if (returnDescription.length) {
@@ -98,7 +102,7 @@
             }) atIndex:(rowItems.count - 1)];
         }
         if (returnObject) {
-            NSString *message = [NSString stringWithFormat:@"<%@: %@> => %@", self.currentObject.shortSelfClassName, self.currentObject.memoryAddress, text];
+            NSString *message = [NSString stringWithFormat:@"<%@: %@> => %@", obj.shortSelfClassName, obj.memoryAddress, text];
             [self _addRecentObject:returnObject message:message];
         }
         

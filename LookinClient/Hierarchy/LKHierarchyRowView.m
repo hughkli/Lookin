@@ -70,7 +70,7 @@
     }
     
     self.image = [self _iconWithDisplayItem:displayItem isSelected:displayItem.isSelected];
-    self.indentLevel = displayItem.indentLevel;
+    self.indentLevel = displayItem.indentLevel - self.minIndentLevel;
     [self updateContentWidth];
     [self _updateLabelStringsAndImageViewAlpha];
     [self _updateLabelsFonts];
