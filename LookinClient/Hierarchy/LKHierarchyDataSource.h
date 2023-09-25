@@ -10,7 +10,15 @@
 
 @class LookinHierarchyInfo, LookinDisplayItem, LKPreferenceManager;
 
+typedef NS_ENUM(NSUInteger, LKHierarchyDataSourceState) {
+    LKHierarchyDataSourceStateNormal,
+    LKHierarchyDataSourceStateSearch,
+    LKHierarchyDataSourceStateFocus,
+};
+
 @interface LKHierarchyDataSource : NSObject
+@property(nonatomic, strong, readonly) RACSignal<NSNumber *> *stateSignal;
+@property(nonatomic, assign, readonly) LKHierarchyDataSourceState state;
 
 /**
  如果 keepState 为 YES，则会尽量维持刷新之前的折叠状态和选中态
@@ -86,12 +94,11 @@
 
 #pragma mark - Search
 
-/// 当前是否处于搜索状态
-@property(nonatomic, assign, readonly) BOOL isSearching;
-
 /// 应该在用户输入搜索词时调用该方法，内部会直接更改 flatItems 和 displayingFlatItems 对象
 /// string 不能为 nil 或空字符串
 - (void)searchWithString:(NSString *)string;
+
+- (void)focusThisItem:(LookinDisplayItem *)item;
 
 /// 应该在点击搜索框的关闭按钮时调用该方法，用来恢复搜索前的状态等一系列工作
 - (void)endSearch;

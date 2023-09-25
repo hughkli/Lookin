@@ -17,6 +17,10 @@
 
 - (void)hierarchyView:(LKHierarchyView *)view didDoubleClickItem:(LookinDisplayItem *)item;
 
+- (void)hierarchyView:(LKHierarchyView *)view shouldFocusItem:(LookinDisplayItem *)item;
+
+- (void)cancelFocusedOnHierarchyView:(LKHierarchyView *)view;
+
 - (void)hierarchyView:(LKHierarchyView *)view didHoverAtItem:(LookinDisplayItem *)item;
 
 - (void)hierarchyView:(LKHierarchyView *)view needToExpandItem:(LookinDisplayItem *)item recursively:(BOOL)recursively;
@@ -51,5 +55,8 @@
 
 /// 激活搜索框
 - (void)activateSearchBar;
+
+- (void)activateFocused;
+- (void)deactivateFocused;
 
 @end

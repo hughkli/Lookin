@@ -21,6 +21,9 @@
 #import "LKStaticViewController.h"
 #import "LookinPreviewView.h"
 #import "LKUserActionManager.h"
+#import "LKHierarchyDataSource+KeyDown.h"
+
+extern NSString *const LKAppShowConsoleNotificationName;
 
 @interface LKPreviewController () <NSGestureRecognizerDelegate, LKPreviewStageViewDelegate, NSMenuDelegate>
 
@@ -513,25 +516,11 @@
         self.isKeyingDownSpace = YES;
         return;
     }
-    if (event.keyCode == 125 || event.keyCode == 126) {
-        // 按键盘的 “上” 或 “下” 方向键时移动 hierarchy 里的 select row
-        NSInteger selectedRowIdx = [self.dataSource.displayingFlatItems indexOfObject:self.dataSource.selectedItem];
-        if (selectedRowIdx != NSNotFound) {
-            NSInteger willSelectedRow;
-            if (event.keyCode == 125) {
-                // 下
-                willSelectedRow = selectedRowIdx + 1;
-            } else {
-                // 上
-                willSelectedRow = selectedRowIdx - 1;
-            }
-            LookinDisplayItem *willSelectedItem = [self.dataSource.displayingFlatItems lookin_safeObjectAtIndex:willSelectedRow];
-            if (willSelectedItem) {
-                self.dataSource.selectedItem = willSelectedItem;
-                return;
-            }
-        }
+
+    if ([self.dataSource keyDown:event]) {
+        return;
     }
+
     [super keyDown:event];
 }
 
@@ -617,6 +606,23 @@
     NSMenu *menu = [NSMenu new];
     menu.autoenablesItems = NO;
     menu.delegate = self;
+
+    [menu addItem:({
+        NSMenuItem *item = [NSMenuItem new];
+        item.target = self;
+        item.action = @selector(_handlePrintItem:);
+        item.title = NSLocalizedString(@"PrintItem", nil);
+        item;
+    })];
+    [menu addItem:({
+        NSMenuItem *item = [NSMenuItem new];
+        item.target = self;
+        item.action = @selector(_handleFocusCurrentItem:);
+        item.title = NSLocalizedString(@"FocusItem", nil);
+        item;
+    })];
+    [menu addItem:[NSMenuItem separatorItem]];
+
     [menu addItem:({
         NSMenuItem *item = [NSMenuItem new];
         item.target = self;
@@ -690,6 +696,16 @@
     } else {
         self.isKeyingDownCommand = NO;
     }
+}
+
+- (void)_handlePrintItem:(NSMenuItem *)menuItem {
+    LookinDisplayItem *item = self.rightClickingDisplayItem;
+    [[NSNotificationCenter defaultCenter] postNotificationName:LKAppShowConsoleNotificationName object:item];
+}
+
+- (void)_handleFocusCurrentItem:(NSMenuItem *)menuItem {
+    LookinDisplayItem *item = self.rightClickingDisplayItem;
+    [self.dataSource focusThisItem:item];
 }
 
 - (void)_handleExpandRecursively:(NSMenuItem *)menuItem {

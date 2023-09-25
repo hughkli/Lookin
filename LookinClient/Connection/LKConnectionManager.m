@@ -590,6 +590,12 @@ static NSIndexSet * PushFrameTypeList() {
     }
 
     NSData *data = [NSData dataWithContentsOfDispatchData:payload.dispatchData];
+    NSError *unarchiveError = nil;
+    LookinConnectionResponseAttachment *attachment = [NSKeyedUnarchiver unarchivedObjectOfClass:[NSObject class] fromData:data error:&unarchiveError];
+    if (unarchiveError) {
+        NSLog(@"Error:%@", unarchiveError);
+//        NSAssert(NO, @"");
+    }
     
 	[self _didReceiveDataWithChannel:channel data:data activeRequest:activeRequest];
 }

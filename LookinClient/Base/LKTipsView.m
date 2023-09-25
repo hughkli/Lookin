@@ -12,7 +12,7 @@
 
 @property(nonatomic, strong) LKLabel *titleLabel;
 @property(nonatomic, strong) NSImageView *imageView;
-@property(nonatomic, strong) CALayer *sepLayer;;
+@property(nonatomic, strong) CALayer *sepLayer;
 
 - (NSColor *)buttonTextColor;
 
@@ -154,6 +154,12 @@
 - (void)setButtonImage:(NSImage *)buttonImage {
     _buttonImage = buttonImage;
     [self _updateButton];
+}
+
+-(void)setInternalInsetsRight:(CGFloat)value {
+    _insetRightWithButton = value;
+    _insetRightWithoutButton = value;
+    _imageRight = value;
 }
 
 - (void)_handleButton {
