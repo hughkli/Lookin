@@ -1016,10 +1016,10 @@
 			children = (
 				AAA8C08B21CC17670017A345 /* LKAppsManager.m */,
 				AAA8C08821CC17670017A345 /* LKAppsManager.h */,
+				AAA8C08921CC17670017A345 /* LKConnectionManager.h */,
 				AAA8C08C21CC17670017A345 /* LKConnectionManager.m */,
 				AA7F157622C0F2B9004436AD /* LKConnectionRequest.h */,
 				AA7F157722C0F2B9004436AD /* LKConnectionRequest.m */,
-				AAA8C08921CC17670017A345 /* LKConnectionManager.h */,
 				AAA8C08D21CC17670017A345 /* LKInspectableApp.h */,
 				AAA8C08A21CC17670017A345 /* LKInspectableApp.m */,
 			);
