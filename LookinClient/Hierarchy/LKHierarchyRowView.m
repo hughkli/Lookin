@@ -48,9 +48,6 @@
 }
 
 - (void)setDisplayItem:(LookinDisplayItem *)displayItem {
-    if (_displayItem == displayItem) {
-        return;
-    }
     _displayItem = displayItem;
     
     displayItem.rowViewDelegate = self;
@@ -79,22 +76,15 @@
     }
     
     BOOL isSelected = (self.dataSource.selectedItem == displayItem);
+    self.isSelected = isSelected;
     self.image = [self _iconWithDisplayItem:displayItem isSelected:isSelected];
     self.indentLevel = displayItem.indentLevel - self.minIndentLevel;
     [self updateContentWidth];
+    [self _updateStrikethroughLayerColor];
     [self _updateLabelStringsAndImageViewAlpha];
     [self _updateLabelsFonts];
 
     [self setNeedsLayout:YES];
-}
-
-- (void)setIsSelected:(BOOL)isSelected {
-    [super setIsSelected:isSelected];
-    self.imageView.image = [self _iconWithDisplayItem:self.displayItem isSelected:isSelected];
-    [self _updateEventHandlerButtonColors];
-    [self _updateStrikethroughLayerColor];
-    [self _updateLabelStringsAndImageViewAlpha];
-    [self _updateLabelStringsAndImageViewAlpha];
 }
 
 - (void)setIsHovered:(BOOL)isHovered {
@@ -204,12 +194,12 @@
 #pragma mark - <LookinDisplayItemDelegate>
 
 - (void)displayItem:(LookinDisplayItem *)displayItem propertyDidChange:(LookinDisplayItemProperty)property {
-    if (property == LookinDisplayItemProperty_None || property == LookinDisplayItemProperty_IsSelected) {
+    if (property == LookinDisplayItemProperty_None) {
         self.isSelected = (self.dataSource.selectedItem == displayItem);
     }
     
     if (property == LookinDisplayItemProperty_None || property == LookinDisplayItemProperty_IsHovered) {
-        self.isHovered = displayItem.isHovered;
+        self.isHovered = (self.dataSource.hoveredItem == self.displayItem);
     }
 
     if (property == LookinDisplayItemProperty_None ||

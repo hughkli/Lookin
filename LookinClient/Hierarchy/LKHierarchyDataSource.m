@@ -266,9 +266,10 @@
     if (_hoveredItem == hoveredItem) {
         return;
     }
-    _hoveredItem.isHovered = NO;
+    LookinDisplayItem *prevItem = _hoveredItem;
     _hoveredItem = hoveredItem;
-    _hoveredItem.isHovered = YES;
+    [prevItem notifyHoverChangeToDelegates];
+    [_hoveredItem notifyHoverChangeToDelegates];
 }
 
 - (void)adjustExpansionByIndex:(NSInteger)index referenceDict:(NSDictionary<NSNumber *, NSNumber *> *)referenceDict selectedItem:(LookinDisplayItem **)selectedItem {
