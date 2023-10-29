@@ -128,7 +128,7 @@ NSString *const LKInspectingAppDidEndNotificationName = @"LKInspectingAppDidEndN
         
         NSArray<RACSignal *> *signals = [connectedChannels lookin_map:^id(NSUInteger idx, Lookin_PTChannel *channel) {
             return [[[LKConnectionManager sharedInstance] requestWithType:LookinRequestTypeApp data:params channel:channel] catch:^RACSignal * _Nonnull(NSError * _Nonnull error) {
-                if (error.code == LookinErrCode_ServerVersionTooHigh || error.code == LookinErrCode_ServerVersionTooLow || error.code == LookinErrCode_ServerIsPrivate || error.code == LookinErrCode_ClientIsPrivate) {
+                if (error.code == LookinErrCode_ServerVersionTooHigh || error.code == LookinErrCode_ServerVersionTooLow) {
                     // 这些 Lookin 版本不匹配的错误应该被保留，因为业务需要显示这些错误
                     return [RACSignal return:error];
                 } else {

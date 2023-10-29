@@ -137,12 +137,7 @@
         return;
     }
     if (view.app.serverVersionError) {
-        if (view.app.serverVersionError.code == LookinErrCode_ServerIsPrivate ||
-            view.app.serverVersionError.code == LookinErrCode_ClientIsPrivate ||
-            LOOKIN_CLIENT_IS_EXPERIMENTAL) {
-            // nothing;
-            
-        } else if (view.app.serverVersionError.code == LookinErrCode_ServerVersionTooLow) {
+        if (view.app.serverVersionError.code == LookinErrCode_ServerVersionTooLow) {
             [LKHelper openLookinWebsiteWithPath:@"faq/server-version-too-low/"];
         } else {
             [LKHelper openLookinWebsiteWithPath:@"faq/server-version-too-high/"];

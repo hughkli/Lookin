@@ -181,3 +181,5 @@
 "Job openings…(China)" = "Job openings…(China)";
 "Clear this message" = "Clear this message";
 "No message" = "No message";
+"Your iOS project uses version %@ of the LookinServer SDK, while the latest version online is %@, it is recommended to upgrade." = "Your iOS project uses version %@ of the LookinServer SDK, while the latest version online is %@, it is recommended to upgrade.";
+"Check out version updates on GitHub…" = "Check out version updates on GitHub…";

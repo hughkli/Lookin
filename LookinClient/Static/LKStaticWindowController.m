@@ -29,6 +29,8 @@
 #import "LKHierarchyView.h"
 #import "LKPerformanceReporter.h"
 #import "LKNotificationManager.h"
+#import "LKServerVersionRequestor.h"
+#import "LKVersionComparer.h"
 
 @import AppCenter;
 @import AppCenterAnalytics;
@@ -140,11 +142,7 @@
             [popover close];
             
             if (app.serverVersionError) {
-                if (app.serverVersionError.code == LookinErrCode_ServerIsPrivate ||
-                    app.serverVersionError.code == LookinErrCode_ClientIsPrivate) {
-                    // nothing;
-                    
-                } else if (app.serverVersionError.code == LookinErrCode_ServerVersionTooLow) {
+                if (app.serverVersionError.code == LookinErrCode_ServerVersionTooLow) {
                     [LKHelper openLookinWebsiteWithPath:@"faq/server-version-too-low/"];
                 } else {
                     [LKHelper openLookinWebsiteWithPath:@"faq/server-version-too-high/"];
@@ -323,6 +321,29 @@
         })];
     }
     
+    NSString *userVersion = [[[LKAppsManager.sharedInstance inspectingApp] appInfo] serverReadableVersion];
+    NSString *newestVersion = [[LKServerVersionRequestor shared] query];
+    if (userVersion.length > 0 && newestVersion.length > 0) {
+        BOOL isNew = [LKVersionComparer compareWithNewest:newestVersion user:userVersion];
+        if (!isNew) {
+            [menu addItem:({
+                NSMenuItem *menuItem = [NSMenuItem new];
+                menuItem.image = [NSImage imageNamed:@"Icon_Inspiration_small"];
+                NSString *format = NSLocalizedString(@"Your iOS project uses version %@ of the LookinServer SDK, while the latest version online is %@, it is recommended to upgrade.", nil);
+                menuItem.title = [NSString stringWithFormat:format, userVersion, newestVersion];
+                menuItem;
+            })];
+            [menu addItem:({
+                NSMenuItem *menuItem = [NSMenuItem new];
+                menuItem.image = [[NSImage alloc] initWithSize:NSMakeSize(18, 1)];
+                menuItem.title = NSLocalizedString(@"Check out version updates on GitHub…", nil);
+                menuItem.target = self;
+                menuItem.action = @selector(handleVersionsHistory);
+                menuItem;
+            })];
+        }
+    }
+    
     [NSMenu popUpContextMenu:menu withEvent:[[NSApplication sharedApplication] currentEvent] forView:button];
 }
 
@@ -469,6 +490,10 @@
 
 - (void)handleClearJobsMenuItem {
     [[LKNotificationManager sharedInstance] markHasShowedJobs];
+}
+
+- (void)handleVersionsHistory {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/QMUI/LookinServer/releases"]];
 }
 
 @end

@@ -137,32 +137,10 @@
         self.subtitleLabel.hidden = YES;
         
         if (app.serverVersionError.code == LookinErrCode_ServerVersionTooLow) {
-            if (LOOKIN_CLIENT_IS_EXPERIMENTAL) {
-                // 内部版本的 LookinClient
-                self.errorTitleLabel.stringValue = @"LookinServer 版本过低：请在 Xcode 中按住 \"Option\" 并选择 \"Product\" - \"Clean Build Folder\" 然后重新编译，或者找 hughkli";
-                self.errorSubtitleLabel.hidden = YES;
-            } else {
-                // 现网的 LookinClient
-                self.errorTitleLabel.stringValue = NSLocalizedString(@"The version of LookinServer linked with this iOS App is too low.", nil);
-            }
+            self.errorTitleLabel.stringValue = NSLocalizedString(@"The version of LookinServer linked with this iOS App is too low.", nil);
             
         } else if (app.serverVersionError.code == LookinErrCode_ServerVersionTooHigh) {
-            if (LOOKIN_CLIENT_IS_EXPERIMENTAL) {
-                // 内部版本的 LookinClient
-                self.errorTitleLabel.stringValue = @"Lookin 客户端版本过低，请使用微信读书主干项目文件夹下最新的 Lookin Exprimental 查看该 app，或者找 hughkli";
-                self.errorSubtitleLabel.hidden = YES;
-            } else {
-                // 现网的 LookinClient
-                self.errorTitleLabel.stringValue = NSLocalizedString(@"Unable to inspect this iOS App. Current version of Lookin app is too low.", nil);
-            }
-            
-        } else if (app.serverVersionError.code == LookinErrCode_ServerIsPrivate) {
-            self.errorTitleLabel.stringValue = @"请使用微信读书主干项目文件夹下最新的 Lookin Exprimental 而非现网版本的 Lookin 查看该 App，或者找 hughkli";
-            self.errorSubtitleLabel.hidden = YES;
-            
-        } else if (app.serverVersionError.code == LookinErrCode_ClientIsPrivate) {
-            self.errorTitleLabel.stringValue = @"请使用现网版本的 Lookin 查看该 App，或者找 hughkli";
-            self.errorSubtitleLabel.hidden = YES;
+            self.errorTitleLabel.stringValue = NSLocalizedString(@"Unable to inspect this iOS App. Current version of Lookin app is too low.", nil);
             
         } else {
             self.errorTitleLabel.stringValue = @"Unknown Error";

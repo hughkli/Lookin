@@ -18,6 +18,8 @@
 		A26EF69927F89F83005A9E4E /* ShortCocoa+UIToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF69127F89F83005A9E4E /* ShortCocoa+UIToolkit.m */; };
 		A2C71CBE282165DB0056D991 /* LKWindowToolbarAppButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A2C71CBD282165DB0056D991 /* LKWindowToolbarAppButton.m */; };
 		A77AA17B2AEED1B8006A7BF4 /* LKNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17A2AEED1B8006A7BF4 /* LKNotificationManager.m */; };
+		A77AA17E2AEED988006A7BF4 /* LKServerVersionRequestor.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17D2AEED988006A7BF4 /* LKServerVersionRequestor.m */; };
+		A77AA1822AEEE095006A7BF4 /* LKVersionComparer.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA1812AEEE095006A7BF4 /* LKVersionComparer.m */; };
 		AA01EF2722DD0D26002A2E06 /* LKHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AA01EF2522DD0D26002A2E06 /* LKHelper.m */; };
 		AA049A1721E61B85008C6366 /* LKMenuPopoverSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA049A1621E61B85008C6366 /* LKMenuPopoverSettingController.m */; };
 		AA05CCD4221ED5CA0086CDD1 /* LKDashboardAttributeNumberInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05CCD3221ED5CA0086CDD1 /* LKDashboardAttributeNumberInputView.m */; };
@@ -217,6 +219,10 @@
 		A2C71CBD282165DB0056D991 /* LKWindowToolbarAppButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKWindowToolbarAppButton.m; sourceTree = "<group>"; };
 		A77AA1792AEED1B8006A7BF4 /* LKNotificationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKNotificationManager.h; sourceTree = "<group>"; };
 		A77AA17A2AEED1B8006A7BF4 /* LKNotificationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKNotificationManager.m; sourceTree = "<group>"; };
+		A77AA17C2AEED988006A7BF4 /* LKServerVersionRequestor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKServerVersionRequestor.h; sourceTree = "<group>"; };
+		A77AA17D2AEED988006A7BF4 /* LKServerVersionRequestor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKServerVersionRequestor.m; sourceTree = "<group>"; };
+		A77AA1802AEEE095006A7BF4 /* LKVersionComparer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKVersionComparer.h; sourceTree = "<group>"; };
+		A77AA1812AEEE095006A7BF4 /* LKVersionComparer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKVersionComparer.m; sourceTree = "<group>"; };
 		AA01EF2522DD0D26002A2E06 /* LKHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKHelper.m; sourceTree = "<group>"; };
 		AA01EF2622DD0D26002A2E06 /* LKHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKHelper.h; sourceTree = "<group>"; };
 		AA049A1521E61B85008C6366 /* LKMenuPopoverSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMenuPopoverSettingController.h; sourceTree = "<group>"; };
@@ -551,6 +557,17 @@
 			path = ShortCocoa;
 			sourceTree = "<group>";
 		};
+		A77AA17F2AEED98B006A7BF4 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				A77AA17C2AEED988006A7BF4 /* LKServerVersionRequestor.h */,
+				A77AA17D2AEED988006A7BF4 /* LKServerVersionRequestor.m */,
+				A77AA1802AEEE095006A7BF4 /* LKVersionComparer.h */,
+				A77AA1812AEEE095006A7BF4 /* LKVersionComparer.m */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		AA05CCD1221ED50B0086CDD1 /* AttributeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -709,6 +726,7 @@
 				AA48F2A621CC0CA60032EC2C /* LookinClient_Info.plist */,
 				AA48F2A121CC0CA60032EC2C /* Assets.xcassets */,
 				AAA8C0C021CC17670017A345 /* LookinClient_PrefixHeader.pch */,
+				A77AA17F2AEED98B006A7BF4 /* Other */,
 				AA77A32C22CE0E7100C73721 /* lookin_icon.icns */,
 				A26EF68527F89F83005A9E4E /* ShortCocoa */,
 				AA39054E23694C3800CA7646 /* About */,
@@ -1213,6 +1231,7 @@
 				AAA8C15C21CC17680017A345 /* LKStaticWindowController.m in Sources */,
 				A2C71CBE282165DB0056D991 /* LKWindowToolbarAppButton.m in Sources */,
 				AA98EC96222703CC0083348D /* LKPreferenceSwitchView.m in Sources */,
+				A77AA17E2AEED988006A7BF4 /* LKServerVersionRequestor.m in Sources */,
 				AA1BE2502237D6A700DB38E6 /* LKTextControl.m in Sources */,
 				AAA8C13421CC17680017A345 /* NSView+LookinClient.m in Sources */,
 				AACBACB222AEA6EA00A8F89D /* LKDashboardAttributeInsetsView.m in Sources */,
@@ -1235,6 +1254,7 @@
 				A26EF69527F89F83005A9E4E /* ShortCocoaCore.m in Sources */,
 				A213803D2821886B009BFE60 /* LKPerformanceReporter.m in Sources */,
 				AA66C5A1231924BD00085C76 /* LKDashboardAccessoryWindowController.m in Sources */,
+				A77AA1822AEEE095006A7BF4 /* LKVersionComparer.m in Sources */,
 				AA50753D22A27EAD00D2A5AC /* LKConsoleDataSourceRowItem.m in Sources */,
 				AA98EC9C22270B800083348D /* LKPreferencePopupView.m in Sources */,
 				D4E1FD66236169130070DFB8 /* LKMeasureResultLineData.m in Sources */,
