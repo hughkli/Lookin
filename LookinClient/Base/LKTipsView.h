@@ -35,6 +35,14 @@
 
 @end
 
+@interface LKYellowTipsView : LKTipsView
+
+- (void)startAnimation;
+- (void)endAnimation;
+
+@end
+
+
 @interface LKRedTipsView : LKTipsView
 
 - (void)startAnimation;

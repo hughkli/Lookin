@@ -36,8 +36,8 @@
 
 "Expand recursively" = "全部展开";
 "Collapse children" = "收起子图层";
-"Focus" = "聚焦此图层";
-"Print in console" = "在控制台中打印该图层";
+"Focus" = "聚焦";
+"Print" = "打印";
 "Hide screenshot this time" = "隐藏图像（仅本次）";
 "Hide screenshot forever…" = "永久隐藏图像…";
 "Show screenshot" = "显示该图层的图像";
@@ -72,6 +72,7 @@
 "Reconnecting…" = "连接已断开 自动重连中…";
 "Change App" = "切换 App";
 "Image is too large to be displayed." = "尺寸过大，无法传输和显示该图层图像";
+"Currently in Focus mode" = "当前处于聚焦模式";
 "The screenshot of selected item is not displayed." = "已隐藏该图层的图像";
 "The screenshot is not displayed due to the config in iOS App." = "由于 iOS 端的项目配置，已隐藏该图层的图像";
 "Display" = "取消隐藏";
@@ -175,3 +176,4 @@
 "After modifying successfully by Lookin, the value seems to be recovered by the code in your iOS app. For example, modifying \"frame\" of a view may trigger \"layoutSubviews\", and \"layoutSubviews\" may modify the value again." = "该属性值被 Lookin 成功修改之后，似乎又触发了你的 iOS app 里的相关业务逻辑把值改回去了。比如修改某个 view 的 frame 可能触发 layoutSubviews，而 layoutSubviews 又恢复了原本的 frame 值。";
 "Version" = "当前版本";
 "Focused" = "聚焦";
+"Exit" = "退出";

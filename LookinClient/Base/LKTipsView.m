@@ -194,6 +194,42 @@
 
 @end
 
+@implementation LKYellowTipsView
+
+- (void)startAnimation {
+    CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+    if ([self.effectiveAppearance lk_isDarkMode]) {
+        anim.fromValue = (id)[NSColor.systemOrangeColor colorWithAlphaComponent:0.7].CGColor;
+        anim.toValue = (id)[NSColor.systemOrangeColor colorWithAlphaComponent:0.64].CGColor;
+    } else {
+        anim.fromValue = (id)[NSColor.systemOrangeColor colorWithAlphaComponent:0.98].CGColor;
+        anim.toValue = (id)[NSColor.systemOrangeColor colorWithAlphaComponent:0.92].CGColor;
+    }
+    anim.duration = .8;
+    anim.repeatCount = HUGE_VALF;
+    anim.autoreverses = YES;
+    [self.layer removeAllAnimations];
+    [self.layer addAnimation:anim forKey:nil];
+}
+
+- (void)endAnimation {
+    [self.layer removeAllAnimations];
+}
+
+- (void)updateColors {
+    [super updateColors];
+    self.titleLabel.textColor = [NSColor whiteColor];
+    self.layer.borderColor = [NSColor clearColor].CGColor;
+    self.sepLayer.backgroundColor = LookinColorRGBAMake(255, 255, 255, .5).CGColor;
+}
+
+- (NSColor *)buttonTextColor {
+    return [NSColor whiteColor];
+}
+
+@end
+
+
 @implementation LKRedTipsView
 
 - (void)startAnimation {

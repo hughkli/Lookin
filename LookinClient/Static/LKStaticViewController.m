@@ -41,6 +41,7 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
 @property(nonatomic, strong) LKTipsView *userConfigNoPreviewTipsView;
 @property(nonatomic, strong) LKTipsView *noPreviewTipView;
 @property(nonatomic, strong) LKTipsView *tutorialTipView;
+@property(nonatomic, strong) LKYellowTipsView *focusTipView;
 
 @property(nonatomic, strong) LKDashboardViewController *dashboardController;
 @property(nonatomic, strong) LKStaticHierarchyController *hierarchyController;
@@ -110,6 +111,15 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     self.tooLargeToSyncScreenshotTipsView.hidden = YES;
     [self.view addSubview:self.tooLargeToSyncScreenshotTipsView];
     
+    self.focusTipView = [LKYellowTipsView new];
+    self.focusTipView.image = NSImageMake(@"icon_info");
+    self.focusTipView.title = NSLocalizedString(@"Currently in Focus mode", nil);
+    self.focusTipView.hidden = YES;
+    self.focusTipView.buttonText = NSLocalizedString(@"Exit", nil);
+    self.focusTipView.target = self;
+    self.focusTipView.clickAction = @selector(_handleCancelFocusTipView);
+    [self.view addSubview:self.focusTipView];
+    
     self.noPreviewTipView = [LKTipsView new];
     self.noPreviewTipView.image = NSImageMake(@"icon_hide");
     self.noPreviewTipView.title = NSLocalizedString(@"The screenshot of selected item is not displayed.", nil);
@@ -167,6 +177,19 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
         }
     }];
     
+    [RACObserve(dataSource, state) subscribeNext:^(NSNumber * _Nullable x) {
+        @strongify(self);
+        LKHierarchyDataSourceState state = x.unsignedIntegerValue;
+        BOOL isFocus = (state == LKHierarchyDataSourceStateFocus);
+        self.focusTipView.hidden = !isFocus;
+        if (isFocus) {
+            [self.focusTipView startAnimation];
+        } else {
+            [self.focusTipView endAnimation];
+        }
+        [self.view setNeedsLayout:YES];
+    }];
+    
     [RACObserve([LKAppsManager sharedInstance], inspectingApp) subscribeNext:^(LKInspectableApp *app) {
         @strongify(self);
         if (app) {
@@ -213,7 +236,7 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     $(self.progressView).fullWidth.height(3).y(windowTitleHeight);
 
     __block CGFloat tipsY = windowTitleHeight + 10;
-    [$(self.connectionTipsView, self.imageSyncTipsView, self.tooLargeToSyncScreenshotTipsView, self.noPreviewTipView, self.userConfigNoPreviewTipsView, self.tutorialTipView).visibles.array enumerateObjectsUsingBlock:^(LKTipsView *tipsView, NSUInteger idx, BOOL * _Nonnull stop) {
+    [$(self.connectionTipsView, self.imageSyncTipsView, self.tooLargeToSyncScreenshotTipsView, self.noPreviewTipView, self.focusTipView, self.userConfigNoPreviewTipsView, self.tutorialTipView).visibles.array enumerateObjectsUsingBlock:^(LKTipsView *tipsView, NSUInteger idx, BOOL * _Nonnull stop) {
         CGFloat midX = self.hierarchyController.view.$width + (self.viewsPreviewController.view.$width - DashboardViewWidth) / 2.0;
         $(tipsView).sizeToFit.y(tipsY).midX(midX);
         tipsY = tipsView.$maxY + 5;
@@ -383,6 +406,10 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
             TutorialMng.hasAlreadyShowedTipsThisLaunch = YES;
         }];
     }
+}
+
+- (void)_handleCancelFocusTipView {
+    
 }
 
 - (void)_handleUserConfigNoPreviewTipView {

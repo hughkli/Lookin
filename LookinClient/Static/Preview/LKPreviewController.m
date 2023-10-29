@@ -87,7 +87,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
             [self.previewView renderWithDisplayItems:validItems discardCache:YES];
         }];
         
-        [self.dataSource.didReloadFlatItemsWithSearch subscribeNext:^(id  _Nullable x) {
+        [self.dataSource.didReloadFlatItemsWithSearchOrFocus subscribeNext:^(id  _Nullable x) {
             @strongify(self);
             NSArray<LookinDisplayItem *> *validItems = [dataSource.flatItems lookin_filter:^BOOL(LookinDisplayItem *obj) {
                 return !obj.inNoPreviewHierarchy;
@@ -611,14 +611,14 @@ extern NSString *const LKAppShowConsoleNotificationName;
         NSMenuItem *item = [NSMenuItem new];
         item.target = self;
         item.action = @selector(_handlePrintItem:);
-        item.title = NSLocalizedString(@"Print in console", nil);
+        item.title = NSLocalizedString(@"Print", nil);
         item;
     })];
     [menu addItem:({
         NSMenuItem *item = [NSMenuItem new];
         item.target = self;
         item.action = @selector(_handleFocusCurrentItem:);
-        item.title = NSLocalizedString(@"FocusItem", nil);
+        item.title = NSLocalizedString(@"Focus", nil);
         item;
     })];
     [menu addItem:[NSMenuItem separatorItem]];

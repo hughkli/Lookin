@@ -3,7 +3,6 @@
 "Select App" = "Select App";
 "View" = "View";
 "Zoom" = "Zoom";
-"Method Trace" = "Method Trace";
 "Console" = "Console";
 "Free Rotation" = "Free Rotation";
 
@@ -37,8 +36,8 @@
 
 "Expand recursively" = "Expand recursively";
 "Collapse children" = "Collapse children";
-"FocusItem" = "Focus this item";
-"Print in console" = "Print in console";
+"Focus" = "Focus";
+"Print" = "Print";
 "Hide screenshot this time" = "Hide screenshot this time";
 "Hide screenshot forever…" = "Hide screenshot forever…";
 "Show screenshot" = "Show screenshot";
@@ -73,6 +72,7 @@
 "Reconnecting…" = "Reconnecting…";
 "Change App" = "Change App";
 "Image is too large to be displayed." = "Image is too large to be displayed.";
+"Currently in Focus mode" = "Currently in Focus mode";
 "The screenshot of selected item is not displayed." = "The screenshot of selected item is not displayed.";
 "The screenshot is not displayed due to the config in iOS App." = "The screenshot is not displayed due to the config in iOS App.";
 "Details" = "Details";
@@ -103,7 +103,6 @@
 "File Size: %.2f M" = "File Size: %.2f M";
 "Failed to show framework in Finder" = "Failed to show framework in Finder";
 "You can download framework from the url below:" = "You can download framework from the url below:";
-"Can not use Method Trace at this time." = "Can not use Method Trace at this time.";
 "Lost connection with the iOS app." = "Lost connection with the iOS app.";
 "Lookin doesn't support adding \"-(void)dealloc\" method." = "Lookin doesn't support adding \"-(void)dealloc\" method.";
 
@@ -177,3 +176,4 @@
 "After modifying successfully by Lookin, the value seems to be recovered by the code in your iOS app. For example, modifying \"frame\" of a view may trigger \"layoutSubviews\", and \"layoutSubviews\" may modify the value again." = "After modifying successfully by Lookin, the value seems to be recovered by the code in your iOS app. For example, modifying \"frame\" of a view may trigger \"layoutSubviews\", and \"layoutSubviews\" may modify the value again.";
 "Version" = "Version";
 "Focused" = "Focused";
+"Exit" = "Exit";

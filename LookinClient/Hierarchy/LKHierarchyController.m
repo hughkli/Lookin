@@ -42,12 +42,12 @@
             [self.hierarchyView updateGuidesWithHoveredItem:x];
         }];
         
-        [[[self.dataSource.stateSignal filter:^BOOL(NSNumber * _Nullable value) {
-            LKHierarchyDataSourceState state = value.unsignedIntegerValue;
-            return state == LKHierarchyDataSourceStateFocus;
-        }] deliverOnMainThread] subscribeNext:^(id  _Nullable x) {
+        [[RACObserve(self.dataSource, state) distinctUntilChanged] subscribeNext:^(NSNumber * _Nullable x) {
             @strongify(self);
-            [self.hierarchyView activateFocused];
+            LKHierarchyDataSourceState state = x.unsignedIntegerValue;
+            if (state == LKHierarchyDataSourceStateFocus) {
+                [self.hierarchyView activateFocused];
+            }
         }];
     }
     return self;
@@ -165,17 +165,6 @@
 - (void)hierarchyView:(LKHierarchyView *)view shouldFocusItem:(LookinDisplayItem *)item {
     if (item) {
         [self.dataSource focusThisItem:item];
-    }
-}
-
-- (void)cancelFocusedOnHierarchyView:(LKHierarchyView *)view {
-    [self.hierarchyView deactivateFocused];
-    [self.dataSource endSearch];
-    if (self.dataSource.selectedItem) {
-        // 结束搜索，滚动到选中的 item
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.hierarchyView scrollToMakeItemVisible:self.dataSource.selectedItem];
-        });
     }
 }
 

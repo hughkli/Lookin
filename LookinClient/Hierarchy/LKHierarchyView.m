@@ -32,8 +32,6 @@ extern NSString *const LKAppShowConsoleNotificationName;
 
 @property(nonatomic, strong) LKLabel *emptyDataLabel;
 
-@property(nonatomic, strong) LKTipsView *focusView;
-
 @property(nonatomic, assign) NSInteger minIndentLevel;
 
 @end
@@ -47,17 +45,6 @@ extern NSString *const LKAppShowConsoleNotificationName;
         self.backgroundEffectView.blendingMode = NSVisualEffectBlendingModeBehindWindow;
         self.backgroundEffectView.state = NSVisualEffectStateActive;
         [self addSubview:self.backgroundEffectView];
-
-        _focusView = [LKTipsView new];
-        _focusView.hidden = true;
-        _focusView.title = NSLocalizedString(@"Focused", nil);
-        _focusView.buttonImage = NSImageMake(@"icon_close");
-        _focusView.backgroundColor = [NSColor clearColor];
-        _focusView.button.imagePosition = NSImageTrailing;
-        _focusView.target = self;
-        _focusView.clickAction = @selector(_handleCancelFocus);
-        [_focusView setInternalInsetsRight:12];
-        [self addSubview:self.focusView];
 
         _tableView = [LKTableView new];
         self.tableView.adjustsSelectionAutomatically = NO;
@@ -119,17 +106,8 @@ extern NSString *const LKAppShowConsoleNotificationName;
     $(self.backgroundEffectView).fullFrame;
     $(self.searchTextFieldView).fullWidth.height(25).bottom(0);
 
-    if (self.focusView.hidden) {
-        $(self.tableView).fullFrame.y(self.searchTextFieldView.$y);
-        $(self.tableView).fullFrame.toMaxY(self.searchTextFieldView.$y);
-    } else {
-        if (@available(macOS 11.0, *)) {
-            $(self.focusView).fullWidth.height(25).y(self.safeAreaInsets.top);
-        } else {
-            $(self.focusView).fullWidth.height(25).y(52);
-        }
-        $(self.tableView).fullFrame.y(self.focusView.$maxY).toMaxY(self.searchTextFieldView.$y);
-    }
+    $(self.tableView).fullFrame.y(self.searchTextFieldView.$y);
+    $(self.tableView).fullFrame.toMaxY(self.searchTextFieldView.$y);
 
     $(self.guidesShapeLayer).frame(CGRectZero);
     
@@ -189,20 +167,6 @@ extern NSString *const LKAppShowConsoleNotificationName;
 
 - (void)activateSearchBar {
     [self.searchTextFieldView.textField becomeFirstResponder];
-}
-
-- (void)activateFocused {
-    self.focusView.hidden = false;
-
-    self.needsLayout = true;
-    [self layoutSubtreeIfNeeded];
-}
-
-- (void)deactivateFocused {
-    self.focusView.hidden = true;
-
-    self.needsLayout = true;
-    [self layoutSubtreeIfNeeded];
 }
 
 #pragma mark - NSTableView
@@ -287,18 +251,18 @@ extern NSString *const LKAppShowConsoleNotificationName;
     [menu addItem:({
         NSMenuItem *item = [NSMenuItem new];
         item.target = self;
-        item.action = @selector(_handlePrintItem:);
-        item.title = NSLocalizedString(@"Print in console", nil);
+        item.action = @selector(_handleFocusCurrentItem:);
+        item.title = NSLocalizedString(@"Focus", nil);
         item;
     })];
-
     [menu addItem:({
         NSMenuItem *item = [NSMenuItem new];
         item.target = self;
-        item.action = @selector(_handleFocusCurrentItem:);
-        item.title = NSLocalizedString(@"FocusItem", nil);
+        item.action = @selector(_handlePrintItem:);
+        item.title = NSLocalizedString(@"Print", nil);
         item;
     })];
+
     [menu addItem:[NSMenuItem separatorItem]];
 
     if (displayItem.isExpandable) {
@@ -515,12 +479,6 @@ extern NSString *const LKAppShowConsoleNotificationName;
 
 - (void)_handleHideScreenshotForever {
     [LKHelper openCustomConfigWebsite];
-}
-
-- (void)_handleCancelFocus {
-    if ([self.delegate respondsToSelector:@selector(cancelFocusedOnHierarchyView:)]) {
-        [self.delegate cancelFocusedOnHierarchyView:self];
-    }
 }
 
 #pragma mark - Guides
