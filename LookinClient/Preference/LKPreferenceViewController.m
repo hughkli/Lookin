@@ -11,6 +11,7 @@
 #import "LKPreferenceSwitchView.h"
 #import "LKPreferencePopupView.h"
 #import "LKNavigationManager.h"
+#import "LKNotificationManager.h"
 
 @interface LKPreferenceViewController ()
 
@@ -100,6 +101,10 @@
     manager.enableReport = YES;
     manager.rgbaFormat = YES;
     [self renderFromPreferenceManager];
+    
+#if DEBUG
+    [[LKNotificationManager sharedInstance] reset];
+#endif
 }
 
 - (void)_handleDebugButton {

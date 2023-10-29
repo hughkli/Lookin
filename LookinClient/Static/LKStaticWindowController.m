@@ -28,6 +28,8 @@
 #import "LookinPreviewView.h"
 #import "LKHierarchyView.h"
 #import "LKPerformanceReporter.h"
+#import "LKNotificationManager.h"
+
 @import AppCenter;
 @import AppCenterAnalytics;
 
@@ -292,23 +294,35 @@
 
 - (void)_handleMessage:(NSButton *)button {
     NSMenu *menu = [NSMenu new];
-    [menu addItem:({
-        NSMenuItem *menuItem = [NSMenuItem new];
-        menuItem.image = [NSImage imageNamed:@"Icon_Inspiration_small"];
-        menuItem.title = NSLocalizedString(@"Job openings…(China)", nil);
-        menuItem.target = self;
-        menuItem.action = @selector(handleJobsMenuItem);
-        menuItem;
-    })];
-    [menu addItem:({
-        NSMenuItem *menuItem = [NSMenuItem new];
-        menuItem.image = [[NSImage alloc] initWithSize:NSMakeSize(18, 1)];
-        menuItem.title = NSLocalizedString(@"Clear this message", nil);
-        menuItem.target = self;
-        menuItem.action = @selector(handleClearJobsMenuItem);
-        menuItem;
-    })];
-    [menu addItem:[NSMenuItem separatorItem]];
+    
+    if ([[LKNotificationManager sharedInstance] queryIfShouldShowJobs]) {
+        [menu addItem:({
+            NSMenuItem *menuItem = [NSMenuItem new];
+            menuItem.image = [NSImage imageNamed:@"Icon_Inspiration_small"];
+            menuItem.title = NSLocalizedString(@"Job openings…(China)", nil);
+            menuItem.target = self;
+            menuItem.action = @selector(handleJobsMenuItem);
+            menuItem;
+        })];
+        [menu addItem:({
+            NSMenuItem *menuItem = [NSMenuItem new];
+            menuItem.image = [[NSImage alloc] initWithSize:NSMakeSize(18, 1)];
+            menuItem.title = NSLocalizedString(@"Clear this message", nil);
+            menuItem.target = self;
+            menuItem.action = @selector(handleClearJobsMenuItem);
+            menuItem;
+        })];
+        [menu addItem:[NSMenuItem separatorItem]];
+    }
+    
+    if (menu.numberOfItems == 0) {
+        [menu addItem:({
+            NSMenuItem *menuItem = [NSMenuItem new];
+            menuItem.title = NSLocalizedString(@"No message", nil);
+            menuItem;
+        })];
+    }
+    
     [NSMenu popUpContextMenu:menu withEvent:[[NSApplication sharedApplication] currentEvent] forView:button];
 }
 
@@ -454,7 +468,7 @@
 }
 
 - (void)handleClearJobsMenuItem {
-    
+    [[LKNotificationManager sharedInstance] markHasShowedJobs];
 }
 
 @end
