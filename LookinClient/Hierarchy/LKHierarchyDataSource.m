@@ -863,6 +863,18 @@
         menuItem.tag = self.customColorMenuItemTag;
         menuItem;
     })];
+    [menu addItem:[NSMenuItem separatorItem]];
+    [menu addItem:({
+        NSMenuItem *menuItem = [NSMenuItem new];
+        menuItem.image = [[NSImage alloc] initWithSize:NSMakeSize(1, 22)];
+        if (rgbaFormat) {
+            menuItem.title = NSLocalizedString(@"Switch color format to HEX", nil);
+        } else {
+            menuItem.title = NSLocalizedString(@"Switch color format to RGBA", nil);
+        }
+        menuItem.tag = self.toggleColorFormatMenuItemTag;
+        menuItem;
+    })];
     
     return menu;
 }
@@ -878,6 +890,10 @@
 
 - (NSInteger)customColorMenuItemTag {
     return 10;
+}
+
+- (NSInteger)toggleColorFormatMenuItemTag {
+    return 11;
 }
 
 #pragma mark - Others

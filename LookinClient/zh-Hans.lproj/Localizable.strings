@@ -148,6 +148,8 @@
 "Click to invoke methods below and get the return value." = "可点击调用下列方法并获取返回值";
 
 "Other…" = "自定义颜色…";
+"Switch color format to RGBA" = "切换颜色格式为 RGBA";
+"Switch color format to HEX" = "切换颜色格式为 HEX";
 "The layout of selected view is not affected by this constraint." = "当前 view 的布局未使用该约束";
 "Open Image with Preview…" = "使用“预览”打开该图片…";
 "The feature is not available in current mode." = "无法在当前模式下使用该功能";

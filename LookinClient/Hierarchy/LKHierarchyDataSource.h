@@ -60,6 +60,8 @@ typedef NS_ENUM(NSUInteger, LKHierarchyDataSourceState) {
 @property(nonatomic, strong, readonly) NSMenu *selectColorMenu;
 /// 该 tag 标示这个 menuItem 是“自定义……”那个选项
 @property(nonatomic, assign, readonly) NSInteger customColorMenuItemTag;
+/// The menu tag of "switch color format"
+@property(nonatomic, assign, readonly) NSInteger toggleColorFormatMenuItemTag;
 
 /// 将 item 折叠起来，如果该 item 没有 subitems 或已经被折叠，则该方法不起任何作用
 - (void)collapseItem:(LookinDisplayItem *)item;
