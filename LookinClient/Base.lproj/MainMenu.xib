@@ -188,12 +188,6 @@
                             <menuItem title="Official Website" tag="52" id="K9e-H9-X9Y">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="How to reduce the reload time" tag="69" id="lmN-eu-pZ4">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                            <menuItem title="Profile of the Developer" tag="56" id="hYy-NB-PWb">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
                             <menuItem title="Source Code at GitHub" tag="57" id="hmd-Lc-rdV">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Source Code at GitHub" id="q1h-qk-yOs">
@@ -230,6 +224,10 @@
                                         </menuItem>
                                     </items>
                                 </menu>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="LiB-JU-B5h"/>
+                            <menuItem title="Job Openings (China)" tag="69" id="AS1-6n-CwY">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
                     </menu>

@@ -41,7 +41,6 @@ static NSUInteger const kTag_CocoaPods = 51;
 static NSUInteger const kTag_ShowWebsite = 52;
 static NSUInteger const kTag_ShowConfig = 53;
 static NSUInteger const kTag_ShowLookiniOS = 54;
-static NSUInteger const kTag_DeveloperProfile = 56;
 
 static NSUInteger const kTag_GitHub = 57;
 static NSUInteger const kTag_LookinClientGitHub = 58;
@@ -55,7 +54,7 @@ static NSUInteger const kTag_Weibo = 64;
 static NSUInteger const kTag_CopyPod = 66;
 static NSUInteger const kTag_CopySPM = 67;
 static NSUInteger const kTag_MoreIntegrationGuide = 68;
-static NSUInteger const kTag_ReduceReloadTime = 69;
+static NSUInteger const kTag_Jobs = 69;
 
 @interface LKAppMenuManager ()
 
@@ -152,10 +151,6 @@ static NSUInteger const kTag_ReduceReloadTime = 69;
     menuItem_showLookiniOS.target = self;
     menuItem_showLookiniOS.action = @selector(_handleShowLookiniOS);
     
-    NSMenuItem *menuItem_viewDeveloperProfile = [menu_help itemWithTag:kTag_DeveloperProfile];
-    menuItem_viewDeveloperProfile.target = self;
-    menuItem_viewDeveloperProfile.action = @selector(_handleShowDeveloperProfile);
-    
     NSMenu *sourceCodeMenu = [menu_help itemWithTag:kTag_GitHub].submenu;
     {
         NSMenuItem *item = [sourceCodeMenu itemWithTag:kTag_LookinClientGitHub];
@@ -202,9 +197,9 @@ static NSUInteger const kTag_ReduceReloadTime = 69;
         item.action = @selector(_handleOpenMoreIntegrationGuide);
     }
     {
-        NSMenuItem *item = [menu_help itemWithTag:kTag_ReduceReloadTime];
+        NSMenuItem *item = [menu_help itemWithTag:kTag_Jobs];
         item.target = self;
-        item.action = @selector(_handleCustomUserConfig);
+        item.action = @selector(_handleJobs);
     }
     
     NSArray *itemArray = [menu_file.itemArray arrayByAddingObjectsFromArray:menu_view.itemArray];
@@ -290,10 +285,6 @@ static NSUInteger const kTag_ReduceReloadTime = 69;
     [LKHelper openLookinWebsiteWithPath:@"faq/lookin-ios/"];
 }
 
-- (void)_handleShowDeveloperProfile {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://www.linkedin.com/in/likai123"]];
-}
-
 - (void)_handleShowLookinClientGithub {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/hughkli/Lookin"]];
 }
@@ -338,8 +329,8 @@ static NSUInteger const kTag_ReduceReloadTime = 69;
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/QMUI/LookinServer/blob/master/README.md"]];
 }
 
-- (void)_handleCustomUserConfig {
-    [LKHelper openCustomConfigWebsite];
+- (void)_handleJobs {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://bytedance.feishu.cn/docx/SAcgdoQuAouyXAxAqy8cmrT2n4b"]];
 }
 
 - (void)_handleCheckUpdates {
