@@ -288,7 +288,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
         NSMenuItem *item = [NSMenuItem new];
         item.target = self;
         item.action = @selector(_handlePrintItem:);
-        item.title = NSLocalizedString(@"PrintItem", nil);
+        item.title = NSLocalizedString(@"Print in console", nil);
         item;
     })];
 

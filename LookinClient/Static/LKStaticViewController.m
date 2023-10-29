@@ -228,9 +228,17 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     @weakify(self);
     [[NSNotificationCenter.defaultCenter rac_addObserverForName:LKAppShowConsoleNotificationName object:nil] subscribeNext:^(NSNotification * _Nullable x) {
         @strongify(self);
+        BOOL isFirstTimeToShowConsole = (self.consoleController == nil);
         self.showConsole = true;
         LookinDisplayItem *item = x.object;
-        [self.consoleController submitWithObj:item.viewObject text:@"self"];
+        if (isFirstTimeToShowConsole) {
+            // give a little time to initialize console
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.consoleController submitWithObj:item.viewObject text:@"self"];
+            });
+        } else {
+            [self.consoleController submitWithObj:item.viewObject text:@"self"];
+        }
     }];
 }
 
