@@ -638,6 +638,7 @@
     [self buildDisplayingFlatItems];
 }
 
+// 有可能从 normal 状态或 search 状态进入该状态
 - (void)focusDisplayItem:(LookinDisplayItem *)item {
     if (!item) {
         NSAssert(NO, @"");
@@ -645,12 +646,16 @@
     }
     self.selectedItem = nil;
 
-    if (self.state != LKHierarchyDataSourceStateFocus) {
+    if (self.state == LKHierarchyDataSourceStateNormal) {
         [self.rawFlatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             obj.isExpandedBeforeSearchOrFocus = obj.isExpanded;
         }];
-        self.state = LKHierarchyDataSourceStateFocus;
+    } else if (self.state == LKHierarchyDataSourceStateSearch) {
+        [self.rawFlatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            obj.isInSearch = NO;
+        }];
     }
+    self.state = LKHierarchyDataSourceStateFocus;
 
     NSMutableArray *newFlatItems = [NSMutableArray array];
     [item enumerateSelfAndChildren:^(LookinDisplayItem *currItem) {

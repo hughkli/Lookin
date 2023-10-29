@@ -116,6 +116,18 @@ extern NSString *const LKAppShowConsoleNotificationName;
             @strongify(self);
             [self _bringGuidesLayerToFront];
         }];
+        [RACObserve(dataSource, state) subscribeNext:^(NSNumber *x) {
+            @strongify(self);
+            // 隐藏搜索功能，避免同时处于 focus 和 search 状态，从而避免状态维护太过复杂
+            LKHierarchyDataSourceState state = x.unsignedIntegerValue;
+            BOOL isFocus = (state == LKHierarchyDataSourceStateFocus);
+            self.searchTextFieldView.hidden = isFocus;
+            
+            if (isFocus && self.searchTextFieldView.textField.stringValue.length > 0) {
+                self.searchTextFieldView.textField.stringValue = @"";
+                [self.window makeFirstResponder:nil];
+            }
+        }];
         
         [self updateColors];
     }
