@@ -1,6 +1,6 @@
 use_frameworks!
 
-inhibit_all_warnings!
+#inhibit_all_warnings!
 
 target 'LookinClient' do 
     platform :osx, '10.14'
