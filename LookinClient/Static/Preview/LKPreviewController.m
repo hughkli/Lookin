@@ -610,15 +610,15 @@ extern NSString *const LKAppShowConsoleNotificationName;
     [menu addItem:({
         NSMenuItem *item = [NSMenuItem new];
         item.target = self;
-        item.action = @selector(_handlePrintItem:);
-        item.title = NSLocalizedString(@"Print", nil);
+        item.action = @selector(_handleFocusCurrentItem:);
+        item.title = NSLocalizedString(@"Focus", nil);
         item;
     })];
     [menu addItem:({
         NSMenuItem *item = [NSMenuItem new];
         item.target = self;
-        item.action = @selector(_handleFocusCurrentItem:);
-        item.title = NSLocalizedString(@"Focus", nil);
+        item.action = @selector(_handlePrintItem:);
+        item.title = NSLocalizedString(@"Print", nil);
         item;
     })];
     [menu addItem:[NSMenuItem separatorItem]];
@@ -705,7 +705,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
 
 - (void)_handleFocusCurrentItem:(NSMenuItem *)menuItem {
     LookinDisplayItem *item = self.rightClickingDisplayItem;
-    [self.dataSource focusThisItem:item];
+    [self.dataSource focusDisplayItem:item];
 }
 
 - (void)_handleExpandRecursively:(NSMenuItem *)menuItem {

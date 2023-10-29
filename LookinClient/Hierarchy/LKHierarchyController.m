@@ -19,36 +19,12 @@
 
 @implementation LKHierarchyController
 
-
 - (instancetype)initWithDataSource:(LKHierarchyDataSource *)dataSource {
-    if (self = [self initWithContainerView:nil]) {
+    LKHierarchyView *hierarchyView = [[LKHierarchyView alloc] initWithDataSource:dataSource];
+    hierarchyView.delegate = self;
+    if (self = [self initWithContainerView:hierarchyView]) {
         _dataSource = dataSource;
-        
-        @weakify(self);
-        [RACObserve(dataSource, selectedItem) subscribeNext:^(LookinDisplayItem * _Nullable item) {
-            @strongify(self);
-            [self.hierarchyView scrollToMakeItemVisible:item];
-        }];
-        
-        RAC(self.hierarchyView, displayItems) = [RACObserve(self.dataSource, displayingFlatItems) doNext:^(id  _Nullable x) {
-            @strongify(self);
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.hierarchyView updateGuidesWithHoveredItem:self.dataSource.hoveredItem];
-            });
-        }];
-        
-        [[RACObserve(self.dataSource, hoveredItem) distinctUntilChanged] subscribeNext:^(LookinDisplayItem * _Nullable x) {
-            @strongify(self);
-            [self.hierarchyView updateGuidesWithHoveredItem:x];
-        }];
-        
-        [[RACObserve(self.dataSource, state) distinctUntilChanged] subscribeNext:^(NSNumber * _Nullable x) {
-            @strongify(self);
-            LKHierarchyDataSourceState state = x.unsignedIntegerValue;
-            if (state == LKHierarchyDataSourceStateFocus) {
-                [self.hierarchyView activateFocused];
-            }
-        }];
+        _hierarchyView = hierarchyView;
     }
     return self;
 }
@@ -159,12 +135,6 @@
                 [self.hierarchyView scrollToMakeItemVisible:self.dataSource.selectedItem];
             });
         }
-    }
-}
-
-- (void)hierarchyView:(LKHierarchyView *)view shouldFocusItem:(LookinDisplayItem *)item {
-    if (item) {
-        [self.dataSource focusThisItem:item];
     }
 }
 

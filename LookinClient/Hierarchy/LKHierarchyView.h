@@ -9,15 +9,13 @@
 #import "LKBaseView.h"
 #import "LKHierarchyRowView.h"
 
-@class LKHierarchyView, LKTableView;
+@class LKHierarchyView, LKTableView, LKHierarchyDataSource;
 
 @protocol LKHierarchyViewDelegate <NSObject>
 
 - (void)hierarchyView:(LKHierarchyView *)view didSelectItem:(LookinDisplayItem *)item;
 
 - (void)hierarchyView:(LKHierarchyView *)view didDoubleClickItem:(LookinDisplayItem *)item;
-
-- (void)hierarchyView:(LKHierarchyView *)view shouldFocusItem:(LookinDisplayItem *)item;
 
 - (void)hierarchyView:(LKHierarchyView *)view didHoverAtItem:(LookinDisplayItem *)item;
 
@@ -41,10 +39,12 @@
 
 @interface LKHierarchyView : LKBaseView
 
+- (instancetype)initWithDataSource:(LKHierarchyDataSource *)dataSource;
+
 @property(nonatomic, strong, readonly) LKTableView *tableView;
 
-@property(nonatomic, copy) NSArray<LookinDisplayItem *> *displayItems;
-
+@property(nonatomic, strong) LKHierarchyDataSource *dataSource;
+          
 @property(nonatomic, weak) id<LKHierarchyViewDelegate> delegate;
 
 - (void)scrollToMakeItemVisible:(LookinDisplayItem *)item;
@@ -53,8 +53,5 @@
 
 /// 激活搜索框
 - (void)activateSearchBar;
-
-- (void)activateFocused;
-- (void)deactivateFocused;
 
 @end

@@ -32,14 +32,18 @@ extern NSString *const LKAppShowConsoleNotificationName;
 
 @property(nonatomic, strong) LKLabel *emptyDataLabel;
 
+@property(nonatomic, copy) NSArray<LookinDisplayItem *> *displayItems;
+
 @property(nonatomic, assign) NSInteger minIndentLevel;
 
 @end
 
 @implementation LKHierarchyView
 
-- (instancetype)initWithFrame:(NSRect)frameRect {
-    if (self = [super initWithFrame:frameRect]) {        
+- (instancetype)initWithDataSource:(LKHierarchyDataSource *)dataSource {
+    if (self = [super initWithFrame:CGRectZero]) {
+        self.dataSource = dataSource;
+        
         self.backgroundEffectView = [LKVisualEffectView new];
         self.backgroundEffectView.material = NSVisualEffectMaterialSidebar;
         self.backgroundEffectView.blendingMode = NSVisualEffectBlendingModeBehindWindow;
@@ -90,8 +94,25 @@ extern NSString *const LKAppShowConsoleNotificationName;
             CGFloat insetTop = [x edgeInsetsValue].top;
             [LKNavigationManager sharedInstance].windowTitleBarHeight = insetTop;
         }];
-    
-        [[RACObserve(self, displayItems) throttle:.75] subscribeNext:^(id  _Nullable x) {
+        
+        [RACObserve(dataSource, selectedItem) subscribeNext:^(LookinDisplayItem * _Nullable item) {
+            @strongify(self);
+            [self scrollToMakeItemVisible:item];
+        }];
+        
+        [[RACObserve(self.dataSource, hoveredItem) distinctUntilChanged] subscribeNext:^(LookinDisplayItem * _Nullable x) {
+            @strongify(self);
+            [self updateGuidesWithHoveredItem:x];
+        }];
+        
+        [RACObserve(dataSource, displayingFlatItems) subscribeNext:^(NSArray<LookinDisplayItem *> *x) {
+            @strongify(self);
+            [self renderWithDisplayItems:x];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self updateGuidesWithHoveredItem:self.dataSource.hoveredItem];
+            });
+        }];
+        [[RACObserve(dataSource, displayingFlatItems) throttle:.75] subscribeNext:^(id  _Nullable x) {
             @strongify(self);
             [self _bringGuidesLayerToFront];
         }];
@@ -116,8 +137,9 @@ extern NSString *const LKAppShowConsoleNotificationName;
     }
 }
 
-- (void)setDisplayItems:(NSArray<LookinDisplayItem *> *)displayItems {
-    _displayItems = displayItems.copy;
+- (void)renderWithDisplayItems:(NSArray<LookinDisplayItem *> *)displayItems {
+    self.displayItems = displayItems;
+    
     _minIndentLevel = [[displayItems lookin_reduce:^NSNumber *(NSNumber *accumulator, NSUInteger idx, LookinDisplayItem *obj) {
         NSInteger res = accumulator ? MIN(accumulator.integerValue, obj.indentLevel):obj.indentLevel;
         return @(res);
@@ -398,10 +420,11 @@ extern NSString *const LKAppShowConsoleNotificationName;
 - (void)_handleFocusCurrentItem:(NSMenuItem *)menuItem {
     LKHierarchyRowView *view = [menuItem.menu lookin_getBindObjectForKey:kMenuBindKey_RowView];
     LookinDisplayItem *item = view.displayItem;
-    NSAssert(item, @"");
-    if ([self.delegate respondsToSelector:@selector(hierarchyView:shouldFocusItem:)]) {
-        [self.delegate hierarchyView:self shouldFocusItem:item];
+    if (!item) {
+        NSAssert(NO, @"");
+        return;
     }
+    [self.dataSource focusDisplayItem:item];
 }
 
 - (void)_handleSearchCloseButton {

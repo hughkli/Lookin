@@ -75,10 +75,11 @@
 
 @property(nonatomic, strong, readwrite) LookinHierarchyInfo *rawHierarchyInfo;
 
-/// 非搜索状态下，rawFlatItems 和 flatItems 一致。搜索状态下，flatItems 仅包含搜索结果，而 rawFlatItems 则仍保持为非搜索状态下的值，可用来在结束搜索时恢复
+/// 每次刷新 Lookin 后，全新生成的 display items 会被保存在这个属性中，并且不会再被修改（除非下次 reload）
 @property(nonatomic, copy) NSArray<LookinDisplayItem *> *rawFlatItems;
+/// 搜索或聚焦状态下，flatItems 是 rawFlatItems 的子集（normal 状态下，flatItems 和 rawFlatItems 等价）
 @property(nonatomic, copy, readwrite) NSArray<LookinDisplayItem *> *flatItems;
-
+/// displayingFlatItems 是 flatItems 的子集，仅包含用户可以看到的 items，而那些被折叠的 items 会被剔除。换句话说，当用户展开或收起 item 时，displayingFlatItems 属性会被 buildDisplayingFlatItems 方法不断更新
 @property(nonatomic, copy, readwrite) NSArray<LookinDisplayItem *> *displayingFlatItems;
 
 @property(nonatomic, strong, readwrite) NSMenu *selectColorMenu;
@@ -484,7 +485,7 @@
         }
     }
     
-    [self _updateDisplayingFlatItems];
+    [self buildDisplayingFlatItems];
 }
 
 - (LookinDisplayItem *)displayItemWithOid:(unsigned long)oid {
@@ -507,7 +508,7 @@
     self.oidToDisplayItemMap = map;
 }
 
-- (void)_updateDisplayingFlatItems {
+- (void)buildDisplayingFlatItems {
     NSMutableArray<LookinDisplayItem *> *displayingItems = [NSMutableArray array];
     [self.flatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.displayingInHierarchy) {
@@ -525,7 +526,7 @@
         return;
     }
     item.isExpanded = NO;
-    [self _updateDisplayingFlatItems];
+    [self buildDisplayingFlatItems];
 }
 
 - (void)expandItem:(LookinDisplayItem *)item {
@@ -536,7 +537,7 @@
         return;
     }
     item.isExpanded = YES;
-    [self _updateDisplayingFlatItems];
+    [self buildDisplayingFlatItems];
 }
 
 - (void)expandToShowItem:(LookinDisplayItem *)item {
@@ -546,7 +547,7 @@
         }
     }];
     
-    [self _updateDisplayingFlatItems];
+    [self buildDisplayingFlatItems];
 }
 
 - (void)expandItemsRootedByItem:(LookinDisplayItem *)item {
@@ -564,7 +565,7 @@
         }];
     }
     
-    [self _updateDisplayingFlatItems];
+    [self buildDisplayingFlatItems];
 }
 
 - (void)collapseAllChildrenOfItem:(LookinDisplayItem *)item {
@@ -580,7 +581,7 @@
         }
         enumeratedItem.isExpanded = NO;
     }];
-    [self _updateDisplayingFlatItems];
+    [self buildDisplayingFlatItems];
 }
 
 #pragma mark - Search
@@ -634,14 +635,15 @@
     self.flatItems = flatItems;
     [self.didReloadFlatItemsWithSearchOrFocus sendNext:nil];
     
-    [self _updateDisplayingFlatItems];
+    [self buildDisplayingFlatItems];
 }
 
-- (void)focusThisItem:(LookinDisplayItem *)item {
+- (void)focusDisplayItem:(LookinDisplayItem *)item {
     if (!item) {
         NSAssert(NO, @"");
         return;
     }
+    self.selectedItem = nil;
 
     if (self.state != LKHierarchyDataSourceStateFocus) {
         [self.rawFlatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -650,29 +652,28 @@
         self.state = LKHierarchyDataSourceStateFocus;
     }
 
-    self.selectedItem = nil;
-
-    NSString *Key_ShouldShow = @"show";
-    [self.rawFlatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull displayItem, NSUInteger idx, BOOL * _Nonnull stop) {
-        [displayItem lookin_bindBOOL:NO forKey:Key_ShouldShow];
-        displayItem.highlightedSearchString = nil;
+    NSMutableArray *newFlatItems = [NSMutableArray array];
+    [item enumerateSelfAndChildren:^(LookinDisplayItem *currItem) {
+        [newFlatItems addObject:currItem];
     }];
-    for (LookinDisplayItem *displayItem in self.rawFlatItems) {
-        if (displayItem == item) {
-            [displayItem enumerateSelfAndChildren:^(LookinDisplayItem *selfOrChild) {
-                [selfOrChild lookin_bindBOOL:YES forKey:Key_ShouldShow];
-            }];
-            break;
-        }
-    }
-
-    NSArray<LookinDisplayItem *> *flatItems = [self.rawFlatItems lookin_filter:^BOOL(LookinDisplayItem *displayItem) {
-        return [displayItem lookin_getBindBOOLForKey:Key_ShouldShow];
-    }];
-    self.flatItems = flatItems;
+    self.flatItems = newFlatItems;
     [self.didReloadFlatItemsWithSearchOrFocus sendNext:nil];
+    [self buildDisplayingFlatItems];
+}
 
-    [self _updateDisplayingFlatItems];
+- (void)endFocus {
+    if (self.state == LKHierarchyDataSourceStateNormal) {
+        return;
+    }
+    self.state = LKHierarchyDataSourceStateNormal;
+    
+    [self.rawFlatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.isExpanded = obj.isExpandedBeforeSearchOrFocus;
+    }];
+    
+    self.flatItems = self.rawFlatItems;
+    [self.didReloadFlatItemsWithSearchOrFocus sendNext:nil];
+    [self buildDisplayingFlatItems];
 }
 
 - (void)endSearch {
@@ -693,7 +694,7 @@
     self.flatItems = self.rawFlatItems;
     [self.didReloadFlatItemsWithSearchOrFocus sendNext:nil];
     
-    [self _updateDisplayingFlatItems];
+    [self buildDisplayingFlatItems];
 }
 
 #pragma mark - Colors

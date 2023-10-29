@@ -17,6 +17,8 @@ typedef NS_ENUM(NSUInteger, LKHierarchyDataSourceState) {
 };
 
 @interface LKHierarchyDataSource : NSObject
+
+/// 业务可以 observe 该属性
 @property(nonatomic, assign, readonly) LKHierarchyDataSourceState state;
 
 /**
@@ -29,6 +31,7 @@ typedef NS_ENUM(NSUInteger, LKHierarchyDataSourceState) {
 @property(nonatomic, copy, readonly) NSArray<LookinDisplayItem *> *flatItems;
 
 /// 一维数组，只包括在 hierarchy 树中因为未被折叠而可见的 displayItems
+/// 业务可以 observe 该属性
 @property(nonatomic, copy, readonly) NSArray<LookinDisplayItem *> *displayingFlatItems;
 
 /**
@@ -99,12 +102,14 @@ typedef NS_ENUM(NSUInteger, LKHierarchyDataSourceState) {
 /// string 不能为 nil 或空字符串
 - (void)searchWithString:(NSString *)string;
 
-- (void)focusThisItem:(LookinDisplayItem *)item;
 
 /// 应该在点击搜索框的关闭按钮时调用该方法，用来恢复搜索前的状态等一系列工作
 - (void)endSearch;
 
 /// 由于搜索或 Focus 而修改了 flatItems
 @property(nonatomic, strong, readonly) RACSubject *didReloadFlatItemsWithSearchOrFocus;
+
+- (void)focusDisplayItem:(LookinDisplayItem *)item;
+- (void)endFocus;
 
 @end

@@ -117,7 +117,7 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     self.focusTipView.hidden = YES;
     self.focusTipView.buttonText = NSLocalizedString(@"Exit", nil);
     self.focusTipView.target = self;
-    self.focusTipView.clickAction = @selector(_handleCancelFocusTipView);
+    self.focusTipView.clickAction = @selector(_handleExitFocusTipView);
     [self.view addSubview:self.focusTipView];
     
     self.noPreviewTipView = [LKTipsView new];
@@ -290,6 +290,10 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     return self.hierarchyController.hierarchyView;
 }
 
+- (LKHierarchyDataSource *)dataSource {
+    return self.hierarchyController.dataSource;
+}
+
 #pragma mark - Tutorial
 
 - (void)viewDidAppear {
@@ -408,8 +412,8 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     }
 }
 
-- (void)_handleCancelFocusTipView {
-    
+- (void)_handleExitFocusTipView {
+    [[self dataSource] endFocus];
 }
 
 - (void)_handleUserConfigNoPreviewTipView {
