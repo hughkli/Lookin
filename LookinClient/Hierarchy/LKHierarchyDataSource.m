@@ -161,12 +161,12 @@
     NSArray<LookinDisplayItem *> *flatItems = self.rawFlatItems.copy;
     
     // 设置 preferToBeCollapsed 属性
-    NSSet<NSString *> *classesPreferredToCollapse = [NSSet setWithObjects:@"UILabel", @"UIPickerView", @"UIProgressView", @"UIActivityIndicatorView", @"UIAlertView", @"UIActionSheet", @"UISearchBar", @"UIButton", @"UITextView", @"UIDatePicker", @"UIPageControl", @"UISegmentedControl", @"UITextField", @"UISlider", @"UISwitch", @"UIVisualEffectView", @"UIImageView", @"WKCommonWebView", @"UITextEffectsWindow", @"LKS_LocalInspectContainerWindow", nil];
+    NSSet<NSString *> *classesPreferredToCollapse = [NSSet setWithObjects:@"UILabel", @"UIPickerView", @"UIProgressView", @"UIActivityIndicatorView", @"UIAlertView", @"UIActionSheet", @"UISearchBar", @"UIButton", @"UITextView", @"UIDatePicker", @"UIPageControl", @"UISegmentedControl", @"UITextField", @"UISlider", @"UISwitch", @"UIVisualEffectView", @"UIImageView", @"WKCommonWebView", @"UITextEffectsWindow", nil];
     if (info.collapsedClassList.count) {
         classesPreferredToCollapse = [classesPreferredToCollapse setByAddingObjectsFromArray:info.collapsedClassList];
     }
     // no preview
-    NSSet<NSString *> *classesWithNoPreview = [NSSet setWithArray:@[@"UITextEffectsWindow", @"UIRemoteKeyboardWindow", @"LKS_LocalInspectContainerWindow"]];
+    NSSet<NSString *> *classesWithNoPreview = [NSSet setWithArray:@[@"UITextEffectsWindow", @"UIRemoteKeyboardWindow"]];
     
     __block BOOL isSwiftProject = NO;
     [flatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -188,6 +188,12 @@
                 item.doNotFetchScreenshotReason = LookinDoNotFetchScreenshotForUserConfig;
             }];
         }
+//        } else if ([LKPreferenceManager mainManager].showHiddenItems.currentBOOLValue == NO && obj.inHiddenHierarchy) {
+//            [obj enumerateSelfAndChildren:^(LookinDisplayItem *item) {
+//                item.noPreview = YES;
+//                item.doNotFetchScreenshotReason = LookinDoNotFetchScreenshotForHidden;
+//            }];
+//        }
         
         if (!isSwiftProject) {
             if ([obj.displayingObject.completedSelfClassName containsString:@"."]) {
