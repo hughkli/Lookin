@@ -644,7 +644,7 @@
         NSAssert(NO, @"");
         return;
     }
-    self.selectedItem = nil;
+    self.selectedItem = item;
 
     if (self.state == LKHierarchyDataSourceStateNormal) {
         [self.rawFlatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -653,6 +653,7 @@
     } else if (self.state == LKHierarchyDataSourceStateSearch) {
         [self.rawFlatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             obj.isInSearch = NO;
+            obj.highlightedSearchString = nil;
         }];
     }
     self.state = LKHierarchyDataSourceStateFocus;
@@ -689,6 +690,7 @@
     
     [self.rawFlatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         obj.isInSearch = NO;
+        obj.highlightedSearchString = nil;
         obj.isExpanded = obj.isExpandedBeforeSearchOrFocus;
     }];
     /// 搜索时被选中的 item，在结束搜索后也应该处于被选中且可见的状态
