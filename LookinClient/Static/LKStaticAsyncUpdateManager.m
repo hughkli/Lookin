@@ -44,7 +44,6 @@
         _updateAll_ProgressSignal = [RACSubject subject];
         _updateAll_CompletionSignal = [RACSubject subject];
         _updateAll_ErrorSignal = [RACSubject subject];
-//        _updateAllErrorSignal = [RACSubject subject];
         _modifyingUpdateProgressSignal = [RACSubject subject];
         _modifyingUpdateErrorSignal = [RACSubject subject];
         
@@ -112,12 +111,15 @@
 
 - (NSArray<LookinStaticAsyncUpdateTask *> *)_makeScreenshotsAndAttrGroupsTasks {
     NSMutableArray<LookinStaticAsyncUpdateTask *> *tasks = [(NSArray<LookinDisplayItem *> *)self.dataSource.displayingFlatItems lookin_map:^id(NSUInteger idx, LookinDisplayItem *item) {
-        if (item.doNotFetchScreenshotReason != LookinFetchScreenshotPermitted) {
-            return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
-        } else if (item.isExpandable && item.isExpanded) {
-            return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeSoloScreenshot];
+        if (item.doNotFetchScreenshotReason == LookinFetchScreenshotPermitted) {
+            if (item.isExpandable && item.isExpanded) {
+                return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeSoloScreenshot];
+            } else {
+                return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeGroupScreenshot];
+            }
+            
         } else {
-            return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeGroupScreenshot];
+            return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
         }
     }].mutableCopy;
     
