@@ -5,6 +5,7 @@
 "Zoom" = "Zoom";
 "Console" = "Console";
 "Free Rotation" = "Free Rotation";
+"Notifications" = "Notifications";
 
 "Can't see your app ?" = "Can't see your app ?";
 "Searching for inspectable apps" = "Searching for inspectable apps";
@@ -177,3 +178,5 @@
 "Version" = "Version";
 "Focused" = "Focused";
 "Exit" = "Exit";
+"Job openings…(China)" = "Job openings…(China)";
+"Clear this message" = "Clear this message";

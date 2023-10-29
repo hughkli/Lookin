@@ -26,6 +26,7 @@ NSToolbarItemIdentifier const LKToolBarIdentifier_Remove = @"14";
 NSToolbarItemIdentifier const LKToolBarIdentifier_Console = @"15";
 NSToolbarItemIdentifier const LKToolBarIdentifier_Rotation = @"16";
 NSToolbarItemIdentifier const LKToolBarIdentifier_Measure = @"17";
+NSToolbarItemIdentifier const LKToolBarIdentifier_Message = @"18";
 
 static NSString * const Key_BindingPreferenceManager = @"PreferenceManager";
 static NSString * const Key_BindingAppInfo = @"AppInfo";
@@ -230,6 +231,20 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
         button.bezelStyle = NSBezelStyleTexturedRounded;
         
         NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:LKToolBarIdentifier_Remove];
+        item.view = button;
+        item.minSize = NSMakeSize(48, 34);
+        return item;
+    }
+    
+    if ([identifier isEqualToString:LKToolBarIdentifier_Message]) {
+        NSImage *image = NSImageMake(@"icon_notification");
+        image.template = YES;
+        
+        NSButton *button = [NSButton new];
+        [button setImage:image];
+        button.bezelStyle = NSBezelStyleTexturedRounded;
+        
+        NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:LKToolBarIdentifier_Message];
         item.view = button;
         item.minSize = NSMakeSize(48, 34);
         return item;

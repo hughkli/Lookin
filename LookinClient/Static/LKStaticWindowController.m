@@ -183,7 +183,7 @@
 }
 
 - (NSArray<NSToolbarItemIdentifier> *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar {
-    return @[LKToolBarIdentifier_Reload, LKToolBarIdentifier_App, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Dimension, LKToolBarIdentifier_Rotation, LKToolBarIdentifier_Setting, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Scale, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Measure, LKToolBarIdentifier_Console];
+    return @[LKToolBarIdentifier_Reload, LKToolBarIdentifier_App, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Dimension, LKToolBarIdentifier_Rotation, LKToolBarIdentifier_Setting, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Scale, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Measure, LKToolBarIdentifier_Console, LKToolBarIdentifier_Message];
 }
 
 - (nullable NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSToolbarItemIdentifier)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {
@@ -215,7 +215,10 @@
             [[[RACObserve(self.viewController, showConsole) distinctUntilChanged] skip:1] subscribeNext:^(NSNumber *x) {
                 ((NSButton *)item.view).state = x.boolValue ? NSControlStateValueOn : NSControlStateValueOff;
             }];
-            
+        } else if ([item.itemIdentifier isEqualToString:LKToolBarIdentifier_Message]) {
+            item.label = NSLocalizedString(@"Notifications", nil);
+            item.target = self;
+            item.action = @selector(_handleMessage:);
         }
     }
     return item;
@@ -285,6 +288,28 @@
 
 - (void)_handleConsole {
     self.viewController.showConsole = !self.viewController.showConsole;
+}
+
+- (void)_handleMessage:(NSButton *)button {
+    NSMenu *menu = [NSMenu new];
+    [menu addItem:({
+        NSMenuItem *menuItem = [NSMenuItem new];
+        menuItem.image = [NSImage imageNamed:@"Icon_Inspiration_small"];
+        menuItem.title = NSLocalizedString(@"Job openings…(China)", nil);
+        menuItem.target = self;
+        menuItem.action = @selector(handleJobsMenuItem);
+        menuItem;
+    })];
+    [menu addItem:({
+        NSMenuItem *menuItem = [NSMenuItem new];
+        menuItem.image = [[NSImage alloc] initWithSize:NSMakeSize(18, 1)];
+        menuItem.title = NSLocalizedString(@"Clear this message", nil);
+        menuItem.target = self;
+        menuItem.action = @selector(handleClearJobsMenuItem);
+        menuItem;
+    })];
+    [menu addItem:[NSMenuItem separatorItem]];
+    [NSMenu popUpContextMenu:menu withEvent:[[NSApplication sharedApplication] currentEvent] forView:button];
 }
 
 - (void)_handleFreeRotation {
@@ -422,6 +447,14 @@
 
 - (void)appMenuManagerDidSelectFilter {
     [[self.viewController currentHierarchyView] activateSearchBar];
+}
+
+- (void)handleJobsMenuItem {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://bytedance.feishu.cn/docx/SAcgdoQuAouyXAxAqy8cmrT2n4b"]];
+}
+
+- (void)handleClearJobsMenuItem {
+    
 }
 
 @end

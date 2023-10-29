@@ -5,6 +5,7 @@
 "Zoom" = "大小";
 "Console" = "控制台";
 "Free Rotation" = "自由旋转";
+"Notifications" = "通知";
 
 "Can't see your app ?" = "看不到你的 App ？";
 "Searching for inspectable apps" = "尚未发现任何 iOS App";
@@ -177,3 +178,5 @@
 "Version" = "当前版本";
 "Focused" = "聚焦";
 "Exit" = "退出";
+"Job openings…(China)" = "工作机会：iOS & Android 客户端开发…";
+"Clear this message" = "清除这条消息";
