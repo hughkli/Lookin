@@ -41,7 +41,6 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
 @property(nonatomic, strong) LKTipsView *userConfigNoPreviewTipsView;
 @property(nonatomic, strong) LKTipsView *noPreviewTipView;
 @property(nonatomic, strong) LKTipsView *tutorialTipView;
-@property(nonatomic, strong) LKTipsView *delayReloadTipView;
 
 @property(nonatomic, strong) LKDashboardViewController *dashboardController;
 @property(nonatomic, strong) LKStaticHierarchyController *hierarchyController;
@@ -104,10 +103,6 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     self.imageSyncTipsView = [LKTipsView new];
     self.imageSyncTipsView.hidden = YES;
     [self.view addSubview:self.imageSyncTipsView];
-    
-    self.delayReloadTipView = [LKTipsView new];
-    self.delayReloadTipView.hidden = YES;
-    [self.view addSubview:self.delayReloadTipView];
     
     self.tooLargeToSyncScreenshotTipsView = [LKRedTipsView new];
     self.tooLargeToSyncScreenshotTipsView.image = NSImageMake(@"icon_info");
@@ -176,7 +171,6 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
         @strongify(self);
         if (app) {
             [self.imageSyncTipsView setImageByDeviceType:app.appInfo.deviceType];
-            [self.delayReloadTipView setImageByDeviceType:app.appInfo.deviceType];
         }
     }];
     
@@ -219,7 +213,7 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     $(self.progressView).fullWidth.height(3).y(windowTitleHeight);
 
     __block CGFloat tipsY = windowTitleHeight + 10;
-    [$(self.connectionTipsView, self.imageSyncTipsView, self.tooLargeToSyncScreenshotTipsView, self.noPreviewTipView, self.userConfigNoPreviewTipsView, self.tutorialTipView, self.delayReloadTipView).visibles.array enumerateObjectsUsingBlock:^(LKTipsView *tipsView, NSUInteger idx, BOOL * _Nonnull stop) {
+    [$(self.connectionTipsView, self.imageSyncTipsView, self.tooLargeToSyncScreenshotTipsView, self.noPreviewTipView, self.userConfigNoPreviewTipsView, self.tutorialTipView).visibles.array enumerateObjectsUsingBlock:^(LKTipsView *tipsView, NSUInteger idx, BOOL * _Nonnull stop) {
         CGFloat midX = self.hierarchyController.view.$width + (self.viewsPreviewController.view.$width - DashboardViewWidth) / 2.0;
         $(tipsView).sizeToFit.y(tipsY).midX(midX);
         tipsY = tipsView.$maxY + 5;
@@ -271,17 +265,6 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
 
 - (LKHierarchyView *)currentHierarchyView {
     return self.hierarchyController.hierarchyView;
-}
-
-- (void)showDelayReloadTipWithSeconds:(NSInteger)seconds {
-    self.delayReloadTipView.title = [NSString stringWithFormat:NSLocalizedString(@"Will reload in %@ seconds…", nil), @(seconds)];
-    self.delayReloadTipView.hidden = NO;
-    [self.view setNeedsLayout:YES];
-}
-
-- (void)removeDelayReloadTip {
-    self.delayReloadTipView.hidden = YES;
-    [self.view setNeedsLayout:YES];
 }
 
 #pragma mark - Tutorial

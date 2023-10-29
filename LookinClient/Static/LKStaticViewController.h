@@ -18,9 +18,6 @@
 
 @property(nonatomic, assign) BOOL showConsole;
 
-- (void)showDelayReloadTipWithSeconds:(NSInteger)seconds;
-- (void)removeDelayReloadTip;
-
 /// 获取当前的 hierarchyView
 - (LKHierarchyView *)currentHierarchyView;
 

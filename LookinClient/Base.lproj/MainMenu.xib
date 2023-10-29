@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -113,9 +113,6 @@
                     <menu key="submenu" title="View" id="uzZ-04-AJ0">
                         <items>
                             <menuItem title="Reload" tag="21" keyEquivalent="r" id="0ie-em-CG2" userLabel="Reload"/>
-                            <menuItem title="Reload in 5 Seconds" tag="29" id="NRl-MX-EHO">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="8pV-nI-5Iy"/>
                             <menuItem title="Filter" tag="28" keyEquivalent="f" id="aSx-qx-mr6"/>
                             <menuItem isSeparatorItem="YES" id="kXZ-3h-usi"/>
@@ -229,13 +226,6 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="5sm-PB-Pq7"/>
-                                        <menuItem title="Email (Click to Copy)" id="gPh-pf-dCp">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="lookin@lookin.work" tag="61" id="oE9-hN-SqM">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="3k2-uJ-acx"/>
                                         <menuItem title="Send Message at Sina Weibo" id="Dln-4J-NPy">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
