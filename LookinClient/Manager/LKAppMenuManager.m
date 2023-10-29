@@ -36,7 +36,6 @@ static NSUInteger const kTag_Filter = 28;
 static NSUInteger const kTag_OpenInNewWindow = 31;
 static NSUInteger const kTag_Export = 32;
 
-static NSUInteger const kTag_ShowFramework = 50;
 static NSUInteger const kTag_CocoaPods = 51;
 static NSUInteger const kTag_ShowWebsite = 52;
 static NSUInteger const kTag_ShowConfig = 53;
@@ -125,11 +124,6 @@ static NSUInteger const kTag_Jobs = 69;
     NSMenu *menu_help = [menu itemAtIndex:5].submenu;
     menu_help.autoenablesItems = YES;
     menu_help.delegate = self;
-    
-    // 帮助 - 显示 Framework
-    NSMenuItem *menuItem_showFramework = [menu_help itemWithTag:kTag_ShowFramework];
-    menuItem_showFramework.target = self;
-    menuItem_showFramework.action = @selector(_handleShowFramework);
     
     // 帮助 - CocoaPods
     NSMenuItem *menuItem_cocoaPods = [menu_help itemWithTag:kTag_CocoaPods];
@@ -335,25 +329,6 @@ static NSUInteger const kTag_Jobs = 69;
 
 - (void)_handleCheckUpdates {
     [[SUUpdater sharedUpdater] checkForUpdates:self];
-}
-
-- (void)_handleShowFramework {
-    NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
-    NSString *frameworkDirPath = [bundlePath stringByAppendingPathComponent:@"/Contents/Resources/LookinServerFramework/"];
-    NSString *unzippedFilePath = [frameworkDirPath stringByAppendingPathComponent:@"LookinServer.framework"];
-    NSFileManager *mng = [NSFileManager defaultManager];
-    BOOL fileExsit = [mng fileExistsAtPath:unzippedFilePath isDirectory:NULL];
-    if (!fileExsit) {
-        [self _handleFailingToShowFramework];
-        return;
-    }
-    NSURL *fileUrl = [[NSURL alloc] initFileURLWithPath:unzippedFilePath isDirectory:NO];
-    [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[fileUrl]];
-}
-
-- (void)_handleFailingToShowFramework {
-    NSString *message = [NSString stringWithFormat:@"%@%@", NSLocalizedString(@"You can download framework from the url below:", nil), LOOKIN_SERVER_FRAMEWORK_URL];
-    AlertErrorText(NSLocalizedString(@"Failed to show framework in Finder", nil), message, [LKNavigationManager sharedInstance].currentKeyWindowController.window);
 }
 
 - (void)_handleShowCocoaPods {
