@@ -73,9 +73,6 @@
 }
 
 - (void)setDisplayItem:(LookinDisplayItem *)displayItem {
-    if (_displayItem == displayItem) {
-        return;
-    }
     _displayItem = displayItem;
     
     /// 不能把 contents 设置成 nil，否则某些场景下会发生内容渲染错乱的情况
@@ -168,6 +165,8 @@
 
 - (void)_renderImageAndColor {
     BOOL isSelected = (self.dataSource.selectedItem == self.displayItem);
+    BOOL isHovered = (self.dataSource.hoveredItem == self.displayItem);
+    
     LookinImage *appropriateScreenshot = self.displayItem.appropriateScreenshot;
     NSAssert(MAX(appropriateScreenshot.representations.firstObject.pixelsWide, appropriateScreenshot.representations.firstObject.pixelsHigh) <= LookinNodeImageMaxLengthInPx , @"image is too large");
     self.contentPlane.firstMaterial.diffuse.contents = appropriateScreenshot;
@@ -175,7 +174,7 @@
     BOOL tooLargeToFetchScreenshot = !appropriateScreenshot && self.displayItem.doNotFetchScreenshotReason == LookinDoNotFetchScreenshotForTooLarge;
     
     // 更新 border 颜色
-    if (isSelected || self.displayItem.isHovered) {
+    if (isSelected || isHovered) {
         if (tooLargeToFetchScreenshot) {
             self.borderColor = LookinColorRGBAMake(255, 38, 0, .8);
         } else {
@@ -196,9 +195,9 @@
     CGFloat maskOpacity = 0;
     if (tooLargeToFetchScreenshot) {
         maskColor = LookinColorMake(255, 38, 0);
-        if (self.dataSource.selectedItem == self.displayItem) {
+        if (isSelected) {
             maskOpacity = .45;
-        } else if (self.displayItem.isHovered) {
+        } else if (isHovered) {
             maskOpacity = .3;
         } else {
             maskOpacity = self.isDarkMode ? .17 : .2;
@@ -207,7 +206,7 @@
         maskColor = LookinColorMake(110, 183, 255);
         if (isSelected) {
             maskOpacity = .35;
-        } else if (self.displayItem.isHovered) {
+        } else if (isHovered) {
             maskOpacity = .18;
         } else {
             maskOpacity = 0;
