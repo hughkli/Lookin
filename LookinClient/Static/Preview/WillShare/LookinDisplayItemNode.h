@@ -8,9 +8,11 @@
 
 #import <SceneKit/SceneKit.h>
 
-@class LookinDisplayItem, LKPreferenceManager;
+@class LookinDisplayItem, LKPreferenceManager, LKHierarchyDataSource;
 
 @interface LookinDisplayItemNode : SCNNode
+
+- (instancetype)initWithDataSource:(LKHierarchyDataSource *)dataSource;
 
 /// 在全部 displayItems 里的 idx
 @property(nonatomic, assign) NSUInteger index;

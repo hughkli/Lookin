@@ -231,7 +231,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
     
     LKHierarchyRowView *view = [tableView makeViewWithIdentifier:@"cell" owner:self];
     if (!view) {
-        view = [[LKHierarchyRowView alloc] init];
+        view = [[LKHierarchyRowView alloc] initWithDataSource:self.dataSource];
         view.disclosureButton.target = self;
         view.disclosureButton.action = @selector(_handleDisclosureButton:);
         view.identifier = @"cell";

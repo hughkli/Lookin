@@ -244,9 +244,11 @@
     if (_selectedItem == selectedItem) {
         return;
     }
-    _selectedItem.isSelected = NO;
+    LookinDisplayItem *prevItem = _selectedItem;
     _selectedItem = selectedItem;
-    _selectedItem.isSelected = YES;
+    
+    [prevItem notifySelectionChangeToDelegates];
+    [_selectedItem notifySelectionChangeToDelegates];
 
     [[LKUserActionManager sharedInstance] sendAction:LKUserActionType_SelectedItemChange];
     

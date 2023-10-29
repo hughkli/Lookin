@@ -9,8 +9,11 @@
 #import "LookinDisplayItemNode.h"
 #import "LookinDisplayItem.h"
 #import "LKPreferenceManager.h"
+#import "LKHierarchyDataSource.h"
 
 @interface LookinDisplayItemNode () <LookinDisplayItemDelegate>
+
+@property(nonatomic, strong) LKHierarchyDataSource *dataSource;
 
 @property(nonatomic, strong) SCNNode *contentNode;
 @property(nonatomic, strong) SCNPlane *contentPlane;
@@ -26,8 +29,10 @@
 
 @implementation LookinDisplayItemNode
 
-- (instancetype)init {
+- (instancetype)initWithDataSource:(LKHierarchyDataSource *)dataSource {
     if (self = [super init]) {
+        self.dataSource = dataSource;
+        
         self.contentPlane = [SCNPlane geometry];
         self.contentPlane.firstMaterial.doubleSided = YES;
         self.contentPlane.firstMaterial.lightingModelName = SCNLightingModelConstant;
@@ -162,6 +167,7 @@
 }
 
 - (void)_renderImageAndColor {
+    BOOL isSelected = (self.dataSource.selectedItem == self.displayItem);
     LookinImage *appropriateScreenshot = self.displayItem.appropriateScreenshot;
     NSAssert(MAX(appropriateScreenshot.representations.firstObject.pixelsWide, appropriateScreenshot.representations.firstObject.pixelsHigh) <= LookinNodeImageMaxLengthInPx , @"image is too large");
     self.contentPlane.firstMaterial.diffuse.contents = appropriateScreenshot;
@@ -169,7 +175,7 @@
     BOOL tooLargeToFetchScreenshot = !appropriateScreenshot && self.displayItem.doNotFetchScreenshotReason == LookinDoNotFetchScreenshotForTooLarge;
     
     // 更新 border 颜色
-    if (self.displayItem.isSelected || self.displayItem.isHovered) {
+    if (isSelected || self.displayItem.isHovered) {
         if (tooLargeToFetchScreenshot) {
             self.borderColor = LookinColorRGBAMake(255, 38, 0, .8);
         } else {
@@ -190,7 +196,7 @@
     CGFloat maskOpacity = 0;
     if (tooLargeToFetchScreenshot) {
         maskColor = LookinColorMake(255, 38, 0);
-        if (self.displayItem.isSelected) {
+        if (self.dataSource.selectedItem == self.displayItem) {
             maskOpacity = .45;
         } else if (self.displayItem.isHovered) {
             maskOpacity = .3;
@@ -199,7 +205,7 @@
         }
     } else {
         maskColor = LookinColorMake(110, 183, 255);
-        if (self.displayItem.isSelected) {
+        if (isSelected) {
             maskOpacity = .35;
         } else if (self.displayItem.isHovered) {
             maskOpacity = .18;

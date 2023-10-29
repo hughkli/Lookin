@@ -14,6 +14,7 @@
 #import "LKNavigationManager.h"
 #import "LKStaticWindowController.h"
 #import "LKTutorialManager.h"
+#import "LKHierarchyDataSource.h"
 
 @interface LKHierarchyRowView () <LookinDisplayItemDelegate>
 
@@ -22,10 +23,18 @@
 @property(nonatomic, strong) CALayer *eventHandlerButtonColorLayer;
 @property(nonatomic, assign) BOOL isFocusingHandlerButton;
 
+@property(nonatomic, strong) LKHierarchyDataSource *dataSource;
+
 @end
 
 @implementation LKHierarchyRowView
 
+- (instancetype)initWithDataSource:(LKHierarchyDataSource *)dataSource {
+    if (self = [super initWithFrame:CGRectZero]) {
+        self.dataSource = dataSource;
+    }
+    return self;
+}
 - (void)layout {
     [super layout];
     
@@ -69,7 +78,8 @@
         self.eventHandlerButton.hidden = YES;
     }
     
-    self.image = [self _iconWithDisplayItem:displayItem isSelected:displayItem.isSelected];
+    BOOL isSelected = (self.dataSource.selectedItem == displayItem);
+    self.image = [self _iconWithDisplayItem:displayItem isSelected:isSelected];
     self.indentLevel = displayItem.indentLevel - self.minIndentLevel;
     [self updateContentWidth];
     [self _updateLabelStringsAndImageViewAlpha];
@@ -195,7 +205,7 @@
 
 - (void)displayItem:(LookinDisplayItem *)displayItem propertyDidChange:(LookinDisplayItemProperty)property {
     if (property == LookinDisplayItemProperty_None || property == LookinDisplayItemProperty_IsSelected) {
-        self.isSelected = displayItem.isSelected;
+        self.isSelected = (self.dataSource.selectedItem == displayItem);
     }
     
     if (property == LookinDisplayItemProperty_None || property == LookinDisplayItemProperty_IsHovered) {

@@ -62,7 +62,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
         
         LookinAppInfo *appInfo = dataSource.rawHierarchyInfo.appInfo;
         
-        self.previewView = [LookinPreviewView new];
+        self.previewView = [[LookinPreviewView alloc] initWithDataSource:dataSource];
         self.previewView.preferenceManager = self.dataSource.preferenceManager;
         self.previewView.alphaValue = 0;
         self.previewView.appScreenSize = CGSizeMake(appInfo.screenWidth, appInfo.screenHeight);

@@ -19,9 +19,11 @@ typedef NS_ENUM (NSUInteger, LookinPreviewDimension) {
     LookinPreviewDimension3D
 };
 
-@class LookinDisplayItem, LKPreferenceManager;
+@class LookinDisplayItem, LKPreferenceManager, LKHierarchyDataSource;
 
 @interface LookinPreviewView : SCNView
+
+- (instancetype)initWithDataSource:(LKHierarchyDataSource *)dataSource;
 
 /// rotation.x 是左右旋转的角度，rotation.y 是上下旋转的角度
 @property(nonatomic, assign, readonly) CGPoint rotation;

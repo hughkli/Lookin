@@ -9,6 +9,7 @@
 #import "LookinPreviewView.h"
 #import "LookinDisplayItemNode.h"
 #import "LookinDisplayItem.h"
+#import "LKHierarchyDataSource.h"
 
 const CGFloat LookinPreviewMinScale = 0;
 const CGFloat LookinPreviewMaxScale = 1;
@@ -17,6 +18,8 @@ const CGFloat LookinPreviewMinZInterspace = 0;
 const CGFloat LookinPreviewMaxZInterspace = 1;
 
 @interface LookinPreviewView ()
+
+@property(nonatomic, strong) LKHierarchyDataSource *dataSource;
 
 @property(nonatomic, strong) SCNNode *stageNode;
 
@@ -32,8 +35,9 @@ const CGFloat LookinPreviewMaxZInterspace = 1;
 
 @implementation LookinPreviewView
 
-- (instancetype)initWithFrame:(CGRect)frame options:(nullable NSDictionary<NSString *, id> *)options {
-    if (self = [super initWithFrame:frame options:options]) {
+- (instancetype)initWithDataSource:(LKHierarchyDataSource *)dataSource {
+    if (self = [super initWithFrame:CGRectZero options:nil]) {
+        self.dataSource = dataSource;
         self.displayItemNodes = [NSMutableArray array];
         
         self.allowsCameraControl = NO;
@@ -102,7 +106,7 @@ const CGFloat LookinPreviewMaxZInterspace = 1;
     }
     
     [self.displayItemNodes lookin_dequeueWithCount:items.count add:^LookinDisplayItemNode *(NSUInteger idx) {
-        LookinDisplayItemNode *newNode = [LookinDisplayItemNode new];
+        LookinDisplayItemNode *newNode = [[LookinDisplayItemNode alloc] initWithDataSource:self.dataSource];
         newNode.screenSize = self.appScreenSize;
         newNode.preferenceManager = self.preferenceManager;
         newNode.isDarkMode = self.isDarkMode;
