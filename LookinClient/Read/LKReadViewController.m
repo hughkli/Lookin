@@ -31,6 +31,7 @@
 @property(nonatomic, strong) LKReadHierarchyController *hierarchyController;
 @property(nonatomic, strong) LKPreviewController *previewController;
 @property(nonatomic, strong) LKMeasureController *measureController;
+@property(nonatomic, strong) LKYellowTipsView *focusTipView;
 
 @end
 
@@ -61,7 +62,30 @@
         [self.splitRightView addSubview:self.measureController.view];
         [self addChildViewController:self.measureController];
         
+        self.focusTipView = [LKYellowTipsView new];
+        self.focusTipView.image = NSImageMake(@"icon_info");
+        self.focusTipView.title = NSLocalizedString(@"Currently in Focus mode", nil);
+        self.focusTipView.hidden = YES;
+        self.focusTipView.buttonText = NSLocalizedString(@"Exit", nil);
+        self.focusTipView.target = self;
+        self.focusTipView.clickAction = @selector(_handleExitFocusTipView);
+        [self.view addSubview:self.focusTipView];
+        
         [manager.isMeasuring subscribe:self action:@selector(_handleToggleMeasure:) relatedObject:nil];
+        
+        @weakify(self);
+        [RACObserve(self.hierarchyDataSource, state) subscribeNext:^(NSNumber * _Nullable x) {
+            @strongify(self);
+            LKHierarchyDataSourceState state = x.unsignedIntegerValue;
+            BOOL isFocus = (state == LKHierarchyDataSourceStateFocus);
+            self.focusTipView.hidden = !isFocus;
+            if (isFocus) {
+                [self.focusTipView startAnimation];
+            } else {
+                [self.focusTipView endAnimation];
+            }
+            [self.view setNeedsLayout:YES];
+        }];
     }
     return self;
 }
@@ -83,13 +107,14 @@
     $(self.previewController.view).fullFrame;
     $(self.dashboardController.view).width(DashboardViewWidth).right(0).fullHeight;
     $(self.measureController.view).width(MeasureViewWidth).right(DashboardHorInset).fullHeight;
-//    CGFloat windowTitleHeight = [LKNavigationManager sharedInstance].windowTitleBarHeight;
-//    __block CGFloat tipsY = windowTitleHeight + 10;
-//    [$(self.zoomTipsView).visibles.array enumerateObjectsUsingBlock:^(LKTipsView *tipsView, NSUInteger idx, BOOL * _Nonnull stop) {
-//        CGFloat midX = self.hierarchyController.view.$width + (self.previewController.view.$width - DashboardViewWidth) / 2.0;
-//        $(tipsView).sizeToFit.y(tipsY).midX(midX);
-//        tipsY = tipsView.$maxY + 5;
-//    }];
+    
+    CGFloat windowTitleHeight = [LKNavigationManager sharedInstance].windowTitleBarHeight;
+    __block CGFloat tipsY = windowTitleHeight + 10;
+    [$(self.focusTipView).visibles.array enumerateObjectsUsingBlock:^(LKTipsView *tipsView, NSUInteger idx, BOOL * _Nonnull stop) {
+        CGFloat midX = self.hierarchyController.view.$width + (self.previewController.view.$width - DashboardViewWidth) / 2.0;
+        $(tipsView).sizeToFit.y(tipsY).midX(midX);
+        tipsY = tipsView.$maxY + 5;
+    }];
 }
 
 - (LKHierarchyView *)currentHierarchyView {
@@ -100,6 +125,10 @@
     BOOL isMeasuring = param.boolValue;
     self.dashboardController.view.hidden = isMeasuring;
     self.measureController.view.hidden = !isMeasuring;
+}
+
+- (void)_handleExitFocusTipView {
+    [[self hierarchyDataSource] endFocus];
 }
 
 #pragma mark - <NSSplitViewDelegate>

@@ -194,9 +194,18 @@
 
 @end
 
+@interface LKYellowTipsView ()
+
+@property(nonatomic, assign) BOOL isAnimating;
+
+@end
+
 @implementation LKYellowTipsView
 
 - (void)startAnimation {
+    if (self.isAnimating) {
+        return;
+    }
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
     if ([self.effectiveAppearance lk_isDarkMode]) {
         anim.fromValue = (id)[NSColor.systemOrangeColor colorWithAlphaComponent:0.7].CGColor;
@@ -210,10 +219,13 @@
     anim.autoreverses = YES;
     [self.layer removeAllAnimations];
     [self.layer addAnimation:anim forKey:nil];
+    
+    self.isAnimating = YES;
 }
 
 - (void)endAnimation {
     [self.layer removeAllAnimations];
+    self.isAnimating = NO;
 }
 
 - (void)updateColors {
