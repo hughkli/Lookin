@@ -183,3 +183,5 @@
 "No message" = "无内容";
 "Your iOS project uses version %@ of the LookinServer SDK, while the latest version online is %@, it is recommended to upgrade." = "你的 iOS 项目中使用的 LookinServer SDK 的版本是 %@，而线上最新版是 %@，推荐升级。";
 "Check out version updates on GitHub…" = "在 GitHub 上查看版本更新内容…";
+"Your iOS project seems to use Swift, but you haven't turn on Swift optimization for Lookin" = "你的 iOS 项目似乎使用了 Swift，但你却没有给 Lookin 开启 Swift 优化";
+"How to turn on…" = "如何开启…";

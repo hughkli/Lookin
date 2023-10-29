@@ -313,14 +313,6 @@
         [menu addItem:[NSMenuItem separatorItem]];
     }
     
-    if (menu.numberOfItems == 0) {
-        [menu addItem:({
-            NSMenuItem *menuItem = [NSMenuItem new];
-            menuItem.title = NSLocalizedString(@"No message", nil);
-            menuItem;
-        })];
-    }
-    
     NSString *userVersion = [[[LKAppsManager.sharedInstance inspectingApp] appInfo] serverReadableVersion];
     NSString *newestVersion = [[LKServerVersionRequestor shared] query];
     if (userVersion.length > 0 && newestVersion.length > 0) {
@@ -341,7 +333,36 @@
                 menuItem.action = @selector(handleVersionsHistory);
                 menuItem;
             })];
+            [menu addItem:[NSMenuItem separatorItem]];
         }
+    }
+    
+    BOOL serverSideIsSwiftProject = [LKStaticHierarchyDataSource sharedInstance].serverSideIsSwiftProject;
+    int serverUsedSwiftSubspec = [[[LKAppsManager.sharedInstance inspectingApp] appInfo] swiftEnabledInLookinServer];
+    if (serverSideIsSwiftProject && serverUsedSwiftSubspec == -1) {
+        [menu addItem:({
+            NSMenuItem *menuItem = [NSMenuItem new];
+            menuItem.image = [NSImage imageNamed:@"Icon_Inspiration_small"];
+            NSString *format = NSLocalizedString(@"Your iOS project seems to use Swift, but you haven't turn on Swift optimization for Lookin", nil);
+            menuItem.title = [NSString stringWithFormat:format, userVersion, newestVersion];
+            menuItem;
+        })];
+        [menu addItem:({
+            NSMenuItem *menuItem = [NSMenuItem new];
+            menuItem.image = [[NSImage alloc] initWithSize:NSMakeSize(18, 1)];
+            menuItem.title = NSLocalizedString(@"How to turn on…", nil);
+            menuItem.target = self;
+            menuItem.action = @selector(handleTurnOnSwift);
+            menuItem;
+        })];
+    }
+    
+    if (menu.numberOfItems == 0) {
+        [menu addItem:({
+            NSMenuItem *menuItem = [NSMenuItem new];
+            menuItem.title = NSLocalizedString(@"No message", nil);
+            menuItem;
+        })];
     }
     
     [NSMenu popUpContextMenu:menu withEvent:[[NSApplication sharedApplication] currentEvent] forView:button];
@@ -494,6 +515,10 @@
 
 - (void)handleVersionsHistory {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/QMUI/LookinServer/releases"]];
+}
+
+- (void)handleTurnOnSwift {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://bytedance.feishu.cn/docx/GFRLdzpeKoakeyxvwgCcZ5XdnTb"]];
 }
 
 @end

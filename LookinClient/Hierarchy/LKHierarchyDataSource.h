@@ -96,6 +96,8 @@ typedef NS_ENUM(NSUInteger, LKHierarchyDataSourceState) {
 /// 当该属性为 YES 时，表示正处于 dashboard 搜索状态中，此时 preview 界面不应该响应图层点击
 @property(nonatomic, assign) BOOL shouldAvoidChangingPreviewSelectionDueToDashboardSearch;
 
+@property(nonatomic, assign, readonly) BOOL serverSideIsSwiftProject;
+
 #pragma mark - Search or Focus
 
 /// 应该在用户输入搜索词时调用该方法，内部会直接更改 flatItems 和 displayingFlatItems 对象

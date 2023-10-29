@@ -153,7 +153,6 @@
     // no preview
     NSSet<NSString *> *classesWithNoPreview = [NSSet setWithArray:@[@"UITextEffectsWindow", @"UIRemoteKeyboardWindow"]];
     
-    __block BOOL isSwiftProject = NO;
     [flatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj itemIsKindOfClassesWithNames:classesPreferredToCollapse]) {
             [obj enumerateSelfAndChildren:^(LookinDisplayItem *item) {
@@ -180,9 +179,9 @@
 //            }];
 //        }
         
-        if (!isSwiftProject) {
+        if (!self.serverSideIsSwiftProject) {
             if ([obj.displayingObject.completedSelfClassName containsString:@"."]) {
-                isSwiftProject = YES;
+                _serverSideIsSwiftProject = YES;
             }
         }
     }];
