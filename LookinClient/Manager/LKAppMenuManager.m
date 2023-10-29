@@ -41,7 +41,6 @@ static NSUInteger const kTag_CocoaPods = 51;
 static NSUInteger const kTag_ShowWebsite = 52;
 static NSUInteger const kTag_ShowConfig = 53;
 static NSUInteger const kTag_ShowLookiniOS = 54;
-static NSUInteger const kTag_MethodTrace = 55;
 static NSUInteger const kTag_DeveloperProfile = 56;
 
 static NSUInteger const kTag_GitHub = 57;
@@ -91,7 +90,6 @@ static NSUInteger const kTag_ReduceReloadTime = 69;
                                    @(kTag_Export):NSStringFromSelector(@selector(appMenuManagerDidSelectExport)),
                                    @(kTag_OpenInNewWindow):NSStringFromSelector(@selector(appMenuManagerDidSelectOpenInNewWindow)),
                                    @(kTag_Filter):NSStringFromSelector(@selector(appMenuManagerDidSelectFilter)),
-                                   @(kTag_MethodTrace):NSStringFromSelector(@selector(appMenuManagerDidSelectMethodTrace)),
     };
     
     NSMenu *menu = [NSApp mainMenu];

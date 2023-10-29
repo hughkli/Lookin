@@ -10,7 +10,6 @@
 #import "LKTutorialPopoverController.h"
 #import "LKHelper.h"
 
-static NSString * const Key_MethodTrace = @"Tut_0";
 static NSString * const Key_USBLowSpeed = @"Tut_1";
 static NSString * const Key_TogglePreview = @"Tut_2";
 static NSString * const Key_QuickSelection = @"Tut_5";
@@ -42,7 +41,6 @@ static NSString * const Key_EventsHandler = @"Tut_EventsHandler";
     if (self = [super init]) {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         
-        _methodTrace = [userDefaults boolForKey:Key_MethodTrace];
         _USBLowSpeed = [userDefaults boolForKey:Key_USBLowSpeed];
         _togglePreview = [userDefaults boolForKey:Key_TogglePreview];
         _quickSelection = [userDefaults boolForKey:Key_QuickSelection];
@@ -52,14 +50,6 @@ static NSString * const Key_EventsHandler = @"Tut_EventsHandler";
         _eventsHandler = [userDefaults boolForKey:Key_EventsHandler];
     }
     return self;
-}
-
-- (void)setMethodTrace:(BOOL)methodTrace {
-    if (_methodTrace == methodTrace) {
-        return;
-    }
-    _methodTrace = methodTrace;
-    [[NSUserDefaults standardUserDefaults] setBool:methodTrace forKey:Key_MethodTrace];
 }
 
 - (void)setUSBLowSpeed:(BOOL)USBLowSpeed {

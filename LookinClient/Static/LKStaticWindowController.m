@@ -424,8 +424,4 @@
     [[self.viewController currentHierarchyView] activateSearchBar];
 }
 
-- (void)appMenuManagerDidSelectMethodTrace {
-    [[LKNavigationManager sharedInstance] showMethodTrace];
-}
-
 @end

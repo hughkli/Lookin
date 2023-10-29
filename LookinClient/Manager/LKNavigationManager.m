@@ -16,7 +16,6 @@
 #import "LKAppsManager.h"
 #import "LookinHierarchyFile.h"
 #import "LKReadWindowController.h"
-#import "LKMethodTraceWindowController.h"
 #import "LKConsoleViewController.h"
 #import "LKPreferenceManager.h"
 #import "LKAboutWindowController.h"
@@ -79,22 +78,6 @@
     [self.aboutWindowController showWindow:self];
 }
 
-- (void)showMethodTrace {
-    if (!self.methodTraceWindowController) {
-        if (![LKAppsManager sharedInstance].inspectingApp) {
-            NSWindow *window = self.staticWindowController.window;
-            AlertErrorText(NSLocalizedString(@"Can not use Method Trace at this time.", nil), NSLocalizedString(@"Lost connection with the iOS app.", nil), window);
-            return;
-        }
-        
-        _methodTraceWindowController = [LKMethodTraceWindowController new];
-        self.methodTraceWindowController.window.delegate = self;
-    }
-    [self.methodTraceWindowController showWindow:self];
-    
-    [MSACAnalytics trackEvent:@"Launch MethodTrace"];
-}
-
 - (LKWindowController *)currentKeyWindowController {
     NSWindow *keyWindow = [NSApplication sharedApplication].keyWindow;
     if ([keyWindow.windowController isKindOfClass:[LKWindowController class]]) {
@@ -149,7 +132,7 @@
 
 
 /**
- staticWindowController 关闭时不要直接释放，因为点击 methodTrace 窗口的“连接已断开” tips 需要唤起 static 窗口来切换 App
+ staticWindowController 关闭时不要直接释放，因为点击某些窗口的“连接已断开” tips 可能需要唤起 static 窗口来切换 App
  */
 - (void)windowWillClose:(NSNotification *)notification {
     NSWindow *closingWindow = notification.object;
@@ -159,10 +142,6 @@
         
     } else if (closingWindow == self.staticWindowController.window) {
         [closingWindow saveFrameUsingName:LKWindowSizeName_Static];
-        
-    } else if (closingWindow == self.methodTraceWindowController.window) {
-        [closingWindow saveFrameUsingName:LKWindowSizeName_Methods];
-        _methodTraceWindowController = nil;
         
     } else if (closingWindow == self.aboutWindowController.window) {
         self.aboutWindowController = nil;

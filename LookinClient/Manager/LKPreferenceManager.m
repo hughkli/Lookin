@@ -15,7 +15,6 @@ NSString *const NotificationName_DidChangeSectionShowing = @"NotificationName_Di
 
 NSString *const LKWindowSizeName_Dynamic = @"LKWindowSizeName_Dynamic";
 NSString *const LKWindowSizeName_Static = @"LKWindowSizeName_Static";
-NSString *const LKWindowSizeName_Methods = @"LKWindowSizeName_Methods";
 
 const CGFloat LKInitialPreviewScale = 0.27;
 

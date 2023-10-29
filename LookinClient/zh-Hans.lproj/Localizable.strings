@@ -3,7 +3,6 @@
 "Select App" = "App 切换";
 "View" = "图像";
 "Zoom" = "大小";
-"Method Trace" = "方法监听";
 "Console" = "控制台";
 "Free Rotation" = "自由旋转";
 
@@ -103,7 +102,6 @@
 "File Size: %.2f M" = "文件大小约 %.2f M";
 "Failed to show framework in Finder" = "试图在 Finder 中显示 Framework 文件时遇到错误";
 "You can download framework from the url below:" = "可从该地址手动下载 Framewowk 文件：";
-"Can not use Method Trace at this time." = "无法使用方法监听功能";
 "Lost connection with the iOS app." = "与 iOS App 的连接已断开";
 "Lookin doesn't support adding \"-(void)dealloc\" method." = "不支持监听 dealloc 方法";
 

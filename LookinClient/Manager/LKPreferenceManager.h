@@ -12,7 +12,6 @@
 
 extern NSString *const LKWindowSizeName_Dynamic;
 extern NSString *const LKWindowSizeName_Static;
-extern NSString *const LKWindowSizeName_Methods;
 
 /// 初始的 preview scale
 extern const CGFloat LKInitialPreviewScale;
