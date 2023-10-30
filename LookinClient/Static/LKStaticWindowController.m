@@ -322,7 +322,7 @@
                     NSString *format = NSLocalizedString(@"Your iOS project uses version %@ of the LookinServer SDK, while the latest version online is %@, it is recommended to upgrade.", nil);
                     menuItem.title = [NSString stringWithFormat:format, userVersion, newestVersion];
                 } else {
-                    NSString *format = NSLocalizedString(@"Your iOS project uses an outdated version of the LookinServer SDK. It is recommended to upgrade to the latest version %@.", nil);
+                    NSString *format = NSLocalizedString(@"Your iOS project uses an outdated version of the LookinServer SDK. It is recommended to upgrade to the latest version %@", nil);
                     menuItem.title = [NSString stringWithFormat:format, newestVersion];
                 }
                 menuItem;

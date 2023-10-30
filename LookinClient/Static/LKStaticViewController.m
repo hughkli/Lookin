@@ -113,7 +113,7 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     
     self.focusTipView = [LKYellowTipsView new];
     self.focusTipView.image = NSImageMake(@"icon_info");
-    self.focusTipView.title = NSLocalizedString(@"Currently in Focus mode", nil);
+    self.focusTipView.title = NSLocalizedString(@"Currently in focus mode", nil);
     self.focusTipView.hidden = YES;
     self.focusTipView.buttonText = NSLocalizedString(@"Exit", nil);
     self.focusTipView.target = self;
