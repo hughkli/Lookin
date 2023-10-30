@@ -29,8 +29,6 @@
 - (void)showMoveWithSpaceTutorialTips;
 @property(nonatomic, assign) BOOL isShowingMoveWithSpaceTutorialTips;
 
-@property(nonatomic, assign) BOOL isShowingDoubleClickTutorialTips;
-
 - (void)showNoPreviewTutorialTips;
 
 - (void)removeTutorialTips;

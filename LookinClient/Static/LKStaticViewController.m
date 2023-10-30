@@ -301,19 +301,6 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     if (TutorialMng.hasAlreadyShowedTipsThisLaunch) {
         return;
     }
-    if (!TutorialMng.doubleClick) {
-        [self _showDoubleClickTutorialTips];
-        return;
-    }
-}
-
-- (void)_showDoubleClickTutorialTips {
-    TutorialMng.doubleClick = YES;
-    TutorialMng.hasAlreadyShowedTipsThisLaunch = YES;
-    self.isShowingDoubleClickTutorialTips = YES;
-    [self _initTutorialTipsIfNeeded];
-    self.tutorialTipView.title = NSLocalizedString(@"You can double-click screenshot to expand or collapse it", nil);
-    [self.view setNeedsLayout:YES];
 }
 
 - (void)showQuickSelectionTutorialTips {
@@ -350,7 +337,6 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     }
     self.isShowingQuickSelectTutorialTips = NO;
     self.isShowingMoveWithSpaceTutorialTips = NO;
-    self.isShowingDoubleClickTutorialTips = NO;
 }
 
 - (void)_initTutorialTipsIfNeeded {

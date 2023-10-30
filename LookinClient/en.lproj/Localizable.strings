@@ -19,11 +19,14 @@
 "No inspectable app was found" = "No inspectable app was found";
 
 "Preferences" = "Preferences";
-"Appearance:" = "Appearance:";
+"Appearance" = "Appearance";
+"Double click" = "Double click";
+"Expand or collapse layer" = "Expand or collapse layer";
+"Focus on layer" = "Focus on layer";
 "Dark Mode" = "Dark Mode";
 "Light Mode" = "Light Mode";
 "System Default" = "System Default";
-"Color Format:" = "Color Format:";
+"Color Format" = "Color Format";
 "Color will be displayed in format like (255, 12, 34, 0.5). Alpha value is between 0 and 1." = "Color will be displayed in format like (255, 12, 34, 0.5). Alpha value is between 0 and 1.";
 "Color will be displayed in format like #7e7e7eff. The components are #RRGGBBAA." = "Color will be displayed in format like #7e7e7eff. The components are #RRGGBBAA.";
 "Share analytics with Lookin" = "Share analytics with Lookin";
@@ -185,3 +188,5 @@
 "Check out version updates on GitHub…" = "Check out version updates on GitHub…";
 "Your iOS project seems to use Swift, but you haven't turn on Swift optimization for Lookin" = "Your iOS project seems to use Swift, but you haven't turn on Swift optimization for Lookin";
 "How to turn on…" = "How to turn on…";
+"What do you want to happen when you double click the layer?" = "What do you want to happen when you double click the layer?";
+"You can change it at any time in your Preferences." = "You can change it at any time in your Preferences.";

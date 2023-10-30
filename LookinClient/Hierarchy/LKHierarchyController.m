@@ -12,6 +12,7 @@
 #import "LKTableView.h"
 #import "LKTutorialManager.h"
 #import "LKHierarchyDataSource+KeyDown.h"
+#import "LKPreferenceManager.h"
 
 @interface LKHierarchyController ()
 
@@ -92,13 +93,27 @@
 }
 
 - (void)hierarchyView:(LKHierarchyView *)view didDoubleClickItem:(LookinDisplayItem *)item {
-    if (!item.isExpandable) {
+    BOOL hasShowedAsk = [LKPreferenceManager popupToAskDoubleClickBehaviorIfNeededWithWindow:self.view.window];
+    if (hasShowedAsk) {
         return;
     }
-    if (item.isExpanded) {
-        [self.dataSource collapseItem:item];
+
+    LookinDoubleClickBehavior behavior = [[LKPreferenceManager mainManager] doubleClickBehavior];
+    if (behavior == LookinDoubleClickBehaviorCollapse) {
+        if (!item.isExpandable) {
+            return;
+        }
+        if (item.isExpanded) {
+            [self.dataSource collapseItem:item];
+        } else {
+            [self.dataSource expandItem:item];
+        }
+
+    } else if (behavior == LookinDoubleClickBehaviorFocus) {
+        [self.dataSource focusDisplayItem:item];
+        
     } else {
-        [self.dataSource expandItem:item];
+        NSAssert(NO, @"");
     }
 }
 

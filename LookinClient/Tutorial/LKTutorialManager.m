@@ -14,9 +14,9 @@ static NSString * const Key_USBLowSpeed = @"Tut_1";
 static NSString * const Key_TogglePreview = @"Tut_2";
 static NSString * const Key_QuickSelection = @"Tut_5";
 static NSString * const Key_MoveWithSpace = @"Tut_6";
-static NSString * const Key_DoubleClick = @"Tut_7";
 static NSString * const Key_CopyTitle = @"Tut_8";
 static NSString * const Key_EventsHandler = @"Tut_EventsHandler";
+static NSString * const Key_DoubleClickBehavior = @"Tut_DoubleClickBehavior";
 
 @interface LKTutorialManager () <NSPopoverDelegate>
 
@@ -45,11 +45,16 @@ static NSString * const Key_EventsHandler = @"Tut_EventsHandler";
         _togglePreview = [userDefaults boolForKey:Key_TogglePreview];
         _quickSelection = [userDefaults boolForKey:Key_QuickSelection];
         _moveWithSpace = [userDefaults boolForKey:Key_MoveWithSpace];
-        _doubleClick = [userDefaults boolForKey:Key_DoubleClick];
         _copyTitle = [userDefaults boolForKey:Key_CopyTitle];
         _eventsHandler = [userDefaults boolForKey:Key_EventsHandler];
+        _hasAskedDoubleClickBehavior = [userDefaults boolForKey:Key_DoubleClickBehavior];
     }
     return self;
+}
+
+- (void)setHasAskedDoubleClickBehavior:(BOOL)hasAskedDoubleClickBehavior {
+    _hasAskedDoubleClickBehavior = hasAskedDoubleClickBehavior;
+    [[NSUserDefaults standardUserDefaults] setBool:hasAskedDoubleClickBehavior forKey:Key_DoubleClickBehavior];
 }
 
 - (void)setUSBLowSpeed:(BOOL)USBLowSpeed {
@@ -82,14 +87,6 @@ static NSString * const Key_EventsHandler = @"Tut_EventsHandler";
     }
     _moveWithSpace = moveWithSpace;
     [[NSUserDefaults standardUserDefaults] setBool:moveWithSpace forKey:Key_MoveWithSpace];
-}
-
-- (void)setDoubleClick:(BOOL)doubleClick {
-    if (_doubleClick == doubleClick) {
-        return;
-    }
-    _doubleClick = doubleClick;
-    [[NSUserDefaults standardUserDefaults] setBool:doubleClick forKey:Key_DoubleClick];
 }
 
 - (void)setCopyTitle:(BOOL)copyTitle {

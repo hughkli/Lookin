@@ -20,11 +20,11 @@
 
 @property(nonatomic, assign) BOOL moveWithSpace;
 
-@property(nonatomic, assign) BOOL doubleClick;
-
 @property(nonatomic, assign) BOOL copyTitle;
 
 @property(nonatomic, assign) BOOL eventsHandler;
+
+@property(nonatomic, assign) BOOL hasAskedDoubleClickBehavior;
 
 /// 当用户点击了“知道了，不再提示”导致弹框关闭，或者弹框出现 2 秒后才被关闭时，learnedBlock 会被调用
 - (void)showPopoverOfView:(NSView *)view text:(NSString *)text learned:(void (^)(void))learnedBlock;

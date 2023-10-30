@@ -452,21 +452,30 @@ extern NSString *const LKAppShowConsoleNotificationName;
     
     NSPoint point = [recognizer locationInView:self.previewView];
     LookinDisplayItem *item = [self.previewView displayItemAtPoint:point];
-    
-    TutorialMng.doubleClick = YES;
-    if (self.staticViewController.isShowingDoubleClickTutorialTips) {
-        [self.staticViewController removeTutorialTips];
-    }
-    
     if (!item.displayingInHierarchy) {
         return;
     }
-    if (item.isExpandable) {
-        if (item.isExpanded) {
-            [self.dataSource collapseItem:item];
-        } else {
-            [self.dataSource expandItem:item];
+    
+    BOOL hasShowedAsk = [LKPreferenceManager popupToAskDoubleClickBehaviorIfNeededWithWindow:self.view.window];
+    if (hasShowedAsk) {
+        return;
+    }
+    
+    LookinDoubleClickBehavior behavior = [[LKPreferenceManager mainManager] doubleClickBehavior];
+    if (behavior == LookinDoubleClickBehaviorCollapse) {
+        if (item.isExpandable) {
+            if (item.isExpanded) {
+                [self.dataSource collapseItem:item];
+            } else {
+                [self.dataSource expandItem:item];
+            }
         }
+        
+    } else if (behavior == LookinDoubleClickBehaviorFocus) {
+        [self.dataSource focusDisplayItem:item];
+        
+    } else {
+        NSAssert(NO, @"");
     }
 }
 

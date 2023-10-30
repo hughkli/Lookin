@@ -19,11 +19,14 @@
 "No inspectable app was found" = "没有发现任何可以连接的 iOS App";
 
 "Preferences" = "偏好设置";
-"Appearance:" = "外观：";
+"Appearance" = "外观";
+"Double click" = "双击图层";
+"Expand or collapse layer" = "展开或折叠";
+"Focus on layer" = "聚焦";
 "Dark Mode" = "深色";
 "Light Mode" = "浅色";
 "System Default" = "跟随系统";
-"Color Format:" = "颜色格式：";
+"Color Format" = "颜色格式";
 "Color will be displayed in format like (255, 12, 34, 0.5). Alpha value is between 0 and 1." = "将以诸如 (255, 12, 34, 0.5) 这样的格式显示色值信息，其中透明度 A 的范围是 0 ~ 1";
 "Color will be displayed in format like #7e7e7eff. The components are #RRGGBBAA." = "将以诸如 #7e7e7eff 这样的格式显示色值信息，顺序是 #RRGGBBAA";
 "Share analytics with Lookin" = "分享诊断和统计数据";
@@ -185,3 +188,5 @@
 "Check out version updates on GitHub…" = "在 GitHub 上查看版本更新内容…";
 "Your iOS project seems to use Swift, but you haven't turn on Swift optimization for Lookin" = "你的 iOS 项目似乎使用了 Swift，但你却没有给 Lookin 开启 Swift 优化";
 "How to turn on…" = "如何开启…";
+"What do you want to happen when you double click the layer?" = "当双击图层时，你希望发生什么？";
+"You can change it at any time in your Preferences." = "你可以在偏好设置中随时修改";
