@@ -186,6 +186,7 @@
     NSMutableArray *ret = @[LKToolBarIdentifier_Reload, LKToolBarIdentifier_App, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Dimension, LKToolBarIdentifier_Rotation, LKToolBarIdentifier_Setting, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Scale, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Measure, LKToolBarIdentifier_Console].mutableCopy;
     if ([[[LKMessageManager sharedInstance] queryMessages] count] > 0) {
         [ret addObject:LKToolBarIdentifier_Message];
+        [MSACAnalytics trackEvent:@"Show Notification"];
     }
     return [ret copy];;
 }
@@ -367,6 +368,12 @@
     }
     
     [NSMenu popUpContextMenu:menu withEvent:[[NSApplication sharedApplication] currentEvent] forView:button];
+    
+    [MSACAnalytics trackEvent:@"Open Notification" withProperties:@{
+        @"Jobs": [NSString stringWithFormat:@"%@", @([msgs containsObject:LKMessage_Jobs])],
+        @"SwiftSubspec": [NSString stringWithFormat:@"%@", @([msgs containsObject:LKMessage_SwiftSubspec])],
+        @"LowServer": [NSString stringWithFormat:@"%@", @([msgs containsObject:LKMessage_NewServerVersion])],
+    }];
 }
 
 - (void)_handleFreeRotation {

@@ -11,6 +11,7 @@
 #import "LookinPreviewView.h"
 #import "LKTutorialManager.h"
 @import AppCenter;
+@import AppCenterAnalytics;
 
 NSString *const NotificationName_DidChangeSectionShowing = @"NotificationName_DidChangeSectionShowing";
 
@@ -181,6 +182,8 @@ static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
         
         _receivingConfigTime_Color = [userDefaults doubleForKey:Key_ReceivingConfigTime_Color];
         _receivingConfigTime_Class = [userDefaults doubleForKey:Key_ReceivingConfigTime_Class];
+        
+        [self reportStatistics];
     }
     return self;
 }
@@ -439,6 +442,15 @@ static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
 
 - (void)reset {
     [LKTutorialManager sharedInstance].hasAskedDoubleClickBehavior = NO;
+}
+
+- (void)reportStatistics {
+    [MSACAnalytics trackEvent:@"Preference" withProperties:@{
+        @"DoubleClick": [NSString stringWithFormat:@"%@", @(self.doubleClickBehavior)],
+        @"ShowHidden": [NSString stringWithFormat:@"%@", @(self.showHiddenItems.currentBOOLValue)],
+        @"RGBA": [NSString stringWithFormat:@"%@", @(self.rgbaFormat)],
+        @"FreeRotation": [NSString stringWithFormat:@"%@", @(self.freeRotation.currentBOOLValue)],
+    }];
 }
 
 @end

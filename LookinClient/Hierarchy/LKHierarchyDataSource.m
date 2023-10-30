@@ -642,6 +642,8 @@
 
 // 有可能从 normal 状态或 search 状态进入该状态
 - (void)focusDisplayItem:(LookinDisplayItem *)item {
+    [MSACAnalytics trackEvent:@"Focus"];
+
     if (!item) {
         NSAssert(NO, @"");
         return;
