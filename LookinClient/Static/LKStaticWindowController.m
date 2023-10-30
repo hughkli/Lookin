@@ -28,7 +28,7 @@
 #import "LookinPreviewView.h"
 #import "LKHierarchyView.h"
 #import "LKPerformanceReporter.h"
-#import "LKNotificationManager.h"
+#import "LKMessageManager.h"
 #import "LKServerVersionRequestor.h"
 #import "LKVersionComparer.h"
 
@@ -183,7 +183,11 @@
 }
 
 - (NSArray<NSToolbarItemIdentifier> *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar {
-    return @[LKToolBarIdentifier_Reload, LKToolBarIdentifier_App, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Dimension, LKToolBarIdentifier_Rotation, LKToolBarIdentifier_Setting, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Scale, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Measure, LKToolBarIdentifier_Console, LKToolBarIdentifier_Message];
+    NSMutableArray *ret = @[LKToolBarIdentifier_Reload, LKToolBarIdentifier_App, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Dimension, LKToolBarIdentifier_Rotation, LKToolBarIdentifier_Setting, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Scale, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Measure, LKToolBarIdentifier_Console].mutableCopy;
+    if ([[[LKMessageManager sharedInstance] queryMessages] count] > 0) {
+        [ret addObject:LKToolBarIdentifier_Message];
+    }
+    return [ret copy];;
 }
 
 - (nullable NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSToolbarItemIdentifier)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {
@@ -232,7 +236,6 @@
 }
 
 - (void)_handleReload {
-    // 停止可能存在的刷新倒计时
     if (self.isSyncingScreenshots) {
         // 停止拉取
         [[LKStaticAsyncUpdateManager sharedInstance] endUpdatingAll];
@@ -293,36 +296,34 @@
 - (void)_handleMessage:(NSButton *)button {
     NSMenu *menu = [NSMenu new];
     
-    if ([[LKNotificationManager sharedInstance] queryIfShouldShowJobs]) {
-        [menu addItem:({
-            NSMenuItem *menuItem = [NSMenuItem new];
-            menuItem.image = [NSImage imageNamed:@"Icon_Inspiration_small"];
-            menuItem.title = NSLocalizedString(@"Job openings…(China)", nil);
-            menuItem.target = self;
-            menuItem.action = @selector(handleJobsMenuItem);
-            menuItem;
-        })];
-        [menu addItem:({
-            NSMenuItem *menuItem = [NSMenuItem new];
-            menuItem.image = [[NSImage alloc] initWithSize:NSMakeSize(18, 1)];
-            menuItem.title = NSLocalizedString(@"Clear this message", nil);
-            menuItem.target = self;
-            menuItem.action = @selector(handleClearJobsMenuItem);
-            menuItem;
-        })];
-        [menu addItem:[NSMenuItem separatorItem]];
-    }
-    
-    NSString *userVersion = [[[LKAppsManager.sharedInstance inspectingApp] appInfo] serverReadableVersion];
-    NSString *newestVersion = [[LKServerVersionRequestor shared] query];
-    if (userVersion.length > 0 && newestVersion.length > 0) {
-        BOOL isNew = [LKVersionComparer compareWithNewest:newestVersion user:userVersion];
-        if (!isNew) {
+    NSArray<NSString *> *msgs = [[LKMessageManager sharedInstance] queryMessages];
+    for (NSString *msg in msgs) {
+        if ([msg isEqualToString:LKMessage_Jobs]) {
             [menu addItem:({
                 NSMenuItem *menuItem = [NSMenuItem new];
                 menuItem.image = [NSImage imageNamed:@"Icon_Inspiration_small"];
-                NSString *format = NSLocalizedString(@"Your iOS project uses version %@ of the LookinServer SDK, while the latest version online is %@, it is recommended to upgrade.", nil);
-                menuItem.title = [NSString stringWithFormat:format, userVersion, newestVersion];
+                menuItem.title = NSLocalizedString(@"Job openings…(China)", nil);
+                menuItem.target = self;
+                menuItem.action = @selector(handleJobsMenuItem);
+                menuItem;
+            })];
+            [menu addItem:[NSMenuItem separatorItem]];
+            continue;
+        }
+        
+        if ([msg isEqualToString:LKMessage_NewServerVersion]) {
+            [menu addItem:({
+                NSMenuItem *menuItem = [NSMenuItem new];
+                menuItem.image = [NSImage imageNamed:@"Icon_Inspiration_small"];
+                NSString *userVersion = [[[LKAppsManager.sharedInstance inspectingApp] appInfo] serverReadableVersion];
+                NSString *newestVersion = [[LKServerVersionRequestor shared] query];
+                if (userVersion.length > 0) {
+                    NSString *format = NSLocalizedString(@"Your iOS project uses version %@ of the LookinServer SDK, while the latest version online is %@, it is recommended to upgrade.", nil);
+                    menuItem.title = [NSString stringWithFormat:format, userVersion, newestVersion];
+                } else {
+                    NSString *format = NSLocalizedString(@"Your iOS project uses an outdated version of the LookinServer SDK. It is recommended to upgrade to the latest version %@.", nil);
+                    menuItem.title = [NSString stringWithFormat:format, newestVersion];
+                }
                 menuItem;
             })];
             [menu addItem:({
@@ -334,29 +335,29 @@
                 menuItem;
             })];
             [menu addItem:[NSMenuItem separatorItem]];
+            continue;
+        }
+        
+        if ([msg isEqualToString:LKMessage_SwiftSubspec]) {
+            [menu addItem:({
+                NSMenuItem *menuItem = [NSMenuItem new];
+                menuItem.image = [NSImage imageNamed:@"Icon_Inspiration_small"];
+                menuItem.title = NSLocalizedString(@"Your iOS project seems to use Swift, but you haven't turn on Swift optimization for Lookin", nil);
+                menuItem;
+            })];
+            [menu addItem:({
+                NSMenuItem *menuItem = [NSMenuItem new];
+                menuItem.image = [[NSImage alloc] initWithSize:NSMakeSize(18, 1)];
+                menuItem.title = NSLocalizedString(@"How to turn on…", nil);
+                menuItem.target = self;
+                menuItem.action = @selector(handleTurnOnSwift);
+                menuItem;
+            })];
+            [menu addItem:[NSMenuItem separatorItem]];
+            continue;
         }
     }
-    
-    BOOL serverSideIsSwiftProject = [LKStaticHierarchyDataSource sharedInstance].serverSideIsSwiftProject;
-    int serverUsedSwiftSubspec = [[[LKAppsManager.sharedInstance inspectingApp] appInfo] swiftEnabledInLookinServer];
-    if (serverSideIsSwiftProject && serverUsedSwiftSubspec == -1) {
-        [menu addItem:({
-            NSMenuItem *menuItem = [NSMenuItem new];
-            menuItem.image = [NSImage imageNamed:@"Icon_Inspiration_small"];
-            NSString *format = NSLocalizedString(@"Your iOS project seems to use Swift, but you haven't turn on Swift optimization for Lookin", nil);
-            menuItem.title = [NSString stringWithFormat:format, userVersion, newestVersion];
-            menuItem;
-        })];
-        [menu addItem:({
-            NSMenuItem *menuItem = [NSMenuItem new];
-            menuItem.image = [[NSImage alloc] initWithSize:NSMakeSize(18, 1)];
-            menuItem.title = NSLocalizedString(@"How to turn on…", nil);
-            menuItem.target = self;
-            menuItem.action = @selector(handleTurnOnSwift);
-            menuItem;
-        })];
-    }
-    
+
     if (menu.numberOfItems == 0) {
         [menu addItem:({
             NSMenuItem *menuItem = [NSMenuItem new];
@@ -507,10 +508,7 @@
 
 - (void)handleJobsMenuItem {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://bytedance.feishu.cn/docx/SAcgdoQuAouyXAxAqy8cmrT2n4b"]];
-}
-
-- (void)handleClearJobsMenuItem {
-    [[LKNotificationManager sharedInstance] markHasShowedJobs];
+    [[LKMessageManager sharedInstance] removeMessage:LKMessage_Jobs];
 }
 
 - (void)handleVersionsHistory {

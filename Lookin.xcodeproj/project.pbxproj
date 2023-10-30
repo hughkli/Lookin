@@ -17,7 +17,7 @@
 		A26EF69827F89F83005A9E4E /* ShortCocoa+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68F27F89F83005A9E4E /* ShortCocoa+Layout.m */; };
 		A26EF69927F89F83005A9E4E /* ShortCocoa+UIToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF69127F89F83005A9E4E /* ShortCocoa+UIToolkit.m */; };
 		A2C71CBE282165DB0056D991 /* LKWindowToolbarAppButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A2C71CBD282165DB0056D991 /* LKWindowToolbarAppButton.m */; };
-		A77AA17B2AEED1B8006A7BF4 /* LKNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17A2AEED1B8006A7BF4 /* LKNotificationManager.m */; };
+		A77AA17B2AEED1B8006A7BF4 /* LKMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17A2AEED1B8006A7BF4 /* LKMessageManager.m */; };
 		A77AA17E2AEED988006A7BF4 /* LKServerVersionRequestor.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17D2AEED988006A7BF4 /* LKServerVersionRequestor.m */; };
 		A77AA1822AEEE095006A7BF4 /* LKVersionComparer.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA1812AEEE095006A7BF4 /* LKVersionComparer.m */; };
 		AA01EF2722DD0D26002A2E06 /* LKHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AA01EF2522DD0D26002A2E06 /* LKHelper.m */; };
@@ -217,8 +217,8 @@
 		A26EF69327F89F83005A9E4E /* ShortCocoaCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortCocoaCore.h; sourceTree = "<group>"; };
 		A2C71CBC282165DB0056D991 /* LKWindowToolbarAppButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKWindowToolbarAppButton.h; sourceTree = "<group>"; };
 		A2C71CBD282165DB0056D991 /* LKWindowToolbarAppButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKWindowToolbarAppButton.m; sourceTree = "<group>"; };
-		A77AA1792AEED1B8006A7BF4 /* LKNotificationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKNotificationManager.h; sourceTree = "<group>"; };
-		A77AA17A2AEED1B8006A7BF4 /* LKNotificationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKNotificationManager.m; sourceTree = "<group>"; };
+		A77AA1792AEED1B8006A7BF4 /* LKMessageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMessageManager.h; sourceTree = "<group>"; };
+		A77AA17A2AEED1B8006A7BF4 /* LKMessageManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMessageManager.m; sourceTree = "<group>"; };
 		A77AA17C2AEED988006A7BF4 /* LKServerVersionRequestor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKServerVersionRequestor.h; sourceTree = "<group>"; };
 		A77AA17D2AEED988006A7BF4 /* LKServerVersionRequestor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKServerVersionRequestor.m; sourceTree = "<group>"; };
 		A77AA1802AEEE095006A7BF4 /* LKVersionComparer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKVersionComparer.h; sourceTree = "<group>"; };
@@ -902,8 +902,8 @@
 				AAA8C11221CC17680017A345 /* LKStaticWindowController.m */,
 				AAA8C0CA21CC17670017A345 /* LKStaticHierarchyController.m */,
 				AAA8C0D121CC17670017A345 /* LKStaticHierarchyController.h */,
-				A77AA1792AEED1B8006A7BF4 /* LKNotificationManager.h */,
-				A77AA17A2AEED1B8006A7BF4 /* LKNotificationManager.m */,
+				A77AA1792AEED1B8006A7BF4 /* LKMessageManager.h */,
+				A77AA17A2AEED1B8006A7BF4 /* LKMessageManager.m */,
 			);
 			path = Static;
 			sourceTree = "<group>";
@@ -1267,7 +1267,7 @@
 				AAB872E6221C26B600C25294 /* LKStaticAsyncUpdateManager.m in Sources */,
 				AAB636C022B3854100885A2C /* LKDashboardAttributeClassView.m in Sources */,
 				AAA8C12E21CC17680017A345 /* LKHierarchyView.m in Sources */,
-				A77AA17B2AEED1B8006A7BF4 /* LKNotificationManager.m in Sources */,
+				A77AA17B2AEED1B8006A7BF4 /* LKMessageManager.m in Sources */,
 				AAA8C11E21CC17680017A345 /* LKAppsManager.m in Sources */,
 				AAE61CCE22A5063F00B3FB9F /* LKInputSearchSuggestionsRowView.m in Sources */,
 				AAA8C12621CC17680017A345 /* LKProgressIndicatorView.m in Sources */,

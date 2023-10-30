@@ -184,6 +184,7 @@
 "Job openings…(China)" = "Job openings…(China)";
 "Clear this message" = "Clear this message";
 "No message" = "No message";
+"Your iOS project uses an outdated version of the LookinServer SDK. It is recommended to upgrade to the latest version %@." = "Your iOS project uses an outdated version of the LookinServer SDK. It is recommended to upgrade to the latest version %@.";
 "Your iOS project uses version %@ of the LookinServer SDK, while the latest version online is %@, it is recommended to upgrade." = "Your iOS project uses version %@ of the LookinServer SDK, while the latest version online is %@, it is recommended to upgrade.";
 "Check out version updates on GitHub…" = "Check out version updates on GitHub…";
 "Your iOS project seems to use Swift, but you haven't turn on Swift optimization for Lookin" = "Your iOS project seems to use Swift, but you haven't turn on Swift optimization for Lookin";

@@ -11,7 +11,7 @@
 #import "LKPreferenceSwitchView.h"
 #import "LKPreferencePopupView.h"
 #import "LKNavigationManager.h"
-#import "LKNotificationManager.h"
+#import "LKMessageManager.h"
 
 @interface LKPreferenceViewController ()
 
@@ -115,7 +115,7 @@
     [self renderFromPreferenceManager];
     
 #if DEBUG
-    [[LKNotificationManager sharedInstance] reset];
+    [[LKMessageManager sharedInstance] reset];
     [[LKPreferenceManager mainManager] reset];
 #endif
 }
