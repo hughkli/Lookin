@@ -47,39 +47,52 @@
 - (void)renderWithAttribute {
     self.inputView.textFieldView.textField.editable = [self canEdit];
     
-    NSString *briefTitle = [LookinDashboardBlueprint briefTitleWithAttrID:self.attribute.identifier];
-    self.inputView.title = briefTitle;
+    if (self.attribute.isUserCustom) {
+        self.inputView.title = nil;
+    } else {
+        NSString *briefTitle = [LookinDashboardBlueprint briefTitleWithAttrID:self.attribute.identifier];
+        self.inputView.title = briefTitle;
+    }
     
     double doubleValue = ((NSNumber *)self.attribute.value).doubleValue;
     
-    static dispatch_once_t onceToken;
-    static NSArray<LookinAttrIdentifier> *horizontalAttrs = nil;
-    dispatch_once(&onceToken,^{
-        horizontalAttrs = @[LookinAttr_ViewLayer_Visibility_Opacity,
-                            LookinAttr_ViewLayer_Corner_Radius,
-                            LookinAttr_ViewLayer_Tag_Tag,
-                            LookinAttr_UILabel_Font_Size,
-                            LookinAttr_UILabel_NumberOfLines_NumberOfLines,
-                            LookinAttr_UITextView_Font_Size,
-                            LookinAttr_UITextField_Font_Size,
-                            LookinAttr_UITextField_CanAdjustFont_MinSize,
-                            LookinAttr_ViewLayer_Border_Width,
-                            LookinAttr_UITableView_SectionsNumber_Number,
-                            LookinAttr_AutoLayout_Resistance_Ver,
-                            LookinAttr_AutoLayout_Resistance_Hor,
-                            LookinAttr_AutoLayout_Hugging_Ver,
-                            LookinAttr_AutoLayout_Hugging_Hor];
-    });
-    if ([horizontalAttrs containsObject:self.attribute.identifier]) {
+    if (self.attribute.isUserCustom) {
         self.inputView.viewStyle = LKNumberInputViewStyleHorizontal;
-        self.inputView.textFieldView.textField.stringValue = [NSString lookin_stringFromDouble:doubleValue decimal:3];
+        self.inputView.textFieldView.textField.stringValue = [NSString lookin_stringFromDouble:doubleValue decimal:6];
+        
     } else {
-        self.inputView.viewStyle = LKNumberInputViewStyleVertical;
-        self.inputView.textFieldView.textField.stringValue = [NSString lookin_stringFromDouble:doubleValue decimal:2];
+        static dispatch_once_t onceToken;
+        static NSArray<LookinAttrIdentifier> *horizontalAttrs = nil;
+        dispatch_once(&onceToken,^{
+            horizontalAttrs = @[LookinAttr_ViewLayer_Visibility_Opacity,
+                                LookinAttr_ViewLayer_Corner_Radius,
+                                LookinAttr_ViewLayer_Tag_Tag,
+                                LookinAttr_UILabel_Font_Size,
+                                LookinAttr_UILabel_NumberOfLines_NumberOfLines,
+                                LookinAttr_UITextView_Font_Size,
+                                LookinAttr_UITextField_Font_Size,
+                                LookinAttr_UITextField_CanAdjustFont_MinSize,
+                                LookinAttr_ViewLayer_Border_Width,
+                                LookinAttr_UITableView_SectionsNumber_Number,
+                                LookinAttr_AutoLayout_Resistance_Ver,
+                                LookinAttr_AutoLayout_Resistance_Hor,
+                                LookinAttr_AutoLayout_Hugging_Ver,
+                                LookinAttr_AutoLayout_Hugging_Hor];
+        });
+        if ([horizontalAttrs containsObject:self.attribute.identifier]) {
+            self.inputView.viewStyle = LKNumberInputViewStyleHorizontal;
+            self.inputView.textFieldView.textField.stringValue = [NSString lookin_stringFromDouble:doubleValue decimal:3];
+        } else {
+            self.inputView.viewStyle = LKNumberInputViewStyleVertical;
+            self.inputView.textFieldView.textField.stringValue = [NSString lookin_stringFromDouble:doubleValue decimal:2];
+        }
     }
 }
 
 - (NSUInteger)numberOfColumnsOccupied {
+    if (self.attribute.isUserCustom) {
+        return 1;
+    }
     static dispatch_once_t onceToken;
     static NSDictionary<LookinAttrIdentifier, NSNumber *> *rawDict = nil;
     dispatch_once(&onceToken,^{

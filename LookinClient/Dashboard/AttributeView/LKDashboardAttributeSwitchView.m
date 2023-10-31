@@ -40,7 +40,12 @@
 }
 
 - (void)renderWithAttribute {
-    NSString *title = [LookinDashboardBlueprint briefTitleWithAttrID:self.attribute.identifier];
+    NSString *title;
+    if (self.attribute.isUserCustom) {
+        title = self.attribute.displayTitle;
+    } else {
+        title = [LookinDashboardBlueprint briefTitleWithAttrID:self.attribute.identifier];
+    }
     [self.button setAttributedTitle:$(title).textColor([NSColor colorNamed:@"DashboardCardValueColor"]).attrString];
     
     BOOL boolValue = ((NSNumber *)self.attribute.value).boolValue;
@@ -57,6 +62,9 @@
 }
 
 - (NSUInteger)numberOfColumnsOccupied {
+    if (self.attribute.isUserCustom) {
+        return 1;
+    }
     if ([self.attribute.identifier isEqualToString:LookinAttr_UIScrollView_Zoom_Bounce]) {
         return 1;
     }

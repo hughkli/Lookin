@@ -317,6 +317,7 @@
         case LookinAttrTypeNSString:
         case LookinAttrTypeUIColor:
         case LookinAttrTypeEnumString:
+        case LookinAttrTypeDouble:
             return attr.displayTitle;
         default:
             return nil;
