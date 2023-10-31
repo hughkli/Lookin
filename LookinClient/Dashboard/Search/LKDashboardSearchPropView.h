@@ -13,7 +13,7 @@
 
 @protocol LKDashboardSearchPropViewDelegate <NSObject>
 
-- (void)dashboardSearchPropView:(LKDashboardSearchPropView *)view didClickRevealAttribute:(LookinAttrIdentifier)attrID;
+- (void)dashboardSearchPropView:(LKDashboardSearchPropView *)view didClickRevealAttribute:(LookinAttribute *)attr;
 
 @end
 

@@ -76,14 +76,14 @@
 
 - (void)renderWithAttribute:(LookinAttribute *)attribute {
     self.attribute = attribute;
-    self.titleLabel.stringValue = [LookinDashboardBlueprint fullTitleWithAttrID:attribute.identifier];
+    self.titleLabel.stringValue = attribute.displayTitle ? : [LookinDashboardBlueprint fullTitleWithAttrID:attribute.identifier];
     self.contentLabel.stringValue = [self _stringValueFromAttribute:attribute];
     [self setNeedsLayout:YES];
 }
 
 - (void)_handleRevealButton {
     if ([self.delegate respondsToSelector:@selector(dashboardSearchPropView:didClickRevealAttribute:)]) {
-        [self.delegate dashboardSearchPropView:self didClickRevealAttribute:self.attribute.identifier];
+        [self.delegate dashboardSearchPropView:self didClickRevealAttribute:self.attribute];
     }
 }
 
@@ -129,6 +129,7 @@
             return [NSString lookin_stringFromInset:[(NSValue *)attribute.value edgeInsetsValue]];
             
         case LookinAttrTypeNSString:
+        case LookinAttrTypeEnumString:
             return attribute.value;
             
         case LookinAttrTypeEnumInt:

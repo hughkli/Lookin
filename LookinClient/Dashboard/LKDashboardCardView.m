@@ -263,6 +263,12 @@
     return image;
 }
 
+- (LKDashboardSectionView *)querySectionViewWithSection:(LookinAttributesSection *)sec {
+    return [self.sectionViews lookin_firstFiltered:^BOOL(LKDashboardSectionView *obj) {
+        return obj.attrSection == sec;
+    }];
+}
+
 #pragma mark - Others
 
 - (void)mouseDown:(NSEvent *)event {

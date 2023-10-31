@@ -27,8 +27,8 @@
 
 @property(nonatomic, strong) NSScrollView *scrollView;
 @property(nonatomic, strong) LKBaseView *documentView;
-
 @property(nonatomic, strong) LKBaseView *cardContainerView;
+
 @property(nonatomic, copy) NSArray<LookinAttributesGroup *> *groupList;
 /// key 是 group.uniqueKey
 @property(nonatomic, strong) NSMutableDictionary<NSString *, LKDashboardCardView *> *cardViews;
@@ -38,7 +38,6 @@
 @property(nonatomic, strong) NSMutableArray<LKDashboardSearchPropView *> *searchPropViews;
 @property(nonatomic, strong) LKDashboardSearchMethodsView *searchMethodsView;
 @property(nonatomic, strong) LKDashboardSearchMethodsDataSource *methodsDataSource;
-
 
 @property(nonatomic, strong) LKStaticHierarchyDataSource *staticDataSource;
 @property(nonatomic, strong) LKReadHierarchyDataSource *readDataSource;
@@ -307,7 +306,12 @@
     [[self.currentDataSource.selectedItem queryAllAttrGroupList]  enumerateObjectsUsingBlock:^(LookinAttributesGroup * _Nonnull group, NSUInteger idx, BOOL * _Nonnull stop) {
         [group.attrSections enumerateObjectsUsingBlock:^(LookinAttributesSection * _Nonnull section, NSUInteger idx, BOOL * _Nonnull stop) {
             [section.attributes enumerateObjectsUsingBlock:^(LookinAttribute * _Nonnull attr, NSUInteger idx, BOOL * _Nonnull stop) {
-                NSString *title = [LookinDashboardBlueprint fullTitleWithAttrID:attr.identifier];
+                NSString *title;
+                if (attr.isUserCustom) {
+                    title = attr.displayTitle;
+                } else {
+                    title = [LookinDashboardBlueprint fullTitleWithAttrID:attr.identifier];
+                }
                 if ([title.lowercaseString containsString:searchString]) {
                     [resultAttrs addObject:attr];
                 }
@@ -416,34 +420,49 @@
 
 #pragma mark - <LKDashboardSearchPropViewDelegate>
 
-- (void)dashboardSearchPropView:(LKDashboardSearchPropView *)view didClickRevealAttribute:(LookinAttrIdentifier)attrID {
-    NSAssert(NO, @"");
-    return;
+- (void)dashboardSearchPropView:(LKDashboardSearchPropView *)view didClickRevealAttribute:(LookinAttribute *)clickedAttr {
     self.searchInputView.isActive = NO;
     
-    LookinAttrSectionIdentifier hostSecID = LookinAttrSec_None;
-    LookinAttrGroupIdentifier hostGroupID = LookinAttrGroup_None;
-    [LookinDashboardBlueprint getHostGroupID:&hostGroupID sectionID:&hostSecID fromAttrID:attrID];
+    __block LookinAttributesGroup *targetGroup = nil;
+    __block LookinAttributesSection *targetSection = nil;
     
-    if ([hostSecID isEqualToString:LookinAttrSec_None] || [hostGroupID isEqualToString:LookinAttrGroup_None]) {
+    [[self.currentDataSource.selectedItem queryAllAttrGroupList] enumerateObjectsUsingBlock:^(LookinAttributesGroup * _Nonnull group, NSUInteger idx, BOOL * _Nonnull stop0) {
+        [group.attrSections enumerateObjectsUsingBlock:^(LookinAttributesSection * _Nonnull section, NSUInteger idx, BOOL * _Nonnull stop1) {
+            [section.attributes enumerateObjectsUsingBlock:^(LookinAttribute * _Nonnull attr, NSUInteger idx, BOOL * _Nonnull stop2) {
+                if (attr == clickedAttr) {
+                    *stop0 = YES;
+                    *stop1 = YES;
+                    *stop2 = YES;
+                    
+                    BOOL isAlreadyAdded = [[LKPreferenceManager mainManager] isSectionShowing:section.identifier];
+                    if (!isAlreadyAdded) {
+                        // 把这个属性添加到主面板上
+                        [[LKPreferenceManager mainManager] showSection:section.identifier];
+                    }
+                    
+                    targetGroup = group;
+                    targetSection = section;
+                }
+            }];
+        }];
+    }];
+    
+    if (!targetGroup || !targetSection) {
         NSAssert(NO, @"");
         return;
     }
-    
-    BOOL isAlreadyAdded = [[LKPreferenceManager mainManager] isSectionShowing:hostSecID];
-    if (!isAlreadyAdded) {
-        // 把这个属性添加到主面板上
-        [[LKPreferenceManager mainManager] showSection:hostSecID];
+    LKDashboardCardView *targetCardView = self.cardViews[targetGroup.uniqueKey];
+    if (!targetCardView) {
+        NSAssert(NO, @"");
+        return;
     }
-    
-    LKDashboardCardView *targetCardView = self.cardViews[hostGroupID];
     if (targetCardView.isCollapsed) {
         // 如果在折叠状态则展开
         [self dashboardCardViewNeedToggleCollapse:targetCardView];
     }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        LKDashboardSectionView *targetSecView = [targetCardView sectionViewWithID:hostSecID];
+        LKDashboardSectionView *targetSecView = [targetCardView querySectionViewWithSection:targetSection];
         [self.scrollView.contentView.animator scrollRectToVisible:[self.scrollView.contentView convertRect:targetSecView.frame fromView:targetSecView.superview]];
         
         [self.cardViews.allValues enumerateObjectsUsingBlock:^(LKDashboardCardView * _Nonnull cardView, NSUInteger idx, BOOL * _Nonnull stop) {

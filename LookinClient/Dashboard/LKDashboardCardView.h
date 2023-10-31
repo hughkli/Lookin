@@ -31,7 +31,7 @@
 
 @property(nonatomic, assign) BOOL isCollapsed;
 
-- (LKDashboardSectionView *)sectionViewWithID:(LookinAttrSectionIdentifier)secID;
+- (LKDashboardSectionView *)querySectionViewWithSection:(LookinAttributesSection *)sec;
 
 /// 如果 rect 为 CGRectZero，则会全部变暗
 - (void)playFadeAnimationWithHighlightRect:(CGRect)rect;
