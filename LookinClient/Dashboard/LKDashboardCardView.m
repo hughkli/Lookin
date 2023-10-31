@@ -96,14 +96,6 @@
         $(view).x(DashboardHorInset).toRight(DashboardHorInset).heightToFit.y(y);
         y = view.$maxY + DashboardSectionMarginTop;
     }];
-//    [[LookinDashboardBlueprint sectionIDsForGroupID:self.attrGroup.identifier] enumerateObjectsUsingBlock:^(LookinAttrSectionIdentifier _Nonnull secID, NSUInteger idx, BOOL * _Nonnull stop) {
-//        LKDashboardSectionView *view = self.sectionViews[secID];
-//        if (!view.isVisible) {
-//            return;
-//        }
-//        $(view).x(DashboardHorInset).toRight(DashboardHorInset).heightToFit.y(y);
-//        y = view.$maxY + DashboardSectionMarginTop;
-//    }];
 }
 
 - (CGSize)sizeThatFits:(NSSize)limitedSize {
