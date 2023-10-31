@@ -102,10 +102,18 @@
     if (didChangeHiddenAlpha) {
         [self.itemDidChangeHiddenAlphaValue sendNext:displayItem];
     }
-    
+
+    BOOL attrChanged = NO;
     if (detail.attributesGroupList.count) {
         displayItem.attributesGroupList = detail.attributesGroupList;
-        [self.itemDidChangeAttrGroup sendNext:displayItem];
+        attrChanged = YES;
+    }
+    if (detail.customAttrGroupList.count) {
+        displayItem.customAttrGroupList = detail.customAttrGroupList;
+        attrChanged = YES;
+    }
+    if (attrChanged) {
+        [self.itemDidChangeAttrGroup sendNext:displayItem];        
     }
 }
 

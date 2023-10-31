@@ -29,8 +29,9 @@
 @property(nonatomic, strong) LKBaseView *documentView;
 
 @property(nonatomic, strong) LKBaseView *cardContainerView;
-/// key 是 LookinAttrGroupIdentifier
-@property(nonatomic, strong) NSMutableDictionary<LookinAttrGroupIdentifier, LKDashboardCardView *> *cardViews;
+@property(nonatomic, copy) NSArray<LookinAttributesGroup *> *groupList;
+/// key 是 group.uniqueKey
+@property(nonatomic, strong) NSMutableDictionary<NSString *, LKDashboardCardView *> *cardViews;
 
 @property(nonatomic, strong) LKBaseView *searchContainerView;
 @property(nonatomic, strong) LKDashboardSearchInputView *searchInputView;
@@ -100,13 +101,13 @@
     if (self.staticDataSource) {
         [[[RACSignal merge:@[RACObserve(self.staticDataSource, selectedItem)]] deliverOnMainThread] subscribeNext:^(id x) {
             @strongify(self);
-            [self reloadWithGroupList:self.staticDataSource.selectedItem.attributesGroupList];
+            [self reloadWithGroupList:[self.staticDataSource.selectedItem queryAllAttrGroupList]];
         }];
         
         [[self.staticDataSource.itemDidChangeAttrGroup deliverOnMainThread] subscribeNext:^(LookinDisplayItem *displayItem) {
             @strongify(self);
             if (self.staticDataSource.selectedItem == displayItem) {
-                [self reloadWithGroupList:displayItem.attributesGroupList];
+                [self reloadWithGroupList:[displayItem queryAllAttrGroupList]];
             }
         }];
         
@@ -119,13 +120,13 @@
     } else if (self.readDataSource) {
         [[[RACSignal merge:@[RACObserve(self.readDataSource, selectedItem)]] deliverOnMainThread] subscribeNext:^(id x) {
             @strongify(self);
-            [self reloadWithGroupList:self.readDataSource.selectedItem.attributesGroupList];
+            [self reloadWithGroupList:[self.readDataSource.selectedItem queryAllAttrGroupList]];
         }];
     }
 
     [[NSNotificationCenter defaultCenter] addObserverForName:NotificationName_DidChangeSectionShowing object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         @strongify(self);
-        [self reloadWithGroupList:[self currentDataSource].selectedItem.attributesGroupList];
+        [self reloadWithGroupList:[[self currentDataSource].selectedItem queryAllAttrGroupList]];
     }];
 }
 
@@ -143,8 +144,9 @@
         $(self.cardContainerView).width(contentWidth).x(DashboardHorInset).y(self.searchInputView.$maxY + verMargin);
     
         __block CGFloat y = 0;
-        [[LookinDashboardBlueprint groupIDs] enumerateObjectsUsingBlock:^(LookinAttrGroupIdentifier _Nonnull groupID, NSUInteger idx, BOOL * _Nonnull stop) {
-            LKDashboardCardView *view = self.cardViews[groupID];
+        
+        [self.groupList enumerateObjectsUsingBlock:^(LookinAttributesGroup * _Nonnull group, NSUInteger idx, BOOL * _Nonnull stop) {
+            LKDashboardCardView *view = self.cardViews[group.uniqueKey];
             if (view && !view.hidden) {
                 $(view).width(contentWidth).y(y).heightToFit;
                 y = view.$maxY + verMargin;
@@ -177,6 +179,8 @@
 }
 
 - (void)reloadWithGroupList:(NSArray<LookinAttributesGroup *> *)list {
+    self.groupList = list;
+    
     if (list.count > 0) {
         self.scrollView.hidden = NO;
     } else {
@@ -187,14 +191,14 @@
     NSMutableArray<LKDashboardCardView *> *needlessViews = [self.cardViews allValues].mutableCopy;
     
     [list enumerateObjectsUsingBlock:^(LookinAttributesGroup * _Nonnull group, NSUInteger idx, BOOL * _Nonnull stop) {
-        LKDashboardCardView *cardView = self.cardViews[group.identifier];
+        LKDashboardCardView *cardView = self.cardViews[group.uniqueKey];
         if (cardView) {
             [needlessViews removeObject:cardView];
         } else {
             cardView = [LKDashboardCardView new];
             cardView.dashboardViewController = self;
             cardView.delegate = self;
-            self.cardViews[group.identifier] = cardView;
+            self.cardViews[group.uniqueKey] = cardView;
             [self.cardContainerView addSubview:cardView];
         }
         cardView.hidden = NO;
@@ -300,7 +304,7 @@
     // 以下是在渲染 attrs
     
     NSMutableArray<LookinAttribute *> *resultAttrs = [NSMutableArray array];
-    [self.currentDataSource.selectedItem.attributesGroupList enumerateObjectsUsingBlock:^(LookinAttributesGroup * _Nonnull group, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[self.currentDataSource.selectedItem queryAllAttrGroupList]  enumerateObjectsUsingBlock:^(LookinAttributesGroup * _Nonnull group, NSUInteger idx, BOOL * _Nonnull stop) {
         [group.attrSections enumerateObjectsUsingBlock:^(LookinAttributesSection * _Nonnull section, NSUInteger idx, BOOL * _Nonnull stop) {
             [section.attributes enumerateObjectsUsingBlock:^(LookinAttribute * _Nonnull attr, NSUInteger idx, BOOL * _Nonnull stop) {
                 NSString *title = [LookinDashboardBlueprint fullTitleWithAttrID:attr.identifier];
@@ -413,6 +417,8 @@
 #pragma mark - <LKDashboardSearchPropViewDelegate>
 
 - (void)dashboardSearchPropView:(LKDashboardSearchPropView *)view didClickRevealAttribute:(LookinAttrIdentifier)attrID {
+    NSAssert(NO, @"");
+    return;
     self.searchInputView.isActive = NO;
     
     LookinAttrSectionIdentifier hostSecID = LookinAttrSec_None;

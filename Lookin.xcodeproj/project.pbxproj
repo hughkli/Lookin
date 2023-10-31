@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		094E413CB04F29F94551D070 /* Pods_LookinClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A3B0CB06C22A05EDC913F3 /* Pods_LookinClient.framework */; };
 		601AD5E52A64D6110013F490 /* LKHierarchyDataSource+KeyDown.m in Sources */ = {isa = PBXBuildFile; fileRef = 601AD5E42A64D6110013F490 /* LKHierarchyDataSource+KeyDown.m */; };
+		7BFFDF0F2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFFDF0E2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.m */; };
+		7BFFDF122AF12E940039B828 /* LookinAttributesSection+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFFDF112AF12E940039B828 /* LookinAttributesSection+LookinClient.m */; };
+		7BFFDF152AF134240039B828 /* LKDashboardSectionViewPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFFDF142AF134240039B828 /* LKDashboardSectionViewPool.m */; };
 		A213803D2821886B009BFE60 /* LKPerformanceReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = A213803C2821886B009BFE60 /* LKPerformanceReporter.m */; };
 		A26EF69427F89F83005A9E4E /* ShortCocoa+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68827F89F83005A9E4E /* ShortCocoa+Private.m */; };
 		A26EF69527F89F83005A9E4E /* ShortCocoaCore.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF68927F89F83005A9E4E /* ShortCocoaCore.m */; };
@@ -197,6 +200,12 @@
 		5E8E4C9C392BAAF93643C21E /* Pods-LookinClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookinClient.release.xcconfig"; path = "Target Support Files/Pods-LookinClient/Pods-LookinClient.release.xcconfig"; sourceTree = "<group>"; };
 		601AD5E32A64D6110013F490 /* LKHierarchyDataSource+KeyDown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LKHierarchyDataSource+KeyDown.h"; sourceTree = "<group>"; };
 		601AD5E42A64D6110013F490 /* LKHierarchyDataSource+KeyDown.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LKHierarchyDataSource+KeyDown.m"; sourceTree = "<group>"; };
+		7BFFDF0D2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LookinAttributesGroup+LookinClient.h"; sourceTree = "<group>"; };
+		7BFFDF0E2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LookinAttributesGroup+LookinClient.m"; sourceTree = "<group>"; };
+		7BFFDF102AF12E940039B828 /* LookinAttributesSection+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LookinAttributesSection+LookinClient.h"; sourceTree = "<group>"; };
+		7BFFDF112AF12E940039B828 /* LookinAttributesSection+LookinClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LookinAttributesSection+LookinClient.m"; sourceTree = "<group>"; };
+		7BFFDF132AF134240039B828 /* LKDashboardSectionViewPool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardSectionViewPool.h; sourceTree = "<group>"; };
+		7BFFDF142AF134240039B828 /* LKDashboardSectionViewPool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardSectionViewPool.m; sourceTree = "<group>"; };
 		81A3B0CB06C22A05EDC913F3 /* Pods_LookinClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LookinClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89555EC46A276B7FD0CB65FA /* Pods_LookinTestflight.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LookinTestflight.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A213803B2821886B009BFE60 /* LKPerformanceReporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKPerformanceReporter.h; sourceTree = "<group>"; };
@@ -638,6 +647,10 @@
 			isa = PBXGroup;
 			children = (
 				AA66645E22DBBAC7009E05CC /* NSString+Score.h */,
+				7BFFDF0D2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.h */,
+				7BFFDF0E2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.m */,
+				7BFFDF102AF12E940039B828 /* LookinAttributesSection+LookinClient.h */,
+				7BFFDF112AF12E940039B828 /* LookinAttributesSection+LookinClient.m */,
 				AA66645D22DBBAC7009E05CC /* NSString+Score.m */,
 				AAEC35A32340EAB3009E5040 /* NSString+LookinClient.h */,
 				AAEC35A42340EAB3009E5040 /* NSString+LookinClient.m */,
@@ -917,6 +930,8 @@
 				AA66C59F231924BD00085C76 /* LKDashboardAccessoryWindowController.h */,
 				AA66C5A0231924BD00085C76 /* LKDashboardAccessoryWindowController.m */,
 				AAA8C0EA21CC17680017A345 /* LKDashboardCardView.m */,
+				7BFFDF132AF134240039B828 /* LKDashboardSectionViewPool.h */,
+				7BFFDF142AF134240039B828 /* LKDashboardSectionViewPool.m */,
 				AAB636C422B3BA0F00885A2C /* LKDashboardCardTitleControl.h */,
 				AAB636C522B3BA0F00885A2C /* LKDashboardCardTitleControl.m */,
 				AA22310B22AA717E00A5A975 /* LKDashboardSectionView.h */,
@@ -1189,8 +1204,10 @@
 				AA05CCD7221ED5E80086CDD1 /* LKDashboardAttributeSwitchView.m in Sources */,
 				AAA8C12021CC17680017A345 /* LKNavigationManager.m in Sources */,
 				AA48F2A821CC0CA60032EC2C /* main.m in Sources */,
+				7BFFDF122AF12E940039B828 /* LookinAttributesSection+LookinClient.m in Sources */,
 				AAF418C222BA2AF000111554 /* LKConsoleSelectPopoverController.m in Sources */,
 				AA22A0ED2276D65B00356E70 /* LKHierarchyItem.m in Sources */,
+				7BFFDF152AF134240039B828 /* LKDashboardSectionViewPool.m in Sources */,
 				AA66645F22DBBAC7009E05CC /* NSString+Score.m in Sources */,
 				AAA8C11F21CC17680017A345 /* LKConnectionManager.m in Sources */,
 				AAEE450B21DF820100BF2650 /* LKPreferenceViewController.m in Sources */,
@@ -1239,6 +1256,7 @@
 				AAA8C15721CC17680017A345 /* LKPreviewPanGestureRecognizer.m in Sources */,
 				AA50754322A2844400D2A5AC /* LKConsoleInputRowView.m in Sources */,
 				AA2F1AF32303F34B004725D6 /* LKTextsMenuView.m in Sources */,
+				7BFFDF0F2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.m in Sources */,
 				AA23624B222C67C1008FE069 /* NSAppearance+LookinClient.m in Sources */,
 				AAA8C16021CC17680017A345 /* LKLaunchWindowController.m in Sources */,
 				AAC41E1722686A28005CDD6E /* LKStaticHierarchyDataSource.m in Sources */,
