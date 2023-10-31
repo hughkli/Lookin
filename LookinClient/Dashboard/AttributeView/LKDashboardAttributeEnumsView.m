@@ -64,13 +64,40 @@
 }
 
 - (void)renderWithAttribute {
-    NSInteger enumValue = [self.attribute.value integerValue];
-    NSString *enumListName = [LookinDashboardBlueprint enumListNameWithAttrID:self.attribute.identifier];
-    NSString *enumString = [[LKEnumListRegistry sharedInstance] descForEnumName:enumListName value:enumValue];
-    self.textLabel.stringValue = enumString;
+    if (self.attribute.attrType == LookinAttrTypeEnumString) {
+        NSString *text = self.attribute.value;
+        if (![text isKindOfClass:[NSString class]]) {
+            NSAssert(NO, @"");
+            return;
+        }
+        self.textLabel.stringValue = text;
+        
+    } else {
+        NSInteger enumValue = [self.attribute.value integerValue];
+        NSString *enumListName = [LookinDashboardBlueprint enumListNameWithAttrID:self.attribute.identifier];
+        NSString *enumString = [[LKEnumListRegistry sharedInstance] descForEnumName:enumListName value:enumValue];
+        self.textLabel.stringValue = enumString;
+    }
 }
 
 - (void)mouseDown:(NSEvent *)event {
+    NSMenu *menu;
+    if (self.attribute.isUserCustom) {
+        menu = [self createMenuForUserCustom];
+    } else {
+        menu = [self createMenuForPreset];
+    }
+    [NSMenu popUpContextMenu:menu withEvent:event forView:self];
+}
+
+- (void)setDashboardViewController:(LKDashboardViewController *)dashboardViewController {
+    [super setDashboardViewController:dashboardViewController];
+    self.backgroundColorName = @"DashboardCardValueBGColor";
+}
+
+#pragma mark - Private
+
+- (NSMenu *)createMenuForPreset {
     NSInteger currentOSVersion = self.dashboardViewController.currentDataSource.rawHierarchyInfo.appInfo.osMainVersion;
     
     NSMenu *menu = [NSMenu new];
@@ -94,15 +121,33 @@
         }
         [menu addItem:item];
     }];
-    [NSMenu popUpContextMenu:menu withEvent:event forView:self];
+    
+    return menu;
 }
 
-- (void)setDashboardViewController:(LKDashboardViewController *)dashboardViewController {
-    [super setDashboardViewController:dashboardViewController];
-    self.backgroundColorName = @"DashboardCardValueBGColor";
+- (NSMenu *)createMenuForUserCustom {
+    NSMenu *menu = [NSMenu new];
+    
+    NSArray<NSString *> *cases = self.attribute.extraValue;
+    if (!cases || ![cases isKindOfClass:[NSArray class]] || cases.count == 0) {
+        return menu;
+    }
+    
+    for (NSString *text in cases) {
+        if (![text isKindOfClass:[NSString class]]) {
+            NSAssert(NO, @"");
+            continue;
+        }
+        NSMenuItem *item = [NSMenuItem new];
+        item.image = [[NSImage alloc] initWithSize:NSMakeSize(1, 22)];
+        item.title = text;
+        item.enabled = NO;
+        item.state = ([text isEqualTo:self.attribute.value] ? NSControlStateValueOn : NSControlStateValueOff);
+        [menu addItem:item];
+    }
+    
+    return menu;
 }
-
-#pragma mark - Private
 
 - (void)_handleMenuItem:(NSMenuItem *)item {
     NSNumber *expectedValue = item.representedObject;
