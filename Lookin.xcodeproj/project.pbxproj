@@ -26,6 +26,7 @@
 		A77AA17B2AEED1B8006A7BF4 /* LKMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17A2AEED1B8006A7BF4 /* LKMessageManager.m */; };
 		A77AA17E2AEED988006A7BF4 /* LKServerVersionRequestor.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17D2AEED988006A7BF4 /* LKServerVersionRequestor.m */; };
 		A77AA1822AEEE095006A7BF4 /* LKVersionComparer.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA1812AEEE095006A7BF4 /* LKVersionComparer.m */; };
+		A7F8FC552AF289F000ABC7F4 /* LookinCustomDisplayItemInfo+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F8FC542AF289F000ABC7F4 /* LookinCustomDisplayItemInfo+LookinClient.m */; };
 		AA01EF2722DD0D26002A2E06 /* LKHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AA01EF2522DD0D26002A2E06 /* LKHelper.m */; };
 		AA049A1721E61B85008C6366 /* LKMenuPopoverSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA049A1621E61B85008C6366 /* LKMenuPopoverSettingController.m */; };
 		AA05CCD4221ED5CA0086CDD1 /* LKDashboardAttributeNumberInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05CCD3221ED5CA0086CDD1 /* LKDashboardAttributeNumberInputView.m */; };
@@ -241,6 +242,8 @@
 		A77AA17D2AEED988006A7BF4 /* LKServerVersionRequestor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKServerVersionRequestor.m; sourceTree = "<group>"; };
 		A77AA1802AEEE095006A7BF4 /* LKVersionComparer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKVersionComparer.h; sourceTree = "<group>"; };
 		A77AA1812AEEE095006A7BF4 /* LKVersionComparer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKVersionComparer.m; sourceTree = "<group>"; };
+		A7F8FC532AF289F000ABC7F4 /* LookinCustomDisplayItemInfo+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LookinCustomDisplayItemInfo+LookinClient.h"; sourceTree = "<group>"; };
+		A7F8FC542AF289F000ABC7F4 /* LookinCustomDisplayItemInfo+LookinClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LookinCustomDisplayItemInfo+LookinClient.m"; sourceTree = "<group>"; };
 		AA01EF2522DD0D26002A2E06 /* LKHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKHelper.m; sourceTree = "<group>"; };
 		AA01EF2622DD0D26002A2E06 /* LKHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKHelper.h; sourceTree = "<group>"; };
 		AA049A1521E61B85008C6366 /* LKMenuPopoverSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMenuPopoverSettingController.h; sourceTree = "<group>"; };
@@ -668,6 +671,8 @@
 			children = (
 				AA66645E22DBBAC7009E05CC /* NSString+Score.h */,
 				7BFFDF0D2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.h */,
+				A7F8FC532AF289F000ABC7F4 /* LookinCustomDisplayItemInfo+LookinClient.h */,
+				A7F8FC542AF289F000ABC7F4 /* LookinCustomDisplayItemInfo+LookinClient.m */,
 				7BFFDF0E2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.m */,
 				1892DD1A2AF258890016D61B /* LookinDisplayItem+LookinClient.h */,
 				1892DD1B2AF258890016D61B /* LookinDisplayItem+LookinClient.m */,
@@ -1227,6 +1232,7 @@
 				AA66645F22DBBAC7009E05CC /* NSString+Score.m in Sources */,
 				AAA8C11F21CC17680017A345 /* LKConnectionManager.m in Sources */,
 				AAEE450B21DF820100BF2650 /* LKPreferenceViewController.m in Sources */,
+				A7F8FC552AF289F000ABC7F4 /* LookinCustomDisplayItemInfo+LookinClient.m in Sources */,
 				AAAF21152226BD4D00975C95 /* LKTextFieldView.m in Sources */,
 				AAA8C15A21CC17680017A345 /* LKSplitView.m in Sources */,
 				AA01EF2722DD0D26002A2E06 /* LKHelper.m in Sources */,

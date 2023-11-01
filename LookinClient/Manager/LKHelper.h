@@ -94,4 +94,6 @@ CG_INLINE HorizontalMargins HorizontalMarginsMake(CGFloat left, CGFloat right) {
 /// 当使用自己实现的版本时（即 10.13 系统），需要业务自己负责 textView（即  scrollableTextView.documentVie）的布局
 + (NSScrollView *)scrollableTextView;
 
++ (BOOL)validateFrame:(CGRect)frame;
+
 @end

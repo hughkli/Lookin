@@ -40,6 +40,7 @@
 #import "NSControl+LookinClient.h"
 #import "NSArray+LookinClient.h"
 #import "LookinDisplayItem+LookinClient.h"
+#import "LookinCustomDisplayItemInfo+LookinClient.h"
 
 #import "ShortCocoa+LookinClient.h"
 

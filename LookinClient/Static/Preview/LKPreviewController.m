@@ -81,7 +81,13 @@ extern NSString *const LKAppShowConsoleNotificationName;
                             self.dataSource.itemDidChangeNoPreview]] subscribeNext:^(id  _Nullable x) {
             @strongify(self);
             NSArray<LookinDisplayItem *> *validItems = [dataSource.flatItems lookin_filter:^BOOL(LookinDisplayItem *obj) {
-                return !obj.inNoPreviewHierarchy;
+                if (obj.inNoPreviewHierarchy) {
+                    return NO;
+                }
+                if (obj.customInfo) {
+                    return [obj.customInfo hasValidFrame];
+                }
+                return YES;
             }];
             [self.previewView renderWithDisplayItems:validItems discardCache:YES];
         }];
