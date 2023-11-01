@@ -16,7 +16,7 @@
 #import "LKWindow.h"
 #import "LKMenuPopoverSettingController.h"
 #import "LKTutorialManager.h"
-#import "LookinPreviewView.h"
+#import "LKPreviewView.h"
 #import "LKHierarchyView.h"
 
 @interface LKReadWindowController () <NSToolbarDelegate>

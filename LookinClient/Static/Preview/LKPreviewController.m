@@ -19,7 +19,7 @@
 #import "LKNavigationManager.h"
 #import "LKTutorialManager.h"
 #import "LKStaticViewController.h"
-#import "LookinPreviewView.h"
+#import "LKPreviewView.h"
 #import "LKUserActionManager.h"
 #import "LKHierarchyDataSource+KeyDown.h"
 
@@ -34,7 +34,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
 @property(nonatomic, strong) LKHierarchyDataSource *dataSource;
 
 @property(nonatomic, strong) LKPreviewStageView *stageView;
-@property(nonatomic, strong) LookinPreviewView *previewView;
+@property(nonatomic, strong) LKPreviewView *previewView;
 
 /// 按住 space 时可以通过 pan 来移动图像
 @property(nonatomic, assign) BOOL isKeyingDownSpace;
@@ -62,7 +62,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
         
         LookinAppInfo *appInfo = dataSource.rawHierarchyInfo.appInfo;
         
-        self.previewView = [[LookinPreviewView alloc] initWithDataSource:dataSource];
+        self.previewView = [[LKPreviewView alloc] initWithDataSource:dataSource];
         self.previewView.preferenceManager = self.dataSource.preferenceManager;
         self.previewView.alphaValue = 0;
         self.previewView.appScreenSize = CGSizeMake(appInfo.screenWidth, appInfo.screenHeight);
@@ -74,7 +74,6 @@ extern NSString *const LKAppShowConsoleNotificationName;
             self.previewView.isDarkMode = isDarkMode;
         };
         [self.view addSubview:self.previewView];
-        
 
         // 这里通过 [RACSignal return:nil] 来立即执行一次渲染
         [[RACSignal merge:@[[RACSignal return:nil],

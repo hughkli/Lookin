@@ -8,7 +8,7 @@
 
 #import "LKPreferenceManager.h"
 #import "LookinDashboardBlueprint.h"
-#import "LookinPreviewView.h"
+#import "LKPreviewView.h"
 #import "LKTutorialManager.h"
 @import AppCenter;
 @import AppCenterAnalytics;

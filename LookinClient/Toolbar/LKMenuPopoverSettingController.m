@@ -9,7 +9,7 @@
 #import "LKMenuPopoverSettingController.h"
 #import "LKPreferenceManager.h"
 #import "LKNavigationManager.h"
-#import "LookinPreviewView.h"
+#import "LKPreviewView.h"
 
 @interface LKMenuPopoverSettingController ()
 

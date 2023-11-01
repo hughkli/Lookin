@@ -1,12 +1,12 @@
 //
-//  LookinPreviewView.m
+//  LKPreviewView.m
 //  Lookin
 //
 //  Created by Li Kai on 2019/8/17.
 //  https://lookin.work
 //
 
-#import "LookinPreviewView.h"
+#import "LKPreviewView.h"
 #import "LookinDisplayItemNode.h"
 #import "LookinDisplayItem.h"
 #import "LKHierarchyDataSource.h"
@@ -17,7 +17,7 @@ const CGFloat LookinPreviewMaxScale = 1;
 const CGFloat LookinPreviewMinZInterspace = 0;
 const CGFloat LookinPreviewMaxZInterspace = 1;
 
-@interface LookinPreviewView ()
+@interface LKPreviewView ()
 
 @property(nonatomic, strong) LKHierarchyDataSource *dataSource;
 
@@ -33,7 +33,7 @@ const CGFloat LookinPreviewMaxZInterspace = 1;
 
 @end
 
-@implementation LookinPreviewView
+@implementation LKPreviewView
 
 - (instancetype)initWithDataSource:(LKHierarchyDataSource *)dataSource {
     if (self = [super initWithFrame:CGRectZero options:nil]) {

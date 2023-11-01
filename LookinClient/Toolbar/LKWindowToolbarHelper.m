@@ -11,7 +11,7 @@
 #import "LKMenuPopoverSettingController.h"
 #import "LKAppsManager.h"
 #import "LKNavigationManager.h"
-#import "LookinPreviewView.h"
+#import "LKPreviewView.h"
 #import "LKWindowToolbarScaleView.h"
 #import "LKWindowToolbarAppButton.h"
 

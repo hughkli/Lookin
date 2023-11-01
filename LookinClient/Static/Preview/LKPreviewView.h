@@ -1,5 +1,5 @@
 //
-//  LookinPreviewView.h
+//  LKPreviewView.h
 //  Lookin
 //
 //  Created by Li Kai on 2019/8/17.
@@ -21,7 +21,7 @@ typedef NS_ENUM (NSUInteger, LookinPreviewDimension) {
 
 @class LookinDisplayItem, LKPreferenceManager, LKHierarchyDataSource;
 
-@interface LookinPreviewView : SCNView
+@interface LKPreviewView : SCNView
 
 - (instancetype)initWithDataSource:(LKHierarchyDataSource *)dataSource;
 

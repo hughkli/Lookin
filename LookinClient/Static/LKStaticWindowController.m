@@ -25,7 +25,7 @@
 #import "LKStaticAsyncUpdateManager.h"
 #import "LKTutorialManager.h"
 #import "LookinHierarchyFile.h"
-#import "LookinPreviewView.h"
+#import "LKPreviewView.h"
 #import "LKHierarchyView.h"
 #import "LKPerformanceReporter.h"
 #import "LKMessageManager.h"

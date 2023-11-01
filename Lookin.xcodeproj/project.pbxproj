@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -151,7 +151,7 @@
 		AAED8ED822AFED490051242B /* LKDashboardAttributeSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAED8ED722AFED490051242B /* LKDashboardAttributeSizeView.m */; };
 		AAEE450721DF81C300BF2650 /* LKPreferenceWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEE450621DF81C300BF2650 /* LKPreferenceWindowController.m */; };
 		AAEE450B21DF820100BF2650 /* LKPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEE450A21DF820100BF2650 /* LKPreferenceViewController.m */; };
-		AAEF2C112308420400CFAC53 /* LookinPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2C0D2308420300CFAC53 /* LookinPreviewView.m */; };
+		AAEF2C112308420400CFAC53 /* LKPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2C0D2308420300CFAC53 /* LKPreviewView.m */; };
 		AAEF2C122308420400CFAC53 /* LookinDisplayItemNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2C0F2308420400CFAC53 /* LookinDisplayItemNode.m */; };
 		AAF418C222BA2AF000111554 /* LKConsoleSelectPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF418C122BA2AF000111554 /* LKConsoleSelectPopoverController.m */; };
 		AAF418C522BA2C9600111554 /* LKConsoleSelectPopoverItemControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF418C422BA2C9600111554 /* LKConsoleSelectPopoverItemControl.m */; };
@@ -492,8 +492,8 @@
 		AAEE450621DF81C300BF2650 /* LKPreferenceWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKPreferenceWindowController.m; sourceTree = "<group>"; };
 		AAEE450921DF820100BF2650 /* LKPreferenceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKPreferenceViewController.h; sourceTree = "<group>"; };
 		AAEE450A21DF820100BF2650 /* LKPreferenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKPreferenceViewController.m; sourceTree = "<group>"; };
-		AAEF2C0D2308420300CFAC53 /* LookinPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookinPreviewView.m; sourceTree = "<group>"; };
-		AAEF2C0E2308420300CFAC53 /* LookinPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookinPreviewView.h; sourceTree = "<group>"; };
+		AAEF2C0D2308420300CFAC53 /* LKPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKPreviewView.m; sourceTree = "<group>"; };
+		AAEF2C0E2308420300CFAC53 /* LKPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKPreviewView.h; sourceTree = "<group>"; };
 		AAEF2C0F2308420400CFAC53 /* LookinDisplayItemNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookinDisplayItemNode.m; sourceTree = "<group>"; };
 		AAEF2C102308420400CFAC53 /* LookinDisplayItemNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookinDisplayItemNode.h; sourceTree = "<group>"; };
 		AAF418C022BA2AF000111554 /* LKConsoleSelectPopoverController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKConsoleSelectPopoverController.h; sourceTree = "<group>"; };
@@ -987,7 +987,10 @@
 		AAA8C10721CC17680017A345 /* Preview */ = {
 			isa = PBXGroup;
 			children = (
-				AAEF2C132308421200CFAC53 /* WillShare */,
+				AAEF2C102308420400CFAC53 /* LookinDisplayItemNode.h */,
+				AAEF2C0F2308420400CFAC53 /* LookinDisplayItemNode.m */,
+				AAEF2C0E2308420300CFAC53 /* LKPreviewView.h */,
+				AAEF2C0D2308420300CFAC53 /* LKPreviewView.m */,
 				AAA8C10B21CC17680017A345 /* LKPreviewController.h */,
 				AAA8C10E21CC17680017A345 /* LKPreviewController.m */,
 				AAA8C10921CC17680017A345 /* LKPreviewPanGestureRecognizer.h */,
@@ -1056,17 +1059,6 @@
 				AA98EC9A22270B800083348D /* LKPreferencePopupView.m */,
 			);
 			path = Preference;
-			sourceTree = "<group>";
-		};
-		AAEF2C132308421200CFAC53 /* WillShare */ = {
-			isa = PBXGroup;
-			children = (
-				AAEF2C102308420400CFAC53 /* LookinDisplayItemNode.h */,
-				AAEF2C0F2308420400CFAC53 /* LookinDisplayItemNode.m */,
-				AAEF2C0E2308420300CFAC53 /* LookinPreviewView.h */,
-				AAEF2C0D2308420300CFAC53 /* LookinPreviewView.m */,
-			);
-			path = WillShare;
 			sourceTree = "<group>";
 		};
 		D4224EF02358ED3A00ED9626 /* Measure */ = {
@@ -1213,7 +1205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAA8C13A21CC17680017A345 /* LKStaticHierarchyController.m in Sources */,
-				AAEF2C112308420400CFAC53 /* LookinPreviewView.m in Sources */,
+				AAEF2C112308420400CFAC53 /* LKPreviewView.m in Sources */,
 				AA3D51AA2289E57C00E4E6B7 /* LKExportManager.m in Sources */,
 				AAEE450721DF81C300BF2650 /* LKPreferenceWindowController.m in Sources */,
 				AA13691E22C3DA6F00B8AE87 /* LKTutorialManager.m in Sources */,
