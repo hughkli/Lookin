@@ -12,6 +12,7 @@
 #import "LKPreferenceManager.h"
 #import "LKColorIndicatorLayer.h"
 #import "LKUserActionManager.h"
+#import "LookinDisplayItem+LookinClient.h"
 @import AppCenter;
 @import AppCenterAnalytics;
 
@@ -166,7 +167,7 @@
             }
         }
         
-        if (!obj.shouldCaptureImage) {
+        if (!obj.isUserCustom && !obj.shouldCaptureImage) {
             [obj enumerateSelfAndChildren:^(LookinDisplayItem *item) {
                 item.noPreview = YES;
                 item.doNotFetchScreenshotReason = LookinDoNotFetchScreenshotForUserConfig;

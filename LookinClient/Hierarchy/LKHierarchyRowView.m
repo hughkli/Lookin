@@ -152,9 +152,13 @@
         subtitleColor = [NSColor whiteColor];
         self.imageView.alphaValue = 1;
         
-    } else if (self.displayItem.inHiddenHierarchy ||
-               self.displayItem.inNoPreviewHierarchy ||
-               (self.displayItem.isInSearch && !self.displayItem.highlightedSearchString.length)) {
+    } else if (self.displayItem.isInSearch && !self.displayItem.highlightedSearchString.length) {
+        titleColor = [NSColor tertiaryLabelColor];
+        subtitleColor = [NSColor tertiaryLabelColor];
+        self.imageView.alphaValue = .6;
+        
+    } else if (!self.displayItem.isUserCustom && (self.displayItem.inHiddenHierarchy ||
+               self.displayItem.inNoPreviewHierarchy)) {
         titleColor = [NSColor tertiaryLabelColor];
         subtitleColor = [NSColor tertiaryLabelColor];
         self.imageView.alphaValue = .6;
@@ -216,7 +220,7 @@
     }
     
     if (property == LookinDisplayItemProperty_None || property == LookinDisplayItemProperty_InNoPreviewHierarchy) {
-        if (displayItem.inNoPreviewHierarchy) {
+        if (!displayItem.isUserCustom && displayItem.inNoPreviewHierarchy) {
             if (!self.strikethroughLayer) {
                 self.strikethroughLayer = [CALayer layer];
                 [self.strikethroughLayer lookin_removeImplicitAnimations];
@@ -280,7 +284,8 @@
 }
 
 - (void)_updateLabelsFonts {
-    if (self.displayItem.inNoPreviewHierarchy || self.displayItem.inHiddenHierarchy) {
+    BOOL noImage = self.displayItem.inNoPreviewHierarchy || self.displayItem.inHiddenHierarchy;
+    if (!self.displayItem.isUserCustom && noImage) {
         self.titleLabel.font = [LKHelper italicFontOfSize:13];
         self.subtitleLabel.font = [LKHelper italicFontOfSize:12];
     } else {
