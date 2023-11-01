@@ -52,34 +52,19 @@
     _displayItem = displayItem;
     
     displayItem.rowViewDelegate = self;
-    
-    // event handler
-    if (displayItem.eventHandlers.count) {
-        if (!self.eventHandlerButton) {
-            _eventHandlerButton = [NSButton new];
-            [self.eventHandlerButton setTitle:@""];
-            self.eventHandlerButton.target = self;
-            self.eventHandlerButton.action = @selector(_handleClickEventHandlerButton:);
-            self.eventHandlerButton.wantsLayer = YES;
-            self.eventHandlerButton.bordered = NO;
-            [self.eventHandlerButton setBezelStyle:NSBezelStyleRoundRect];
-            self.eventHandlerButton.layer.backgroundColor = [NSColor clearColor].CGColor;
-            [self addSubview:self.eventHandlerButton];
-        
-            self.eventHandlerButtonColorLayer = [CALayer layer];
-            self.eventHandlerButtonColorLayer.actions = @{NSStringFromSelector(@selector(contents)): [NSNull null]};
-            [self.eventHandlerButton.layer addSublayer:self.eventHandlerButtonColorLayer];
-        }
-        self.eventHandlerButton.hidden = NO;
-        [self _updateEventHandlerButtonColors];
-    } else {
-        self.eventHandlerButton.hidden = YES;
+    [self reRender];
+}
+
+- (void)reRender {
+    if (!self.displayItem) {
+        return;
     }
-    
-    BOOL isSelected = (self.dataSource.selectedItem == displayItem);
-    self.isSelected = isSelected;
-    self.image = [self _iconWithDisplayItem:displayItem isSelected:isSelected];
-    self.indentLevel = displayItem.indentLevel - self.minIndentLevel;
+    self.isSelected = (self.dataSource.selectedItem == self.displayItem);
+    self.isHovered = (self.dataSource.hoveredItem == self.displayItem);
+    self.image = [self resolveIconImage];
+    self.indentLevel = self.displayItem.indentLevel - self.minIndentLevel;
+    [self updateEventsButton];
+    [self updateExpandStatus];
     [self updateContentWidth];
     [self updateStrikethroughLayer];
     [self _updateLabelStringsAndImageViewAlpha];
@@ -188,42 +173,38 @@
     self.subtitleLabel.attributedStringValue = subtitleString;
 }
 
+- (void)updateEventsButton {
+    if (!self.displayItem || self.displayItem.eventHandlers.count == 0) {
+        self.eventHandlerButton.hidden = YES;
+        return;
+    }
+    if (!self.eventHandlerButton) {
+        _eventHandlerButton = [NSButton new];
+        [self.eventHandlerButton setTitle:@""];
+        self.eventHandlerButton.target = self;
+        self.eventHandlerButton.action = @selector(_handleClickEventHandlerButton:);
+        self.eventHandlerButton.wantsLayer = YES;
+        self.eventHandlerButton.bordered = NO;
+        [self.eventHandlerButton setBezelStyle:NSBezelStyleRoundRect];
+        self.eventHandlerButton.layer.backgroundColor = [NSColor clearColor].CGColor;
+        [self addSubview:self.eventHandlerButton];
+    
+        self.eventHandlerButtonColorLayer = [CALayer layer];
+        self.eventHandlerButtonColorLayer.actions = @{NSStringFromSelector(@selector(contents)): [NSNull null]};
+        [self.eventHandlerButton.layer addSublayer:self.eventHandlerButtonColorLayer];
+    }
+    self.eventHandlerButton.hidden = NO;
+    [self _updateEventHandlerButtonColors];
+}
+
 #pragma mark - <LookinDisplayItemDelegate>
 
 - (void)displayItem:(LookinDisplayItem *)displayItem propertyDidChange:(LookinDisplayItemProperty)property {
-    if (property == LookinDisplayItemProperty_None) {
-        self.isSelected = (self.dataSource.selectedItem == displayItem);
-    }
-    
-    if (property == LookinDisplayItemProperty_None || property == LookinDisplayItemProperty_IsHovered) {
+    if (property == LookinDisplayItemProperty_IsHovered) {
         self.isHovered = (self.dataSource.hoveredItem == self.displayItem);
+    } else {
+        [self reRender];
     }
-
-    if (property == LookinDisplayItemProperty_None ||
-        property == LookinDisplayItemProperty_IsExpandable ||
-        property == LookinDisplayItemProperty_IsExpanded) {
-        if (!displayItem.isExpandable) {
-            self.status = LKOutlineRowViewStatusNotExpandable;
-        } else if (displayItem.isExpanded) {
-            self.status = LKOutlineRowViewStatusExpanded;
-        } else {
-            self.status = LKOutlineRowViewStatusCollapsed;
-        }
-    }
-    
-    if (property == LookinDisplayItemProperty_InHiddenHierarchy ||
-        property == LookinDisplayItemProperty_InNoPreviewHierarchy) {
-        [self _updateLabelStringsAndImageViewAlpha];
-        [self _updateLabelsFonts];
-    }
-    
-    if (property == LookinDisplayItemProperty_None ||
-        property == LookinDisplayItemProperty_IsInSearch ||
-        property == LookinDisplayItemProperty_HighlightedSearchString) {
-        [self _updateLabelStringsAndImageViewAlpha];
-    }
-    
-    [self updateStrikethroughLayer];
 }
 
 - (void)updateStrikethroughLayer {
@@ -298,9 +279,23 @@
     [self setNeedsLayout:YES];
 }
 
+- (void)updateExpandStatus {
+    if (!self.displayItem) {
+        self.status = LKOutlineRowViewStatusNotExpandable;
+        return;
+    }
+    if (!self.displayItem.isExpandable) {
+        self.status = LKOutlineRowViewStatusNotExpandable;
+    } else if (self.displayItem.isExpanded) {
+        self.status = LKOutlineRowViewStatusExpanded;
+    } else {
+        self.status = LKOutlineRowViewStatusCollapsed;
+    }
+}
+
 #pragma mark - Others
 
-- (NSImage *)_iconWithDisplayItem:(LookinDisplayItem *)item isSelected:(BOOL)isSelected {
+- (NSImage *)resolveIconImage {
     static dispatch_once_t viewOnceToken;
     static NSArray<NSDictionary<NSString *, NSString *> *> *viewsList = nil;
     dispatch_once(&viewOnceToken,^{
@@ -331,6 +326,10 @@
                       ];
     });
     
+    LookinDisplayItem *item = self.displayItem;
+    if (!item) {
+        return nil;
+    }
     __block NSString *imageName = nil;
     if (item.isUserCustom) {
         imageName = @"hierarchy_custom";
@@ -375,7 +374,7 @@
         imageName = @"hierarchy_view";
     }
 
-    if (isSelected) {
+    if (self.dataSource.selectedItem == self.displayItem) {
         NSString *selectedImageName = [imageName stringByAppendingString:@"_selected"];
         NSImage *selectedImage = NSImageMake(selectedImageName);
         if (selectedImage) {
