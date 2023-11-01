@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		094E413CB04F29F94551D070 /* Pods_LookinClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A3B0CB06C22A05EDC913F3 /* Pods_LookinClient.framework */; };
 		1892DD1C2AF258890016D61B /* LookinDisplayItem+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892DD1B2AF258890016D61B /* LookinDisplayItem+LookinClient.m */; };
+		1892DD292AF25EDE0016D61B /* LookinMsgTargetAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892DD252AF25EDE0016D61B /* LookinMsgTargetAction.m */; };
+		1892DD2A2AF25EDE0016D61B /* LookinMsgAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892DD282AF25EDE0016D61B /* LookinMsgAttribute.m */; };
 		601AD5E52A64D6110013F490 /* LKHierarchyDataSource+KeyDown.m in Sources */ = {isa = PBXBuildFile; fileRef = 601AD5E42A64D6110013F490 /* LKHierarchyDataSource+KeyDown.m */; };
 		7BFFDF0F2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFFDF0E2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.m */; };
 		7BFFDF122AF12E940039B828 /* LookinAttributesSection+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFFDF112AF12E940039B828 /* LookinAttributesSection+LookinClient.m */; };
@@ -199,6 +201,10 @@
 		07695A2606130B23B91F553C /* Pods-LookinTestflight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookinTestflight.release.xcconfig"; path = "Target Support Files/Pods-LookinTestflight/Pods-LookinTestflight.release.xcconfig"; sourceTree = "<group>"; };
 		1892DD1A2AF258890016D61B /* LookinDisplayItem+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LookinDisplayItem+LookinClient.h"; sourceTree = "<group>"; };
 		1892DD1B2AF258890016D61B /* LookinDisplayItem+LookinClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LookinDisplayItem+LookinClient.m"; sourceTree = "<group>"; };
+		1892DD252AF25EDE0016D61B /* LookinMsgTargetAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookinMsgTargetAction.m; sourceTree = "<group>"; };
+		1892DD262AF25EDE0016D61B /* LookinMsgTargetAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookinMsgTargetAction.h; sourceTree = "<group>"; };
+		1892DD272AF25EDE0016D61B /* LookinMsgAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookinMsgAttribute.h; sourceTree = "<group>"; };
+		1892DD282AF25EDE0016D61B /* LookinMsgAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookinMsgAttribute.m; sourceTree = "<group>"; };
 		4225D6261428134154CB341E /* Pods-LookinTestflight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookinTestflight.debug.xcconfig"; path = "Target Support Files/Pods-LookinTestflight/Pods-LookinTestflight.debug.xcconfig"; sourceTree = "<group>"; };
 		5E8E4C9C392BAAF93643C21E /* Pods-LookinClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookinClient.release.xcconfig"; path = "Target Support Files/Pods-LookinClient/Pods-LookinClient.release.xcconfig"; sourceTree = "<group>"; };
 		601AD5E32A64D6110013F490 /* LKHierarchyDataSource+KeyDown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LKHierarchyDataSource+KeyDown.h"; sourceTree = "<group>"; };
@@ -537,6 +543,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		1892DD2B2AF25EE20016D61B /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				1892DD272AF25EDE0016D61B /* LookinMsgAttribute.h */,
+				1892DD282AF25EDE0016D61B /* LookinMsgAttribute.m */,
+				1892DD262AF25EDE0016D61B /* LookinMsgTargetAction.h */,
+				1892DD252AF25EDE0016D61B /* LookinMsgTargetAction.m */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 		5D159F647DFD4AA3F8E7F9E7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -825,6 +842,7 @@
 		AAA8C08F21CC17670017A345 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				1892DD2B2AF25EE20016D61B /* Message */,
 				AA0757C322C6084A005535DC /* Category */,
 				AA50755822A3ED9B00D2A5AC /* InputSearch */,
 				AAB09026229D74F000159B15 /* LKOutlineItem.h */,
@@ -1261,6 +1279,7 @@
 				AAD3872D2288614300042229 /* LKReadWindowController.m in Sources */,
 				AAA8C15721CC17680017A345 /* LKPreviewPanGestureRecognizer.m in Sources */,
 				AA50754322A2844400D2A5AC /* LKConsoleInputRowView.m in Sources */,
+				1892DD292AF25EDE0016D61B /* LookinMsgTargetAction.m in Sources */,
 				AA2F1AF32303F34B004725D6 /* LKTextsMenuView.m in Sources */,
 				7BFFDF0F2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.m in Sources */,
 				AA23624B222C67C1008FE069 /* NSAppearance+LookinClient.m in Sources */,
@@ -1327,6 +1346,7 @@
 				AAB636C622B3BA0F00885A2C /* LKDashboardCardTitleControl.m in Sources */,
 				AAA8C12F21CC17680017A345 /* LKHierarchyRowView.m in Sources */,
 				AA50755122A28A0A00D2A5AC /* LKConsoleSubmitRowView.m in Sources */,
+				1892DD2A2AF25EDE0016D61B /* LookinMsgAttribute.m in Sources */,
 				AAB636C322B3981200885A2C /* LKDashboardAttributeRelationView.m in Sources */,
 				AA6CC488221FE7DE00CA6D54 /* LKNumberInputView.m in Sources */,
 				AA50753A22A27CC500D2A5AC /* LKConsoleDataSource.m in Sources */,

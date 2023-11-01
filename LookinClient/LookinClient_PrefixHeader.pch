@@ -41,7 +41,6 @@
 #import "NSArray+LookinClient.h"
 
 #import "ShortCocoa+LookinClient.h"
-#import "LookinMsgAttribute.h"
 
 
 #endif /* PrefixHeader_pch */

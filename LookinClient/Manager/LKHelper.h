@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import "LookinDefines.h"
-#import "LookinMsgAttribute.h"
 
 #define InspectingApp [LKAppsManager sharedInstance].inspectingApp
 #define TutorialMng [LKTutorialManager sharedInstance]

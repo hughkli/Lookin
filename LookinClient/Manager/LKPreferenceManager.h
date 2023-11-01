@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LookinAttributesGroup.h"
 #import "LKExportManager.h"
+#import "LookinMsgAttribute.h"
 
 extern NSString *const LKWindowSizeName_Dynamic;
 extern NSString *const LKWindowSizeName_Static;
