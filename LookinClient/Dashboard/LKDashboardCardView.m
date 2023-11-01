@@ -255,7 +255,7 @@
                  LookinAttrGroup_UITextView: NSImageMake(@"dashboard_textview"),
                  LookinAttrGroup_UITextField: NSImageMake(@"dashboard_textfield"),
                  LookinAttrGroup_UIVisualEffectView: NSImageMake(@"dashboard_effectview"),
-                 LookinAttrGroup_UserCustom: NSImageMake(@"dashboard_effectview")
+                 LookinAttrGroup_UserCustom: NSImageMake(@"dashboard_custom")
                  };
     });
     NSImage *image = dict[group.identifier];
