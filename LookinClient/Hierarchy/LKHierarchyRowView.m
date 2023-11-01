@@ -81,10 +81,10 @@
     self.image = [self _iconWithDisplayItem:displayItem isSelected:isSelected];
     self.indentLevel = displayItem.indentLevel - self.minIndentLevel;
     [self updateContentWidth];
-    [self _updateStrikethroughLayerColor];
+    [self updateStrikethroughLayer];
     [self _updateLabelStringsAndImageViewAlpha];
     [self _updateLabelsFonts];
-
+    
     [self setNeedsLayout:YES];
 }
 
@@ -151,18 +151,10 @@
         titleColor = [NSColor whiteColor];
         subtitleColor = [NSColor whiteColor];
         self.imageView.alphaValue = 1;
-        
-    } else if (self.displayItem.isInSearch && !self.displayItem.highlightedSearchString.length) {
+    } else if ([self resolveIfShouldFadeContent]) {
         titleColor = [NSColor tertiaryLabelColor];
         subtitleColor = [NSColor tertiaryLabelColor];
         self.imageView.alphaValue = .6;
-        
-    } else if (!self.displayItem.isUserCustom && (self.displayItem.inHiddenHierarchy ||
-               self.displayItem.inNoPreviewHierarchy)) {
-        titleColor = [NSColor tertiaryLabelColor];
-        subtitleColor = [NSColor tertiaryLabelColor];
-        self.imageView.alphaValue = .6;
-        
     } else {
         titleColor = [NSColor labelColor];
         subtitleColor = [NSColor secondaryLabelColor];
@@ -219,21 +211,6 @@
         }
     }
     
-    if (property == LookinDisplayItemProperty_None || property == LookinDisplayItemProperty_InNoPreviewHierarchy) {
-        if (!displayItem.isUserCustom && displayItem.inNoPreviewHierarchy) {
-            if (!self.strikethroughLayer) {
-                self.strikethroughLayer = [CALayer layer];
-                [self.strikethroughLayer lookin_removeImplicitAnimations];
-                [self _updateStrikethroughLayerColor];
-                [self.layer addSublayer:self.strikethroughLayer];
-            }
-            self.strikethroughLayer.hidden = NO;
-            [self setNeedsLayout:YES];
-        } else {
-            self.strikethroughLayer.hidden = YES;
-        }
-    }
-    
     if (property == LookinDisplayItemProperty_InHiddenHierarchy ||
         property == LookinDisplayItemProperty_InNoPreviewHierarchy) {
         [self _updateLabelStringsAndImageViewAlpha];
@@ -245,22 +222,48 @@
         property == LookinDisplayItemProperty_HighlightedSearchString) {
         [self _updateLabelStringsAndImageViewAlpha];
     }
+    
+    [self updateStrikethroughLayer];
 }
 
-- (void)_updateStrikethroughLayerColor {
-    if (!self.strikethroughLayer) {
-        return;
-    }
-    if (self.isSelected) {
-        self.strikethroughLayer.backgroundColor = [[NSColor whiteColor] colorWithAlphaComponent:.75].CGColor;
+- (void)updateStrikethroughLayer {
+    BOOL shouldShow = [self resolveIfShouldShowStrikethrough];
+    if (shouldShow) {
+        if (!self.strikethroughLayer) {
+            self.strikethroughLayer = [CALayer layer];
+            [self.strikethroughLayer lookin_removeImplicitAnimations];
+            [self.layer addSublayer:self.strikethroughLayer];
+        }
+        if (self.isSelected) {
+            self.strikethroughLayer.backgroundColor = [[NSColor whiteColor] colorWithAlphaComponent:.75].CGColor;
+        } else {
+            self.strikethroughLayer.backgroundColor = self.isDarkMode ? LookinColorRGBAMake(255, 255, 255, .2).CGColor : LookinColorRGBAMake(0, 0, 0, .2).CGColor;
+        }
+        self.strikethroughLayer.hidden = NO;
+        [self setNeedsLayout:YES];
+        
     } else {
-        self.strikethroughLayer.backgroundColor = self.isDarkMode ? LookinColorRGBAMake(255, 255, 255, .2).CGColor : LookinColorRGBAMake(0, 0, 0, .2).CGColor;
+        self.strikethroughLayer.hidden = YES;
     }
+}
+
+- (BOOL)resolveIfShouldShowStrikethrough {
+    LookinDisplayItem *item = self.displayItem;
+    if (!item) {
+        return NO;
+    }
+    if (![item hasPreviewBoxAbility]) {
+        return NO;
+    }
+    if (item.inNoPreviewHierarchy) {
+        return YES;
+    }
+    return NO;
 }
 
 - (void)setIsDarkMode:(BOOL)isDarkMode {
     [super setIsDarkMode:isDarkMode];
-    [self _updateStrikethroughLayerColor];
+    [self updateStrikethroughLayer];
 }
 
 - (void)_updateEventHandlerButtonColors {
@@ -383,6 +386,18 @@
     } else {
         return NSImageMake(imageName);
     }
+}
+
+- (BOOL)resolveIfShouldFadeContent {
+    LookinDisplayItem *item = self.displayItem;
+    
+    if (item.isInSearch && !item.highlightedSearchString.length) {
+        return YES;
+    }
+    if (![item hasPreviewBoxAbility]) {
+        return NO;
+    }
+    return (item.inHiddenHierarchy || item.inNoPreviewHierarchy);
 }
 
 + (CGFloat)insetLeft {

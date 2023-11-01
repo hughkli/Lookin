@@ -321,26 +321,28 @@ extern NSString *const LKAppShowConsoleNotificationName;
     // 显示和隐藏图像
     [menu addItem:[NSMenuItem separatorItem]];
     
-    if (displayItem.inNoPreviewHierarchy) {
-        [menu addItem:({
-            NSMenuItem *item = [NSMenuItem new];
-            item.target = self;
-            item.action = @selector(_handleShowPreview:);
-            if (displayItem.doNotFetchScreenshotReason == LookinFetchScreenshotPermitted) {
-                item.title = NSLocalizedString(@"Show screenshot", nil);
-            } else {
-                item.title = NSLocalizedString(@"Show layer border", nil);
-            }
-            item;
-        })];
-    } else {
-        [menu addItem:({
-            NSMenuItem *item = [NSMenuItem new];
-            item.target = self;
-            item.action = @selector(_handleCancelPreview:);
-            item.title = NSLocalizedString(@"Hide screenshot this time", nil);
-            item;
-        })];
+    if ([displayItem hasPreviewBoxAbility]) {
+        if (displayItem.inNoPreviewHierarchy) {
+            [menu addItem:({
+                NSMenuItem *item = [NSMenuItem new];
+                item.target = self;
+                item.action = @selector(_handleShowPreview:);
+                if (displayItem.doNotFetchScreenshotReason == LookinFetchScreenshotPermitted) {
+                    item.title = NSLocalizedString(@"Show screenshot", nil);
+                } else {
+                    item.title = NSLocalizedString(@"Show layer border", nil);
+                }
+                item;
+            })];
+        } else {
+            [menu addItem:({
+                NSMenuItem *item = [NSMenuItem new];
+                item.target = self;
+                item.action = @selector(_handleCancelPreview:);
+                item.title = NSLocalizedString(@"Hide screenshot this time", nil);
+                item;
+            })];
+        }
     }
     
     if (displayItem.groupScreenshot) {

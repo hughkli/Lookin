@@ -14,6 +14,16 @@
     return self.customInfo != nil;
 }
 
+- (BOOL)hasPreviewBoxAbility {
+    if (!self.customInfo) {
+        return YES;
+    }
+    if ([self.customInfo hasValidFrame]) {
+        return YES;
+    }
+    return NO;
+}
+
 - (BOOL)hasValidFrameToRoot {
     if (self.customInfo) {
         return [self.customInfo hasValidFrame];
