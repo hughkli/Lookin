@@ -228,11 +228,12 @@ const CGFloat LookinPreviewMaxZInterspace = 1;
         NSAssert(NO, @"");
         return nil;
     }
+    CGRect itemFrameToRoot = [item calculateFrameToRoot];
     NSIndexSet *indexesBelow = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, itemIndex)];
     __block LookinDisplayItem *targetItem = nil;
     [self.flatDisplayItems enumerateObjectsAtIndexes:indexesBelow options:NSEnumerationReverse usingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (!obj.inHiddenHierarchy || self.showHiddenItems) {
-            if (CGRectIntersectsRect(item.frameToRoot, obj.frameToRoot)) {
+            if (CGRectIntersectsRect(itemFrameToRoot, [obj calculateFrameToRoot])) {
                 if (!targetItem) {
                     targetItem = obj;
                 } else {

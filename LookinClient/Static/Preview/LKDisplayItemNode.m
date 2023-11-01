@@ -223,7 +223,7 @@
 
 - (void)displayItem:(LookinDisplayItem *)displayItem propertyDidChange:(LookinDisplayItemProperty)property {
     if (property == LookinDisplayItemProperty_None || property == LookinDisplayItemProperty_FrameToRoot) {
-        CGRect frameToRoot = displayItem.frameToRoot;
+        CGRect frameToRoot = [displayItem calculateFrameToRoot];
         
         CGFloat originX = frameToRoot.origin.x;
         CGFloat originY = frameToRoot.origin.y;

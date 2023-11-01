@@ -111,16 +111,19 @@
     
     NSString *sizeInvalidClass = nil;
     NSString *sizeInvalidProperty = nil;
-    if (self.dataSource.selectedItem.frameToRoot.size.width <= 0) {
+    CGRect selectedItemFrame = [self.dataSource.selectedItem calculateFrameToRoot];
+    CGRect hoveredItemFrame = [self.dataSource.hoveredItem calculateFrameToRoot];
+    
+    if (selectedItemFrame.size.width <= 0) {
         sizeInvalidClass = self.dataSource.selectedItem.title;
         sizeInvalidProperty = @"width";
-    } else if (self.dataSource.selectedItem.frameToRoot.size.height <= 0) {
+    } else if (selectedItemFrame.size.height <= 0) {
         sizeInvalidClass = self.dataSource.selectedItem.title;
         sizeInvalidProperty = @"height";
-    } else if (self.dataSource.hoveredItem.frameToRoot.size.width <= 0) {
+    } else if (hoveredItemFrame.size.width <= 0) {
         sizeInvalidClass = self.dataSource.hoveredItem.title;
         sizeInvalidProperty = @"width";
-    } else if (self.dataSource.hoveredItem.frameToRoot.size.height <= 0) {
+    } else if (hoveredItemFrame.size.height <= 0) {
         sizeInvalidClass = self.dataSource.hoveredItem.title;
         sizeInvalidProperty = @"height";
     }
@@ -137,7 +140,7 @@
     
     self.tutorialView.hidden = YES;
     self.resultView.hidden = NO;
-    [self.resultView renderWithMainRect:self.dataSource.selectedItem.frameToRoot mainImage:self.dataSource.selectedItem.groupScreenshot referRect:self.dataSource.hoveredItem.frameToRoot referImage:self.dataSource.hoveredItem.groupScreenshot];
+    [self.resultView renderWithMainRect:selectedItemFrame mainImage:self.dataSource.selectedItem.groupScreenshot referRect:hoveredItemFrame referImage:self.dataSource.hoveredItem.groupScreenshot];
     [self.view setNeedsLayout:YES];
 }
 
