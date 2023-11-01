@@ -283,22 +283,23 @@ extern NSString *const LKAppShowConsoleNotificationName;
     
     [menu removeAllItems];
 
-    [menu addItem:({
-        NSMenuItem *item = [NSMenuItem new];
-        item.target = self;
-        item.action = @selector(_handleFocusCurrentItem:);
-        item.title = NSLocalizedString(@"Focus", nil);
-        item;
-    })];
-    [menu addItem:({
-        NSMenuItem *item = [NSMenuItem new];
-        item.target = self;
-        item.action = @selector(_handlePrintItem:);
-        item.title = NSLocalizedString(@"Print", nil);
-        item;
-    })];
-
-    [menu addItem:[NSMenuItem separatorItem]];
+    if (!displayItem.isUserCustom) {
+        [menu addItem:({
+            NSMenuItem *item = [NSMenuItem new];
+            item.target = self;
+            item.action = @selector(_handleFocusCurrentItem:);
+            item.title = NSLocalizedString(@"Focus", nil);
+            item;
+        })];
+        [menu addItem:({
+            NSMenuItem *item = [NSMenuItem new];
+            item.target = self;
+            item.action = @selector(_handlePrintItem:);
+            item.title = NSLocalizedString(@"Print", nil);
+            item;
+        })];
+        [menu addItem:[NSMenuItem separatorItem]];        
+    }
 
     if (displayItem.isExpandable) {
         [menu addItem:({
@@ -400,7 +401,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
         })];
     }];
     
-    if (!displayItem.inNoPreviewHierarchy) {
+    if (!displayItem.isUserCustom && !displayItem.inNoPreviewHierarchy) {
         [menu addItem:[NSMenuItem separatorItem]];
         [menu addItem:({
             NSMenuItem *item = [NSMenuItem new];

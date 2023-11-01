@@ -39,6 +39,7 @@
 #import "NSButton+LookinClient.h"
 #import "NSControl+LookinClient.h"
 #import "NSArray+LookinClient.h"
+#import "LookinDisplayItem+LookinClient.h"
 
 #import "ShortCocoa+LookinClient.h"
 

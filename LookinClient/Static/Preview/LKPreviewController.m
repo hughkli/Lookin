@@ -615,39 +615,56 @@ extern NSString *const LKAppShowConsoleNotificationName;
     NSMenu *menu = [NSMenu new];
     menu.autoenablesItems = NO;
     menu.delegate = self;
+    return menu;
+}
 
-    [menu addItem:({
-        NSMenuItem *item = [NSMenuItem new];
-        item.target = self;
-        item.action = @selector(_handleFocusCurrentItem:);
-        item.title = NSLocalizedString(@"Focus", nil);
-        item;
-    })];
-    [menu addItem:({
-        NSMenuItem *item = [NSMenuItem new];
-        item.target = self;
-        item.action = @selector(_handlePrintItem:);
-        item.title = NSLocalizedString(@"Print", nil);
-        item;
-    })];
-    [menu addItem:[NSMenuItem separatorItem]];
-
-    [menu addItem:({
-        NSMenuItem *item = [NSMenuItem new];
-        item.target = self;
-        item.action = @selector(_handleExpandRecursively:);
-        item.title = NSLocalizedString(@"Expand recursively", nil);
-        item;
-    })];
-    [menu addItem:({
-        NSMenuItem *item = [NSMenuItem new];
-        item.target = self;
-        item.action = @selector(_handleCollapseChildren:);
-        item.title = NSLocalizedString(@"Collapse children", nil);
-        item;
-    })];
+- (void)menuNeedsUpdate:(NSMenu *)menu {
+    [menu removeAllItems];
     
-    [menu addItem:[NSMenuItem separatorItem]];
+    LookinDisplayItem *displayItem = self.rightClickingDisplayItem;
+    if (!displayItem) {
+        return;
+    }
+    
+    if (!displayItem.isUserCustom) {
+        [menu addItem:({
+            NSMenuItem *item = [NSMenuItem new];
+            item.target = self;
+            item.action = @selector(_handleFocusCurrentItem:);
+            item.title = NSLocalizedString(@"Focus", nil);
+            item;
+        })];
+        [menu addItem:({
+            NSMenuItem *item = [NSMenuItem new];
+            item.target = self;
+            item.action = @selector(_handlePrintItem:);
+            item.title = NSLocalizedString(@"Print", nil);
+            item;
+        })];
+        [menu addItem:[NSMenuItem separatorItem]];        
+    }
+
+    if (displayItem.isExpandable) {
+        if (displayItem.isExpanded) {
+            [menu addItem:({
+                NSMenuItem *item = [NSMenuItem new];
+                item.target = self;
+                item.action = @selector(_handleCollapseChildren:);
+                item.title = NSLocalizedString(@"Collapse children", nil);
+                item;
+            })];
+        } else {
+            [menu addItem:({
+                NSMenuItem *item = [NSMenuItem new];
+                item.target = self;
+                item.action = @selector(_handleExpandRecursively:);
+                item.title = NSLocalizedString(@"Expand recursively", nil);
+                item;
+            })];
+        }
+        [menu addItem:[NSMenuItem separatorItem]];
+    }
+    
     [menu addItem:({
         NSMenuItem *item = [NSMenuItem new];
         item.enabled = YES;
@@ -656,46 +673,26 @@ extern NSString *const LKAppShowConsoleNotificationName;
         item.title = NSLocalizedString(@"Hide screenshot this time", nil);
         item;
     })];
-    [menu addItem:({
-        NSMenuItem *item = [NSMenuItem new];
-        item.enabled = YES;
-        item.target = self;
-        item.action = @selector(_handleExportScreenshot:);
-        item.title = NSLocalizedString(@"Export screenshot…", nil);
-        item;
-    })];
     
-    [menu addItem:[NSMenuItem separatorItem]];
-    [menu addItem:({
-        NSMenuItem *item = [NSMenuItem new];
-        item.target = self;
-        item.action = @selector(_handleHideScreenshotForever);
-        item.title = NSLocalizedString(@"Hide screenshot forever…", nil);
-        item;
-    })];
-    return menu;
-}
-
-- (void)menuNeedsUpdate:(NSMenu *)menu {
-    LookinDisplayItem *displayItem = self.rightClickingDisplayItem;
-    if (!displayItem) {
-        return;
+    if (!displayItem.isUserCustom && displayItem.groupScreenshot) {
+        [menu addItem:({
+            NSMenuItem *item = [NSMenuItem new];
+            item.enabled = YES;
+            item.target = self;
+            item.action = @selector(_handleExportScreenshot:);
+            item.title = NSLocalizedString(@"Export screenshot…", nil);
+            item;
+        })];
+        
+        [menu addItem:[NSMenuItem separatorItem]];
+        [menu addItem:({
+            NSMenuItem *item = [NSMenuItem new];
+            item.target = self;
+            item.action = @selector(_handleHideScreenshotForever);
+            item.title = NSLocalizedString(@"Hide screenshot forever…", nil);
+            item;
+        })];
     }
-    NSMenuItem *item_expand = [menu itemAtIndex:0];
-    NSMenuItem *item_collapse = [menu itemAtIndex:1];
-//    NSMenuItem *item_cancelPreview = [menu itemAtIndex:3];
-    NSMenuItem *item_export = [menu itemAtIndex:4];
-    
-    // 设置“全部展开”和“全部收起”的 enabled
-    if (displayItem.isExpandable) {
-        item_expand.enabled = YES;
-        item_collapse.enabled = YES;
-    } else {
-        item_expand.enabled = NO;
-        item_collapse.enabled = NO;
-    }
-    
-    item_export.enabled = !!displayItem.groupScreenshot;
 }
 
 - (void)menuDidClose:(NSMenu *)menu {
