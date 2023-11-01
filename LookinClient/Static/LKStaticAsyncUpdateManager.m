@@ -17,6 +17,7 @@
 #import "LookinStaticAsyncUpdateTask.h"
 #import "LKNavigationManager.h"
 #import "LKPerformanceReporter.h"
+#import "LookinDisplayItem+LookinClient.h"
 
 @interface LKStaticAsyncUpdateManager ()
 
@@ -111,6 +112,9 @@
 
 - (NSArray<LookinStaticAsyncUpdateTask *> *)_makeScreenshotsAndAttrGroupsTasks {
     NSMutableArray<LookinStaticAsyncUpdateTask *> *tasks = [(NSArray<LookinDisplayItem *> *)self.dataSource.displayingFlatItems lookin_map:^id(NSUInteger idx, LookinDisplayItem *item) {
+        if (item.isUserCustom) {
+            return nil;
+        }
         if (item.doNotFetchScreenshotReason == LookinFetchScreenshotPermitted) {
             if (item.isExpandable && item.isExpanded) {
                 return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeSoloScreenshot];
@@ -124,6 +128,9 @@
     }].mutableCopy;
     
     [self.dataSource.flatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (item.isUserCustom) {
+            return;
+        }
         if (item.doNotFetchScreenshotReason != LookinFetchScreenshotPermitted) {
             LookinStaticAsyncUpdateTask *task = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
             if (![tasks containsObject:task]) {

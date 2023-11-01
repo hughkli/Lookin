@@ -15,6 +15,7 @@
 #import "LKStaticWindowController.h"
 #import "LKTutorialManager.h"
 #import "LKHierarchyDataSource.h"
+#import "LookinDisplayItem+LookinClient.h"
 
 @interface LKHierarchyRowView () <LookinDisplayItemDelegate>
 
@@ -323,7 +324,10 @@
     });
     
     __block NSString *imageName = nil;
-    if (item.hostViewControllerObject) {
+    if (item.isUserCustom) {
+        imageName = @"hierarchy_view";
+        
+    } else if (item.hostViewControllerObject) {
         imageName = @"hierarchy_controller";
         
     } else if (item.viewObject) {
