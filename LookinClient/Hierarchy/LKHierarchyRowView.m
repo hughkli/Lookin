@@ -330,7 +330,7 @@
     
     __block NSString *imageName = nil;
     if (item.isUserCustom) {
-        imageName = @"hierarchy_view";
+        imageName = @"hierarchy_custom";
         
     } else if (item.hostViewControllerObject) {
         imageName = @"hierarchy_controller";
