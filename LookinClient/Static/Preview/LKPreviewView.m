@@ -7,7 +7,7 @@
 //
 
 #import "LKPreviewView.h"
-#import "LookinDisplayItemNode.h"
+#import "LKDisplayItemNode.h"
 #import "LookinDisplayItem.h"
 #import "LKHierarchyDataSource.h"
 
@@ -29,7 +29,7 @@ const CGFloat LookinPreviewMaxZInterspace = 1;
 @property(nonatomic, strong) SCNNode *leftLightNode;
 
 @property(nonatomic, copy) NSArray<LookinDisplayItem *> *flatDisplayItems;
-@property(nonatomic, strong) NSMutableArray<LookinDisplayItemNode *> *displayItemNodes;
+@property(nonatomic, strong) NSMutableArray<LKDisplayItemNode *> *displayItemNodes;
 
 @end
 
@@ -92,7 +92,7 @@ const CGFloat LookinPreviewMaxZInterspace = 1;
     leftPos.y = -appScreenSize.height * 0.01 * 0.5 - 2;
     self.leftLightNode.position = leftPos;
 
-    [self.displayItemNodes enumerateObjectsUsingBlock:^(LookinDisplayItemNode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.displayItemNodes enumerateObjectsUsingBlock:^(LKDisplayItemNode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         obj.screenSize = appScreenSize;
     }];
 }
@@ -100,26 +100,26 @@ const CGFloat LookinPreviewMaxZInterspace = 1;
 - (void)renderWithDisplayItems:(NSArray<LookinDisplayItem *> *)items discardCache:(BOOL)discardCache {
     self.flatDisplayItems = items;
     
-    NSMutableArray<LookinDisplayItemNode *> *nodesToBeDiscarded = nil;
+    NSMutableArray<LKDisplayItemNode *> *nodesToBeDiscarded = nil;
     if (discardCache) {
         nodesToBeDiscarded = [NSMutableArray array];
     }
     
-    [self.displayItemNodes lookin_dequeueWithCount:items.count add:^LookinDisplayItemNode *(NSUInteger idx) {
-        LookinDisplayItemNode *newNode = [[LookinDisplayItemNode alloc] initWithDataSource:self.dataSource];
+    [self.displayItemNodes lookin_dequeueWithCount:items.count add:^LKDisplayItemNode *(NSUInteger idx) {
+        LKDisplayItemNode *newNode = [[LKDisplayItemNode alloc] initWithDataSource:self.dataSource];
         newNode.screenSize = self.appScreenSize;
         newNode.preferenceManager = self.preferenceManager;
         newNode.isDarkMode = self.isDarkMode;
         [self.stageNode addChildNode:newNode];
         return newNode;
         
-    } notDequeued:^(NSUInteger idx, LookinDisplayItemNode *node) {
+    } notDequeued:^(NSUInteger idx, LKDisplayItemNode *node) {
         [node removeFromParentNode];
         if (discardCache) {
             [nodesToBeDiscarded addObject:node];
         }
         
-    } doNext:^(NSUInteger idx, LookinDisplayItemNode *node) {
+    } doNext:^(NSUInteger idx, LKDisplayItemNode *node) {
         if (!node.parentNode) {
             [self.stageNode addChildNode:node];
         }
@@ -160,12 +160,12 @@ const CGFloat LookinPreviewMaxZInterspace = 1;
     NSMutableDictionary<NSNumber *, NSNumber *> *zIndexAndCountDict = [NSMutableDictionary dictionary];
     
     __block NSUInteger maxZIndex = 0;
-    [self.displayItemNodes enumerateObjectsUsingBlock:^(LookinDisplayItemNode * _Nonnull node, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.displayItemNodes enumerateObjectsUsingBlock:^(LKDisplayItemNode * _Nonnull node, NSUInteger idx, BOOL * _Nonnull stop) {
         maxZIndex = MAX(maxZIndex, node.displayItem.previewZIndex);
     }];
     NSUInteger zIndexOffset = round(maxZIndex * 0.5);
     
-    [self.displayItemNodes enumerateObjectsUsingBlock:^(LookinDisplayItemNode * _Nonnull node, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.displayItemNodes enumerateObjectsUsingBlock:^(LKDisplayItemNode * _Nonnull node, NSUInteger idx, BOOL * _Nonnull stop) {
         LookinDisplayItem *item = node.displayItem;
         // 将 "1, 2, 3, 4, 5 ..." 这样的 zIndex 排序调整为 “-2，-1，0，1，2 ...”，这样旋转时 Y 轴就会位于 zIndex 为中间值的那个 layer 的位置
         NSInteger adjustedZIndex = item.previewZIndex - zIndexOffset;
@@ -251,7 +251,7 @@ const CGFloat LookinPreviewMaxZInterspace = 1;
         return;
     }
     
-    LookinDisplayItemNode *displayItemNode = item.previewNode;
+    LKDisplayItemNode *displayItemNode = item.previewNode;
     
     SCNVector3 rightPos = self.rightLightNode.position;
     rightPos.z = displayItemNode.position.z + 2;
@@ -268,8 +268,8 @@ const CGFloat LookinPreviewMaxZInterspace = 1;
                                                         SCNHitTestIgnoreHiddenNodesKey:@(NO)}];
     if ([hitResults count] > 0) {
         SCNHitTestResult *result = [hitResults objectAtIndex:0];
-        LookinDisplayItemNode *targetNode = (LookinDisplayItemNode *)result.node.parentNode;
-        NSAssert([targetNode isKindOfClass:[LookinDisplayItemNode class]], @"");
+        LKDisplayItemNode *targetNode = (LKDisplayItemNode *)result.node.parentNode;
+        NSAssert([targetNode isKindOfClass:[LKDisplayItemNode class]], @"");
         return targetNode.displayItem;
     } else {
         return nil;
@@ -370,7 +370,7 @@ const CGFloat LookinPreviewMaxZInterspace = 1;
     
     self.backgroundColor = isDarkMode ? LookinColorMake(19, 20, 21) : LookinColorMake(249, 249, 249);
     
-    [self.displayItemNodes enumerateObjectsUsingBlock:^(LookinDisplayItemNode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.displayItemNodes enumerateObjectsUsingBlock:^(LKDisplayItemNode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         obj.isDarkMode = isDarkMode;
     }];
 }

@@ -1,5 +1,5 @@
 //
-//  LookinDisplayItemNode.h
+//  LKDisplayItemNode.h
 //  Lookin
 //
 //  Created by Li Kai on 2019/8/17.
@@ -10,7 +10,7 @@
 
 @class LookinDisplayItem, LKPreferenceManager, LKHierarchyDataSource;
 
-@interface LookinDisplayItemNode : SCNNode
+@interface LKDisplayItemNode : SCNNode
 
 - (instancetype)initWithDataSource:(LKHierarchyDataSource *)dataSource;
 

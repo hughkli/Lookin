@@ -1,17 +1,17 @@
 //
-//  LookinDisplayItemNode.m
+//  LKDisplayItemNode.m
 //  Lookin
 //
 //  Created by Li Kai on 2019/8/17.
 //  https://lookin.work
 //
 
-#import "LookinDisplayItemNode.h"
+#import "LKDisplayItemNode.h"
 #import "LookinDisplayItem.h"
 #import "LKPreferenceManager.h"
 #import "LKHierarchyDataSource.h"
 
-@interface LookinDisplayItemNode () <LookinDisplayItemDelegate>
+@interface LKDisplayItemNode () <LookinDisplayItemDelegate>
 
 @property(nonatomic, strong) LKHierarchyDataSource *dataSource;
 
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation LookinDisplayItemNode
+@implementation LKDisplayItemNode
 
 - (instancetype)initWithDataSource:(LKHierarchyDataSource *)dataSource {
     if (self = [super init]) {

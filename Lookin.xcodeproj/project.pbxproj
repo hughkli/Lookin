@@ -152,7 +152,7 @@
 		AAEE450721DF81C300BF2650 /* LKPreferenceWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEE450621DF81C300BF2650 /* LKPreferenceWindowController.m */; };
 		AAEE450B21DF820100BF2650 /* LKPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEE450A21DF820100BF2650 /* LKPreferenceViewController.m */; };
 		AAEF2C112308420400CFAC53 /* LKPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2C0D2308420300CFAC53 /* LKPreviewView.m */; };
-		AAEF2C122308420400CFAC53 /* LookinDisplayItemNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2C0F2308420400CFAC53 /* LookinDisplayItemNode.m */; };
+		AAEF2C122308420400CFAC53 /* LKDisplayItemNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2C0F2308420400CFAC53 /* LKDisplayItemNode.m */; };
 		AAF418C222BA2AF000111554 /* LKConsoleSelectPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF418C122BA2AF000111554 /* LKConsoleSelectPopoverController.m */; };
 		AAF418C522BA2C9600111554 /* LKConsoleSelectPopoverItemControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF418C422BA2C9600111554 /* LKConsoleSelectPopoverItemControl.m */; };
 		AAF418C822BA2D1300111554 /* LKImageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF418C722BA2D1300111554 /* LKImageTextView.m */; };
@@ -494,8 +494,8 @@
 		AAEE450A21DF820100BF2650 /* LKPreferenceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKPreferenceViewController.m; sourceTree = "<group>"; };
 		AAEF2C0D2308420300CFAC53 /* LKPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKPreviewView.m; sourceTree = "<group>"; };
 		AAEF2C0E2308420300CFAC53 /* LKPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKPreviewView.h; sourceTree = "<group>"; };
-		AAEF2C0F2308420400CFAC53 /* LookinDisplayItemNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookinDisplayItemNode.m; sourceTree = "<group>"; };
-		AAEF2C102308420400CFAC53 /* LookinDisplayItemNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookinDisplayItemNode.h; sourceTree = "<group>"; };
+		AAEF2C0F2308420400CFAC53 /* LKDisplayItemNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKDisplayItemNode.m; sourceTree = "<group>"; };
+		AAEF2C102308420400CFAC53 /* LKDisplayItemNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKDisplayItemNode.h; sourceTree = "<group>"; };
 		AAF418C022BA2AF000111554 /* LKConsoleSelectPopoverController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKConsoleSelectPopoverController.h; sourceTree = "<group>"; };
 		AAF418C122BA2AF000111554 /* LKConsoleSelectPopoverController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKConsoleSelectPopoverController.m; sourceTree = "<group>"; };
 		AAF418C322BA2C9600111554 /* LKConsoleSelectPopoverItemControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKConsoleSelectPopoverItemControl.h; sourceTree = "<group>"; };
@@ -987,8 +987,8 @@
 		AAA8C10721CC17680017A345 /* Preview */ = {
 			isa = PBXGroup;
 			children = (
-				AAEF2C102308420400CFAC53 /* LookinDisplayItemNode.h */,
-				AAEF2C0F2308420400CFAC53 /* LookinDisplayItemNode.m */,
+				AAEF2C102308420400CFAC53 /* LKDisplayItemNode.h */,
+				AAEF2C0F2308420400CFAC53 /* LKDisplayItemNode.m */,
 				AAEF2C0E2308420300CFAC53 /* LKPreviewView.h */,
 				AAEF2C0D2308420300CFAC53 /* LKPreviewView.m */,
 				AAA8C10B21CC17680017A345 /* LKPreviewController.h */,
@@ -1257,7 +1257,7 @@
 				AA3A7D0923003F5800997887 /* LKHierarchyHandlersPopoverItemView.m in Sources */,
 				D4224EEF2358ED3400ED9626 /* LKMeasureController.m in Sources */,
 				AAA8C14021CC17680017A345 /* LKDashboardViewController.m in Sources */,
-				AAEF2C122308420400CFAC53 /* LookinDisplayItemNode.m in Sources */,
+				AAEF2C122308420400CFAC53 /* LKDisplayItemNode.m in Sources */,
 				AA17857E22DE65D20042C8F0 /* LKTutorialPopoverController.m in Sources */,
 				D4D1B2D32353975A002A5071 /* LKWindowToolbarScaleView.m in Sources */,
 				AAF418C822BA2D1300111554 /* LKImageTextView.m in Sources */,
