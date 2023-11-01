@@ -41,6 +41,7 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
 @property(nonatomic, strong) LKTipsView *userConfigNoPreviewTipsView;
 @property(nonatomic, strong) LKTipsView *noPreviewTipView;
 @property(nonatomic, strong) LKTipsView *tutorialTipView;
+@property(nonatomic, strong) LKTipsView *customViewTipView;
 @property(nonatomic, strong) LKYellowTipsView *focusTipView;
 
 @property(nonatomic, strong) LKDashboardViewController *dashboardController;
@@ -129,6 +130,15 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     self.noPreviewTipView.hidden = YES;
     [self.view addSubview:self.noPreviewTipView];
     
+    self.customViewTipView = [LKTipsView new];
+    self.customViewTipView.image = NSImageMake(@"Icon_Inspiration_small");
+    self.customViewTipView.title = NSLocalizedString(@"This object may not be a UIView or CALayer.", nil);
+    self.customViewTipView.buttonText = NSLocalizedString(@"Details", nil);
+    self.customViewTipView.target = self;
+    self.customViewTipView.clickAction = @selector(handleCustomViewTipsView);
+    self.customViewTipView.hidden = YES;
+    [self.view addSubview:self.customViewTipView];
+    
     self.userConfigNoPreviewTipsView = [LKTipsView new];
     self.userConfigNoPreviewTipsView.image = NSImageMake(@"icon_hide");
     self.userConfigNoPreviewTipsView.title = NSLocalizedString(@"The screenshot is not displayed due to the config in iOS App.", nil);
@@ -144,25 +154,7 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     @weakify(self);
     [RACObserve(dataSource, selectedItem) subscribeNext:^(LookinDisplayItem *item) {
         @strongify(self);
-        BOOL showTips = (![item appropriateScreenshot] && item.doNotFetchScreenshotReason == LookinDoNotFetchScreenshotForTooLarge);
-        BOOL shouldHide = !showTips;
-        if (self.tooLargeToSyncScreenshotTipsView.hidden == shouldHide) {
-            return;
-        }
-        self.tooLargeToSyncScreenshotTipsView.hidden = shouldHide;
-        if (shouldHide) {
-            [self.tooLargeToSyncScreenshotTipsView endAnimation];
-        } else {
-            [self.tooLargeToSyncScreenshotTipsView startAnimation];
-        }
-        [self.view setNeedsLayout:YES];
-    }];
-    
-    [RACObserve(dataSource, selectedItem) subscribeNext:^(LookinDisplayItem *item) {
-        @strongify(self);
-        BOOL showTips = (![item appropriateScreenshot] && item.doNotFetchScreenshotReason == LookinDoNotFetchScreenshotForUserConfig);
-        self.userConfigNoPreviewTipsView.hidden = !showTips;
-        [self.view setNeedsLayout:YES];
+        [self handleSelectItemDidChange];
     }];
     
     [[[RACSignal merge:@[RACObserve(dataSource, selectedItem), dataSource.itemDidChangeNoPreview]] skip:1] subscribeNext:^(id  _Nullable x) {
@@ -236,7 +228,7 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     $(self.progressView).fullWidth.height(3).y(windowTitleHeight);
 
     __block CGFloat tipsY = windowTitleHeight + 10;
-    [$(self.connectionTipsView, self.imageSyncTipsView, self.tooLargeToSyncScreenshotTipsView, self.noPreviewTipView, self.focusTipView, self.userConfigNoPreviewTipsView, self.tutorialTipView).visibles.array enumerateObjectsUsingBlock:^(LKTipsView *tipsView, NSUInteger idx, BOOL * _Nonnull stop) {
+    [$(self.connectionTipsView, self.imageSyncTipsView, self.tooLargeToSyncScreenshotTipsView, self.noPreviewTipView, self.focusTipView, self.userConfigNoPreviewTipsView, self.tutorialTipView, self.customViewTipView).visibles.array enumerateObjectsUsingBlock:^(LKTipsView *tipsView, NSUInteger idx, BOOL * _Nonnull stop) {
         CGFloat midX = self.hierarchyController.view.$width + (self.viewsPreviewController.view.$width - DashboardViewWidth) / 2.0;
         $(tipsView).sizeToFit.y(tipsY).midX(midX);
         tipsY = tipsView.$maxY + 5;
@@ -398,6 +390,10 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     }
 }
 
+- (void)handleCustomViewTipsView {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://bytedance.feishu.cn/docx/TRridRXeUoErMTxs94bcnGchnlb"]];
+}
+
 - (void)_handleExitFocusTipView {
     [[self dataSource] endFocus];
 }
@@ -412,7 +408,31 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     self.measureController.view.hidden = !isMeasuring;
 }
 
-#pragma mark - Others
+- (void)handleSelectItemDidChange {
+    LookinDisplayItem *item = [[self dataSource] selectedItem];
+    
+    {
+        BOOL showTips = (item && ![item appropriateScreenshot] && item.doNotFetchScreenshotReason == LookinDoNotFetchScreenshotForTooLarge);
+        BOOL shouldHide = !showTips;
+        if (self.tooLargeToSyncScreenshotTipsView.hidden != shouldHide) {
+            self.tooLargeToSyncScreenshotTipsView.hidden = shouldHide;
+            if (shouldHide) {
+                [self.tooLargeToSyncScreenshotTipsView endAnimation];
+            } else {
+                [self.tooLargeToSyncScreenshotTipsView startAnimation];
+            }
+            [self.view setNeedsLayout:YES];
+        }
+    }
+    {
+        BOOL showTips = (item && item.isUserCustom);
+        BOOL shouldHide = !showTips;
+        if (self.customViewTipView.hidden != shouldHide) {
+            self.customViewTipView.hidden = shouldHide;
+            [self.view setNeedsLayout:YES];
+        }
+    }
+}
 
 - (LKStaticWindowController *)_staticWindowController {
     NSWindowController *windowController = self.view.window.windowController;

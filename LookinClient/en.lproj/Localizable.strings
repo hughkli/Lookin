@@ -191,3 +191,4 @@
 "How to turn on…" = "How to turn on…";
 "What do you want to happen when you double click the layer?" = "What do you want to happen when you double click the layer?";
 "You can change it at any time in your Preferences." = "You can change it at any time in your Preferences.";
+"This object may not be a UIView or CALayer." = "This object may not be a UIView or CALayer.";
