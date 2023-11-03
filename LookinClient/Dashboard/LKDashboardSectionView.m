@@ -182,6 +182,10 @@
     
     [self.attrSection.attributes enumerateObjectsUsingBlock:^(LookinAttribute * _Nonnull attr, NSUInteger idx, BOOL * _Nonnull stop) {
         Class attrViewClass = [self _targetAttrClassForType:attr.attrType identifier:attr.identifier];
+        if (!attrViewClass) {
+            NSAssert(NO, @"");
+            return;
+        }
         LKDashboardAttributeView *view = [notUsedViews lookin_firstFiltered:^BOOL(LKDashboardAttributeView *obj) {
             return [obj isMemberOfClass:attrViewClass];
         }];
@@ -226,7 +230,8 @@
         case LookinAttrTypeDouble:
         case LookinAttrTypeLong:
             return [LKDashboardAttributeNumberInputView class];
-        case  LookinAttrTypeUIColor:
+        case LookinAttrTypeUIColor:
+            return nil;
             return [LKDashboardAttributeColorView class];
         case LookinAttrTypeEnumInt:
         case LookinAttrTypeEnumLong:
