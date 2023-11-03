@@ -231,7 +231,6 @@
         case LookinAttrTypeLong:
             return [LKDashboardAttributeNumberInputView class];
         case LookinAttrTypeUIColor:
-            return nil;
             return [LKDashboardAttributeColorView class];
         case LookinAttrTypeEnumInt:
         case LookinAttrTypeEnumLong:
