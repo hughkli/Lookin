@@ -109,6 +109,14 @@
     [self.tableView reloadData];
 }
 
+- (void)reloadDataWithOffset {
+    CGPoint offset = self.documentVisibleRect.origin;
+    [self reloadData];
+    self.needsLayout = YES;
+    [self layoutSubtreeIfNeeded];
+    [self.documentView scrollPoint:offset];
+}
+
 - (void)scrollRowToVisible:(NSInteger)row {
     [self.tableView scrollRowToVisible:row];
 }

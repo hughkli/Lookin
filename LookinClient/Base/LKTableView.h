@@ -44,6 +44,9 @@
 
 - (void)reloadData;
 
+/// reloadData 但是仍维持原本的滚动条位置（上面的 reloadData 会重置 offset）
+- (void)reloadDataWithOffset;
+
 - (void)scrollRowToVisible:(NSInteger)row;
 
 @end

@@ -97,7 +97,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
         
         [RACObserve(dataSource, selectedItem) subscribeNext:^(LookinDisplayItem * _Nullable item) {
             @strongify(self);
-            [self.tableView reloadData];
+            [self.tableView reloadDataWithOffset];
             [self scrollToMakeItemVisible:item];
         }];
         
