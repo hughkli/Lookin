@@ -20,7 +20,11 @@
 
 - (BOOL)canEdit {
     if (self.attribute.isUserCustom) {
-        return NO;
+        if (self.attribute.customSetterID.length > 0) {
+            return YES;
+        } else {
+            return NO;            
+        }
     }
     SEL setter = [LookinDashboardBlueprint setterWithAttrID:self.attribute.identifier];
     return setter && self.dashboardViewController.isStaticMode;

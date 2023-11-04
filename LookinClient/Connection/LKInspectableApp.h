@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LookinAppInfo.h"
 #import "LookinAttributeModification.h"
+#import "LookinCustomAttrModification.h"
 #import "LookinAttributesGroup.h"
 
 @class Lookin_PTChannel, LookinDisplayItemTrace, LookinInvocationRequest, LookinHierarchyInfo, LookinStaticAsyncUpdateTasksPackage, LookinStaticAsyncUpdateTask;
@@ -23,7 +24,8 @@
 
 - (RACSignal *)fetchHierarchyData;
 
-- (RACSignal *)submitModification:(LookinAttributeModification *)modification;
+- (RACSignal *)submitInbuiltModification:(LookinAttributeModification *)modification;
+- (RACSignal *)submitCustomModification:(LookinCustomAttrModification *)modification;
 
 - (RACSignal *)fetchHierarchyDetailWithTaskPackages:(NSArray<LookinStaticAsyncUpdateTasksPackage *> *)packages;
 - (void)cancelHierarchyDetailFetching;

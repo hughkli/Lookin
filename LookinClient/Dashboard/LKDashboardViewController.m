@@ -22,6 +22,7 @@
 #import "LKDashboardSectionView.h"
 #import "LKDashboardSearchMethodsView.h"
 #import "LKDashboardSearchMethodsDataSource.h"
+#import "LookinCustomAttrModification.h"
 
 @interface LKDashboardViewController () <LKDashboardCardViewDelegate, LKDashboardSearchInputViewDelegate, LKDashboardSearchPropViewDelegate, LKDashboardSearchMethodsViewDelegate>
 
@@ -122,7 +123,7 @@
             [self reloadWithGroupList:[self.readDataSource.selectedItem queryAllAttrGroupList]];
         }];
     }
-
+    
     [[NSNotificationCenter defaultCenter] addObserverForName:NotificationName_DidChangeSectionShowing object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         @strongify(self);
         [self reloadWithGroupList:[[self currentDataSource].selectedItem queryAllAttrGroupList]];
@@ -131,7 +132,7 @@
 
 - (void)viewDidLayout {
     [super viewDidLayout];
-
+    
     $(self.scrollView).fullFrame;
     
     CGFloat verMargin = 10;
@@ -141,7 +142,7 @@
     
     if (!self.cardContainerView.hidden) {
         $(self.cardContainerView).width(contentWidth).x(DashboardHorInset).y(self.searchInputView.$maxY + verMargin);
-    
+        
         __block CGFloat y = 0;
         
         [self.groupList enumerateObjectsUsingBlock:^(LookinAttributesGroup * _Nonnull group, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -151,14 +152,14 @@
                 y = view.$maxY + verMargin;
             }
         }];
-    
+        
         $(self.cardContainerView).height(y);
         $(self.documentView).fullWidth.y(0).toMaxY(self.cardContainerView.$maxY);
     }
     
     if (!self.searchContainerView.hidden) {
         $(self.searchContainerView).width(contentWidth).x(DashboardHorInset).y(self.searchInputView.$maxY + verMargin);
-    
+        
         __block CGFloat y = 0;
         [self.searchPropViews enumerateObjectsUsingBlock:^(LKDashboardSearchPropView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
             if (!view.hidden) {
@@ -214,6 +215,52 @@
 }
 
 - (RACSignal *)modifyAttribute:(LookinAttribute *)attribute newValue:(id)newValue {
+    if (attribute.isUserCustom) {
+        return [self modifyCustomAttribute:attribute newValue:newValue];
+    } else {
+        return [self modifyInbuiltAttribute:attribute newValue:newValue];
+    }
+}
+
+- (RACSignal *)modifyCustomAttribute:(LookinAttribute *)attribute newValue:(id)newValue {
+    @weakify(self);
+    return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+        @strongify(self);        
+        LookinCustomAttrModification *modification = [LookinCustomAttrModification new];
+        modification.customSetterID = attribute.customSetterID;
+        modification.attrType = attribute.attrType;
+        modification.value = newValue;
+    
+        if (modification.customSetterID.length == 0) {
+            NSAssert(NO, @"");
+            AlertError(LookinErr_Inner, self.view.window);
+            [subscriber sendError:LookinErr_Inner];
+            return nil;
+        }
+        
+        if (![LKAppsManager sharedInstance].inspectingApp) {
+            AlertError(LookinErr_NoConnect, self.view.window);
+            [subscriber sendError:LookinErr_NoConnect];
+            return nil;
+        }
+        
+        @weakify(self);
+        [[[LKAppsManager sharedInstance].inspectingApp submitCustomModification:modification] subscribeNext:^(id ret) {
+            NSLog(@"custom modification - succ");
+            attribute.value = newValue;
+            [subscriber sendNext:nil];
+
+        } error:^(NSError * _Nullable error) {
+            @strongify(self);
+            AlertError(error, self.view.window);
+            [subscriber sendError:error];
+        }];
+        
+        return nil;
+    }];
+}
+
+- (RACSignal *)modifyInbuiltAttribute:(LookinAttribute *)attribute newValue:(id)newValue {
     @weakify(self);
     return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
         @strongify(self);
@@ -241,7 +288,7 @@
         }
         
         @weakify(self);
-        [[[LKAppsManager sharedInstance].inspectingApp submitModification:modification] subscribeNext:^(LookinDisplayItemDetail *detail) {
+        [[[LKAppsManager sharedInstance].inspectingApp submitInbuiltModification:modification] subscribeNext:^(LookinDisplayItemDetail *detail) {
             NSLog(@"modification - succ");
             @strongify(self);
             if (self.staticDataSource) {
@@ -249,7 +296,7 @@
                 if ([LookinDashboardBlueprint needPatchAfterModificationWithAttrID:attribute.identifier]) {
                     [[LKStaticAsyncUpdateManager sharedInstance] updateAfterModifyingDisplayItem:(LookinStaticDisplayItem *)modifyingItem];
                 }
-
+                
             } else {
                 NSAssert(NO, @"");
             }

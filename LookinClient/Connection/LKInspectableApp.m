@@ -17,8 +17,12 @@
     return [self _requestWithType:LookinRequestTypeHierarchy data:nil];
 }
 
-- (RACSignal *)submitModification:(LookinAttributeModification *)modification {
-    return [self _requestWithType:LookinRequestTypeModification data:modification];
+- (RACSignal *)submitInbuiltModification:(LookinAttributeModification *)modification {
+    return [self _requestWithType:LookinRequestTypeInbuiltAttrModification data:modification];
+}
+
+- (RACSignal *)submitCustomModification:(LookinCustomAttrModification *)modification {
+    return [self _requestWithType:LookinRequestTypeCustomAttrModification data:modification];
 }
 
 - (RACSignal *)fetchHierarchyDetailWithTaskPackages:(NSArray<LookinStaticAsyncUpdateTasksPackage *> *)packages {
