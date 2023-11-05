@@ -16,7 +16,7 @@
 #import "LKReadHierarchyDataSource.h"
 #import "LookinDashboardBlueprint.h"
 #import "LKUserActionManager.h"
-#import "LKDashboardSearchInputView.h"
+#import "LKDashboardHeaderView.h"
 #import "LKDashboardSearchPropView.h"
 #import "LookinAttributesSection.h"
 #import "LKDashboardSectionView.h"
@@ -26,7 +26,7 @@
 @import AppCenter;
 @import AppCenterAnalytics;
 
-@interface LKDashboardViewController () <LKDashboardCardViewDelegate, LKDashboardSearchInputViewDelegate, LKDashboardSearchPropViewDelegate, LKDashboardSearchMethodsViewDelegate>
+@interface LKDashboardViewController () <LKDashboardCardViewDelegate, LKDashboardHeaderViewDelegate, LKDashboardSearchPropViewDelegate, LKDashboardSearchMethodsViewDelegate>
 
 @property(nonatomic, strong) NSScrollView *scrollView;
 @property(nonatomic, strong) LKBaseView *documentView;
@@ -37,7 +37,7 @@
 @property(nonatomic, strong) NSMutableDictionary<NSString *, LKDashboardCardView *> *cardViews;
 
 @property(nonatomic, strong) LKBaseView *searchContainerView;
-@property(nonatomic, strong) LKDashboardSearchInputView *searchInputView;
+@property(nonatomic, strong) LKDashboardHeaderView *headerView;
 @property(nonatomic, strong) NSMutableArray<LKDashboardSearchPropView *> *searchPropViews;
 @property(nonatomic, strong) LKDashboardSearchMethodsView *searchMethodsView;
 @property(nonatomic, strong) LKDashboardSearchMethodsDataSource *methodsDataSource;
@@ -81,9 +81,9 @@
     self.scrollView.contentView.documentView = self.documentView;
     [containerView addSubview:self.scrollView];
     
-    self.searchInputView = [LKDashboardSearchInputView new];
-    self.searchInputView.delegate = self;
-    [self.documentView addSubview:self.searchInputView];
+    self.headerView = [LKDashboardHeaderView new];
+    self.headerView.delegate = self;
+    [self.documentView addSubview:self.headerView];
     
     self.cardContainerView = [LKBaseView new];
     [self.documentView addSubview:self.cardContainerView];
@@ -140,10 +140,10 @@
     CGFloat verMargin = 10;
     CGFloat contentWidth = DashboardViewWidth - DashboardHorInset * 2;
     
-    $(self.searchInputView).width(contentWidth).x(DashboardHorInset).height(23).y(10);
+    $(self.headerView).width(contentWidth).x(DashboardHorInset).height(23).y(10);
     
     if (!self.cardContainerView.hidden) {
-        $(self.cardContainerView).width(contentWidth).x(DashboardHorInset).y(self.searchInputView.$maxY + verMargin);
+        $(self.cardContainerView).width(contentWidth).x(DashboardHorInset).y(self.headerView.$maxY + verMargin);
         
         __block CGFloat y = 0;
         
@@ -160,7 +160,7 @@
     }
     
     if (!self.searchContainerView.hidden) {
-        $(self.searchContainerView).width(contentWidth).x(DashboardHorInset).y(self.searchInputView.$maxY + verMargin);
+        $(self.searchContainerView).width(contentWidth).x(DashboardHorInset).y(self.headerView.$maxY + verMargin);
         
         __block CGFloat y = 0;
         [self.searchPropViews enumerateObjectsUsingBlock:^(LKDashboardSearchPropView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -339,9 +339,9 @@
     [self.view setNeedsLayout:YES];
 }
 
-#pragma mark - <LKDashboardSearchInputViewDelegate>
+#pragma mark - <LKDashboardHeaderViewDelegate>
 
-- (void)dashboardSearchInputView:(LKDashboardSearchInputView *)view didInputString:(NSString *)searchString {
+- (void)dashboardHeaderView:(LKDashboardHeaderView *)view didInputString:(NSString *)searchString {
     if (searchString.length < 3) {
         self.searchContainerView.hidden = YES;
         return;
@@ -405,7 +405,7 @@
     @weakify(self);
     [[self.methodsDataSource fetchNonArgMethodsListWithClass:selectedClassName] subscribeNext:^(NSArray<NSString *> *methodsList) {
         @strongify(self);
-        if (![searchString isEqualToString:[self.searchInputView currentInputString]]) {
+        if (![searchString isEqualToString:[self.headerView currentInputString]]) {
             return;
         }
         NSArray<NSString *> *searchedMethods = [LKHelper bestMatchesInCandidates:methodsList input:searchString maxResultsCount:5];
@@ -415,7 +415,7 @@
         
     } error:^(NSError * _Nullable error) {
         @strongify(self);
-        if (![searchString isEqualToString:[self.searchInputView currentInputString]]) {
+        if (![searchString isEqualToString:[self.headerView currentInputString]]) {
             return;
         }
         [self.searchMethodsView renderWithError:error];
@@ -424,7 +424,7 @@
     }];
 }
 
-- (void)dashboardSearchInputView:(LKDashboardSearchInputView *)view didToggleActive:(BOOL)isActive {
+- (void)dashboardHeaderView:(LKDashboardHeaderView *)view didToggleActive:(BOOL)isActive {
     if (isActive) {
         self.cardContainerView.animator.hidden = YES;
         self.currentDataSource.shouldAvoidChangingPreviewSelectionDueToDashboardSearch = YES;
@@ -474,7 +474,7 @@
 #pragma mark - <LKDashboardSearchPropViewDelegate>
 
 - (void)dashboardSearchPropView:(LKDashboardSearchPropView *)view didClickRevealAttribute:(LookinAttribute *)clickedAttr {
-    self.searchInputView.isActive = NO;
+    self.headerView.isActive = NO;
     
     __block LookinAttributesGroup *targetGroup = nil;
     __block LookinAttributesSection *targetSection = nil;

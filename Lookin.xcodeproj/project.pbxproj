@@ -123,7 +123,7 @@
 		AAB636C022B3854100885A2C /* LKDashboardAttributeClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB636BF22B3854100885A2C /* LKDashboardAttributeClassView.m */; };
 		AAB636C322B3981200885A2C /* LKDashboardAttributeRelationView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB636C222B3981200885A2C /* LKDashboardAttributeRelationView.m */; };
 		AAB636C622B3BA0F00885A2C /* LKDashboardCardTitleControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB636C522B3BA0F00885A2C /* LKDashboardCardTitleControl.m */; };
-		AAB65C062320ED56001E4299 /* LKDashboardSearchInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB65C052320ED56001E4299 /* LKDashboardSearchInputView.m */; };
+		AAB65C062320ED56001E4299 /* LKDashboardHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB65C052320ED56001E4299 /* LKDashboardHeaderView.m */; };
 		AAB65C092320FC30001E4299 /* LKDashboardSearchCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB65C082320FC30001E4299 /* LKDashboardSearchCardView.m */; };
 		AAB65C0C2320FCF0001E4299 /* LKDashboardSearchPropView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB65C0B2320FCF0001E4299 /* LKDashboardSearchPropView.m */; };
 		AAB872E6221C26B600C25294 /* LKStaticAsyncUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB872E5221C26B600C25294 /* LKStaticAsyncUpdateManager.m */; };
@@ -435,8 +435,8 @@
 		AAB636C222B3981200885A2C /* LKDashboardAttributeRelationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeRelationView.m; sourceTree = "<group>"; };
 		AAB636C422B3BA0F00885A2C /* LKDashboardCardTitleControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardCardTitleControl.h; sourceTree = "<group>"; };
 		AAB636C522B3BA0F00885A2C /* LKDashboardCardTitleControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardCardTitleControl.m; sourceTree = "<group>"; };
-		AAB65C042320ED56001E4299 /* LKDashboardSearchInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardSearchInputView.h; sourceTree = "<group>"; };
-		AAB65C052320ED56001E4299 /* LKDashboardSearchInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardSearchInputView.m; sourceTree = "<group>"; };
+		AAB65C042320ED56001E4299 /* LKDashboardHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardHeaderView.h; sourceTree = "<group>"; };
+		AAB65C052320ED56001E4299 /* LKDashboardHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardHeaderView.m; sourceTree = "<group>"; };
 		AAB65C072320FC30001E4299 /* LKDashboardSearchCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardSearchCardView.h; sourceTree = "<group>"; };
 		AAB65C082320FC30001E4299 /* LKDashboardSearchCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardSearchCardView.m; sourceTree = "<group>"; };
 		AAB65C0A2320FCF0001E4299 /* LKDashboardSearchPropView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardSearchPropView.h; sourceTree = "<group>"; };
@@ -1028,8 +1028,8 @@
 				AAB65C0B2320FCF0001E4299 /* LKDashboardSearchPropView.m */,
 				AA56062B2322A733008C82CF /* LKDashboardSearchMethodsView.h */,
 				AA56062C2322A733008C82CF /* LKDashboardSearchMethodsView.m */,
-				AAB65C042320ED56001E4299 /* LKDashboardSearchInputView.h */,
-				AAB65C052320ED56001E4299 /* LKDashboardSearchInputView.m */,
+				AAB65C042320ED56001E4299 /* LKDashboardHeaderView.h */,
+				AAB65C052320ED56001E4299 /* LKDashboardHeaderView.m */,
 				AA56062E2322AEA7008C82CF /* LKDashboardSearchMethodsDataSource.h */,
 				AA56062F2322AEA7008C82CF /* LKDashboardSearchMethodsDataSource.m */,
 			);
@@ -1336,7 +1336,7 @@
 				AAD2BECE226B1ED500E83D01 /* LKTableView.m in Sources */,
 				A26EF69727F89F83005A9E4E /* ShortCocoa+String.m in Sources */,
 				A26EF69427F89F83005A9E4E /* ShortCocoa+Private.m in Sources */,
-				AAB65C062320ED56001E4299 /* LKDashboardSearchInputView.m in Sources */,
+				AAB65C062320ED56001E4299 /* LKDashboardHeaderView.m in Sources */,
 				AA28179F22B0305400A0874C /* LKDashboardAttributeRowsCountView.m in Sources */,
 				AA05CCDD221ED6110086CDD1 /* LKDashboardAttributeEnumsView.m in Sources */,
 				AA50755422A28A1600D2A5AC /* LKConsoleReturnRowView.m in Sources */,

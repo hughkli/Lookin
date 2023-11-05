@@ -1,22 +1,22 @@
 //
-//  LKDashboardSearchInputView.m
+//  LKDashboardHeaderView.m
 //  Lookin
 //
 //  Created by Li Kai on 2019/9/5.
 //  https://lookin.work
 //
 
-#import "LKDashboardSearchInputView.h"
+#import "LKDashboardHeaderView.h"
 #import "LKPreferenceManager.h"
 
-@interface LKDashboardSearchInputView () <NSTextFieldDelegate>
+@interface LKDashboardHeaderView () <NSTextFieldDelegate>
 
 @property(nonatomic, strong) NSImageView *iconImageView;
 @property(nonatomic, strong) NSTextField *textField;
 
 @end
 
-@implementation LKDashboardSearchInputView {
+@implementation LKDashboardHeaderView {
     CGFloat _iconXWhenActive;
 }
 
@@ -48,8 +48,8 @@
         @weakify(self);
         [[self.textField.rac_textSignal throttle:0.3] subscribeNext:^(NSString * _Nullable x) {
             @strongify(self);
-            if ([self.delegate respondsToSelector:@selector(dashboardSearchInputView:didInputString:)]) {
-                [self.delegate dashboardSearchInputView:self didInputString:x];
+            if ([self.delegate respondsToSelector:@selector(dashboardHeaderView:didInputString:)]) {
+                [self.delegate dashboardHeaderView:self didInputString:x];
             }
         }];
         
@@ -107,8 +107,8 @@
         self.textField.stringValue = @"";
     }
     
-    if ([self.delegate respondsToSelector:@selector(dashboardSearchInputView:didToggleActive:)]) {
-        [self.delegate dashboardSearchInputView:self didToggleActive:isActive];
+    if ([self.delegate respondsToSelector:@selector(dashboardHeaderView:didToggleActive:)]) {
+        [self.delegate dashboardHeaderView:self didToggleActive:isActive];
     }
 }
 
