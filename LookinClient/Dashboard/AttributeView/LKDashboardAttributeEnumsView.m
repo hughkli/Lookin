@@ -141,7 +141,10 @@
         NSMenuItem *item = [NSMenuItem new];
         item.image = [[NSImage alloc] initWithSize:NSMakeSize(1, 22)];
         item.title = text;
-        item.enabled = NO;
+        item.representedObject = text;
+        item.enabled = [self canEdit];
+        item.target = self;
+        item.action = @selector(_handleMenuItem:);
         item.state = ([text isEqualTo:self.attribute.value] ? NSControlStateValueOn : NSControlStateValueOff);
         [menu addItem:item];
     }
@@ -155,7 +158,10 @@
         NSLog(@"修改没有变化，不做任何提交");
         return;
     }
+    @weakify(self);
     [[self.dashboardViewController modifyAttribute:self.attribute newValue:expectedValue] subscribeNext:^(id  _Nullable x) {
+        @strongify(self);
+        [self renderWithAttribute];
     }];
 }
 

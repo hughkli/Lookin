@@ -57,6 +57,14 @@
 
 #pragma mark - <NSTextViewDelegate>
 
+- (BOOL)textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector {
+    if (commandSelector == @selector(insertNewline:)) {
+        [self.window makeFirstResponder:nil];
+        return YES;
+    }
+    return NO;
+}
+
 - (void)textDidEndEditing:(NSNotification *)notification {
     NSString *expectedValue = self.textView.string;
     

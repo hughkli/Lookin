@@ -225,7 +225,10 @@
         return;
     }
     // 提交修改
+    @weakify(self);
     [[self.dashboardViewController modifyAttribute:self.attribute newValue:expecetdValue] subscribeNext:^(id  _Nullable x) {
+        @strongify(self);
+        [self renderWithAttribute];
     }];
 }
 
