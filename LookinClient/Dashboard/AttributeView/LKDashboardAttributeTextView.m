@@ -14,12 +14,16 @@
 @property(nonatomic, strong) NSScrollView *scrollView;
 @property(nonatomic, strong) NSTextView *textView;
 
+@property(nonatomic, copy) NSString *initialText;
+
 @end
 
 @implementation LKDashboardAttributeTextView
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
     if (self = [super initWithFrame:frameRect]) {
+        self.initialText = @"";
+        
         self.scrollView = [LKHelper scrollableTextView];
         self.scrollView.wantsLayer = YES;
         self.scrollView.layer.cornerRadius = DashboardCardControlCornerRadius;
@@ -41,7 +45,8 @@
 - (void)renderWithAttribute {
     [super renderWithAttribute];
     /// nil 居然会 crash
-    self.textView.string = self.attribute.value ? : @"";
+    self.initialText = self.attribute.value ? : @"";
+    self.textView.string = self.initialText;
     self.textView.editable = self.canEdit;
 }
 
@@ -68,7 +73,7 @@
 - (void)textDidEndEditing:(NSNotification *)notification {
     NSString *expectedValue = self.textView.string;
     
-    if ([expectedValue isEqual:self.attribute.value]) {
+    if ([expectedValue isEqual:self.initialText]) {
         NSLog(@"修改没有变化，不做任何提交");
         [self renderWithAttribute];
         return;
