@@ -182,8 +182,6 @@ static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
         
         _receivingConfigTime_Color = [userDefaults doubleForKey:Key_ReceivingConfigTime_Color];
         _receivingConfigTime_Class = [userDefaults doubleForKey:Key_ReceivingConfigTime_Class];
-        
-        [self reportStatistics];
     }
     return self;
 }

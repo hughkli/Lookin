@@ -215,6 +215,8 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
         [self.progressView resetToZero];
         AlertError(error, self.view.window);
     }];
+    
+    [[LKPreferenceManager mainManager] reportStatistics];
 }
 
 - (void)viewDidLayout {

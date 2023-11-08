@@ -103,4 +103,6 @@ extern NSString *const NotificationName_DidChangeSectionShowing;
 
 - (void)reset;
 
+- (void)reportStatistics;
+
 @end
