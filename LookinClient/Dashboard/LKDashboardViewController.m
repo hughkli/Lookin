@@ -269,6 +269,7 @@
         LookinDisplayItem *modifyingItem = attribute.targetDisplayItem;
         
         LookinAttributeModification *modification = [LookinAttributeModification new];
+        modification.clientReadableVersion = [LKHelper lookinReadableVersion];
         if ([LookinDashboardBlueprint isUIViewPropertyWithAttrID:attribute.identifier]) {
             modification.targetOid = modifyingItem.viewObject.oid;
         } else {

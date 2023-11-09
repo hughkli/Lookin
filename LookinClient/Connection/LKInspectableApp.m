@@ -14,7 +14,9 @@
 @implementation LKInspectableApp
 
 - (RACSignal *)fetchHierarchyData {
-    return [self _requestWithType:LookinRequestTypeHierarchy data:nil];
+    /// Lookin 1.0.4 开始加入这个参数
+    NSDictionary *param = @{@"clientVersion": [LKHelper lookinReadableVersion]};
+    return [self _requestWithType:LookinRequestTypeHierarchy data:param];
 }
 
 - (RACSignal *)submitInbuiltModification:(LookinAttributeModification *)modification {

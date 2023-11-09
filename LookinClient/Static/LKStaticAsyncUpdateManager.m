@@ -191,6 +191,7 @@
     task.oid = item.layerObject.oid;
     task.frameSize = item.frame.size;
     task.taskType = type;
+    task.clientReadableVersion = [LKHelper lookinReadableVersion];
     return task;
 }
 

@@ -71,7 +71,7 @@ CG_INLINE HorizontalMargins HorizontalMarginsMake(CGFloat left, CGFloat right) {
 
 + (NSFont *)italicFontOfSize:(CGFloat)fontSize;
 
-+ (NSString *)lookinVersion;
++ (NSString *)lookinReadableVersion;
 
 + (void)openLookinWebsiteWithPath:(NSString *)path;
 

@@ -44,14 +44,14 @@ const CGFloat ZoomSliderMaxValue = 2.8;
     return font;
 }
 
-+ (NSString *)lookinVersion {
++ (NSString *)lookinReadableVersion {
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString *string = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     return string ? : @"";
 }
 
 + (void)openLookinWebsiteWithPath:(NSString *)path {
-    NSString *version = [[self lookinVersion] stringByReplacingOccurrencesOfString:@"." withString:@"d"];
+    NSString *version = [[self lookinReadableVersion] stringByReplacingOccurrencesOfString:@"." withString:@"d"];
     NSString *urlString = [NSString stringWithFormat:@"https://lookin.work/%@?v=%@", path, version];
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:urlString]];
 }
