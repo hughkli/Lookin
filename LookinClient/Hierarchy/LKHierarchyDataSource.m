@@ -218,6 +218,11 @@
     }
     self.selectedItem = shouldSelectedItem;
 
+    if (self.state != LKHierarchyDataSourceStateNormal) {
+        // 可能在 search 或 focus 状态，要退出
+        self.state = LKHierarchyDataSourceStateNormal;
+    }
+    
     [self.didReloadHierarchyInfo sendNext:nil];
 }
 
