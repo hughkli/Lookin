@@ -304,6 +304,7 @@
                       @{@"UINavigationBar": @"hierarchy_navigationbar"},
                       @{@"UITabBar": @"hierarchy_tabbar"},
                       @{@"UITextView": @"hierarchy_textview"},
+                      @{@"UIStackView": @"hierarchy_stackview"},
                       @{@"UITextField": @"hierarchy_textfield"},
                       @{@"UITableView": @"hierarchy_tableview"},
                       @{@"UICollectionView": @"hierarchy_collectionview"},
