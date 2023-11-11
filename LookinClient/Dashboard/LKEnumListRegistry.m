@@ -145,6 +145,28 @@
             MakeItemWithVersion(@"UIBlurEffectStyleSystemChromeMaterialDark", 20, 13),
         ];
         
+        mData[@"UILayoutConstraintAxis"] = @[
+            MakeItem(@"UILayoutConstraintAxisHorizontal", 0),
+            MakeItem(@"UILayoutConstraintAxisVertical", 1),
+        ];
+        
+        mData[@"UIStackViewDistribution"] = @[
+            MakeItem(@"UIStackViewDistributionFill", 0),
+            MakeItem(@"UIStackViewDistributionFillEqually", 1),
+            MakeItem(@"UIStackViewDistributionFillProportionally", 2),
+            MakeItem(@"UIStackViewDistributionEqualSpacing", 3),
+            MakeItem(@"UIStackViewDistributionEqualCentering", 4)
+        ];
+        
+        mData[@"UIStackViewAlignment"] = @[
+            MakeItem(@"UIStackViewAlignmentFill", 0),
+            MakeItem(@"UIStackViewAlignmentLeading (Top)", 1),
+            MakeItem(@"UIStackViewAlignmentFirstBaseline", 2),
+            MakeItem(@"UIStackViewAlignmentCenter", 3),
+            MakeItem(@"UIStackViewAlignmentTrailing (Bottom)", 4),
+            MakeItem(@"UIStackViewAlignmentLastBaseline", 5)
+        ];
+        
         self.data = mData;
     }
     return self;

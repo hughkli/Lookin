@@ -77,7 +77,8 @@
                                 LookinAttr_AutoLayout_Resistance_Ver,
                                 LookinAttr_AutoLayout_Resistance_Hor,
                                 LookinAttr_AutoLayout_Hugging_Ver,
-                                LookinAttr_AutoLayout_Hugging_Hor];
+                                LookinAttr_AutoLayout_Hugging_Hor,
+                                LookinAttr_UIStackView_Spacing_Spacing];
         });
         if ([horizontalAttrs containsObject:self.attribute.identifier]) {
             self.inputView.viewStyle = LKNumberInputViewStyleHorizontal;
@@ -107,6 +108,7 @@
                     LookinAttr_UITableView_SectionsNumber_Number: @1,
                     LookinAttr_UILabel_NumberOfLines_NumberOfLines: @1,
                     LookinAttr_UILabel_Font_Size: @1,
+                    LookinAttr_UIStackView_Spacing_Spacing: @1,
                     
                     LookinAttr_AutoLayout_Resistance_Ver: @2,
                     LookinAttr_AutoLayout_Resistance_Hor: @2,
