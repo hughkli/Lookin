@@ -29,9 +29,10 @@ typedef NS_ENUM(NSInteger, CompareResult) {
 @property(nonatomic, strong) NSImageView *mainImageView;
 @property(nonatomic, strong) NSImageView *referImageView;
 
-/// 如果直接把 solidLinesLayer 作为 contentView.layer 的 sublayer 则经常出现 linesLayer 被 imageView.layer 盖住的情况，貌似 imageView.layer 是懒加载的且时机不好掌握，因此这里多包一层 view 吧确保顺序
+/// 如果直接把 horSolidLinesLayer 作为 contentView.layer 的 sublayer 则经常出现 linesLayer 被 imageView.layer 盖住的情况，貌似 imageView.layer 是懒加载的且时机不好掌握，因此这里多包一层 view 吧确保顺序
 @property(nonatomic, strong) LKBaseView *linesContainerView;
-@property(nonatomic, strong) CAShapeLayer *solidLinesLayer;
+@property(nonatomic, strong) CAShapeLayer *horSolidLinesLayer;
+@property(nonatomic, strong) CAShapeLayer *verSolidLinesLayer;
 /// imageView 重叠时会被半透明处理，我们又不想半透明 border，所以单独把 border 作为 layer
 @property(nonatomic, strong) CALayer *mainImageViewBorderLayer;
 @property(nonatomic, strong) CALayer *referImageViewBorderLayer;
@@ -88,11 +89,17 @@ typedef NS_ENUM(NSInteger, CompareResult) {
         [self.referImageViewBorderLayer lookin_removeImplicitAnimations];
         [self.linesContainerView.layer addSublayer:self.referImageViewBorderLayer];
         
-        self.solidLinesLayer = [CAShapeLayer layer];
-        self.solidLinesLayer.lineWidth = 1;
-        [self.solidLinesLayer lookin_removeImplicitAnimations];
-        self.solidLinesLayer.strokeColor = LookinColorMake(10, 127, 251).CGColor;
-        [self.linesContainerView.layer addSublayer:self.solidLinesLayer];
+        self.horSolidLinesLayer = [CAShapeLayer layer];
+        self.horSolidLinesLayer.lineWidth = 1;
+        [self.horSolidLinesLayer lookin_removeImplicitAnimations];
+        self.horSolidLinesLayer.strokeColor = LookinColorMake(10, 127, 251).CGColor;
+        [self.linesContainerView.layer addSublayer:self.horSolidLinesLayer];
+        
+        self.verSolidLinesLayer = [CAShapeLayer layer];
+        self.verSolidLinesLayer.lineWidth = 1;
+        [self.verSolidLinesLayer lookin_removeImplicitAnimations];
+        self.verSolidLinesLayer.strokeColor = LookinColorMake(209, 120, 0).CGColor;
+        [self.linesContainerView.layer addSublayer:self.verSolidLinesLayer];
     
         [self updateColors];
     }
@@ -116,7 +123,8 @@ typedef NS_ENUM(NSInteger, CompareResult) {
     $(self.contentView).width(contentWidth).height(contentHeight).centerAlign;
     
     self.linesContainerView.frame = self.contentView.bounds;
-    self.solidLinesLayer.frame = self.linesContainerView.bounds;
+    self.horSolidLinesLayer.frame = self.linesContainerView.bounds;
+    self.verSolidLinesLayer.frame = self.linesContainerView.bounds;
     self.mainImageViewBorderLayer.frame = self.mainImageView.frame;
     self.referImageViewBorderLayer.frame = self.referImageView.frame;
     [self _renderLinesAndLabels];
@@ -148,7 +156,8 @@ typedef NS_ENUM(NSInteger, CompareResult) {
 /// 画那些辅助线。调用该方法前，self.scaledMainFrame 和 self.scaledReferFrame 必须已经被正确设置完毕
 - (void)_renderLinesAndLabels {
     [self _hideAllLabels];
-    self.solidLinesLayer.hidden = YES;
+    self.horSolidLinesLayer.hidden = YES;
+    self.verSolidLinesLayer.hidden = YES;
     
     // 为了方便，mainFrame 记为 A，referRect 记为 B
     CGRect rectA = self.scaledMainFrame;
@@ -307,39 +316,67 @@ typedef NS_ENUM(NSInteger, CompareResult) {
     
     /** 竖直方向的线 END **/
     
-    CGMutablePathRef path = CGPathCreateMutable();
+    CGMutablePathRef horPath = CGPathCreateMutable();
+    CGMutablePathRef verPath = CGPathCreateMutable();
     CGFloat handlerLength = 3;
     [horDatas enumerateObjectsUsingBlock:^(LKMeasureResultHorLineData * _Nonnull data, NSUInteger idx, BOOL * _Nonnull stop) {
-        CGPathMoveToPoint(path, NULL, data.startX, data.y);
-        CGPathAddLineToPoint(path, NULL, data.endX, data.y);
+        CGPathMoveToPoint(horPath, NULL, data.startX, data.y);
+        CGPathAddLineToPoint(horPath, NULL, data.endX, data.y);
         
         // 线段两端的小把手
-        CGPathMoveToPoint(path, NULL, data.startX + .5, data.y - handlerLength);
-        CGPathAddLineToPoint(path, NULL, data.startX + .5, data.y + handlerLength);
-        CGPathMoveToPoint(path, NULL, data.endX - .5, data.y - handlerLength);
-        CGPathAddLineToPoint(path, NULL, data.endX - .5, data.y + handlerLength);
+        CGPathMoveToPoint(horPath, NULL, data.startX + .5, data.y - handlerLength);
+        CGPathAddLineToPoint(horPath, NULL, data.startX + .5, data.y + handlerLength);
+        CGPathMoveToPoint(horPath, NULL, data.endX - .5, data.y - handlerLength);
+        CGPathAddLineToPoint(horPath, NULL, data.endX - .5, data.y + handlerLength);
         
         LKTextFieldView *labelView = [self _dequeueAvailableTextField];
+        labelView.backgroundColor = NSColor.systemBlueColor;
         labelView.textField.stringValue = [NSString lookin_stringFromDouble:data.displayValue decimal:2];
         $(labelView).sizeToFit.height(_labelHeight).midX(data.startX + (data.endX - data.startX) / 2.0).maxY(data.y - 5);
     }];
     [verDatas enumerateObjectsUsingBlock:^(LKMeasureResultVerLineData * _Nonnull data, NSUInteger idx, BOOL * _Nonnull stop) {
-        CGPathMoveToPoint(path, NULL, data.x, data.startY);
-        CGPathAddLineToPoint(path, NULL, data.x, data.endY);
+        CGPathMoveToPoint(verPath, NULL, data.x, data.startY);
+        CGPathAddLineToPoint(verPath, NULL, data.x, data.endY);
         
         // 线段两端的小把手
-        CGPathMoveToPoint(path, NULL, data.x - handlerLength, data.startY + .5);
-        CGPathAddLineToPoint(path, NULL, data.x + handlerLength, data.startY + .5);
-        CGPathMoveToPoint(path, NULL, data.x - handlerLength, data.endY - .5);
-        CGPathAddLineToPoint(path, NULL, data.x + handlerLength, data.endY - .5);
+        CGPathMoveToPoint(verPath, NULL, data.x - handlerLength, data.startY + .5);
+        CGPathAddLineToPoint(verPath, NULL, data.x + handlerLength, data.startY + .5);
+        CGPathMoveToPoint(verPath, NULL, data.x - handlerLength, data.endY - .5);
+        CGPathAddLineToPoint(verPath, NULL, data.x + handlerLength, data.endY - .5);
         
         LKTextFieldView *labelView = [self _dequeueAvailableTextField];
+        labelView.backgroundColor = LookinColorRGBAMake(209, 120, 0, 1.0);
         labelView.textField.stringValue = [NSString lookin_stringFromDouble:data.displayValue decimal:2];
         $(labelView).sizeToFit.height(_labelHeight).midY(data.startY + (data.endY - data.startY) / 2.0).maxX(data.x - 5);
+        if ([self checkOverlapOfTargetLabelView:labelView]) {
+            $(labelView).x(data.x + 5);
+            // 给点透明度，至少能稍微看到后面重叠的文字
+            labelView.backgroundColor = LookinColorRGBAMake(209, 120, 0, 0.5);
+        }
     }];
-    self.solidLinesLayer.path = path;
-    self.solidLinesLayer.hidden = NO;
-    CGPathRelease(path);
+    self.horSolidLinesLayer.path = horPath;
+    self.horSolidLinesLayer.hidden = NO;
+    self.verSolidLinesLayer.path = verPath;
+    self.verSolidLinesLayer.hidden = NO;
+    CGPathRelease(horPath);
+    CGPathRelease(verPath);
+}
+
+- (BOOL)checkOverlapOfTargetLabelView:(NSView *)targetView {
+    for (NSView *otherView in self.textFieldViews) {
+        if (otherView == targetView) {
+            continue;
+        }
+        if (!otherView.isVisible) {
+            continue;
+        }
+        CGRect inter = CGRectIntersection(otherView.frame, targetView.frame);
+        if (!CGRectIsNull(inter) && inter.size.width * inter.size.height > 100) {
+//            NSLog(@"moss - %@", @(inter.size.width * inter.size.height));
+            return YES;
+        }
+    }
+    return NO;
 }
 
 - (NSSize)sizeThatFits:(NSSize)limitedSize {
@@ -432,7 +469,6 @@ typedef NS_ENUM(NSInteger, CompareResult) {
     }];
     if (!resultView) {
         resultView = [LKTextFieldView labelView];
-        resultView.backgroundColor = LookinColorMake(10, 127, 251);
         resultView.insets = NSEdgeInsetsMake(0, 3, 0, 3);
         resultView.textField.textColor = [NSColor whiteColor];
         resultView.textField.font = NSFontMake(12);
