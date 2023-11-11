@@ -265,6 +265,7 @@
                  LookinAttrGroup_UITextView: NSImageMake(@"dashboard_textview"),
                  LookinAttrGroup_UITextField: NSImageMake(@"dashboard_textfield"),
                  LookinAttrGroup_UIVisualEffectView: NSImageMake(@"dashboard_effectview"),
+                 LookinAttrGroup_UIStackView: NSImageMake(@"dashboard_stackview"),
                  LookinAttrGroup_UserCustom: NSImageMake(@"dashboard_custom")
                  };
     });
