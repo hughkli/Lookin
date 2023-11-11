@@ -29,6 +29,7 @@
 @property(nonatomic, strong) LKVisualEffectView *backgroundEffectView;
 @property(nonatomic, strong) LKDashboardCardTitleControl *titleControl;
 @property(nonatomic, strong) NSButton *detailButton;
+@property(nonatomic, strong) NSButton *relationHelpButton;
 
 @property(nonatomic, strong) LKBaseView *fadeView;
 
@@ -85,6 +86,9 @@
     $(self.titleControl).fullWidth.height(_titleHeight).y(0);
     if (self.detailButton.isVisible) {
         $(self.detailButton).width(50).height(28).right(-3).y(0);
+    }
+    if (self.relationHelpButton.isVisible) {
+        $(self.relationHelpButton).width(30).height(28).right(5).y(0);
     }
     
     if (!self.attrGroup || !self.sectionViews.count) {
@@ -162,6 +166,12 @@
     
     if (self.accessoryWC) {
         [self _renderAccessoryWindowController];
+    }
+    
+    if ([self.attrGroup.identifier isEqualToString:LookinAttrGroup_Relation]) {
+        [self showRelationHelpButton];
+    } else {
+        [self hideRelationHelpButton];
     }
     
     [self setNeedsLayout:YES];
@@ -267,6 +277,20 @@
     return [self.sectionViews lookin_firstFiltered:^BOOL(LKDashboardSectionView *obj) {
         return obj.attrSection == sec;
     }];
+}
+
+- (void)showRelationHelpButton {
+    if (!self.relationHelpButton) {
+        self.relationHelpButton = [NSButton buttonWithImage:NSImageMake(@"ic_question") target:self action:@selector(_handleRelationHelpButton)];
+        self.relationHelpButton.bezelStyle = NSBezelStyleRoundRect;
+        self.relationHelpButton.bordered = NO;
+        [self addSubview:self.detailButton];
+    }
+    [self addSubview:self.relationHelpButton];
+}
+
+- (void)hideRelationHelpButton {
+    [self.relationHelpButton removeFromSuperview];
 }
 
 #pragma mark - Others
@@ -377,6 +401,23 @@
     } else {
         return NO;
     }
+}
+
+- (void)_handleRelationHelpButton {
+    NSMenu *menu = [NSMenu new];
+    
+    NSMenuItem *menuItem = [NSMenuItem new];
+    menuItem.image = NSImageMake(@"Icon_Inspiration_small");
+    menuItem.title = NSLocalizedString(@"How to display more member variables…", nil);
+    menuItem.target = self;
+    menuItem.action = @selector(handleRelationDocument);
+    [menu addItem:menuItem];
+    
+    [NSMenu popUpContextMenu:menu withEvent:NSApplication.sharedApplication.currentEvent forView:self.relationHelpButton];
+}
+
+- (void)handleRelationDocument {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://bytedance.larkoffice.com/docx/CKRndHqdeoub11xSqUZcMlFhnWe"]];
 }
 
 @end
