@@ -239,6 +239,8 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     @weakify(self);
     [[NSNotificationCenter.defaultCenter rac_addObserverForName:LKAppShowConsoleNotificationName object:nil] subscribeNext:^(NSNotification * _Nullable x) {
         @strongify(self);
+        [MSACAnalytics trackEvent:@"PrintItem"];
+        
         BOOL isFirstTimeToShowConsole = (self.consoleController == nil);
         self.showConsole = true;
         LookinDisplayItem *item = x.object;

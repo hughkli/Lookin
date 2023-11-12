@@ -154,6 +154,8 @@
     // no preview
     NSSet<NSString *> *classesWithNoPreview = [NSSet setWithArray:@[@"UITextEffectsWindow", @"UIRemoteKeyboardWindow"]];
     
+    __block BOOL hasCustomSubviews = NO;
+    __block BOOL hasCustomAttrs = NO;
     [flatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj itemIsKindOfClassesWithNames:classesPreferredToCollapse]) {
             [obj enumerateSelfAndChildren:^(LookinDisplayItem *item) {
@@ -185,7 +187,16 @@
                 _serverSideIsSwiftProject = YES;
             }
         }
+        
+        if (obj.isUserCustom) {
+            hasCustomSubviews = YES;
+        }
+        if (obj.customAttrGroupList.count > 0) {
+            hasCustomAttrs = YES;
+        }
     }];
+    [MSACAnalytics trackEvent:@"CustomSubview" withProperties:@{@"Has": hasCustomSubviews ? @"True" : @"False"}];
+    [MSACAnalytics trackEvent:@"CustomAttrs" withProperties:@{@"Has": hasCustomAttrs ? @"True" : @"False"}];
     
     self.flatItems = flatItems;
     
