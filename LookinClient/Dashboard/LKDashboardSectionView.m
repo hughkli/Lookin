@@ -22,6 +22,7 @@
 #import "LKDashboardAttributeRelationView.h"
 #import "LKDashboardAttributeConstraintsView.h"
 #import "LKDashboardAttributeTextView.h"
+#import "LKDashboardAttributeShadowView.h"
 #import "LKPreferenceManager.h"
 #import "LKDashboardAttributeOpenImageView.h"
 
@@ -242,6 +243,8 @@
             return [LKDashboardAttributeSizeView class];
         case LookinAttrTypeNSString:
             return [LKDashboardAttributeTextView class];
+        case LookinAttrTypeShadow:
+            return [LKDashboardAttributeShadowView class];
         case LookinAttrTypeCustomObj:
             if ([identifier isEqualToString:LookinAttr_UITableView_RowsNumber_Number]) {
                 return [LKDashboardAttributeRowsCountView class];
@@ -323,6 +326,9 @@
         case LookinAttrTypeEnumString:
         case LookinAttrTypeDouble:
         case LookinAttrTypeCGRect:
+        case LookinAttrTypeCGSize:
+        case LookinAttrTypeCGPoint:
+        case LookinAttrTypeUIEdgeInsets:
             return attr.displayTitle;
         default:
             return nil;
