@@ -22,6 +22,10 @@
     if (!components) {
         return nil;
     }
+    if (![components isKindOfClass:[NSArray class]]) {
+        NSAssert(NO, @"");
+        return nil;
+    }
     if (components.count != 4) {
         NSAssert(NO, @"");
         return nil;

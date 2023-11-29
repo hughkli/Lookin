@@ -329,6 +329,7 @@
         case LookinAttrTypeCGSize:
         case LookinAttrTypeCGPoint:
         case LookinAttrTypeUIEdgeInsets:
+        case LookinAttrTypeShadow:
             return attr.displayTitle;
         default:
             return nil;
