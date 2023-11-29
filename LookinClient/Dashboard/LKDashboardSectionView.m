@@ -322,6 +322,7 @@
         case LookinAttrTypeUIColor:
         case LookinAttrTypeEnumString:
         case LookinAttrTypeDouble:
+        case LookinAttrTypeCGRect:
             return attr.displayTitle;
         default:
             return nil;
