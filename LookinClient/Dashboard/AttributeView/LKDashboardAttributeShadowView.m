@@ -9,12 +9,15 @@
 #import "LKDashboardAttributeShadowView.h"
 #import "LKColorIndicatorLayer.h"
 #import "LKPreferenceManager.h"
+#import "LKNumberInputView.h"
+#import "LKTextFieldView.h"
 
 @interface LKDashboardAttributeShadowView ()
 
 @property(nonatomic, strong) LKBaseView *colorContainerView;
 @property(nonatomic, strong) LKColorIndicatorLayer *colorIndicatorLayer;
 @property(nonatomic, strong) LKLabel *colorDescLabel;
+@property(nonatomic, strong) NSArray<LKNumberInputView *> *inputViews;
 
 @end
 
@@ -37,6 +40,22 @@
         self.colorDescLabel.textColor = [NSColor colorNamed:@"DashboardCardValueColor"];
         self.colorDescLabel.font = NSFontMake(13);
         [self.colorContainerView addSubview:self.colorDescLabel];
+        
+        NSArray<NSString *> *titles = @[@"Opacity", @"Radius", @"OffsetW", @"OffsetH"];
+        self.inputViews = [NSArray lookin_arrayWithCount:4 block:^id(NSUInteger idx) {
+            LKNumberInputView *view = [LKNumberInputView new];
+            view.textFieldView.textField.editable = NO;
+            view.title = titles[idx];
+            view.viewStyle = LKNumberInputViewStyleVertical;
+            [self addSubview:view];
+            return view;
+        }];
+        
+        @weakify(self);
+        [[RACObserve([LKPreferenceManager mainManager], rgbaFormat) skip:1] subscribeNext:^(NSNumber *bool_rgbaFormat) {
+            @strongify(self);
+            [self renderWithAttribute];
+        }];
     }
     return self;
 }
@@ -46,10 +65,20 @@
     $(self.colorContainerView).fullWidth.height(30).y(0);
     $(self.colorIndicatorLayer).width(16).height(16).x(8).verAlign;
     $(self.colorDescLabel).x(28).toRight(20).heightToFit.verAlign.offsetY(-1);
+    
+    CGFloat itemWidth = (self.$width - DashboardAttrItemHorInterspace * 3) / 4.0;
+    CGFloat y = self.colorContainerView.$maxY + DashboardAttrItemVerInterspace;
+    __block CGFloat x = 0;
+    [self.inputViews enumerateObjectsUsingBlock:^(LKNumberInputView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
+        $(view).width(itemWidth).height(LKNumberInputVerticalHeight).x(x).y(y);
+        x += itemWidth + DashboardAttrItemHorInterspace;
+    }];
 }
 
 - (NSSize)sizeThatFits:(NSSize)limitedSize {
     CGFloat height = 30;
+    height += DashboardAttrItemVerInterspace;
+    height += LKNumberInputVerticalHeight;
     limitedSize.height = height;
     return limitedSize;
 }
@@ -81,12 +110,27 @@
     }
     CGFloat opacity = [opacityNumber doubleValue];
     
+    NSNumber *radiusNumber = info[@"radius"];
+    if (![radiusNumber isKindOfClass:[NSNumber class]]) {
+        NSAssert(NO, @"");
+        return;
+    }
+    CGFloat radius = [radiusNumber doubleValue];
+    
     self.colorIndicatorLayer.color = color;
     if (color) {
         self.colorDescLabel.stringValue = [LKPreferenceManager mainManager].rgbaFormat ? color.rgbaString : color.hexString;
     } else {
         self.colorDescLabel.stringValue = @"nil";
     }
+    
+    NSArray<NSString *> *strs = @[[NSString lookin_stringFromDouble:opacity decimal:2],
+                                  [NSString lookin_stringFromDouble:radius decimal:2],
+                                  [NSString lookin_stringFromDouble:offset.width decimal:2],
+                                  [NSString lookin_stringFromDouble:offset.height decimal:2]];
+    [self.inputViews enumerateObjectsUsingBlock:^(LKNumberInputView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.textFieldView.textField.stringValue = strs[idx];
+    }];
 }
 
 @end
