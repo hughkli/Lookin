@@ -25,6 +25,7 @@
 #import "LKDashboardAttributeShadowView.h"
 #import "LKPreferenceManager.h"
 #import "LKDashboardAttributeOpenImageView.h"
+#import "LKDashboardAttributeJsonView.h"
 
 @interface LKDashboardSectionView ()
 
@@ -245,6 +246,8 @@
             return [LKDashboardAttributeTextView class];
         case LookinAttrTypeShadow:
             return [LKDashboardAttributeShadowView class];
+        case LookinAttrTypeJson:
+            return [LKDashboardAttributeJsonView class];
         case LookinAttrTypeCustomObj:
             if ([identifier isEqualToString:LookinAttr_UITableView_RowsNumber_Number]) {
                 return [LKDashboardAttributeRowsCountView class];
@@ -330,6 +333,7 @@
         case LookinAttrTypeCGPoint:
         case LookinAttrTypeUIEdgeInsets:
         case LookinAttrTypeShadow:
+        case LookinAttrTypeJson:
             return attr.displayTitle;
         default:
             return nil;

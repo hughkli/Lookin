@@ -24,6 +24,7 @@
 		A26EF69927F89F83005A9E4E /* ShortCocoa+UIToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = A26EF69127F89F83005A9E4E /* ShortCocoa+UIToolkit.m */; };
 		A2C71CBE282165DB0056D991 /* LKWindowToolbarAppButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A2C71CBD282165DB0056D991 /* LKWindowToolbarAppButton.m */; };
 		A70A0C2E2B179754009A1937 /* LKDashboardAttributeShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A0C2D2B179754009A1937 /* LKDashboardAttributeShadowView.m */; };
+		A70A0C352B17AA12009A1937 /* LKDashboardAttributeJsonView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A0C342B17AA12009A1937 /* LKDashboardAttributeJsonView.m */; };
 		A77AA17B2AEED1B8006A7BF4 /* LKMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17A2AEED1B8006A7BF4 /* LKMessageManager.m */; };
 		A77AA17E2AEED988006A7BF4 /* LKServerVersionRequestor.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17D2AEED988006A7BF4 /* LKServerVersionRequestor.m */; };
 		A77AA1822AEEE095006A7BF4 /* LKVersionComparer.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA1812AEEE095006A7BF4 /* LKVersionComparer.m */; };
@@ -239,6 +240,8 @@
 		A2C71CBD282165DB0056D991 /* LKWindowToolbarAppButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKWindowToolbarAppButton.m; sourceTree = "<group>"; };
 		A70A0C2C2B179754009A1937 /* LKDashboardAttributeShadowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeShadowView.h; sourceTree = "<group>"; };
 		A70A0C2D2B179754009A1937 /* LKDashboardAttributeShadowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeShadowView.m; sourceTree = "<group>"; };
+		A70A0C332B17AA12009A1937 /* LKDashboardAttributeJsonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeJsonView.h; sourceTree = "<group>"; };
+		A70A0C342B17AA12009A1937 /* LKDashboardAttributeJsonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeJsonView.m; sourceTree = "<group>"; };
 		A77AA1792AEED1B8006A7BF4 /* LKMessageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMessageManager.h; sourceTree = "<group>"; };
 		A77AA17A2AEED1B8006A7BF4 /* LKMessageManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMessageManager.m; sourceTree = "<group>"; };
 		A77AA17C2AEED988006A7BF4 /* LKServerVersionRequestor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKServerVersionRequestor.h; sourceTree = "<group>"; };
@@ -632,6 +635,8 @@
 				AAED8ED622AFED490051242B /* LKDashboardAttributeSizeView.h */,
 				AA17F38E232FBD710082F393 /* LKDashboardAttributeTextView.h */,
 				A70A0C2C2B179754009A1937 /* LKDashboardAttributeShadowView.h */,
+				A70A0C332B17AA12009A1937 /* LKDashboardAttributeJsonView.h */,
+				A70A0C342B17AA12009A1937 /* LKDashboardAttributeJsonView.m */,
 				A70A0C2D2B179754009A1937 /* LKDashboardAttributeShadowView.m */,
 				AA17F38F232FBD710082F393 /* LKDashboardAttributeTextView.m */,
 				AAED8ED722AFED490051242B /* LKDashboardAttributeSizeView.m */,
@@ -1360,6 +1365,7 @@
 				AAEC35A52340EAB3009E5040 /* NSString+LookinClient.m in Sources */,
 				AA2F1AF623040552004725D6 /* NSArray+LookinClient.m in Sources */,
 				AAB09028229D74F000159B15 /* LKOutlineItem.m in Sources */,
+				A70A0C352B17AA12009A1937 /* LKDashboardAttributeJsonView.m in Sources */,
 				AAC16CDA2282B5F400E67E0A /* LKTipsView.m in Sources */,
 				AAA8C14F21CC17680017A345 /* LKMenuPopoverAppsListController.m in Sources */,
 				AAD2BED1226B280B00E83D01 /* LKTableRowView.m in Sources */,
