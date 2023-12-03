@@ -25,6 +25,9 @@
 		A2C71CBE282165DB0056D991 /* LKWindowToolbarAppButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A2C71CBD282165DB0056D991 /* LKWindowToolbarAppButton.m */; };
 		A70A0C2E2B179754009A1937 /* LKDashboardAttributeShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A0C2D2B179754009A1937 /* LKDashboardAttributeShadowView.m */; };
 		A70A0C352B17AA12009A1937 /* LKDashboardAttributeJsonView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70A0C342B17AA12009A1937 /* LKDashboardAttributeJsonView.m */; };
+		A721E48E2B1CE2BC00546017 /* LKJSONAttributeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A721E48D2B1CE2BC00546017 /* LKJSONAttributeWindowController.m */; };
+		A721E4912B1CE2F000546017 /* LKJSONAttributeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A721E4902B1CE2F000546017 /* LKJSONAttributeViewController.m */; };
+		A721E4942B1CE42800546017 /* LKJSONAttributeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A721E4932B1CE42800546017 /* LKJSONAttributeItem.m */; };
 		A77AA17B2AEED1B8006A7BF4 /* LKMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17A2AEED1B8006A7BF4 /* LKMessageManager.m */; };
 		A77AA17E2AEED988006A7BF4 /* LKServerVersionRequestor.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17D2AEED988006A7BF4 /* LKServerVersionRequestor.m */; };
 		A77AA1822AEEE095006A7BF4 /* LKVersionComparer.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA1812AEEE095006A7BF4 /* LKVersionComparer.m */; };
@@ -242,6 +245,12 @@
 		A70A0C2D2B179754009A1937 /* LKDashboardAttributeShadowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeShadowView.m; sourceTree = "<group>"; };
 		A70A0C332B17AA12009A1937 /* LKDashboardAttributeJsonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardAttributeJsonView.h; sourceTree = "<group>"; };
 		A70A0C342B17AA12009A1937 /* LKDashboardAttributeJsonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardAttributeJsonView.m; sourceTree = "<group>"; };
+		A721E48C2B1CE2BC00546017 /* LKJSONAttributeWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKJSONAttributeWindowController.h; sourceTree = "<group>"; };
+		A721E48D2B1CE2BC00546017 /* LKJSONAttributeWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKJSONAttributeWindowController.m; sourceTree = "<group>"; };
+		A721E48F2B1CE2F000546017 /* LKJSONAttributeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKJSONAttributeViewController.h; sourceTree = "<group>"; };
+		A721E4902B1CE2F000546017 /* LKJSONAttributeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKJSONAttributeViewController.m; sourceTree = "<group>"; };
+		A721E4922B1CE42800546017 /* LKJSONAttributeItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKJSONAttributeItem.h; sourceTree = "<group>"; };
+		A721E4932B1CE42800546017 /* LKJSONAttributeItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKJSONAttributeItem.m; sourceTree = "<group>"; };
 		A77AA1792AEED1B8006A7BF4 /* LKMessageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMessageManager.h; sourceTree = "<group>"; };
 		A77AA17A2AEED1B8006A7BF4 /* LKMessageManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMessageManager.m; sourceTree = "<group>"; };
 		A77AA17C2AEED988006A7BF4 /* LKServerVersionRequestor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKServerVersionRequestor.h; sourceTree = "<group>"; };
@@ -595,6 +604,21 @@
 			path = ShortCocoa;
 			sourceTree = "<group>";
 		};
+		A721E4882B1CE18800546017 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				A70A0C332B17AA12009A1937 /* LKDashboardAttributeJsonView.h */,
+				A721E48C2B1CE2BC00546017 /* LKJSONAttributeWindowController.h */,
+				A721E48D2B1CE2BC00546017 /* LKJSONAttributeWindowController.m */,
+				A721E48F2B1CE2F000546017 /* LKJSONAttributeViewController.h */,
+				A721E4902B1CE2F000546017 /* LKJSONAttributeViewController.m */,
+				A721E4922B1CE42800546017 /* LKJSONAttributeItem.h */,
+				A721E4932B1CE42800546017 /* LKJSONAttributeItem.m */,
+				A70A0C342B17AA12009A1937 /* LKDashboardAttributeJsonView.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
 		A77AA17F2AEED98B006A7BF4 /* Other */ = {
 			isa = PBXGroup;
 			children = (
@@ -635,8 +659,7 @@
 				AAED8ED622AFED490051242B /* LKDashboardAttributeSizeView.h */,
 				AA17F38E232FBD710082F393 /* LKDashboardAttributeTextView.h */,
 				A70A0C2C2B179754009A1937 /* LKDashboardAttributeShadowView.h */,
-				A70A0C332B17AA12009A1937 /* LKDashboardAttributeJsonView.h */,
-				A70A0C342B17AA12009A1937 /* LKDashboardAttributeJsonView.m */,
+				A721E4882B1CE18800546017 /* JSON */,
 				A70A0C2D2B179754009A1937 /* LKDashboardAttributeShadowView.m */,
 				AA17F38F232FBD710082F393 /* LKDashboardAttributeTextView.m */,
 				AAED8ED722AFED490051242B /* LKDashboardAttributeSizeView.m */,
@@ -1231,6 +1254,7 @@
 				AAC1FB212282EDC6000A3653 /* LKWindowToolbarHelper.m in Sources */,
 				A26EF69827F89F83005A9E4E /* ShortCocoa+Layout.m in Sources */,
 				AAED8ED822AFED490051242B /* LKDashboardAttributeSizeView.m in Sources */,
+				A721E4942B1CE42800546017 /* LKJSONAttributeItem.m in Sources */,
 				AAA8C12821CC17680017A345 /* LKBaseViewController.m in Sources */,
 				AA05CCD7221ED5E80086CDD1 /* LKDashboardAttributeSwitchView.m in Sources */,
 				AAA8C12021CC17680017A345 /* LKNavigationManager.m in Sources */,
@@ -1242,6 +1266,7 @@
 				AA66645F22DBBAC7009E05CC /* NSString+Score.m in Sources */,
 				AAA8C11F21CC17680017A345 /* LKConnectionManager.m in Sources */,
 				AAEE450B21DF820100BF2650 /* LKPreferenceViewController.m in Sources */,
+				A721E4912B1CE2F000546017 /* LKJSONAttributeViewController.m in Sources */,
 				A7F8FC552AF289F000ABC7F4 /* LookinCustomDisplayItemInfo+LookinClient.m in Sources */,
 				AAAF21152226BD4D00975C95 /* LKTextFieldView.m in Sources */,
 				AAA8C15A21CC17680017A345 /* LKSplitView.m in Sources */,
@@ -1338,6 +1363,7 @@
 				AAA8C15E21CC17680017A345 /* LKLaunchViewController.m in Sources */,
 				AA7F157822C0F2B9004436AD /* LKConnectionRequest.m in Sources */,
 				AA9A3D732269DDCE00BE46C7 /* LKConsoleViewController.m in Sources */,
+				A721E48E2B1CE2BC00546017 /* LKJSONAttributeWindowController.m in Sources */,
 				AA34A15E233F884D00513829 /* LKConstraintPopoverController.m in Sources */,
 				AAA8C15B21CC17680017A345 /* LKStaticViewController.m in Sources */,
 				AAE61CC822A4F7B100B3FB9F /* LKInputSearchSuggestionItem.m in Sources */,

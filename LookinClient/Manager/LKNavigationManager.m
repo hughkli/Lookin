@@ -19,12 +19,15 @@
 #import "LKConsoleViewController.h"
 #import "LKPreferenceManager.h"
 #import "LKAboutWindowController.h"
+#import "LKJSONAttributeWindowController.h"
+#import "LKJSONAttributeViewController.h"
 @import AppCenter;
 @import AppCenterAnalytics;
 
 @interface LKNavigationManager ()
 
 @property(nonatomic, strong) LKPreferenceWindowController *preferenceWindowController;
+@property(nonatomic, strong) LKJSONAttributeWindowController *jsonWindowController;
 @property(nonatomic, strong) LKAboutWindowController *aboutWindowController;
 
 @end
@@ -128,6 +131,16 @@
     [self.readWindowControllers addObject:wc];
 }
 
+
+- (void)showJsonWindow:(NSString *)json {
+    if (!self.jsonWindowController) {
+        self.jsonWindowController = [LKJSONAttributeWindowController new];
+        self.jsonWindowController.window.delegate = self;
+    }
+    [((LKJSONAttributeViewController *)self.jsonWindowController.contentViewController) renderWithJSON:json];
+    [self.jsonWindowController showWindow:self];
+}
+
 #pragma mark - <NSWindowDelegate>
 
 
@@ -139,6 +152,9 @@
     
     if (closingWindow == self.preferenceWindowController.window) {
         _preferenceWindowController = nil;
+        
+    } else if (closingWindow == self.preferenceWindowController.window) {
+        self.preferenceWindowController = nil;
         
     } else if (closingWindow == self.staticWindowController.window) {
         [closingWindow saveFrameUsingName:LKWindowSizeName_Static];

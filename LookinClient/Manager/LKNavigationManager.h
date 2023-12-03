@@ -24,6 +24,8 @@
 
 - (void)showAbout;
 
+- (void)showJsonWindow:(NSString *)json;
+
 - (BOOL)showReaderWithFilePath:(NSString *)filePath error:(NSError **)error;
 - (void)showReaderWithHierarchyFile:(LookinHierarchyFile *)file title:(NSString *)title;
 
