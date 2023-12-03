@@ -79,6 +79,9 @@
         NSAssert(NO, @"");
         return;
     }
+    if (detail.customDisplayTitle) {
+        displayItem.customDisplayTitle = detail.customDisplayTitle;
+    }
     if (detail.groupScreenshot) {
         displayItem.groupScreenshot = detail.groupScreenshot;
     }
