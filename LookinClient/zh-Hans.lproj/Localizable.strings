@@ -194,3 +194,5 @@
 "This object may not be a UIView or CALayer." = "该对象可能不是个 UIView 或 CALayer";
 "How to add custom properties…" = "如何添加自定义属性…";
 "How to display more member variables…" = "如何显示更多成员变量…";
+
+"Click to view…" = "点击以查看…";

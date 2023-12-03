@@ -24,7 +24,7 @@
         self.layer.cornerRadius = DashboardCardControlCornerRadius;
         
         self.textLabel = [LKLabel new];
-        self.textLabel.stringValue = @"点击以展示…";
+        self.textLabel.stringValue = NSLocalizedString(@"Click to view…", nil);
         self.textLabel.textColor = [NSColor colorNamed:@"DashboardCardValueColor"];
         self.textLabel.maximumNumberOfLines = 0;
         self.textLabel.font = NSFontMake(12);

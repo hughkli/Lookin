@@ -15,6 +15,8 @@
 @property(nonatomic, assign) BOOL expanded;
 @property(nonatomic, assign) NSUInteger indentation;
 
-@property(nonatomic, strong) NSMutableArray<LKJSONAttributeItem *> *subItems;
+@property(nonatomic, strong) NSArray<LKJSONAttributeItem *> *subItems;
+
+- (NSArray<LKJSONAttributeItem *> *)flatItems;
 
 @end

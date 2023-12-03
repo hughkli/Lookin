@@ -194,3 +194,5 @@
 "This object may not be a UIView or CALayer." = "This object may not be a UIView or CALayer.";
 "How to add custom properties…" = "How to add custom properties…";
 "How to display more member variables…" = "How to display more member variables…";
+
+"Click to view…" = "Click to view…";
