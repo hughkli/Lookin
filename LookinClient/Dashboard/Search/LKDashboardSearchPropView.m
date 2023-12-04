@@ -71,7 +71,8 @@
     [super updateColors];
     self.contentLabel.textColor = self.isDarkMode ? LookinColorMake(250, 251, 252) : LookinColorMake(56, 57, 58);
     
-    self.revealControl.label.attributedStringValue = $(@"在主面板中显示").textColor(self.isDarkMode ? @"245, 166, 30" : @"229, 135, 67").font(@11).addImage(@"icon_arrowRight_orange", 0, 2, 0).attrString;
+    NSString *text = NSLocalizedString(@"Reveal in panel…", nil);
+    self.revealControl.label.attributedStringValue = $(text).textColor(self.isDarkMode ? @"245, 166, 30" : @"229, 135, 67").font(@11).addImage(@"icon_arrowRight_orange", 0, 2, 0).attrString;
 }
 
 - (void)renderWithAttribute:(LookinAttribute *)attribute {
@@ -148,6 +149,9 @@
                 return @"nil";
             }
         }
+        case LookinAttrTypeShadow:
+        case LookinAttrTypeJson:
+            return @"……";
     }
     
     NSAssert(NO, @"");
