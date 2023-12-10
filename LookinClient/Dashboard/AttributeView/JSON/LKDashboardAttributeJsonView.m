@@ -8,10 +8,12 @@
 
 #import "LKDashboardAttributeJsonView.h"
 #import "LKNavigationManager.h"
+#import "LKJSONAttributeContentView.h"
 
 @interface LKDashboardAttributeJsonView ()
 
 @property(nonatomic, strong) LKLabel *textLabel;
+@property(nonatomic, strong) LKJSONAttributeContentView *contentView;
 
 @end
 
@@ -23,41 +25,42 @@
         //        self.layer.borderColor = [NSColor redColor].CGColor;
         self.layer.cornerRadius = DashboardCardControlCornerRadius;
         
-        self.textLabel = [LKLabel new];
-        self.textLabel.stringValue = NSLocalizedString(@"Click to view…", nil);
-        self.textLabel.textColor = [NSColor colorNamed:@"DashboardCardValueColor"];
-        self.textLabel.maximumNumberOfLines = 0;
-        self.textLabel.font = NSFontMake(12);
-        [self addSubview:self.textLabel];
-        
-        self.backgroundColorName = @"DashboardCardValueBGColor";
+        self.contentView = [[LKJSONAttributeContentView alloc] initWithBigFont:NO];
+        [self addSubview:self.contentView];
     }
     return self;
 }
 
 - (void)layout {
     [super layout];
-    $(self.textLabel).x(5).toRight(20).heightToFit.verAlign;
+    $(self.contentView).fullFrame;
 }
 
 - (NSSize)sizeThatFits:(NSSize)limitedSize {
-    CGFloat height = 27;
+    CGFloat height = 100;
     limitedSize.height = height;
     return limitedSize;
 }
 
 - (void)renderWithAttribute {
     [super renderWithAttribute];
-}
-
-- (void)mouseDown:(NSEvent *)event {
     NSString *json = self.attribute.value;
     if (![json isKindOfClass:[NSString class]]) {
+        [self.contentView renderWithJSON:nil];
         NSAssert(NO, @"");
         return;
     }
-    
-    [[LKNavigationManager sharedInstance] showJsonWindow:json];
+    [self.contentView renderWithJSON:json];
 }
+
+//- (void)mouseDown:(NSEvent *)event {
+//    NSString *json = self.attribute.value;
+//    if (![json isKindOfClass:[NSString class]]) {
+//        NSAssert(NO, @"");
+//        return;
+//    }
+//    
+//    [[LKNavigationManager sharedInstance] showJsonWindow:json];
+//}
 
 @end

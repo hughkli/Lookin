@@ -12,14 +12,29 @@ static CGFloat const kInsetRight = 15;
 static CGFloat const kIndentUnitWidth = 14;
 static CGFloat const kDisclosureWidth = 16;
 
+@interface LKOutlineRowView ()
+
+@property(nonatomic, assign) BOOL useCompactUI;
+
+@end
+
 @implementation LKOutlineRowView
 
-- (instancetype)initWithFrame:(NSRect)frameRect {
-    if (self = [super initWithFrame:frameRect]) {
-        _imageLeft = 5;
-        _imageRight = 2;
-        _titleLeft = 2;
-        _subtitleLeft = 10;
+- (instancetype)initWithCompactUI:(BOOL)compact {
+    if (self = [super initWithFrame:NSZeroRect]) {
+        self.useCompactUI = compact;
+        
+        if (compact) {
+            _imageLeft = 5;
+            _imageRight = 2;
+            _titleLeft = 0;
+            _subtitleLeft = 2;
+        } else {
+            _imageLeft = 5;
+            _imageRight = 2;
+            _titleLeft = 2;
+            _subtitleLeft = 10;
+        }
         
         _disclosureButton = [NSButton new];
         self.disclosureButton.bordered = NO;
@@ -31,6 +46,10 @@ static CGFloat const kDisclosureWidth = 16;
         [self addSubview:self.imageView];
     }
     return self;
+}
+
+- (instancetype)initWithFrame:(NSRect)frameRect {
+    return [self initWithCompactUI:NO];
 }
 
 - (void)layout {
