@@ -13,7 +13,6 @@
 
 @interface LKDashboardAttributeJsonView ()
 
-@property(nonatomic, strong) LKLabel *textLabel;
 @property(nonatomic, strong) LKJSONAttributeContentView *contentView;
 
 @end
@@ -59,14 +58,14 @@
     [self.contentView renderWithJSON:json];
 }
 
-//- (void)mouseDown:(NSEvent *)event {
-//    NSString *json = self.attribute.value;
-//    if (![json isKindOfClass:[NSString class]]) {
-//        NSAssert(NO, @"");
-//        return;
-//    }
-//    
-//    [[LKNavigationManager sharedInstance] showJsonWindow:json];
-//}
+- (void)showInNewWindow {
+    NSString *json = self.attribute.value;
+    if (![json isKindOfClass:[NSString class]]) {
+        NSAssert(NO, @"");
+        return;
+    }
+
+    [[LKNavigationManager sharedInstance] showJsonWindow:json];
+}
 
 @end
