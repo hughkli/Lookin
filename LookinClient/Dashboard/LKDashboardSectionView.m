@@ -363,7 +363,12 @@
         NSAssert(NO, @"");
         return nil;
     }
-    return attr.displayTitle;
+    switch (attr.attrType) {
+        case LookinAttrTypeBOOL:
+            return nil;
+        default:
+            return attr.displayTitle;
+    }
 }
 
 @end
