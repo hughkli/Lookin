@@ -14,4 +14,8 @@
 
 - (void)renderWithJSON:(NSString *)json;
 
+- (CGFloat)queryContentHeight;
+
+@property (nonatomic, copy) void (^didReloadData)(void);
+
 @end

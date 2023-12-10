@@ -33,6 +33,8 @@
 
 @property(nonatomic, strong) LKTableView *tableView;
 
+@property(nonatomic, assign) CGFloat rowHeight;
+
 @end
 
 @implementation LKJSONAttributeContentView
@@ -49,8 +51,10 @@
         self.tableView.automaticallyAdjustsContentInsets = NO;
         if (bigFont) {
             self.tableView.contentInsets = NSEdgeInsetsMake(5, 0, 5, 0);
+            self.rowHeight = 25;
         } else {
             self.tableView.contentInsets = NSEdgeInsetsMake(0, 0, 0, 0);
+            self.rowHeight = 20;
         }
         [self addSubview:self.tableView];
     }
@@ -131,11 +135,7 @@
 }
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
-    if (self.useBigFont) {
-        return 25;
-    } else {
-        return 20;
-    }
+    return self.rowHeight;
 }
 
 - (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
@@ -193,6 +193,15 @@
     }
     item.expanded = !item.expanded;
     [self render];
+    
+    if (self.didReloadData) {
+        self.didReloadData();
+    }
+}
+
+- (CGFloat)queryContentHeight {
+    NSInteger count = self.flatItems.count;
+    return count * self.rowHeight;
 }
 
 @end

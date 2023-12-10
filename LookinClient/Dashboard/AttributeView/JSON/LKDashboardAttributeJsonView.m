@@ -9,6 +9,7 @@
 #import "LKDashboardAttributeJsonView.h"
 #import "LKNavigationManager.h"
 #import "LKJSONAttributeContentView.h"
+#import "LKDashboardViewController.h"
 
 @interface LKDashboardAttributeJsonView ()
 
@@ -26,6 +27,11 @@
         self.layer.cornerRadius = DashboardCardControlCornerRadius;
         
         self.contentView = [[LKJSONAttributeContentView alloc] initWithBigFont:NO];
+        @weakify(self);
+        self.contentView.didReloadData = ^{
+            @strongify(self);
+            [self.dashboardViewController.view setNeedsLayout:YES];
+        };
         [self addSubview:self.contentView];
     }
     return self;
@@ -37,7 +43,7 @@
 }
 
 - (NSSize)sizeThatFits:(NSSize)limitedSize {
-    CGFloat height = 100;
+    CGFloat height = [self.contentView queryContentHeight];
     limitedSize.height = height;
     return limitedSize;
 }
