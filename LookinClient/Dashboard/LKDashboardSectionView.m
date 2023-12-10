@@ -363,21 +363,7 @@
         NSAssert(NO, @"");
         return nil;
     }
-    switch (attr.attrType) {
-        case LookinAttrTypeNSString:
-        case LookinAttrTypeUIColor:
-        case LookinAttrTypeEnumString:
-        case LookinAttrTypeDouble:
-        case LookinAttrTypeCGRect:
-        case LookinAttrTypeCGSize:
-        case LookinAttrTypeCGPoint:
-        case LookinAttrTypeUIEdgeInsets:
-        case LookinAttrTypeShadow:
-        case LookinAttrTypeJson:
-            return attr.displayTitle;
-        default:
-            return nil;
-    }
+    return attr.displayTitle;
 }
 
 @end
