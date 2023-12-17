@@ -49,6 +49,9 @@
 }
 
 - (void)setDisplayItem:(LookinDisplayItem *)displayItem {
+    if (displayItem == _displayItem) {
+        return;
+    }
     _displayItem = displayItem;
     
     displayItem.rowViewDelegate = self;
