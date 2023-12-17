@@ -19,6 +19,8 @@
 #import "LKMessageManager.h"
 #import "LKServerVersionRequestor.h"
 #import "LKVersionComparer.h"
+@import AppCenter;
+@import AppCenterAnalytics;
 
 @interface LKStaticHierarchyDataSource ()
 
@@ -165,6 +167,7 @@
         // LookinServer 1.2.3 之前的版本没有该字段
         return NO;
     }
+    [MSACAnalytics trackEvent:@"ServerVersion" withProperties:@{@"version":userVersion}];
     BOOL isNew = [LKVersionComparer compareWithNewest:newestVersion user:userVersion];
     return isNew;
 }
