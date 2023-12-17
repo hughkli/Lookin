@@ -98,6 +98,8 @@ const CGFloat LookinPreviewMaxZInterspace = 1;
 }
 
 - (void)renderWithDisplayItems:(NSArray<LookinDisplayItem *> *)items discardCache:(BOOL)discardCache {
+    NSLog(@"LKPreviewView - render");
+    
     self.flatDisplayItems = items;
     
     NSMutableArray<LKDisplayItemNode *> *nodesToBeDiscarded = nil;

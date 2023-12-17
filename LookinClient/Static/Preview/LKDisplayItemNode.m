@@ -30,6 +30,8 @@
 @implementation LKDisplayItemNode
 
 - (instancetype)initWithDataSource:(LKHierarchyDataSource *)dataSource {
+    NSLog(@"LKDisplayItemNode - init");
+    
     if (self = [super init]) {
         self.dataSource = dataSource;
         
@@ -222,6 +224,8 @@
 #pragma mark - <LookinDisplayItemDelegate>
 
 - (void)displayItem:(LookinDisplayItem *)displayItem propertyDidChange:(LookinDisplayItemProperty)property {
+    NSLog(@"LKDisplayItemNode - %@ did Change", @(property));
+    
     if (property == LookinDisplayItemProperty_None || property == LookinDisplayItemProperty_FrameToRoot) {
         CGRect frameToRoot = [displayItem calculateFrameToRoot];
         
