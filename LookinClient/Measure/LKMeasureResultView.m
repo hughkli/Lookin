@@ -57,7 +57,7 @@ typedef NS_ENUM(NSInteger, CompareResult) {
     if (self = [super initWithFrame:frameRect]) {
         _horInset = 20;
         _verInset = 20;
-        _labelHeight = 16;
+        _labelHeight = 18;
         
         self.hasEffectedBackground = YES;
         self.layer.cornerRadius = DashboardCardCornerRadius;
@@ -471,7 +471,7 @@ typedef NS_ENUM(NSInteger, CompareResult) {
         resultView = [LKTextFieldView labelView];
         resultView.insets = NSEdgeInsetsMake(0, 3, 0, 3);
         resultView.textField.textColor = [NSColor whiteColor];
-        resultView.textField.font = NSFontMake(12);
+        resultView.textField.font = NSFontMake(13);
         resultView.textField.alignment = NSTextAlignmentCenter;
         resultView.layer.cornerRadius = _labelHeight / 2.0;
         [self.contentView addSubview:resultView];
