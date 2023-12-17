@@ -30,7 +30,7 @@
 @implementation LKDisplayItemNode
 
 - (instancetype)initWithDataSource:(LKHierarchyDataSource *)dataSource {
-    NSLog(@"LKDisplayItemNode - init");
+//    NSLog(@"LKDisplayItemNode - init");
     
     if (self = [super init]) {
         self.dataSource = dataSource;
@@ -77,7 +77,7 @@
 - (void)setDisplayItem:(LookinDisplayItem *)displayItem {
     _displayItem = displayItem;
     
-    NSLog(@"LKDisplayItemNode - setContentPlane");
+//    NSLog(@"LKDisplayItemNode - setContentPlane");
     /// 不能把 contents 设置成 nil，否则某些场景下会发生内容渲染错乱的情况
     self.contentPlane.firstMaterial.diffuse.contents = displayItem.backgroundColor ? : [NSColor clearColor];
     
@@ -93,7 +93,7 @@
 }
 
 - (void)setIndex:(NSUInteger)index {
-    NSLog(@"LKDisplayItemNode - setIndex");
+//    NSLog(@"LKDisplayItemNode - setIndex");
     
     _index = index;
     self.contentNode.renderingOrder = index * 10;
@@ -102,7 +102,7 @@
 }
 
 - (void)_renderborderColor {
-    NSLog(@"LKDisplayItemNode - renderBorderColor");
+//    NSLog(@"LKDisplayItemNode - renderBorderColor");
     
     self.borderGeometry.firstMaterial.diffuse.contents = self.borderColor;
 }
@@ -129,7 +129,7 @@
 }
 
 - (void)_renderVisibility {
-    NSLog(@"LKDisplayItemNode - renderVisibility");
+//    NSLog(@"LKDisplayItemNode - renderVisibility");
     
     BOOL displayingInHierarchy = self.displayItem.displayingInHierarchy;
     BOOL inHiddenHierarchy = self.displayItem.inHiddenHierarchy;
@@ -169,7 +169,7 @@
 }
 
 - (void)_renderImageAndColor {
-    NSLog(@"LKDisplayItemNode - renderImageAndColor");
+//    NSLog(@"LKDisplayItemNode - renderImageAndColor");
     
     BOOL isSelected = (self.dataSource.selectedItem == self.displayItem);
     BOOL isHovered = (self.dataSource.hoveredItem == self.displayItem);
@@ -229,7 +229,7 @@
 #pragma mark - <LookinDisplayItemDelegate>
 
 - (void)displayItem:(LookinDisplayItem *)displayItem propertyDidChange:(LookinDisplayItemProperty)property {
-    NSLog(@"LKDisplayItemNode - %@ did Change", @(property));
+//    NSLog(@"LKDisplayItemNode - %@ did Change", @(property));
     
     if (property == LookinDisplayItemProperty_None || property == LookinDisplayItemProperty_FrameToRoot) {
         CGRect frameToRoot = [displayItem calculateFrameToRoot];

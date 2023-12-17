@@ -33,8 +33,6 @@ typedef NS_ENUM(NSUInteger, LKOutlineRowViewStatus) {
 
 @property(nonatomic, assign) NSUInteger indentLevel;
 
-- (void)updateContentWidth;
-
 + (CGFloat)dislosureMidXWithIndentLevel:(NSUInteger)level;
 
 @end

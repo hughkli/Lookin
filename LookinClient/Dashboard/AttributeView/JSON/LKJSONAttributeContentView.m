@@ -180,7 +180,6 @@
     } else {
         view.status = LKOutlineRowViewStatusNotExpandable;
     }
-    [view updateContentWidth];
     [view setNeedsLayout:YES];
     return view;
 }

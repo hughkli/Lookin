@@ -68,7 +68,6 @@
     self.indentLevel = self.displayItem.indentLevel - self.minIndentLevel;
     [self updateEventsButton];
     [self updateExpandStatus];
-    [self updateContentWidth];
     [self updateStrikethroughLayer];
     [self _updateLabelStringsAndImageViewAlpha];
     [self _updateLabelsFonts];

@@ -8,7 +8,7 @@
 
 #import "LKTableView.h"
 #import "LKTableRowView.h"
-
+#import "LKTableViewHorizontalScrollWidthManager.h"
 
 @interface DisableKeyDownTableView: NSTableView
 @property(nonatomic, weak) NSResponder *responder;
@@ -22,7 +22,7 @@
 
 @interface LKTableView () <NSTableViewDelegate, NSTableViewDataSource>
 
-@property(nonatomic, assign) CGFloat tableViewWidth;
+@property(nonatomic, strong) LKTableViewHorizontalScrollWidthManager *horizontalScrollWidthManager;
 
 /// -1 表示不存在
 @property(nonatomic, assign) NSInteger hoveredRow;
@@ -67,29 +67,6 @@
         self.tableView.action = @selector(_handleTableViewDefaultAction);
         self.tableView.doubleAction = @selector(_handleDoubleClickTableView);
         
-        @weakify(self);
-        [[[[self.tableView rac_signalForSelector:@selector(reloadData)] filter:^BOOL(RACTuple * _Nullable value) {
-            @strongify(self);
-            return self.canScrollHorizontally;
-        }] throttle:.5] subscribeNext:^(RACTuple * _Nullable x) {
-            NSInteger rows = [self.tableView numberOfRows];
-            CGFloat maxWidth = 0;
-            while (rows--) {
-                NSTableRowView *view = [self.tableView rowViewAtRow:rows makeIfNecessary:YES];
-                if (!view) {
-                    continue;
-                }
-                if ([view isKindOfClass:[LKTableRowView class]]) {
-                    CGFloat width = ((LKTableRowView *)view).contentWidth;
-                    maxWidth = MAX(maxWidth, width);
-                } else {
-                    //                    NSAssert(NO, @"");
-                }
-            }
-            self.tableViewWidth = maxWidth;
-            [self setNeedsLayout:YES];
-        }];
-        
         self.canScrollHorizontally = YES;
     }
     return self;
@@ -97,15 +74,30 @@
 
 - (void)layout {
     [super layout];
-    if (self.canScrollHorizontally) {
-        $(self.tableView).width(self.tableViewWidth);
-    } else {
+    if (!self.canScrollHorizontally || !self.horizontalScrollWidthManager) {
         $(self.tableView).fullWidth;
+        return;
+    }
+    if (self.horizontalScrollWidthManager.maxRowWidth <= self.$width) {
+        $(self.tableView).fullWidth;
+    } else {
+        $(self.tableView).width(self.horizontalScrollWidthManager.maxRowWidth + 20);
     }
 }
 
 - (void)reloadData {
     self.selectedRow = -1;
+
+    self.horizontalScrollWidthManager = nil;
+    if (self.canScrollHorizontally) {
+        self.horizontalScrollWidthManager = [LKTableViewHorizontalScrollWidthManager new];
+        @weakify(self);
+        self.horizontalScrollWidthManager.didReachNewMaxWidth = ^{
+            @strongify(self);
+            [self handleRowViewMaxWidthChange];
+        };
+    }
+    
     [self.tableView reloadData];
 }
 
@@ -128,6 +120,20 @@
 - (void)setCanScrollHorizontally:(BOOL)canScrollHorizontally {
     _canScrollHorizontally = canScrollHorizontally;
     self.hasHorizontalScroller = canScrollHorizontally;
+    
+    if (!canScrollHorizontally) {
+        self.horizontalScrollWidthManager = nil;
+    }
+}
+
+- (void)handleRowViewMaxWidthChange {
+    if (!self.canScrollHorizontally || !self.horizontalScrollWidthManager) {
+        return;
+    }
+    if (self.horizontalScrollWidthManager.maxRowWidth <= self.$width) {
+        return;
+    }
+    $(self.tableView).width(self.horizontalScrollWidthManager.maxRowWidth + 20);
 }
 
 #pragma mark - Table View
@@ -153,6 +159,10 @@
             ((LKTableRowView *)rowView).isHovered = (self.hoveredRow == row);
             if (self.adjustsSelectionAutomatically) {
                 ((LKTableRowView *)rowView).isSelected = (self.selectedRow == row);
+            }
+            
+            if (self.canScrollHorizontally) {
+                ((LKTableRowView *)rowView).horizontalScrollWidthManager = self.horizontalScrollWidthManager;
             }
         }
         return rowView;

@@ -7,6 +7,7 @@
 //
 
 #import "LKOutlineRowView.h"
+#import "LKTableViewHorizontalScrollWidthManager.h"
 
 static CGFloat const kInsetRight = 15;
 static CGFloat const kIndentUnitWidth = 14;
@@ -64,27 +65,17 @@ static CGFloat const kDisclosureWidth = 16;
     }
     
     $(self.titleLabel).sizeToFit.x(x + _titleLeft).verAlign;
+    CGFloat maxX = self.titleLabel.$maxX;
     
     if (self.subtitleLabel.isVisible) {
         $(self.subtitleLabel).sizeToFit.x(self.titleLabel.$maxX + _subtitleLeft).verAlign;
+        maxX = self.subtitleLabel.$maxX;
     }
     $(self.disclosureButton, self.titleLabel, self.subtitleLabel).visibles.offsetY(-1);
-}
-
-- (void)updateContentWidth {
-    CGFloat width = [self.class insetLeft] + kInsetRight + self.indentLevel * kIndentUnitWidth + kDisclosureWidth;
     
-    if (self.imageView.isVisible) {
-        width += [self.imageView sizeThatFits:NSSizeMax].width + _imageLeft + _imageRight;
+    if (self.horizontalScrollWidthManager) {
+        [self.horizontalScrollWidthManager rowDidLayoutWithWidth:maxX];
     }
-    
-    width += _titleLeft + [self.titleLabel sizeThatFits:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX)].width;
-    
-    if (self.subtitleLabel.isVisible) {
-        width += self->_subtitleLeft + [self.subtitleLabel sizeThatFits:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX)].width;
-    }
-    
-    self.contentWidth = width;
 }
 
 - (void)setIndentLevel:(NSUInteger)indentLevel {

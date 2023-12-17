@@ -88,7 +88,6 @@
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
     if (self = [super initWithFrame:frameRect]) {
-        self.contentWidth = 0;
     }
     return self;
 }

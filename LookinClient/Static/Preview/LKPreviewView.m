@@ -189,7 +189,7 @@ const CGFloat LookinPreviewMaxZInterspace = 1;
     
     // 切记：要把 SCNTransaction commit 放到 for 循环外面，不能放到 for 循环里面。否则短时间内大量细碎的 SCNTransaction 会导致渲染很慢
     [SCNTransaction commit];
-    NSLog(@"SCNTransaction commit");
+//    NSLog(@"SCNTransaction commit");
 }
 
 - (void)_updateZIndexForItem:(LookinDisplayItem *)item {
