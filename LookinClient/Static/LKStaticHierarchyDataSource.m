@@ -84,6 +84,9 @@
     if (detail.customDisplayTitle) {
         displayItem.customDisplayTitle = detail.customDisplayTitle;
     }
+    if (detail.danceUISource) {
+        displayItem.danceuiSource = detail.danceUISource;
+    }
     if (detail.groupScreenshot) {
         displayItem.groupScreenshot = detail.groupScreenshot;
     }

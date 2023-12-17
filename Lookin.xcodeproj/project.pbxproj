@@ -30,6 +30,8 @@
 		A721E4912B1CE2F000546017 /* LKJSONAttributeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A721E4902B1CE2F000546017 /* LKJSONAttributeViewController.m */; };
 		A721E4942B1CE42800546017 /* LKJSONAttributeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A721E4932B1CE42800546017 /* LKJSONAttributeItem.m */; };
 		A74B5E812B25C9BE00566549 /* LKJSONAttributeContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A74B5E802B25C9BE00566549 /* LKJSONAttributeContentView.m */; };
+		A777C2A42B2F54D700677624 /* DanceScriptManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A777C2A32B2F54D700677624 /* DanceScriptManager.m */; };
+		A777C2A72B2F55EE00677624 /* DanceScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = A777C2A62B2F55EE00677624 /* DanceScript.sh */; };
 		A77AA17B2AEED1B8006A7BF4 /* LKMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17A2AEED1B8006A7BF4 /* LKMessageManager.m */; };
 		A77AA17E2AEED988006A7BF4 /* LKServerVersionRequestor.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17D2AEED988006A7BF4 /* LKServerVersionRequestor.m */; };
 		A77AA1822AEEE095006A7BF4 /* LKVersionComparer.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA1812AEEE095006A7BF4 /* LKVersionComparer.m */; };
@@ -257,6 +259,9 @@
 		A721E4932B1CE42800546017 /* LKJSONAttributeItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKJSONAttributeItem.m; sourceTree = "<group>"; };
 		A74B5E7F2B25C9BE00566549 /* LKJSONAttributeContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKJSONAttributeContentView.h; sourceTree = "<group>"; };
 		A74B5E802B25C9BE00566549 /* LKJSONAttributeContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKJSONAttributeContentView.m; sourceTree = "<group>"; };
+		A777C2A22B2F54D700677624 /* DanceScriptManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DanceScriptManager.h; sourceTree = "<group>"; };
+		A777C2A32B2F54D700677624 /* DanceScriptManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DanceScriptManager.m; sourceTree = "<group>"; };
+		A777C2A62B2F55EE00677624 /* DanceScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = DanceScript.sh; sourceTree = "<group>"; };
 		A77AA1792AEED1B8006A7BF4 /* LKMessageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKMessageManager.h; sourceTree = "<group>"; };
 		A77AA17A2AEED1B8006A7BF4 /* LKMessageManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKMessageManager.m; sourceTree = "<group>"; };
 		A77AA17C2AEED988006A7BF4 /* LKServerVersionRequestor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKServerVersionRequestor.h; sourceTree = "<group>"; };
@@ -627,6 +632,16 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
+		A777C2A52B2F54DA00677624 /* DanceScript */ = {
+			isa = PBXGroup;
+			children = (
+				A777C2A22B2F54D700677624 /* DanceScriptManager.h */,
+				A777C2A32B2F54D700677624 /* DanceScriptManager.m */,
+				A777C2A62B2F55EE00677624 /* DanceScript.sh */,
+			);
+			path = DanceScript;
+			sourceTree = "<group>";
+		};
 		A77AA17F2AEED98B006A7BF4 /* Other */ = {
 			isa = PBXGroup;
 			children = (
@@ -807,6 +822,7 @@
 				AA48F2A621CC0CA60032EC2C /* LookinClient_Info.plist */,
 				AA48F2A121CC0CA60032EC2C /* Assets.xcassets */,
 				AAA8C0C021CC17670017A345 /* LookinClient_PrefixHeader.pch */,
+				A777C2A52B2F54DA00677624 /* DanceScript */,
 				A77AA17F2AEED98B006A7BF4 /* Other */,
 				AA77A32C22CE0E7100C73721 /* lookin_icon.icns */,
 				A26EF68527F89F83005A9E4E /* ShortCocoa */,
@@ -1200,6 +1216,7 @@
 				AA66488C23696D220043B50A /* logo_jump.gif in Resources */,
 				AA48F2A521CC0CA60032EC2C /* MainMenu.xib in Resources */,
 				AA77A32D22CE0E7100C73721 /* lookin_icon.icns in Resources */,
+				A777C2A72B2F55EE00677624 /* DanceScript.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1375,6 +1392,7 @@
 				AAA8C15E21CC17680017A345 /* LKLaunchViewController.m in Sources */,
 				AA7F157822C0F2B9004436AD /* LKConnectionRequest.m in Sources */,
 				AA9A3D732269DDCE00BE46C7 /* LKConsoleViewController.m in Sources */,
+				A777C2A42B2F54D700677624 /* DanceScriptManager.m in Sources */,
 				A721E48E2B1CE2BC00546017 /* LKJSONAttributeWindowController.m in Sources */,
 				AA34A15E233F884D00513829 /* LKConstraintPopoverController.m in Sources */,
 				AAA8C15B21CC17680017A345 /* LKStaticViewController.m in Sources */,
