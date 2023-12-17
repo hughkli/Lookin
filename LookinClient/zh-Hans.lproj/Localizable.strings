@@ -21,6 +21,8 @@
 "Preferences" = "偏好设置";
 "Appearance" = "外观";
 "Double click" = "双击图层";
+"Image contrast" = "图像对比度";
+"Adjust this option to use a deeper layer selection color." = "调整该选项以使用更深的图层选中色";
 "Expand or collapse layer" = "展开或折叠";
 "Focus on layer" = "聚焦";
 "Dark Mode" = "深色";
@@ -197,3 +199,6 @@
 
 "Click to view…" = "点击以查看…";
 "Reveal in panel…" = "在主面板中展示…";
+"Normal" = "普通";
+"Medium" = "中";
+"High" = "高";

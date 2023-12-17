@@ -211,10 +211,15 @@
         }
     } else {
         maskColor = LookinColorMake(110, 183, 255);
+        NSInteger level = [[LKPreferenceManager mainManager] imageContrastLevel];
+        if (level < 0 || level > 2) {
+            NSAssert(NO, @"");
+            level = 0;
+        }
         if (isSelected) {
-            maskOpacity = .35;
+            maskOpacity = [@[@.35, @.6, @.85][level] doubleValue];
         } else if (isHovered) {
-            maskOpacity = .18;
+            maskOpacity = [@[@.18, @.38, @.6][level] doubleValue];
         } else {
             maskOpacity = 0;
         }

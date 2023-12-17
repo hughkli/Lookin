@@ -29,6 +29,7 @@ static NSString * const Key_ZInterspace = @"zInterspace_v095";
 static NSString * const Key_AppearanceType = @"appearanceType";
 static NSString * const Key_DoubleClickBehavior = @"doubleClickBehavior";
 static NSString * const Key_ExpansionIndex = @"expansionIndex";
+static NSString * const Key_ContrastLevel = @"contrastLevel";
 static NSString * const Key_SectionsShow = @"ss";
 static NSString * const Key_CollapsedGroups = @"collapsedGroups_918";
 static NSString * const Key_PreferredExportCompression = @"preferredExportCompression";
@@ -144,6 +145,14 @@ static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
             [userDefaults setObject:@(_expansionIndex) forKey:Key_ExpansionIndex];
         }
         
+        NSNumber *obj_contrastLevel = [userDefaults objectForKey:Key_ContrastLevel];
+        if (obj_contrastLevel != nil) {
+            _imageContrastLevel = [obj_contrastLevel integerValue];
+        } else {
+            _imageContrastLevel = 0;
+            [userDefaults setObject:@(_imageContrastLevel) forKey:Key_ContrastLevel];
+        }
+        
         NSNumber *obj_syncConsoleTarget = [userDefaults objectForKey:Key_SyncConsoleTarget];
         if (obj_syncConsoleTarget != nil) {
             _syncConsoleTarget = [obj_syncConsoleTarget boolValue];
@@ -244,6 +253,17 @@ static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
     _expansionIndex = expansionIndex;
     if (self.shouldStoreToLocal) {
         [[NSUserDefaults standardUserDefaults] setObject:@(expansionIndex) forKey:Key_ExpansionIndex];
+    }
+}
+
+- (void)setImageContrastLevel:(NSInteger)imageContrastLevel {
+    if (_imageContrastLevel == imageContrastLevel) {
+        return;
+    }
+    _imageContrastLevel = imageContrastLevel;
+    
+    if (self.shouldStoreToLocal) {
+        [[NSUserDefaults standardUserDefaults] setObject:@(imageContrastLevel) forKey:Key_ContrastLevel];
     }
 }
 
