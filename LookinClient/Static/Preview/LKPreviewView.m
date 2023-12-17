@@ -98,7 +98,7 @@ const CGFloat LookinPreviewMaxZInterspace = 1;
 }
 
 - (void)renderWithDisplayItems:(NSArray<LookinDisplayItem *> *)items discardCache:(BOOL)discardCache {
-    NSLog(@"LKPreviewView - render");
+    NSLog(@"LKPreviewView - render %@ items", @(items.count));
     
     self.flatDisplayItems = items;
     
@@ -181,6 +181,7 @@ const CGFloat LookinPreviewMaxZInterspace = 1;
         SCNVector3 position = node.position;
         position.z = adjustedZIndex * interspace + offsetToAvoidOverlapBug;
         
+        // 没这个 SCNTransaction 的话，收起、展开时图像没动画
         [SCNTransaction begin];
         node.position = position;
         [SCNTransaction commit];
