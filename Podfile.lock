@@ -10,21 +10,18 @@ PODS:
   - LookinShared (1.2.5)
   - ReactiveObjC (3.1.0)
   - Sparkle (1.27.1)
-  - STPrivilegedTask (1.0.1)
 
 DEPENDENCIES:
   - AppCenter
   - LookinShared (from `../LookinServer/`)
   - ReactiveObjC (= 3.1.0)
   - Sparkle (~> 1.0)
-  - STPrivilegedTask
 
 SPEC REPOS:
   trunk:
     - AppCenter
     - ReactiveObjC
     - Sparkle
-    - STPrivilegedTask
 
 EXTERNAL SOURCES:
   LookinShared:
@@ -35,8 +32,7 @@ SPEC CHECKSUMS:
   LookinShared: f5e42dead83e6d469ed9013c35a3bd1d5bb10853
   ReactiveObjC: 2a38ea15335de4119d8b17caf1db1484f61db902
   Sparkle: 23f98b268284c8c03e6228230fc8f1807ef041d5
-  STPrivilegedTask: 103f97827454e786074640cf89d303be344498c7
 
-PODFILE CHECKSUM: 1b778a9c376d15daed359ce2bfcefed56962d809
+PODFILE CHECKSUM: 5da7aed9eb92584dcb20b807877d578beecf13ce
 
 COCOAPODS: 1.13.0
