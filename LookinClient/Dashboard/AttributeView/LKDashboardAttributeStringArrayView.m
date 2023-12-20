@@ -113,6 +113,9 @@
     [self.danceButton setHidden:YES];
     if ([self.attribute.identifier isEqualToString:LookinAttr_Class_Class_Class]) {
         NSString *danceSource = self.attribute.targetDisplayItem.danceuiSource;
+        if (!danceSource) {
+            danceSource = self.attribute.targetDisplayItem.customInfo.danceuiSource;
+        }
         if (danceSource) {
             [self addDanceButtonIfNeeded];
             self.danceButton.title = NSLocalizedString(@"Navigate…", nil);
@@ -141,6 +144,9 @@
 
 - (void)handleDanceButton {
     NSString *json = self.attribute.targetDisplayItem.danceuiSource;
+    if (!json) {
+        json = self.attribute.targetDisplayItem.customInfo.danceuiSource;
+    }
     [[DanceScriptManager shared] handleText:json];
 }
 

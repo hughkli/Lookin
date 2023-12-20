@@ -13,6 +13,7 @@
 #import "LKColorIndicatorLayer.h"
 #import "LKUserActionManager.h"
 #import "LookinDisplayItem+LookinClient.h"
+#import "LKDanceUIAttrMaker.h"
 @import AppCenter;
 @import AppCenterAnalytics;
 
@@ -186,6 +187,10 @@
             if ([obj.displayingObject.completedSelfClassName containsString:@"."]) {
                 _serverSideIsSwiftProject = YES;
             }
+        }
+        
+        if (obj.customInfo.danceuiSource.length > 0) {
+            [LKDanceUIAttrMaker makeDanceUIJumpAttribute:obj danceSource:obj.customInfo.danceuiSource];
         }
         
         if (obj.isUserCustom) {
