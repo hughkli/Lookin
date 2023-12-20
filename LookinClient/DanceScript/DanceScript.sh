@@ -5,6 +5,9 @@ build_path=$1
 # 跳转的方法名，DanceUI 主要有两类：View.body、ViewModifier.body(content:)
 subprogram_name=$3
 
+root_path="$(dirname "$0")"
+echo $root_path
+
 process_string() {
     local original="$1"
     # 删除 "<>" 及其内部的所有内容
@@ -46,7 +49,7 @@ echo $file_creation_time
 filename=$(basename "$build_path")
 echo $filename
 
-file_path="./temp/${filename}"
+file_path="${root_path}/temp/${filename}"
 dir_path="$file_path/${file_creation_time}"
 
 # 创建目录: /temp/DanceUIApp/1702555003/

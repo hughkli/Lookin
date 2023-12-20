@@ -24,6 +24,8 @@
 
 @interface LKStaticHierarchyDataSource ()
 
+@property(nonatomic, assign) BOOL isUsingDanceUI;
+
 @end
 
 @implementation LKStaticHierarchyDataSource
@@ -86,6 +88,11 @@
     }
     if (detail.danceUISource) {
         displayItem.danceuiSource = detail.danceUISource;
+        
+        if (!self.isUsingDanceUI) {
+            self.isUsingDanceUI = YES;
+            [MSACAnalytics trackEvent:@"UseDance"];
+        }
     }
     if (detail.groupScreenshot) {
         displayItem.groupScreenshot = detail.groupScreenshot;
