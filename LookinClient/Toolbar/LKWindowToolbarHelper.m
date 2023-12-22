@@ -33,6 +33,8 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
 
 @interface LKWindowToolbarHelper ()
 
+@property (nonatomic, weak) NSToolbarItem *measureItem;
+
 @end
 
 @implementation LKWindowToolbarHelper
@@ -48,6 +50,15 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
 
 + (id)allocWithZone:(struct _NSZone *)zone{
     return [self sharedInstance];
+}
+
+- (NSString *)_updateMeasureButtonTitle:(BOOL)locked {
+    NSString *lockString = NSLocalizedString(@"Locked", nil);
+    if (!locked) {
+        lockString = NSLocalizedString(@"Unlocked", nil);
+    }
+    NSString *str = [NSString stringWithFormat:@"%@ %@", lockString, NSLocalizedString(@"Measure", nil)];
+    return str;
 }
 
 - (NSToolbarItem *)makeToolBarItemWithIdentifier:(NSToolbarItemIdentifier)identifier preferenceManager:(LKPreferenceManager *)manager {
@@ -66,11 +77,10 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
         [button lookin_bindObject:manager forKey:@"manager"];
         
         NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:LKToolBarIdentifier_Measure];
-        item.label = NSLocalizedString(@"Measure", nil);
+        item.label = [self _updateMeasureButtonTitle:NO];
         item.view = button;
         item.minSize = NSMakeSize(48, 34);
-
-        [manager.isMeasuring subscribe:self action:@selector(_handleMeasureDidChange:) relatedObject:button sendAtOnce:YES];
+        self.measureItem = item;
         
         return item;
     }
@@ -314,13 +324,10 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
 
 - (void)_handleToggleMeasureButton:(NSButton *)button {
     LKPreferenceManager *manager = [button lookin_getBindObjectForKey:@"manager"];
-    [manager.isMeasuring setBOOLValue:((button.state == NSControlStateValueOn) ? YES : NO) ignoreSubscriber:self];
-}
-
-- (void)_handleMeasureDidChange:(LookinMsgActionParams *)param {
-    NSButton *button = param.relatedObject;
-    BOOL boolValue = param.boolValue;
-    button.state = boolValue ? NSControlStateValueOn : NSControlStateValueOff;
+    BOOL boolValue = ((button.state == NSControlStateValueOn) ? YES : NO);
+    self.measureItem.label = [self _updateMeasureButtonTitle:boolValue];
+    [manager.isMeasurLock setBOOLValue:boolValue ignoreSubscriber:self];
+    [manager.isMeasuring setBOOLValue:boolValue ignoreSubscriber:self];
 }
 
 @end

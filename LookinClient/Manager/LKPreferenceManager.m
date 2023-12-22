@@ -61,6 +61,7 @@ static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
         _previewScale = [LookinDoubleMsgAttribute attributeWithDouble:LKInitialPreviewScale];
         _previewDimension = [LookinIntegerMsgAttribute attributeWithInteger:LookinPreviewDimension3D];
         _isMeasuring = [LookinBOOLMsgAttribute attributeWithBOOL:NO];
+        _isMeasurLock = [LookinBOOLMsgAttribute attributeWithBOOL:NO];
         _isQuickSelecting = [LookinBOOLMsgAttribute attributeWithBOOL:NO];
         
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

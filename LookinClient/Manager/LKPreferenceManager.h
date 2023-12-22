@@ -95,6 +95,9 @@ extern NSString *const NotificationName_DidChangeSectionShowing;
 /// param 里的 userInfo 为 NSNumber(BOOL)，如果为 YES 则表示本次 measure 是由快捷键触发的
 @property(nonatomic, strong, readonly) LookinBOOLMsgAttribute *isMeasuring;
 
+/// 锁定测距
+@property(nonatomic, strong, readonly) LookinBOOLMsgAttribute *isMeasurLock;
+
 /// 是否用户正在按住 cmd 键而处于快速选择模式
 @property(nonatomic, strong, readonly) LookinBOOLMsgAttribute *isQuickSelecting;
 
