@@ -9,7 +9,6 @@
 #import "LKOutlineRowView.h"
 #import "LKTableViewHorizontalScrollWidthManager.h"
 
-static CGFloat const kInsetRight = 15;
 static CGFloat const kIndentUnitWidth = 14;
 static CGFloat const kDisclosureWidth = 16;
 

@@ -8,7 +8,7 @@
 
 #import "LookinAutoLayoutConstraint+LookinClient.h"
 
-@implementation LookinObject (LookinAutoLayoutConstraint)
+@implementation LookinAutoLayoutConstraint (LookinAutoLayoutConstraint)
 
 
 + (NSString *)descriptionWithItemObject:(LookinObject *)object type:(LookinConstraintItemType)type detailed:(BOOL)detailed {
