@@ -369,7 +369,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
         [stringsToCopy addObject:displayItem.title];
 
     }
-    NSString *hostViewControllerName = displayItem.hostViewControllerObject.shortSelfClassName;
+    NSString *hostViewControllerName = displayItem.hostViewControllerObject.rawClassName;
     if (hostViewControllerName.length) {
         [stringsToCopy addObject:hostViewControllerName];
     }

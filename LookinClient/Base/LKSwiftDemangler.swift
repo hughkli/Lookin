@@ -15,13 +15,14 @@ public class LKSwiftDemangler: NSObject {
         if let cachedResult = cache[input] {
             return cachedResult
         }
-        guard let swiftSymbol = try? parseMangledSwiftSymbol(input) else {
-            assertionFailure()
-            cache[input] = input
-            return input
+        let result: String
+        do {
+            let swiftSymbol = try parseMangledSwiftSymbol(input)
+            result = swiftSymbol.print(using:
+               SymbolPrintOptions.default.union(.synthesizeSugarOnTypes))
+        } catch _ {
+            result = input
         }
-        let result = swiftSymbol.print(using:
-           SymbolPrintOptions.default.union(.synthesizeSugarOnTypes))
         cache[input] = result
         return result
     }

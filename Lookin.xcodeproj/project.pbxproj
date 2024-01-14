@@ -32,6 +32,7 @@
 		A74B5E812B25C9BE00566549 /* LKJSONAttributeContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A74B5E802B25C9BE00566549 /* LKJSONAttributeContentView.m */; };
 		A74C63072B540FDD0068FBB8 /* CwlDemangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74C63062B540FDD0068FBB8 /* CwlDemangle.swift */; };
 		A74C630C2B54131F0068FBB8 /* LKSwiftDemangler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74C630B2B54131F0068FBB8 /* LKSwiftDemangler.swift */; };
+		A74C630F2B54202E0068FBB8 /* LookinObject+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A74C630E2B54202E0068FBB8 /* LookinObject+LookinClient.m */; };
 		A777C2A42B2F54D700677624 /* DanceScriptManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A777C2A32B2F54D700677624 /* DanceScriptManager.m */; };
 		A777C2A72B2F55EE00677624 /* DanceScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = A777C2A62B2F55EE00677624 /* DanceScript.sh */; };
 		A77AA17B2AEED1B8006A7BF4 /* LKMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17A2AEED1B8006A7BF4 /* LKMessageManager.m */; };
@@ -265,6 +266,8 @@
 		A74C63052B540FDC0068FBB8 /* LookinClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LookinClient-Bridging-Header.h"; sourceTree = "<group>"; };
 		A74C63062B540FDD0068FBB8 /* CwlDemangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlDemangle.swift; sourceTree = "<group>"; };
 		A74C630B2B54131F0068FBB8 /* LKSwiftDemangler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKSwiftDemangler.swift; sourceTree = "<group>"; };
+		A74C630D2B54202E0068FBB8 /* LookinObject+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LookinObject+LookinClient.h"; sourceTree = "<group>"; };
+		A74C630E2B54202E0068FBB8 /* LookinObject+LookinClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LookinObject+LookinClient.m"; sourceTree = "<group>"; };
 		A777C2A22B2F54D700677624 /* DanceScriptManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DanceScriptManager.h; sourceTree = "<group>"; };
 		A777C2A32B2F54D700677624 /* DanceScriptManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DanceScriptManager.m; sourceTree = "<group>"; };
 		A777C2A62B2F55EE00677624 /* DanceScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = DanceScript.sh; sourceTree = "<group>"; };
@@ -736,6 +739,8 @@
 				AA66645E22DBBAC7009E05CC /* NSString+Score.h */,
 				7BFFDF0D2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.h */,
 				A7F8FC532AF289F000ABC7F4 /* LookinCustomDisplayItemInfo+LookinClient.h */,
+				A74C630D2B54202E0068FBB8 /* LookinObject+LookinClient.h */,
+				A74C630E2B54202E0068FBB8 /* LookinObject+LookinClient.m */,
 				A7F8FC542AF289F000ABC7F4 /* LookinCustomDisplayItemInfo+LookinClient.m */,
 				7BFFDF0E2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.m */,
 				1892DD1A2AF258890016D61B /* LookinDisplayItem+LookinClient.h */,
@@ -1406,6 +1411,7 @@
 				A78FCEB42B334D3300F1D307 /* LKDanceUIAttrMaker.m in Sources */,
 				AAB65C092320FC30001E4299 /* LKDashboardSearchCardView.m in Sources */,
 				AA290358229824A400073B65 /* LKPanelContentView.m in Sources */,
+				A74C630F2B54202E0068FBB8 /* LookinObject+LookinClient.m in Sources */,
 				AAA8C15E21CC17680017A345 /* LKLaunchViewController.m in Sources */,
 				AA7F157822C0F2B9004436AD /* LKConnectionRequest.m in Sources */,
 				AA9A3D732269DDCE00BE46C7 /* LKConsoleViewController.m in Sources */,
