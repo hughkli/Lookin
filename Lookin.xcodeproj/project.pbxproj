@@ -30,6 +30,8 @@
 		A721E4912B1CE2F000546017 /* LKJSONAttributeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A721E4902B1CE2F000546017 /* LKJSONAttributeViewController.m */; };
 		A721E4942B1CE42800546017 /* LKJSONAttributeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A721E4932B1CE42800546017 /* LKJSONAttributeItem.m */; };
 		A74B5E812B25C9BE00566549 /* LKJSONAttributeContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A74B5E802B25C9BE00566549 /* LKJSONAttributeContentView.m */; };
+		A74C63072B540FDD0068FBB8 /* CwlDemangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74C63062B540FDD0068FBB8 /* CwlDemangle.swift */; };
+		A74C630C2B54131F0068FBB8 /* LKSwiftDemangler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74C630B2B54131F0068FBB8 /* LKSwiftDemangler.swift */; };
 		A777C2A42B2F54D700677624 /* DanceScriptManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A777C2A32B2F54D700677624 /* DanceScriptManager.m */; };
 		A777C2A72B2F55EE00677624 /* DanceScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = A777C2A62B2F55EE00677624 /* DanceScript.sh */; };
 		A77AA17B2AEED1B8006A7BF4 /* LKMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17A2AEED1B8006A7BF4 /* LKMessageManager.m */; };
@@ -260,6 +262,9 @@
 		A721E4932B1CE42800546017 /* LKJSONAttributeItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKJSONAttributeItem.m; sourceTree = "<group>"; };
 		A74B5E7F2B25C9BE00566549 /* LKJSONAttributeContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKJSONAttributeContentView.h; sourceTree = "<group>"; };
 		A74B5E802B25C9BE00566549 /* LKJSONAttributeContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKJSONAttributeContentView.m; sourceTree = "<group>"; };
+		A74C63052B540FDC0068FBB8 /* LookinClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LookinClient-Bridging-Header.h"; sourceTree = "<group>"; };
+		A74C63062B540FDD0068FBB8 /* CwlDemangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlDemangle.swift; sourceTree = "<group>"; };
+		A74C630B2B54131F0068FBB8 /* LKSwiftDemangler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKSwiftDemangler.swift; sourceTree = "<group>"; };
 		A777C2A22B2F54D700677624 /* DanceScriptManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DanceScriptManager.h; sourceTree = "<group>"; };
 		A777C2A32B2F54D700677624 /* DanceScriptManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DanceScriptManager.m; sourceTree = "<group>"; };
 		A777C2A62B2F55EE00677624 /* DanceScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = DanceScript.sh; sourceTree = "<group>"; };
@@ -907,10 +912,12 @@
 		AAA8C08F21CC17670017A345 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				A74C63062B540FDD0068FBB8 /* CwlDemangle.swift */,
 				1892DD2B2AF25EE20016D61B /* Message */,
 				AA0757C322C6084A005535DC /* Category */,
 				AA50755822A3ED9B00D2A5AC /* InputSearch */,
 				AAB09026229D74F000159B15 /* LKOutlineItem.h */,
+				A74C630B2B54131F0068FBB8 /* LKSwiftDemangler.swift */,
 				AA65ED472341FE8300F0BF34 /* LKTwoColors.h */,
 				AA65ED482341FE8300F0BF34 /* LKTwoColors.m */,
 				AAB09027229D74F000159B15 /* LKOutlineItem.m */,
@@ -964,6 +971,7 @@
 				AAA8C0A321CC17670017A345 /* LKBaseView.m */,
 				AAA8C0A521CC17670017A345 /* LKBaseViewController.h */,
 				AAA8C09C21CC17670017A345 /* LKBaseViewController.m */,
+				A74C63052B540FDC0068FBB8 /* LookinClient-Bridging-Header.h */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1181,6 +1189,7 @@
 				TargetAttributes = {
 					AA48F29A21CC0CA50032EC2C = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1500;
 						SystemCapabilities = {
 							com.apple.HardenedRuntime = {
 								enabled = 1;
@@ -1310,6 +1319,7 @@
 				AA20A499232A2A2300AC80AA /* LKDashboardAttributeConstraintsView.m in Sources */,
 				AAD387312288624600042229 /* LKReadViewController.m in Sources */,
 				AAA8C12221CC17680017A345 /* LKLabel.m in Sources */,
+				A74C630C2B54131F0068FBB8 /* LKSwiftDemangler.swift in Sources */,
 				AABE9005224169D200030361 /* LKAppMenuManager.m in Sources */,
 				AAF418C522BA2C9600111554 /* LKConsoleSelectPopoverItemControl.m in Sources */,
 				AAA8C12721CC17680017A345 /* LKImageControl.m in Sources */,
@@ -1381,6 +1391,7 @@
 				A77AA17B2AEED1B8006A7BF4 /* LKMessageManager.m in Sources */,
 				AAA8C11E21CC17680017A345 /* LKAppsManager.m in Sources */,
 				AAE61CCE22A5063F00B3FB9F /* LKInputSearchSuggestionsRowView.m in Sources */,
+				A74C63072B540FDD0068FBB8 /* CwlDemangle.swift in Sources */,
 				AAA8C12621CC17680017A345 /* LKProgressIndicatorView.m in Sources */,
 				AAA8C12A21CC17680017A345 /* LKBaseControl.m in Sources */,
 				AACBACAF22AE983F00A8F89D /* LKDashboardAttributeRectView.m in Sources */,
@@ -1583,11 +1594,13 @@
 			baseConfigurationReference = D97552B9BF9170E090F8CAA7 /* Pods-LookinClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = LookinClient/Lookin.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 12;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5V3Z8FVWHU;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1611,6 +1624,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = hughkli.Lookin;
 				PRODUCT_NAME = Lookin;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "LookinClient/Base/LookinClient-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1619,11 +1635,13 @@
 			baseConfigurationReference = 5E8E4C9C392BAAF93643C21E /* Pods-LookinClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = LookinClient/Lookin.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 12;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5V3Z8FVWHU;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1647,6 +1665,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = hughkli.Lookin;
 				PRODUCT_NAME = Lookin;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "LookinClient/Base/LookinClient-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
