@@ -45,6 +45,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 遍历自身后所有下级元素
 - (void)enumerateSelfAndChildren:(void (^)(LookinDisplayItem *item))block;
 
+- (BOOL)itemIsKindOfClassWithName:(NSString *)className;
+- (BOOL)itemIsKindOfClassesWithNames:(NSSet<NSString *> *)classNames;
+
 @end
 
 NS_ASSUME_NONNULL_END
