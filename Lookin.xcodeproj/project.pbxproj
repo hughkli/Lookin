@@ -33,6 +33,7 @@
 		A74C63072B540FDD0068FBB8 /* CwlDemangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74C63062B540FDD0068FBB8 /* CwlDemangle.swift */; };
 		A74C630C2B54131F0068FBB8 /* LKSwiftDemangler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74C630B2B54131F0068FBB8 /* LKSwiftDemangler.swift */; };
 		A74C630F2B54202E0068FBB8 /* LookinObject+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A74C630E2B54202E0068FBB8 /* LookinObject+LookinClient.m */; };
+		A74C63122B5429B60068FBB8 /* LookinAutoLayoutConstraint+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A74C63112B5429B60068FBB8 /* LookinAutoLayoutConstraint+LookinClient.m */; };
 		A777C2A42B2F54D700677624 /* DanceScriptManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A777C2A32B2F54D700677624 /* DanceScriptManager.m */; };
 		A777C2A72B2F55EE00677624 /* DanceScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = A777C2A62B2F55EE00677624 /* DanceScript.sh */; };
 		A77AA17B2AEED1B8006A7BF4 /* LKMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A77AA17A2AEED1B8006A7BF4 /* LKMessageManager.m */; };
@@ -268,6 +269,8 @@
 		A74C630B2B54131F0068FBB8 /* LKSwiftDemangler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKSwiftDemangler.swift; sourceTree = "<group>"; };
 		A74C630D2B54202E0068FBB8 /* LookinObject+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LookinObject+LookinClient.h"; sourceTree = "<group>"; };
 		A74C630E2B54202E0068FBB8 /* LookinObject+LookinClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LookinObject+LookinClient.m"; sourceTree = "<group>"; };
+		A74C63102B5429B60068FBB8 /* LookinAutoLayoutConstraint+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LookinAutoLayoutConstraint+LookinClient.h"; sourceTree = "<group>"; };
+		A74C63112B5429B60068FBB8 /* LookinAutoLayoutConstraint+LookinClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LookinAutoLayoutConstraint+LookinClient.m"; sourceTree = "<group>"; };
 		A777C2A22B2F54D700677624 /* DanceScriptManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DanceScriptManager.h; sourceTree = "<group>"; };
 		A777C2A32B2F54D700677624 /* DanceScriptManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DanceScriptManager.m; sourceTree = "<group>"; };
 		A777C2A62B2F55EE00677624 /* DanceScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = DanceScript.sh; sourceTree = "<group>"; };
@@ -741,6 +744,8 @@
 				A7F8FC532AF289F000ABC7F4 /* LookinCustomDisplayItemInfo+LookinClient.h */,
 				A74C630D2B54202E0068FBB8 /* LookinObject+LookinClient.h */,
 				A74C630E2B54202E0068FBB8 /* LookinObject+LookinClient.m */,
+				A74C63102B5429B60068FBB8 /* LookinAutoLayoutConstraint+LookinClient.h */,
+				A74C63112B5429B60068FBB8 /* LookinAutoLayoutConstraint+LookinClient.m */,
 				A7F8FC542AF289F000ABC7F4 /* LookinCustomDisplayItemInfo+LookinClient.m */,
 				7BFFDF0E2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.m */,
 				1892DD1A2AF258890016D61B /* LookinDisplayItem+LookinClient.h */,
@@ -1398,6 +1403,7 @@
 				AAE61CCE22A5063F00B3FB9F /* LKInputSearchSuggestionsRowView.m in Sources */,
 				A74C63072B540FDD0068FBB8 /* CwlDemangle.swift in Sources */,
 				AAA8C12621CC17680017A345 /* LKProgressIndicatorView.m in Sources */,
+				A74C63122B5429B60068FBB8 /* LookinAutoLayoutConstraint+LookinClient.m in Sources */,
 				AAA8C12A21CC17680017A345 /* LKBaseControl.m in Sources */,
 				AACBACAF22AE983F00A8F89D /* LKDashboardAttributeRectView.m in Sources */,
 				AAA8C14221CC17680017A345 /* LKEnumListRegistry.m in Sources */,

@@ -9,6 +9,7 @@
 #import "LKDashboardAttributeConstraintsItemControl.h"
 #import "LookinAutoLayoutConstraint.h"
 #import "LookinObject.h"
+#import "LookinAutoLayoutConstraint+LookinClient.h"
 
 @implementation LKDashboardAttributeConstraintsItemControl
 

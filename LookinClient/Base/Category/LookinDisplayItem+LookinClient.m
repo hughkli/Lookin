@@ -7,6 +7,7 @@
 //
 
 #import "LookinDisplayItem+LookinClient.h"
+#import "LookinIvarTrace.h"
 
 @implementation LookinDisplayItem (LookinClient)
 
@@ -22,6 +23,31 @@
     } else {
         return nil;
     }
+}
+
+- (NSString *)subtitle {
+    if (self.customInfo) {
+        return self.customInfo.subtitle;
+    }
+    
+    NSString *text = self.hostViewControllerObject.lk_demangledNoModuleClassName;
+    if (text.length) {
+        return [NSString stringWithFormat:@"%@.view", text];
+    }
+    
+    LookinObject *representedObject = self.viewObject ? : self.layerObject;
+    if (representedObject.specialTrace.length) {
+        return representedObject.specialTrace;
+        
+    }
+    if (representedObject.ivarTraces.count) {
+        NSArray<NSString *> *ivarNameList = [representedObject.ivarTraces lookin_map:^id(NSUInteger idx, LookinIvarTrace *value) {
+            return value.ivarName;
+        }];
+        return [[[NSSet setWithArray:ivarNameList] allObjects] componentsJoinedByString:@"   "];
+    }
+    
+    return nil;
 }
 
 - (BOOL)representedForSystemClass {

@@ -10,8 +10,12 @@
 
 @implementation LookinObject (LookinClient)
 
+- (NSString *)lk_demangledClassName {
+    return [self.rawClassName lk_demangledSwiftName];
+}
+
 - (NSString *)lk_demangledNoModuleClassName {
-    NSString *demangled = [self.rawClassName lk_demangledSwiftName];
+    NSString *demangled = [self lk_demangledClassName];
     NSString *result = [demangled componentsSeparatedByString:@"."].lastObject;
     return result;
 }

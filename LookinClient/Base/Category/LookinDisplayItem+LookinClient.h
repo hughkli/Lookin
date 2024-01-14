@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 该 item 在左侧 hierarchy 中显示的字符串，通常是类名
 - (NSString *)title;
 
+- (NSString *)subtitle;
+
 /// className 以 “UI”、“CA” 等开头时认为是系统类，该属性将返回 YES
 @property(nonatomic, assign, readonly) BOOL representedForSystemClass;
 

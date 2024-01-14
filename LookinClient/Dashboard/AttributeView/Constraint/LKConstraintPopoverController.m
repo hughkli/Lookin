@@ -11,6 +11,7 @@
 #import "LKTextsMenuView.h"
 #import "LKTextFieldView.h"
 #import "LookinObject.h"
+#import "LookinAutoLayoutConstraint+LookinClient.h"
 
 @interface LKConstraintPopoverController ()
 

@@ -10,7 +10,10 @@
 
 @interface LookinObject (LookinClient)
 
-/// 这里返回的类名已经被 demangle 过，并且没有 module 前缀
+/// 这里返回的类名已经被 demangle 过，但是【有 module 前缀】
+- (NSString *)lk_demangledClassName;
+
+/// 这里返回的类名已经被 demangle 过，并且【没有 module 前缀】
 - (NSString *)lk_demangledNoModuleClassName;
 
 @end
