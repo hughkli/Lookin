@@ -54,6 +54,13 @@
     return [self.title hasPrefix:@"UI"] || [self.title hasPrefix:@"CA"] || [self.title hasPrefix:@"_"];
 }
 
+- (NSImage *)appropriateScreenshot {
+    if (self.isExpandable && self.isExpanded) {
+        return self.soloScreenshot;
+    }
+    return self.groupScreenshot;
+}
+
 - (BOOL)isUserCustom {
     return self.customInfo != nil;
 }
@@ -113,6 +120,36 @@
         return YES;
     }
     return NO;
+}
+
+- (void)enumerateSelfAndAncestors:(void (^)(LookinDisplayItem *, BOOL *))block {
+    if (!block) {
+        return;
+    }
+    LookinDisplayItem *item = self;
+    while (item) {
+        BOOL shouldStop = NO;
+        block(item, &shouldStop);
+        if (shouldStop) {
+            break;
+        }
+        item = item.superItem;
+    }
+}
+
+- (void)enumerateAncestors:(void (^)(LookinDisplayItem *, BOOL *))block {
+    [self.superItem enumerateSelfAndAncestors:block];
+}
+
+- (void)enumerateSelfAndChildren:(void (^)(LookinDisplayItem *item))block {
+    if (!block) {
+        return;
+    }
+    
+    block(self);
+    [self.subitems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull subitem, NSUInteger idx, BOOL * _Nonnull stop) {
+        [subitem enumerateSelfAndChildren:block];
+    }];
 }
 
 @end

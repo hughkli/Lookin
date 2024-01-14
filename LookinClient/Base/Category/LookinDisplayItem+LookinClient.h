@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)subtitle;
 
+/// 返回 soloScreenshot 或 groupScreenshot
+- (NSImage *)appropriateScreenshot;
+
 /// className 以 “UI”、“CA” 等开头时认为是系统类，该属性将返回 YES
 @property(nonatomic, assign, readonly) BOOL representedForSystemClass;
 
@@ -33,6 +36,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// 在 string 这个搜索词下，如果该 displayItem 应该被搜索到，则该方法返回 YES。
 /// string 字段不能为 nil 或空字符串
 - (BOOL)isMatchedWithSearchString:(NSString *)string;
+
+/// 遍历自身和所有上级元素
+- (void)enumerateSelfAndAncestors:(void (^)(LookinDisplayItem *item, BOOL *stop))block;
+
+- (void)enumerateAncestors:(void (^)(LookinDisplayItem *item, BOOL *stop))block;
+
+/// 遍历自身后所有下级元素
+- (void)enumerateSelfAndChildren:(void (^)(LookinDisplayItem *item))block;
 
 @end
 
