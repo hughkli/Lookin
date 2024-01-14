@@ -11,8 +11,7 @@
 @implementation LookinObject (LookinClient)
 
 - (NSString *)lk_demangledNoModuleClassName {
-    NSString *rawName = self.rawClassName;
-    NSString *demangled = [rawName lk_demangledSwiftName];
+    NSString *demangled = [self.rawClassName lk_demangledSwiftName];
     NSString *result = [demangled componentsSeparatedByString:@"."].lastObject;
     return result;
 }

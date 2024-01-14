@@ -10,6 +10,24 @@
 
 @implementation LookinDisplayItem (LookinClient)
 
+- (NSString *)title {
+    if (self.customInfo) {
+        return self.customInfo.title;
+    } else if (self.customDisplayTitle.length > 0) {
+        return self.customDisplayTitle;
+    } else if (self.viewObject) {
+        return self.viewObject.lk_demangledNoModuleClassName;
+    } else if (self.layerObject) {
+        return self.layerObject.lk_demangledNoModuleClassName;
+    } else {
+        return nil;
+    }
+}
+
+- (BOOL)representedForSystemClass {
+    return [self.title hasPrefix:@"UI"] || [self.title hasPrefix:@"CA"] || [self.title hasPrefix:@"_"];
+}
+
 - (BOOL)isUserCustom {
     return self.customInfo != nil;
 }
@@ -48,6 +66,27 @@
     CGFloat width = selfFrame.size.width;
     CGFloat height = selfFrame.size.height;
     return CGRectMake(x, y, width, height);
+}
+
+- (BOOL)isMatchedWithSearchString:(NSString *)string {
+    if (string.length == 0) {
+        NSAssert(NO, @"");
+        return NO;
+    }
+    NSString *searchString = string.lowercaseString;
+    if ([self.title.lowercaseString containsString:searchString]) {
+        return YES;
+    }
+    if ([self.subtitle.lowercaseString containsString:searchString]) {
+        return YES;
+    }
+    if ([self.viewObject.memoryAddress containsString:searchString]) {
+        return YES;
+    }
+    if ([self.layerObject.memoryAddress containsString:searchString]) {
+        return YES;
+    }
+    return NO;
 }
 
 @end
