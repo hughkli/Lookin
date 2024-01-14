@@ -14,6 +14,4 @@
 /// 返回首字母大写的字符串
 - (NSString *)lk_capitalizedString;
 
-- (NSString *)lk_demangledSwiftName;
-
 @end

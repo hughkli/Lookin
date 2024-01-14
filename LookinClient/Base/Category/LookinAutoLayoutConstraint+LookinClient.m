@@ -24,7 +24,7 @@
             
         case LookinConstraintItemTypeView:
         case LookinConstraintItemTypeLayoutGuide:
-            return detailed ? [NSString stringWithFormat:@"<%@: %@>", object.rawClassName, object.memoryAddress] : [NSString stringWithFormat:@"(%@*)", object.lk_demangledNoModuleClassName];
+            return detailed ? [NSString stringWithFormat:@"<%@: %@>", object.rawClassName, object.memoryAddress] : [NSString stringWithFormat:@"(%@*)", object.lk_simpleDemangledClassName];
             
         default:
             NSAssert(NO, @"");

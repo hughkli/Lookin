@@ -11,9 +11,9 @@
 @interface LookinObject (LookinClient)
 
 /// 这里返回的类名已经被 demangle 过，但是【有 module 前缀】
-- (NSString *)lk_demangledClassName;
+- (NSString *)lk_completedDemangledClassName;
 
 /// 这里返回的类名已经被 demangle 过，并且【没有 module 前缀】
-- (NSString *)lk_demangledNoModuleClassName;
+- (NSString *)lk_simpleDemangledClassName;
 
 @end

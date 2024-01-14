@@ -17,9 +17,9 @@
     } else if (self.customDisplayTitle.length > 0) {
         return self.customDisplayTitle;
     } else if (self.viewObject) {
-        return self.viewObject.lk_demangledNoModuleClassName;
+        return self.viewObject.lk_simpleDemangledClassName;
     } else if (self.layerObject) {
-        return self.layerObject.lk_demangledNoModuleClassName;
+        return self.layerObject.lk_simpleDemangledClassName;
     } else {
         return nil;
     }
@@ -30,7 +30,7 @@
         return self.customInfo.subtitle;
     }
     
-    NSString *text = self.hostViewControllerObject.lk_demangledNoModuleClassName;
+    NSString *text = self.hostViewControllerObject.lk_simpleDemangledClassName;
     if (text.length) {
         return [NSString stringWithFormat:@"%@.view", text];
     }

@@ -90,7 +90,7 @@
             LKConsoleDataSourceRowItem *item = [LKConsoleDataSourceRowItem new];
             item.type = LKConsoleDataSourceRowItemTypeSubmit;
             item.normalText = text;
-            item.highlightText = [NSString stringWithFormat:@"<%@: %@>", obj.lk_demangledNoModuleClassName, obj.memoryAddress];
+            item.highlightText = [NSString stringWithFormat:@"<%@: %@>", obj.lk_simpleDemangledClassName, obj.memoryAddress];
             item;
         }) atIndex:(rowItems.count - 1)];
         if (returnDescription.length) {
@@ -102,7 +102,7 @@
             }) atIndex:(rowItems.count - 1)];
         }
         if (returnObject) {
-            NSString *message = [NSString stringWithFormat:@"<%@: %@> => %@", obj.lk_demangledNoModuleClassName, obj.memoryAddress, text];
+            NSString *message = [NSString stringWithFormat:@"<%@: %@> => %@", obj.lk_simpleDemangledClassName, obj.memoryAddress, text];
             [self _addRecentObject:returnObject message:message];
         }
         

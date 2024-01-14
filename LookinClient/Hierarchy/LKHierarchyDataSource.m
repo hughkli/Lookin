@@ -184,7 +184,7 @@
 //        }
         
         if (!self.serverSideIsSwiftProject) {
-            if ([obj.displayingObject.lk_demangledClassName containsString:@"."]) {
+            if ([obj.displayingObject.lk_completedDemangledClassName containsString:@"."]) {
                 _serverSideIsSwiftProject = YES;
             }
         }
