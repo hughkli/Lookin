@@ -76,6 +76,7 @@
     NSArray<NSString *> *lists = [self stringListWithAttribute:self.attribute];
     self.labels = [self.labels lookin_resizeWithCount:lists.count add:^LKLabel *(NSUInteger idx) {
         LKLabel *label = [LKLabel new];
+        label.lineBreakStrategy = NSLineBreakStrategyNone;
         label.selectable = YES;
         label.allowsEditingTextAttributes = YES;
         [self addSubview:label];
