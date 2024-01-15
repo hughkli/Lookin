@@ -94,7 +94,11 @@
     }
     
     if (self.titleLabel.isVisible) {
-        $(self.titleLabel).x(contentsX).width(selfWidth).heightToFit.y(self.topSepLayer.hidden ? 0 : _titleMarginTop);
+        CGFloat titleWidth = selfWidth;
+        if (self.jsonPopupButton.isVisible) {
+            titleWidth -= 20;
+        }
+        $(self.titleLabel).x(contentsX).width(titleWidth).heightToFit.y(self.topSepLayer.hidden ? 0 : _titleMarginTop);
         contentsY = self.titleLabel.$maxY + DashboardAttrItemVerInterspace;
     }
     
@@ -133,7 +137,11 @@
         height += DashboardAttrItemVerInterspace;
     }
     if (self.titleLabel.isVisible) {
-        height += [self.titleLabel sizeThatFits:NSSizeMax].height + _titleMarginTop;
+        CGFloat titleWidth = limitedSize.width;
+        if (self.jsonPopupButton.isVisible) {
+            titleWidth -= 20;
+        }
+        height += [self.titleLabel sizeThatFits:NSMakeSize(titleWidth, CGFLOAT_MAX)].height + _titleMarginTop;
     }
     __block CGFloat prevMaxX = 0;
     height = [attrViews lookin_reduceCGFloat:^CGFloat(CGFloat accumulator, NSUInteger idx, LKDashboardAttributeView *view) {
