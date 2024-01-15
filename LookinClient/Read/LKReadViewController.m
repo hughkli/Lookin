@@ -71,7 +71,7 @@
         self.focusTipView.clickAction = @selector(_handleExitFocusTipView);
         [self.view addSubview:self.focusTipView];
         
-        [manager.isMeasuring subscribe:self action:@selector(_handleToggleMeasure:) relatedObject:nil];
+        [manager.measureState subscribe:self action:@selector(_handleMeasureStateChange:) relatedObject:nil];
         
         @weakify(self);
         [RACObserve(self.hierarchyDataSource, state) subscribeNext:^(NSNumber * _Nullable x) {
@@ -121,10 +121,11 @@
     return self.hierarchyController.hierarchyView;
 }
 
-- (void)_handleToggleMeasure:(LookinMsgActionParams *)param {
-    BOOL isMeasuring = param.boolValue;
-    self.dashboardController.view.hidden = isMeasuring;
-    self.measureController.view.hidden = !isMeasuring;
+- (void)_handleMeasureStateChange:(LookinMsgActionParams *)param {
+    LookinMeasureState state = param.integerValue;
+    BOOL isMeasure = (state != LookinMeasureState_no);
+    self.dashboardController.view.hidden = isMeasure;
+    self.measureController.view.hidden = !isMeasure;
 }
 
 - (void)_handleExitFocusTipView {

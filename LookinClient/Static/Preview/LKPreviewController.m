@@ -570,15 +570,18 @@ extern NSString *const LKAppShowConsoleNotificationName;
 }
 
 - (void)setIsKeyingDownOption:(BOOL)isKeyingDownOption {
+    if (_isKeyingDownOption == isKeyingDownOption) {
+        return;
+    }
     _isKeyingDownOption = isKeyingDownOption;
     
-    BOOL shouldStartMeasure;
+    LookinMeasureState state;
     if (isKeyingDownOption && self.dataSource.selectedItem && [self.view.window isKeyWindow]) {
-        shouldStartMeasure = YES;
+        state = LookinMeasureState_unlocked;
     } else {
-        shouldStartMeasure = NO;
+        state = LookinMeasureState_no;
     }
-    [self.dataSource.preferenceManager.isMeasuring setValue:@(shouldStartMeasure) ignoreSubscriber:nil userInfo:@(YES)];
+    [self.dataSource.preferenceManager.measureState setIntegerValue:state ignoreSubscriber:nil];
 }
 
 - (void)didResetCursorRectsInPreviewStageView:(LKPreviewStageView *)view {

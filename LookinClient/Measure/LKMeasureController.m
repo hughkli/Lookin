@@ -14,6 +14,7 @@
 #import "LKMeasureTutorialView.h"
 #import "LKMeasureResultView.h"
 #import "LKNavigationManager.h"
+#import "LKPreferenceSwitchView.h"
 @import AppCenter;
 @import AppCenterAnalytics;
 
@@ -23,6 +24,7 @@
 @property(nonatomic, strong) LKMeasureResultView *resultView;
 @property(nonatomic, strong) LKHierarchyDataSource *dataSource;
 @property(nonatomic, strong) LKLabel *shortcutLabel;
+@property(nonatomic, strong) LKPreferenceSwitchView *lockSwitchView;
 
 @end
 
@@ -38,7 +40,7 @@
         self.resultView = [LKMeasureResultView new];
         [self.view addSubview:self.resultView];
         
-        [dataSource.preferenceManager.isMeasuring subscribe:self action:@selector(_isMeasuringPropertyDidChange:) relatedObject:nil];
+        [dataSource.preferenceManager.measureState subscribe:self action:@selector(_measureStatePropertyDidChange:) relatedObject:nil];
         
         @weakify(self);
         [[RACObserve(dataSource, selectedItem) combineLatestWith:RACObserve(dataSource, hoveredItem)] subscribeNext:^(id  _Nullable x) {
@@ -66,17 +68,31 @@
     if (self.shortcutLabel) {
         $(self.shortcutLabel).sizeToFit.horAlign.y(contentView.$maxY + 5);
     }
+    if (self.lockSwitchView) {
+        $(self.lockSwitchView).sizeToFit.horAlign.y(contentView.$maxY + 5);
+    }
 }
 
-- (void)_isMeasuringPropertyDidChange:(LookinMsgActionParams *)params {
-    if (params.boolValue) {
-        BOOL triggerByShortcut = ((NSNumber *)params.userInfo).boolValue;
-        [MSACAnalytics trackEvent:@"Start Measure" withProperties:@{@"shortcut":(triggerByShortcut ? @"YES": @"NO")}];
-        
-        if (triggerByShortcut) {
+- (void)_measureStatePropertyDidChange:(LookinMsgActionParams *)params {
+    self.shortcutLabel.hidden = YES;
+    self.lockSwitchView.hidden = YES;
+    LookinMeasureState state = params.integerValue;
+    switch (state) {
+        case LookinMeasureState_no:
+            break;
+            
+        case LookinMeasureState_unlocked:
             // 由快捷键触发
-            self.shortcutLabel.hidden = YES;
-        } else {
+            [MSACAnalytics trackEvent:@"Start Measure" withProperties:@{@"shortcut":@"YES"}];
+            
+            if (!self.lockSwitchView) {
+                self.lockSwitchView = [LKPreferenceSwitchView alloc] initWithTitle:<#(NSString *)#> message:nil;
+            }
+            break;
+            
+        case LookinMeasureState_locked: {
+            [MSACAnalytics trackEvent:@"Start Measure" withProperties:@{@"shortcut":@"NO"}];
+            
             if (!self.shortcutLabel) {
                 self.shortcutLabel = [LKLabel new];
                 self.shortcutLabel.stringValue = NSLocalizedString(@"shortcut: holding \"option\" key", nil);
@@ -84,15 +100,14 @@
                 [self.view addSubview:self.shortcutLabel];
             }
             self.shortcutLabel.hidden = NO;
+            break;
         }
-    } else {
-        self.shortcutLabel.hidden = YES;
     }
     [self _reRender];
 }
 
 - (void)_reRender {
-    if (!self.dataSource.preferenceManager.isMeasuring.currentBOOLValue) {
+    if (self.dataSource.preferenceManager.measureState.currentIntegerValue == LookinMeasureState_no) {
         return;
     }
     if (!self.dataSource.selectedItem) {

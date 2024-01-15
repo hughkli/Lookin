@@ -277,9 +277,9 @@
         [[NSColorPanel sharedColorPanel] close];
     }
 
-    if (!selectedItem && self.preferenceManager.isMeasuring.currentBOOLValue) {
+    if (!selectedItem && self.preferenceManager.measureState.currentIntegerValue != LookinMeasureState_no) {
         // 如果当前在测距，则取消
-        [self.preferenceManager.isMeasuring setBOOLValue:NO ignoreSubscriber:nil];
+        [self.preferenceManager.measureState setIntegerValue:LookinMeasureState_no ignoreSubscriber:nil];
     }
 }
 

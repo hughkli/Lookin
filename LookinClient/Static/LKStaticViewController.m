@@ -48,7 +48,6 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
 @property(nonatomic, strong) LKStaticHierarchyController *hierarchyController;
 @property(nonatomic, strong) LKConsoleViewController *consoleController;
 @property(nonatomic, strong) LKMeasureController *measureController;
-@property(nonatomic, assign) BOOL isMeasureLock;
 
 @end
 
@@ -71,8 +70,8 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     [super setView:view];
     
     LKPreferenceManager *preferenceManager = [LKPreferenceManager mainManager];
-    [preferenceManager.isMeasuring subscribe:self action:@selector(_handleToggleMeasure:) relatedObject:nil];
-    [preferenceManager.isMeasurLock subscribe:self action:@selector(_isMeasureLockPropertyDidChange:) relatedObject:nil];
+    [preferenceManager.measureState subscribe:self action:@selector(_handleMeasureStateChange:) relatedObject:nil];
+    
     LKStaticHierarchyDataSource *dataSource = [LKStaticHierarchyDataSource sharedInstance];
     
     self.hierarchyController = [[LKStaticHierarchyController alloc] initWithDataSource:dataSource];
@@ -407,20 +406,11 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     [LKHelper openCustomConfigWebsite];
 }
 
-- (void)_handleToggleMeasure:(LookinMsgActionParams *)param {
-    BOOL isMeasuring = param.boolValue;
-    if (self.isMeasureLock) {
-        self.dashboardController.view.hidden = YES;
-        self.measureController.view.hidden = NO;
-    } else {
-        self.dashboardController.view.hidden = isMeasuring;
-        self.measureController.view.hidden = !isMeasuring;
-    }
-}
-
-- (void)_isMeasureLockPropertyDidChange:(LookinMsgActionParams *)param {
-    BOOL boolValue = param.boolValue;
-    self.isMeasureLock = boolValue;
+- (void)_handleMeasureStateChange:(LookinMsgActionParams *)param {
+    LookinMeasureState state = param.integerValue;
+    BOOL isMeasure = (state != LookinMeasureState_no);
+    self.dashboardController.view.hidden = isMeasure;
+    self.measureController.view.hidden = !isMeasure;
 }
 
 - (void)handleSelectItemDidChange {
