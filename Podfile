@@ -7,7 +7,7 @@ target 'LookinClient' do
     pod 'AppCenter'
     pod 'ReactiveObjC', '3.1.0'
     pod 'Sparkle', '~> 1.0'
-    pod 'LookinShared', :git=>'https://github.com/QMUI/LookinServer.git', :branch => 'release/1.2.6'
+    pod 'LookinShared', :git=>'https://github.com/QMUI/LookinServer.git', :branch => 'develop'
     #pod 'LookinShared', :path=>'../LookinServer/'
 end
 
