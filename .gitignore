@@ -3,3 +3,6 @@ Build/
 Lookin.xcodeproj/xcuserdata
 Lookin.xcworkspace/xcuserdata
 .DS_Store
+DerivedData/
+Gemfile
+Gemfile.lock

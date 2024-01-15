@@ -48,6 +48,7 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
 @property(nonatomic, strong) LKStaticHierarchyController *hierarchyController;
 @property(nonatomic, strong) LKConsoleViewController *consoleController;
 @property(nonatomic, strong) LKMeasureController *measureController;
+@property(nonatomic, assign) BOOL isMeasureLock;
 
 @end
 
@@ -71,7 +72,7 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     
     LKPreferenceManager *preferenceManager = [LKPreferenceManager mainManager];
     [preferenceManager.isMeasuring subscribe:self action:@selector(_handleToggleMeasure:) relatedObject:nil];
-    
+    [preferenceManager.isMeasurLock subscribe:self action:@selector(_isMeasureLockPropertyDidChange:) relatedObject:nil];
     LKStaticHierarchyDataSource *dataSource = [LKStaticHierarchyDataSource sharedInstance];
     
     self.hierarchyController = [[LKStaticHierarchyController alloc] initWithDataSource:dataSource];
@@ -408,8 +409,18 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
 
 - (void)_handleToggleMeasure:(LookinMsgActionParams *)param {
     BOOL isMeasuring = param.boolValue;
-    self.dashboardController.view.hidden = isMeasuring;
-    self.measureController.view.hidden = !isMeasuring;
+    if (self.isMeasureLock) {
+        self.dashboardController.view.hidden = YES;
+        self.measureController.view.hidden = NO;
+    } else {
+        self.dashboardController.view.hidden = isMeasuring;
+        self.measureController.view.hidden = !isMeasuring;
+    }
+}
+
+- (void)_isMeasureLockPropertyDidChange:(LookinMsgActionParams *)param {
+    BOOL boolValue = param.boolValue;
+    self.isMeasureLock = boolValue;
 }
 
 - (void)handleSelectItemDidChange {
