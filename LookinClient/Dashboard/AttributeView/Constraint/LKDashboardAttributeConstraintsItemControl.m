@@ -48,7 +48,7 @@
     NSMutableString *string = [NSMutableString string];
     [string appendFormat:@"%@.%@ %@",
      [LookinAutoLayoutConstraint descriptionWithItemObject:constraint.firstItem type:constraint.firstItemType detailed:NO],
-     [LookinAutoLayoutConstraint descriptionWithAttribute:constraint.firstAttribute],
+     [LookinAutoLayoutConstraint descriptionWithAttributeInt:constraint.firstAttribute],
      [LookinAutoLayoutConstraint symbolWithRelation:constraint.relation]];
     
     if (constraint.secondAttribute == 0) {
@@ -56,7 +56,7 @@
     } else {
         [string appendFormat:@" %@.%@",
          [LookinAutoLayoutConstraint descriptionWithItemObject:constraint.secondItem type:constraint.secondItemType detailed:NO],
-         [LookinAutoLayoutConstraint descriptionWithAttribute:constraint.secondAttribute]];
+         [LookinAutoLayoutConstraint descriptionWithAttributeInt:constraint.secondAttribute]];
         
         if (constraint.multiplier != 1) {
             [string appendFormat:@" * %@", [NSString lookin_stringFromDouble:constraint.multiplier decimal:3]];

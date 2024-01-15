@@ -11,7 +11,7 @@
 @interface LookinAutoLayoutConstraint (LookinClient)
 
 + (NSString *)descriptionWithItemObject:(LookinObject *)object type:(LookinConstraintItemType)type detailed:(BOOL)detailed;
-+ (NSString *)descriptionWithAttribute:(NSLayoutAttribute)attribute;
++ (NSString *)descriptionWithAttributeInt:(NSInteger)attribute;
 + (NSString *)symbolWithRelation:(NSLayoutRelation)relation;
 + (NSString *)descriptionWithRelation:(NSLayoutRelation)relation;
 

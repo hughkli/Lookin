@@ -32,7 +32,8 @@
     }
 }
 
-+ (NSString *)descriptionWithAttribute:(NSLayoutAttribute)attribute {
+// 注意 iOS 和 macOS 虽然都有 NSLayoutAttribute 但是 value 非常不同，这里应该去 iOS 平台查看 NSLayoutAttribute 的对应
++ (NSString *)descriptionWithAttributeInt:(NSInteger)attribute {
     switch (attribute) {
         case 0 :
             // 在某些业务里确实会出现这种情况，在 Reveal 和 UI Debugger 里也是这么显示的
@@ -60,24 +61,22 @@
         case 11:
             return @"lastBaseline";
         case 12:
-            return @"baseline";
-        case 13:
             return @"firstBaseline";
-        case 14:
+        case 13:
             return @"leftMargin";
-        case 15:
+        case 14:
             return @"rightMargin";
-        case 16:
+        case 15:
             return @"topMargin";
-        case 17:
+        case 16:
             return @"bottomMargin";
-        case 18:
+        case 17:
             return @"leadingMargin";
-        case 19:
+        case 18:
             return @"trailingMargin";
-        case 20:
+        case 19:
             return @"centerXWithinMargins";
-        case 21:
+        case 20:
             return @"centerYWithinMargins";
             
             // 以下都是和 AutoResizingMask 有关的，这里的定义是从系统 UI Debugger 里抄过来的，暂时没在官方文档里发现它们的公开定义
