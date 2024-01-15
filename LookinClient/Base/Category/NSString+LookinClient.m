@@ -9,6 +9,7 @@
 #import "NSString+LookinClient.h"
 #import <AppKit/AppKit.h>
 
+
 @implementation NSString (LookinClient)
 
 - (NSString *)lk_capitalizedString {

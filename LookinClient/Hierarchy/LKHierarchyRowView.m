@@ -49,6 +49,9 @@
 }
 
 - (void)setDisplayItem:(LookinDisplayItem *)displayItem {
+    if (displayItem == _displayItem) {
+        return;
+    }
     _displayItem = displayItem;
     
     displayItem.rowViewDelegate = self;
@@ -65,7 +68,6 @@
     self.indentLevel = self.displayItem.indentLevel - self.minIndentLevel;
     [self updateEventsButton];
     [self updateExpandStatus];
-    [self updateContentWidth];
     [self updateStrikethroughLayer];
     [self _updateLabelStringsAndImageViewAlpha];
     [self _updateLabelsFonts];

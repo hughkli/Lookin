@@ -100,7 +100,7 @@
     NSColor *selectButtonColor = self.isDarkMode ? LookinColorMake(85, 200, 95) : LookinColorMake(54, 155, 62);
     LookinObject *obj = self.dataSource.currentObject;
     if (obj) {
-        NSString *string = [NSString stringWithFormat:@"<%@: %@>", obj.shortSelfClassName, obj.memoryAddress];
+        NSString *string = [NSString stringWithFormat:@"<%@: %@>", obj.lk_simpleDemangledClassName, obj.memoryAddress];
         self.selectButton.attributedTitle = $(string).textColor(selectButtonColor).attrString;
         self.inputView.textField.editable = YES;
         self.inputView.textField.placeholderString = NSLocalizedString(@"Type property or method name here", nil);

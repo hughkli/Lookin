@@ -34,6 +34,7 @@
 @property(nonatomic, strong) CALayer *topSepLayer;
 
 @property(nonatomic, strong) NSButton *manageButton;
+@property(nonatomic, strong) NSButton *jsonPopupButton;
 
 @end
 
@@ -81,6 +82,10 @@
 
         $(self.manageButton).sizeToFit.x(0).y(y);
         contentsX = self.manageButton.$maxX + 6;
+    }
+    
+    if (self.jsonPopupButton.isVisible) {
+        $(self.jsonPopupButton).width(30).height(28).right(-5).y(0);
     }
     
     if (!self.topSepLayer.hidden) {
@@ -207,6 +212,15 @@
         obj.hidden = YES;
     }];
     
+    BOOL hasJSONAttr = [self.attrSection.attributes lookin_any:^BOOL(LookinAttribute *obj) {
+        return obj.attrType == LookinAttrTypeJson;
+    }];
+    if (hasJSONAttr) {
+        [self showJSONPopupButton];
+    } else {
+        [self hideJSONPopupButton];
+    }
+    
     [self setNeedsLayout:YES];
 }
 
@@ -271,6 +285,32 @@
     }
 }
 
+- (void)showJSONPopupButton {
+    if (self.jsonPopupButton) {
+        return;
+    }
+    self.jsonPopupButton = [NSButton buttonWithImage:NSImageMake(@"open_newwindow") target:self action:@selector(_handleJSONPopupButton)];
+    self.jsonPopupButton.bezelStyle = NSBezelStyleRoundRect;
+    self.jsonPopupButton.bordered = NO;
+    [self addSubview:self.jsonPopupButton];
+    [self addSubview:self.jsonPopupButton];
+}
+
+- (void)hideJSONPopupButton {
+    [self.jsonPopupButton removeFromSuperview];
+}
+
+- (void)_handleJSONPopupButton {
+    LKDashboardAttributeJsonView *view = (LKDashboardAttributeJsonView *)[self.attrViews lookin_firstFiltered:^BOOL(LKDashboardAttributeView *obj) {
+        return obj.attribute.attrType == LookinAttrTypeJson;
+    }];
+    if (![view isKindOfClass:[LKDashboardAttributeJsonView class]]) {
+        NSAssert(NO, @"");
+        return;
+    }
+    [view showInNewWindow];
+}
+
 #pragma mark - Manage
 
 - (void)setManageState:(LKDashboardSectionManageState)manageState {
@@ -324,19 +364,10 @@
         return nil;
     }
     switch (attr.attrType) {
-        case LookinAttrTypeNSString:
-        case LookinAttrTypeUIColor:
-        case LookinAttrTypeEnumString:
-        case LookinAttrTypeDouble:
-        case LookinAttrTypeCGRect:
-        case LookinAttrTypeCGSize:
-        case LookinAttrTypeCGPoint:
-        case LookinAttrTypeUIEdgeInsets:
-        case LookinAttrTypeShadow:
-        case LookinAttrTypeJson:
-            return attr.displayTitle;
-        default:
+        case LookinAttrTypeBOOL:
             return nil;
+        default:
+            return attr.displayTitle;
     }
 }
 

@@ -61,6 +61,9 @@ typedef NS_ENUM(NSInteger, LookinPreferredCallStackType) {
 
 @property(nonatomic, assign) BOOL rgbaFormat;
 
+/// 0 ~ 2
+@property(nonatomic, assign) NSInteger imageContrastLevel;
+
 /// 是否自动将选中的 UIView/CALayer 作为控制台的目标对象
 @property(nonatomic, assign) BOOL syncConsoleTarget;
 

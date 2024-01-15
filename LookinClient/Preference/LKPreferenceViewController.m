@@ -19,6 +19,7 @@
 @property(nonatomic, strong) LKPreferencePopupView *view_appearance;
 @property(nonatomic, strong) LKPreferencePopupView *view_colorFormat;
 @property(nonatomic, strong) LKPreferenceSwitchView *view_enableLog;
+@property(nonatomic, strong) LKPreferencePopupView *view_contrast;
 
 //@property(nonatomic, strong) NSButton *debugButton;
 @property(nonatomic, strong) NSButton *resetButton;
@@ -41,6 +42,14 @@
         [LKPreferenceManager mainManager].rgbaFormat = (selectedIndex == 0 ? YES : NO);
     };
     [self.view addSubview:self.view_colorFormat];
+    
+    NSString *contrastTips = NSLocalizedString(@"Adjust this option to use a deeper layer selection color.", nil);
+    self.view_contrast = [[LKPreferencePopupView alloc] initWithTitle:NSLocalizedString(@"Image contrast", nil) messages:@[contrastTips, contrastTips, contrastTips] options:@[NSLocalizedString(@"Normal", nil), NSLocalizedString(@"Medium", nil), NSLocalizedString(@"High", nil)]];
+    self.view_contrast.buttonX = controlX;
+    self.view_contrast.didChange = ^(NSUInteger selectedIndex) {
+        [LKPreferenceManager mainManager].imageContrastLevel = selectedIndex;
+    };
+    [self.view addSubview:self.view_contrast];
     
     self.view_appearance = [[LKPreferencePopupView alloc] initWithTitle:NSLocalizedString(@"Appearance", nil) message:nil options:@[NSLocalizedString(@"Dark Mode", nil), NSLocalizedString(@"Light Mode", nil), NSLocalizedString(@"System Default", nil)]];
     self.view_appearance.buttonX = controlX;
@@ -79,6 +88,8 @@
     } else {
         self.view_colorFormat.selectedIndex = 1;
     }
+    
+    self.view_contrast.selectedIndex = manager.imageContrastLevel;
 
     self.view_appearance.selectedIndex = manager.appearanceType;
     self.view_doubleClick.selectedIndex = manager.doubleClickBehavior;
@@ -93,8 +104,9 @@
     $(self.view_appearance).x(insets.left).toRight(insets.right).y(insets.top).height(50);
 
     $(self.view_colorFormat).x(insets.left).toRight(insets.right).y(self.view_appearance.$maxY).height(80);
+    $(self.view_contrast).x(insets.left).toRight(insets.right).y(self.view_colorFormat.$maxY).height(65);
     
-    $(self.view_doubleClick).x(insets.left).toRight(insets.right).y(self.view_colorFormat.$maxY).height(50);
+    $(self.view_doubleClick).x(insets.left).toRight(insets.right).y(self.view_contrast.$maxY).height(50);
     
     __block CGFloat y = self.view_doubleClick.$maxY;
     [$(self.view_enableLog).array enumerateObjectsUsingBlock:^(NSView *  _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -112,6 +124,7 @@
     manager.enableReport = YES;
     manager.rgbaFormat = YES;
     manager.doubleClickBehavior = LookinDoubleClickBehaviorCollapse;
+    manager.imageContrastLevel = 0;
     [self renderFromPreferenceManager];
     
 #if DEBUG

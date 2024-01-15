@@ -158,7 +158,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
         return @(res);
     }] integerValue];
     
-    [self.tableView reloadData];
+    [self.tableView reloadDataWithOffset];
     
     if (displayItems.count == 0) {
         if (!self.emptyDataLabel) {
@@ -369,7 +369,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
         [stringsToCopy addObject:displayItem.title];
 
     }
-    NSString *hostViewControllerName = displayItem.hostViewControllerObject.shortSelfClassName;
+    NSString *hostViewControllerName = displayItem.hostViewControllerObject.lk_simpleDemangledClassName;
     if (hostViewControllerName.length) {
         [stringsToCopy addObject:hostViewControllerName];
     }

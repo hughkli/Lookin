@@ -30,6 +30,8 @@
 @implementation LKDisplayItemNode
 
 - (instancetype)initWithDataSource:(LKHierarchyDataSource *)dataSource {
+//    NSLog(@"LKDisplayItemNode - init");
+    
     if (self = [super init]) {
         self.dataSource = dataSource;
         
@@ -75,6 +77,7 @@
 - (void)setDisplayItem:(LookinDisplayItem *)displayItem {
     _displayItem = displayItem;
     
+//    NSLog(@"LKDisplayItemNode - setContentPlane");
     /// 不能把 contents 设置成 nil，否则某些场景下会发生内容渲染错乱的情况
     self.contentPlane.firstMaterial.diffuse.contents = displayItem.backgroundColor ? : [NSColor clearColor];
     
@@ -90,6 +93,8 @@
 }
 
 - (void)setIndex:(NSUInteger)index {
+//    NSLog(@"LKDisplayItemNode - setIndex");
+    
     _index = index;
     self.contentNode.renderingOrder = index * 10;
     self.maskNode.renderingOrder = index * 10 + 1;
@@ -97,6 +102,8 @@
 }
 
 - (void)_renderborderColor {
+//    NSLog(@"LKDisplayItemNode - renderBorderColor");
+    
     self.borderGeometry.firstMaterial.diffuse.contents = self.borderColor;
 }
 
@@ -122,12 +129,12 @@
 }
 
 - (void)_renderVisibility {
+//    NSLog(@"LKDisplayItemNode - renderVisibility");
+    
     BOOL displayingInHierarchy = self.displayItem.displayingInHierarchy;
     BOOL inHiddenHierarchy = self.displayItem.inHiddenHierarchy;
     BOOL showEvenWhenCollapsed = self.preferenceManager.isQuickSelecting.currentBOOLValue && !self.displayItem.superItem.preferToBeCollapsed;
     BOOL showHiddenItems = self.preferenceManager.showHiddenItems.currentBOOLValue;
-    
-    [SCNTransaction begin];
     
     BOOL canSelect;
     if (inHiddenHierarchy && !showHiddenItems) {
@@ -159,11 +166,11 @@
     } else {
         self.contentNode.categoryBitMask = LookinPreviewBitMask_Unselectable|LookinPreviewBitMask_NoLight;
     }
-    
-    [SCNTransaction commit];
 }
 
 - (void)_renderImageAndColor {
+//    NSLog(@"LKDisplayItemNode - renderImageAndColor");
+    
     BOOL isSelected = (self.dataSource.selectedItem == self.displayItem);
     BOOL isHovered = (self.dataSource.hoveredItem == self.displayItem);
     
@@ -204,10 +211,15 @@
         }
     } else {
         maskColor = LookinColorMake(110, 183, 255);
+        NSInteger level = [[LKPreferenceManager mainManager] imageContrastLevel];
+        if (level < 0 || level > 2) {
+            NSAssert(NO, @"");
+            level = 0;
+        }
         if (isSelected) {
-            maskOpacity = .35;
+            maskOpacity = [@[@.35, @.6, @.85][level] doubleValue];
         } else if (isHovered) {
-            maskOpacity = .18;
+            maskOpacity = [@[@.18, @.38, @.6][level] doubleValue];
         } else {
             maskOpacity = 0;
         }
@@ -222,6 +234,8 @@
 #pragma mark - <LookinDisplayItemDelegate>
 
 - (void)displayItem:(LookinDisplayItem *)displayItem propertyDidChange:(LookinDisplayItemProperty)property {
+//    NSLog(@"LKDisplayItemNode - %@ did Change", @(property));
+    
     if (property == LookinDisplayItemProperty_None || property == LookinDisplayItemProperty_FrameToRoot) {
         CGRect frameToRoot = [displayItem calculateFrameToRoot];
         

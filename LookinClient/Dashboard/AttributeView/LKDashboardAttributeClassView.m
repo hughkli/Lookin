@@ -7,14 +7,19 @@
 //
 
 #import "LKDashboardAttributeClassView.h"
+#import "Lookin-Swift.h"
 
 @implementation LKDashboardAttributeClassView
 
 - (NSArray<NSString *> *)stringListWithAttribute:(LookinAttribute *)attribute {
     NSArray<NSArray<NSString *> *> *lists = attribute.value;
-    return [lists lookin_map:^id(NSUInteger idx, NSArray<NSString *> *value) {
-        return [value componentsJoinedByString:@"\n"];
+    NSArray<NSString *> *result = [lists lookin_map:^id(NSUInteger idx, NSArray<NSString *> *rawClassList) {
+        NSArray<NSString *> *demangled = [rawClassList lookin_map:^id(NSUInteger idx, NSString *rawClass) {
+            return [LKSwiftDemangler completedParseWithInput:rawClass];
+        }];
+        return [demangled componentsJoinedByString:@"\n"];
     }];
+    return result;
 }
 
 @end

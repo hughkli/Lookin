@@ -402,7 +402,7 @@
     }
     
     LookinObject *selectedObj = self.currentDataSource.selectedItem.viewObject ? : self.currentDataSource.selectedItem.layerObject;
-    NSString *selectedClassName = [selectedObj completedSelfClassName];
+    NSString *selectedClassName = [selectedObj rawClassName];
     @weakify(self);
     [[self.methodsDataSource fetchNonArgMethodsListWithClass:selectedClassName] subscribeNext:^(NSArray<NSString *> *methodsList) {
         @strongify(self);

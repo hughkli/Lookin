@@ -11,7 +11,8 @@
 @implementation LKDashboardAttributeRelationView
 
 - (NSArray<NSString *> *)stringListWithAttribute:(LookinAttribute *)attribute {
-    return attribute.value;
+    NSArray<NSString *> *result = attribute.value;
+    return result;
 }
 
 @end

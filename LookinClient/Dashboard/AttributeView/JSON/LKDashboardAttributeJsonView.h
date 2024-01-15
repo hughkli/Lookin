@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LKDashboardAttributeJsonView : LKDashboardAttributeView
 
+- (void)showInNewWindow;
+
 @end
 
 NS_ASSUME_NONNULL_END

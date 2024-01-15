@@ -22,6 +22,8 @@ typedef NS_ENUM(NSUInteger, LKOutlineRowViewStatus) {
     CGFloat _subtitleLeft;
 }
 
+- (instancetype)initWithCompactUI:(BOOL)compact;
+
 @property(nonatomic, strong, readonly) NSButton *disclosureButton;
 
 @property(nonatomic, strong) NSImage *image;
@@ -30,8 +32,6 @@ typedef NS_ENUM(NSUInteger, LKOutlineRowViewStatus) {
 @property(nonatomic, assign) LKOutlineRowViewStatus status;
 
 @property(nonatomic, assign) NSUInteger indentLevel;
-
-- (void)updateContentWidth;
 
 + (CGFloat)dislosureMidXWithIndentLevel:(NSUInteger)level;
 

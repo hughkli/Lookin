@@ -173,7 +173,7 @@
         } doNext:^(NSUInteger idx, LKConsoleSelectPopoverItemControl *control) {
             RACTwoTuple *tuple = self.dataSource.recentObjects[idx];
             LookinObject *targetObject = tuple.first;
-            control.title = [NSString stringWithFormat:@"<%@: %@>", targetObject.shortSelfClassName, targetObject.memoryAddress];
+            control.title = [NSString stringWithFormat:@"<%@: %@>", targetObject.lk_simpleDemangledClassName, targetObject.memoryAddress];
             control.subtitle = tuple.second;
             control.isChecked = (self.dataSource.currentObject.oid == targetObject.oid);
             control.representedObject = targetObject;
@@ -192,7 +192,7 @@
         
     } doNext:^(NSUInteger idx, LKConsoleSelectPopoverItemControl *control) {
         LookinObject *targetObject = self.dataSource.selectedObjects[idx];
-        control.title = [NSString stringWithFormat:@"<%@: %@>", targetObject.shortSelfClassName, targetObject.memoryAddress];
+        control.title = [NSString stringWithFormat:@"<%@: %@>", targetObject.lk_simpleDemangledClassName, targetObject.memoryAddress];
         control.isChecked = (self.dataSource.currentObject.oid == targetObject.oid);
         control.representedObject = targetObject;
     }];
