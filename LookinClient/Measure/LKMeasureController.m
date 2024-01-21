@@ -24,7 +24,7 @@
 @property(nonatomic, strong) LKMeasureResultView *resultView;
 @property(nonatomic, strong) LKHierarchyDataSource *dataSource;
 @property(nonatomic, strong) LKLabel *shortcutLabel;
-@property(nonatomic, strong) LKPreferenceSwitchView *lockSwitchView;
+@property(nonatomic, strong) NSButton *lockSwitchButton;
 
 @end
 
@@ -68,26 +68,36 @@
     if (self.shortcutLabel) {
         $(self.shortcutLabel).sizeToFit.horAlign.y(contentView.$maxY + 5);
     }
-    if (self.lockSwitchView) {
-        $(self.lockSwitchView).sizeToFit.horAlign.y(contentView.$maxY + 5);
+    if (self.lockSwitchButton) {
+        $(self.lockSwitchButton).sizeToFit.horAlign.y(contentView.$maxY + 5);
     }
 }
 
 - (void)_measureStatePropertyDidChange:(LookinMsgActionParams *)params {
     self.shortcutLabel.hidden = YES;
-    self.lockSwitchView.hidden = YES;
+    
     LookinMeasureState state = params.integerValue;
     switch (state) {
         case LookinMeasureState_no:
+            self.lockSwitchButton.hidden = YES;
+            self.lockSwitchButton.state = NSControlStateValueOff;
             break;
             
         case LookinMeasureState_unlocked:
             // 由快捷键触发
             [MSACAnalytics trackEvent:@"Start Measure" withProperties:@{@"shortcut":@"YES"}];
             
-            if (!self.lockSwitchView) {
-                self.lockSwitchView = [LKPreferenceSwitchView alloc] initWithTitle:<#(NSString *)#> message:nil;
+            if (!self.lockSwitchButton) {
+                self.lockSwitchButton = [NSButton new];
+                [self.lockSwitchButton setButtonType:NSButtonTypeSwitch];
+                self.lockSwitchButton.font = NSFontMake(15);
+                self.lockSwitchButton.title = NSLocalizedString(@"Cancel measure after key up.", nil);
+                self.lockSwitchButton.target = self;
+                self.lockSwitchButton.action = @selector(handleLockSwitchButton);
+                [self.view addSubview:self.lockSwitchButton];
             }
+            self.lockSwitchButton.state = NSControlStateValueOn;
+            self.lockSwitchButton.hidden = NO;
             break;
             
         case LookinMeasureState_locked: {
@@ -157,6 +167,17 @@
     self.resultView.hidden = NO;
     [self.resultView renderWithMainRect:selectedItemFrame mainImage:self.dataSource.selectedItem.groupScreenshot referRect:hoveredItemFrame referImage:self.dataSource.hoveredItem.groupScreenshot];
     [self.view setNeedsLayout:YES];
+}
+
+- (void)handleLockSwitchButton {
+    if (!self.lockSwitchButton) {
+        return;
+    }
+    if (self.lockSwitchButton.state == NSControlStateValueOn) {
+        [self.dataSource.preferenceManager.measureState setIntegerValue:LookinMeasureState_unlocked ignoreSubscriber:self];
+    } else {
+        [self.dataSource.preferenceManager.measureState setIntegerValue:LookinMeasureState_locked ignoreSubscriber:self];
+    }
 }
 
 @end

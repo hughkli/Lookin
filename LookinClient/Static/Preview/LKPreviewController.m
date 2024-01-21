@@ -575,6 +575,10 @@ extern NSString *const LKAppShowConsoleNotificationName;
     }
     _isKeyingDownOption = isKeyingDownOption;
     
+    if (self.dataSource.preferenceManager.measureState.currentIntegerValue == LookinMeasureState_locked) {
+        return;
+    }
+    
     LookinMeasureState state;
     if (isKeyingDownOption && self.dataSource.selectedItem && [self.view.window isKeyWindow]) {
         state = LookinMeasureState_unlocked;
