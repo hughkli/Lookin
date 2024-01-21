@@ -225,10 +225,6 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="LiB-JU-B5h"/>
-                            <menuItem title="Job Openings (China)" tag="69" id="AS1-6n-CwY">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
