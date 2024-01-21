@@ -5,6 +5,8 @@
 //  Created by Li Kai on 2019/8/17.
 //  https://lookin.work
 //
+//  该类的代码实现，借鉴甚至直接复制了很多 https://github.com/TalkingData/YourView 项目的 SceneKit 相关代码
+//  Lookin 项目鸣谢：https://qxh1ndiez2w.feishu.cn/docx/YIFjdE4gIolp3hxn1tGckiBxnWf
 
 #import "LKPreviewView.h"
 #import "LKDisplayItemNode.h"
