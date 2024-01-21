@@ -182,12 +182,19 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Q9p-dn-YRK"/>
-                            <menuItem title="Integration Guide" tag="68" id="TaG-im-Whl">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
                             <menuItem title="Official Website" tag="52" id="K9e-H9-X9Y">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
+                            <menuItem title="Integration Guide" tag="68" id="TaG-im-Whl">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="How to display custom information in Lookin" tag="71" id="pR2-nW-SZO">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Lookin Documentation Collection" tag="70" id="Kq5-cK-Xit">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Tfc-f5-uaD"/>
                             <menuItem title="Source Code at GitHub" tag="57" id="hmd-Lc-rdV">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Source Code at GitHub" id="q1h-qk-yOs">
@@ -224,6 +231,10 @@
                                         </menuItem>
                                     </items>
                                 </menu>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="kI1-jX-DIk"/>
+                            <menuItem title="Acknowledgements" tag="72" id="CMY-kh-bFD">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
                     </menu>

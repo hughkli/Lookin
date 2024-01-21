@@ -54,6 +54,9 @@ static NSUInteger const kTag_CopyPod = 66;
 static NSUInteger const kTag_CopySPM = 67;
 static NSUInteger const kTag_MoreIntegrationGuide = 68;
 static NSUInteger const kTag_Jobs = 69;
+static NSUInteger const kTag_DocumentCollection = 70;
+static NSUInteger const kTag_CustomInformation = 71;
+static NSUInteger const kTag_Acknowledgements = 72;
 
 @interface LKAppMenuManager ()
 
@@ -194,6 +197,21 @@ static NSUInteger const kTag_Jobs = 69;
         NSMenuItem *item = [menu_help itemWithTag:kTag_Jobs];
         item.target = self;
         item.action = @selector(_handleJobs);
+    }
+    {
+        NSMenuItem *item = [menu_help itemWithTag:kTag_DocumentCollection];
+        item.target = self;
+        item.action = @selector(_handleDocumentCollection);
+    }
+    {
+        NSMenuItem *item = [menu_help itemWithTag:kTag_CustomInformation];
+        item.target = self;
+        item.action = @selector(_handleCustomInformation);
+    }
+    {
+        NSMenuItem *item = [menu_help itemWithTag:kTag_Acknowledgements];
+        item.target = self;
+        item.action = @selector(_handleAcknowledgements);
     }
     
     NSArray *itemArray = [menu_file.itemArray arrayByAddingObjectsFromArray:menu_view.itemArray];
@@ -337,6 +355,18 @@ static NSUInteger const kTag_Jobs = 69;
 
 - (void)_handleAbout {
     [[LKNavigationManager sharedInstance] showAbout];
+}
+
+- (void)_handleDocumentCollection {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://bytedance.larkoffice.com/docx/Yvv1d57XQoe5l0xZ0ZRc0ILfnWb"]];
+}
+
+- (void)_handleCustomInformation {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://bytedance.larkoffice.com/docx/TRridRXeUoErMTxs94bcnGchnlb"]];
+}
+
+- (void)_handleAcknowledgements {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://qxh1ndiez2w.feishu.cn/docx/YIFjdE4gIolp3hxn1tGckiBxnWf"]];
 }
 
 @end
