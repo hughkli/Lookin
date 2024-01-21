@@ -37,10 +37,10 @@ NSString *const LKMessage_SwiftSubspec = @"LKMessage_SwiftSubspec";
     if (self = [super init]) {
         self.messages = [NSMutableSet set];
         
-        BOOL hasReadJobs = [[NSUserDefaults standardUserDefaults] boolForKey:@"LKMessageManager_HasReadJobs"];
-        if (!hasReadJobs) {
-            [self addMessage:LKMessage_Jobs];
-        }
+//        BOOL hasReadJobs = [[NSUserDefaults standardUserDefaults] boolForKey:@"LKMessageManager_HasReadJobs"];
+//        if (!hasReadJobs) {
+//            [self addMessage:LKMessage_Jobs];
+//        }
     }
     return self;
 }
