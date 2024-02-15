@@ -106,6 +106,59 @@
     }];
 }
 
+- (BOOL)updateForItemIfNeed:(LookinDisplayItem *)item {
+    LKInspectableApp *app = [LKAppsManager sharedInstance].inspectingApp;
+    if (!app || !self.dataSource.flatItems.count) {
+        return NO;
+    }
+    
+    NSArray<LookinStaticAsyncUpdateTask *> *tasks = [self _makeScreenshotsAndAttrGroupsTasksByItem:item];
+    if (tasks.count == 0) {
+        return NO;
+    }
+    self.isSyncing = YES;
+    
+    [self.updateAll_ProgressSignal sendNext:[RACTuple tupleWithObjects:@0, @0, nil]];
+    
+    NSArray<LookinStaticAsyncUpdateTasksPackage *> *packages = [self _makePackagesFromTasks:tasks];
+    
+    NSUInteger totalTasksCount = tasks.count;
+    __block NSUInteger receivedTasksCount = 0;
+    @weakify(self);
+    [[app fetchHierarchyDetailWithTaskPackages:packages] subscribeNext:^(NSArray<LookinDisplayItemDetail *> *details) {
+        @strongify(self);
+        [details enumerateObjectsUsingBlock:^(LookinDisplayItemDetail * _Nonnull detail, NSUInteger idx, BOOL * _Nonnull stop) {
+            [[LKStaticHierarchyDataSource sharedInstance] modifyWithDisplayItemDetail:detail];
+        }];
+        receivedTasksCount += details.count;
+        [self.updateAll_ProgressSignal sendNext:[RACTuple tupleWithObjects:@(receivedTasksCount), @(totalTasksCount), nil]];
+        
+    } error:^(NSError * _Nullable error) {
+        @strongify(self);
+        if (error.code == LookinErrCode_PingFailForTimeout) {
+            error = LookinErrorMake(NSLocalizedString(@"Failed to sync screenshots due to the request timeout.", nil), LookinErrorText_Timeout);
+        } else if (error.code == LookinErrCode_Timeout) {
+            NSString *msgTitle = [NSString stringWithFormat:NSLocalizedString(@"Failed to sync remaining %@ screenshots due to the request timeout.", nil), @(totalTasksCount - receivedTasksCount)];
+            NSString *msgDetail = NSLocalizedString(@"Perhaps your iOS app is paused with breakpoint in Xcode, blocked by other tasks in main thread, or moved to background state.\nToo large screenshots may also lead to this error.", nil);
+            error = LookinErrorMake(msgTitle, msgDetail);
+        }
+        [self.updateAll_CompletionSignal sendNext:nil];
+        [[RACScheduler mainThreadScheduler] afterDelay:1 schedule:^{
+            // 此时可能 StaticViewController 还没来得及被初始化导致错误 tips 显示不出来，所以稍等一下
+            [self.updateAll_ErrorSignal sendNext:error];
+        }];
+        self.isSyncing = NO;
+    } completed:^{
+        // 注意，用户手动取消请求后，也会走到这里
+        @strongify(self);
+        [self.updateAll_CompletionSignal sendNext:nil];
+        self.isSyncing = NO;
+        
+        [LKPerformanceReporter.sharedInstance didComplete];
+    }];
+    return YES;
+}
+
 - (void)endUpdatingAll {
     [InspectingApp cancelHierarchyDetailFetching];
 }
@@ -127,32 +180,29 @@
         }
     }].mutableCopy;
     
-    [self.dataSource.flatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (item.isUserCustom) {
-            return;
+    return tasks.copy;
+}
+
+- (NSArray<LookinStaticAsyncUpdateTask *> *)_makeScreenshotsAndAttrGroupsTasksByItem:(LookinDisplayItem *)item {
+    NSArray<LookinStaticAsyncUpdateTask *> *tasks = [(NSArray<LookinDisplayItem *> *)item.subitems lookin_map:^id(NSUInteger idx, LookinDisplayItem *item) {
+        if (item.isUserCustom 
+            || (item.soloScreenshot != nil || item.groupScreenshot != nil)
+            || !item.shouldCaptureImage
+            || (item.frame.size.width == 0 || item.frame.size.height == 0)) {
+            return nil;
         }
-        if (item.doNotFetchScreenshotReason != LookinFetchScreenshotPermitted) {
-            LookinStaticAsyncUpdateTask *task = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
-            if (![tasks containsObject:task]) {
-                [tasks addObject:task];
+        if (item.doNotFetchScreenshotReason == LookinFetchScreenshotPermitted) {
+            if (item.isExpandable && item.isExpanded) {
+                return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeSoloScreenshot];
+            } else {
+                return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeGroupScreenshot];
             }
             
         } else {
-            LookinStaticAsyncUpdateTask *task = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeGroupScreenshot];
-            if (![tasks containsObject:task]) {
-                [tasks addObject:task];
-            }
-            
-            if (item.isExpandable) {
-                LookinStaticAsyncUpdateTask *task2 = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeSoloScreenshot];
-                if (![tasks containsObject:task2]) {
-                    [tasks addObject:task2];
-                }
-            }
+            return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
         }
     }];
-    
-    return tasks.copy;
+    return tasks;
 }
 
 - (NSArray<LookinStaticAsyncUpdateTasksPackage *> *)_makePackagesFromTasks:(NSArray<LookinStaticAsyncUpdateTask *> *)tasks {

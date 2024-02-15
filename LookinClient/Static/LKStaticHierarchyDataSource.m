@@ -182,4 +182,12 @@
     return isNew;
 }
 
+#pragma mark - override
+- (void)expandItem:(LookinDisplayItem *)item {
+    [super expandItem:item];
+    if (item.isExpanded && [[LKStaticAsyncUpdateManager sharedInstance] updateForItemIfNeed:item]) {
+        [self updateMessageStatus];
+    }
+}
+
 @end
