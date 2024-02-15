@@ -172,6 +172,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
     } else {
         self.emptyDataLabel.hidden = YES;
     }
+    [self.dataSource reloadWithItems:displayItems];
 }
 
 - (void)scrollToMakeItemVisible:(LookinDisplayItem *)item {

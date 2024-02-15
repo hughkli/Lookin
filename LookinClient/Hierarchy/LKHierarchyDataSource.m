@@ -608,6 +608,8 @@
     [self buildDisplayingFlatItems];
 }
 
+- (void)reloadWithItems:(NSArray<LookinDisplayItem *> *)items {}
+
 #pragma mark - Search
 
 - (void)searchWithString:(NSString *)string {

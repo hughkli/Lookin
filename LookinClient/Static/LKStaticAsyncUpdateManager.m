@@ -106,13 +106,13 @@
     }];
 }
 
-- (BOOL)updateForItemIfNeed:(LookinDisplayItem *)item {
+- (BOOL)updateForItemsIfNeed:(NSArray<LookinDisplayItem *> *)items {
     LKInspectableApp *app = [LKAppsManager sharedInstance].inspectingApp;
     if (!app || !self.dataSource.flatItems.count) {
         return NO;
     }
     
-    NSArray<LookinStaticAsyncUpdateTask *> *tasks = [self _makeScreenshotsAndAttrGroupsTasksByItem:item];
+    NSArray<LookinStaticAsyncUpdateTask *> *tasks = [self _makeScreenshotsAndAttrGroupsTasksByItems:items];
     if (tasks.count == 0) {
         return NO;
     }
@@ -183,9 +183,9 @@
     return tasks.copy;
 }
 
-- (NSArray<LookinStaticAsyncUpdateTask *> *)_makeScreenshotsAndAttrGroupsTasksByItem:(LookinDisplayItem *)item {
-    NSArray<LookinStaticAsyncUpdateTask *> *tasks = [(NSArray<LookinDisplayItem *> *)item.subitems lookin_map:^id(NSUInteger idx, LookinDisplayItem *item) {
-        if (item.isUserCustom 
+- (NSArray<LookinStaticAsyncUpdateTask *> *)_makeScreenshotsAndAttrGroupsTasksByItems:(NSArray<LookinDisplayItem *> *)items {
+    NSArray<LookinStaticAsyncUpdateTask *> *tasks = [items lookin_map:^id(NSUInteger idx, LookinDisplayItem *item) {
+        if (item.isUserCustom
             || (item.soloScreenshot != nil || item.groupScreenshot != nil)
             || !item.shouldCaptureImage
             || (item.frame.size.width == 0 || item.frame.size.height == 0)) {

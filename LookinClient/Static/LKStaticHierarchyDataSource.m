@@ -183,9 +183,8 @@
 }
 
 #pragma mark - override
-- (void)expandItem:(LookinDisplayItem *)item {
-    [super expandItem:item];
-    if (item.isExpanded && [[LKStaticAsyncUpdateManager sharedInstance] updateForItemIfNeed:item]) {
+- (void)reloadWithItems:(NSArray<LookinDisplayItem *> *)items {
+    if ([[LKStaticAsyncUpdateManager sharedInstance] updateForItemsIfNeed:items]) {
         [self updateMessageStatus];
     }
 }
