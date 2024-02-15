@@ -18,6 +18,7 @@
 #import "LKNavigationManager.h"
 #import "LKPerformanceReporter.h"
 #import "LookinDisplayItem+LookinClient.h"
+#import "LKPreferenceManager.h"
 
 @interface LKStaticAsyncUpdateManager ()
 
@@ -180,13 +181,41 @@
         }
     }].mutableCopy;
     
+    if ([LKPreferenceManager mainManager].refreshMode == LookinRefreshModeAllItems) {
+        [self.dataSource.flatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (item.isUserCustom) {
+                return;
+            }
+            if (item.doNotFetchScreenshotReason != LookinFetchScreenshotPermitted) {
+                LookinStaticAsyncUpdateTask *task = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
+                if (![tasks containsObject:task]) {
+                    [tasks addObject:task];
+                }
+                
+            } else {
+                LookinStaticAsyncUpdateTask *task = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeGroupScreenshot];
+                if (![tasks containsObject:task]) {
+                    [tasks addObject:task];
+                }
+                
+                if (item.isExpandable) {
+                    LookinStaticAsyncUpdateTask *task2 = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeSoloScreenshot];
+                    if (![tasks containsObject:task2]) {
+                        [tasks addObject:task2];
+                    }
+                }
+            }
+        }];
+    }
+    
     return tasks.copy;
 }
 
 - (NSArray<LookinStaticAsyncUpdateTask *> *)_makeScreenshotsAndAttrGroupsTasksByItems:(NSArray<LookinDisplayItem *> *)items {
     NSArray<LookinStaticAsyncUpdateTask *> *tasks = [items lookin_map:^id(NSUInteger idx, LookinDisplayItem *item) {
         if (item.isUserCustom
-            || (item.soloScreenshot != nil || item.groupScreenshot != nil)
+            || (item.soloScreenshot != nil && item.isExpanded)
+            || (item.groupScreenshot != nil && !item.isExpanded)
             || !item.shouldCaptureImage
             || (item.frame.size.width == 0 || item.frame.size.height == 0)) {
             return nil;

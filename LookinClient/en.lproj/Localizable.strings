@@ -21,7 +21,11 @@
 "Preferences" = "Preferences";
 "Appearance" = "Appearance";
 "Double click" = "Double click";
+"Refresh mode" = "Refresh mode";
 "Expand or collapse layer" = "Expand or collapse layer";
+"Refresh all view nodes immediately" = "Refresh all view nodes immediately";
+"Refresh only visible view nodes" = "Refresh only visible view nodes";
+"Choosing to refresh only visible view nodes can significantly improve the loading speed." = "Choosing to refresh only visible view nodes can significantly improve the loading speed.";
 "Focus on layer" = "Focus on layer";
 "Dark Mode" = "Dark Mode";
 "Light Mode" = "Light Mode";
