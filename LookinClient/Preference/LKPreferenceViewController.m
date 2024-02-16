@@ -66,7 +66,7 @@
     };
     [self.view addSubview:self.view_doubleClick];
     
-    NSString *refreshTips = NSLocalizedString(@"Choosing to refresh only visible view nodes can significantly improve the loading speed.", nil);
+    NSString *refreshTips = NSLocalizedString(@"Choosing to refresh only visible view nodes can significantly improve the loading speed. However, in some scenarios, it may display abnormally.", nil);
     self.view_refreshMode = [[LKPreferencePopupView alloc] initWithTitle:NSLocalizedString(@"Refresh mode", nil) message:refreshTips options:@[NSLocalizedString(@"Refresh all view nodes immediately", nil), NSLocalizedString(@"Refresh only visible view nodes", nil)]];
     self.view_refreshMode.buttonX = controlX;
     self.view_refreshMode.didChange = ^(NSUInteger selectedIndex) {
@@ -117,7 +117,7 @@
     $(self.view_contrast).x(insets.left).toRight(insets.right).y(self.view_colorFormat.$maxY).height(65);
     
     $(self.view_doubleClick).x(insets.left).toRight(insets.right).y(self.view_contrast.$maxY).height(50);
-    $(self.view_refreshMode).x(insets.left).toRight(insets.right).y(self.view_doubleClick.$maxY).height(65);
+    $(self.view_refreshMode).x(insets.left).toRight(insets.right).y(self.view_doubleClick.$maxY).height(80);
     
     __block CGFloat y = self.view_refreshMode.$maxY;
     [$(self.view_enableLog).array enumerateObjectsUsingBlock:^(NSView *  _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
