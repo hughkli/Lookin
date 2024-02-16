@@ -47,6 +47,7 @@
 "Expand recursively" = "全部展开";
 "Collapse children" = "收起子图层";
 "Focus" = "聚焦";
+"Refresh" = "刷新";
 "Print" = "打印";
 "Hide screenshot this time" = "隐藏图像（仅本次）";
 "Hide screenshot forever…" = "永久隐藏图像…";

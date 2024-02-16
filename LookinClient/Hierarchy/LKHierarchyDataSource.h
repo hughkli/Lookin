@@ -114,6 +114,6 @@ typedef NS_ENUM(NSUInteger, LKHierarchyDataSourceState) {
 - (void)focusDisplayItem:(LookinDisplayItem *)item;
 - (void)endFocus;
 
-- (void)reloadWithItems:(NSArray<LookinDisplayItem *> *)items;
+- (void)reloadWithItems:(NSArray<LookinDisplayItem *> *)items forced:(BOOL)forced;
 
 @end

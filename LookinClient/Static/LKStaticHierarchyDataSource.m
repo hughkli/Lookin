@@ -19,7 +19,6 @@
 #import "LKMessageManager.h"
 #import "LKServerVersionRequestor.h"
 #import "LKVersionComparer.h"
-#import "LKPreferenceManager.h"
 @import AppCenter;
 @import AppCenterAnalytics;
 
@@ -184,8 +183,8 @@
 }
 
 #pragma mark - override
-- (void)reloadWithItems:(NSArray<LookinDisplayItem *> *)items {
-    if ([LKPreferenceManager mainManager].refreshMode == LookinRefreshModeDisplayingItems && [[LKStaticAsyncUpdateManager sharedInstance] updateForItemsIfNeed:items]) {
+- (void)reloadWithItems:(NSArray<LookinDisplayItem *> *)items forced:(BOOL)forced {
+    if ([[LKStaticAsyncUpdateManager sharedInstance] updateForItemsIfNeed:items forced:forced]) {
         [self updateMessageStatus];
     }
 }

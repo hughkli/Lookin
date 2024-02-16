@@ -608,7 +608,7 @@
     [self buildDisplayingFlatItems];
 }
 
-- (void)reloadWithItems:(NSArray<LookinDisplayItem *> *)items {}
+- (void)reloadWithItems:(NSArray<LookinDisplayItem *> *)items forced:(BOOL)forced {}
 
 #pragma mark - Search
 

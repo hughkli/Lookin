@@ -107,13 +107,13 @@
     }];
 }
 
-- (BOOL)updateForItemsIfNeed:(NSArray<LookinDisplayItem *> *)items {
+- (BOOL)updateForItemsIfNeed:(NSArray<LookinDisplayItem *> *)items forced:(BOOL)forced {
     LKInspectableApp *app = [LKAppsManager sharedInstance].inspectingApp;
     if (!app || !self.dataSource.flatItems.count) {
         return NO;
     }
     
-    NSArray<LookinStaticAsyncUpdateTask *> *tasks = [self _makeScreenshotsAndAttrGroupsTasksByItems:items];
+    NSArray<LookinStaticAsyncUpdateTask *> *tasks = [self _makeScreenshotsAndAttrGroupsTasksByItems:items forced:forced];
     if (tasks.count == 0) {
         return NO;
     }
@@ -211,14 +211,18 @@
     return tasks.copy;
 }
 
-- (NSArray<LookinStaticAsyncUpdateTask *> *)_makeScreenshotsAndAttrGroupsTasksByItems:(NSArray<LookinDisplayItem *> *)items {
+- (NSArray<LookinStaticAsyncUpdateTask *> *)_makeScreenshotsAndAttrGroupsTasksByItems:(NSArray<LookinDisplayItem *> *)items forced:(BOOL)forced {
     NSArray<LookinStaticAsyncUpdateTask *> *tasks = [items lookin_map:^id(NSUInteger idx, LookinDisplayItem *item) {
-        if (item.isUserCustom
-            || (item.soloScreenshot != nil && item.isExpanded)
-            || (item.groupScreenshot != nil && !item.isExpanded)
-            || !item.shouldCaptureImage
-            || (item.frame.size.width == 0 || item.frame.size.height == 0)) {
+        if (item.isUserCustom) {
             return nil;
+        }
+        if (!forced) {
+            if ((item.soloScreenshot != nil && item.isExpanded)
+                || (item.groupScreenshot != nil && !item.isExpanded)
+                || !item.shouldCaptureImage
+                || (item.frame.size.width == 0 || item.frame.size.height == 0)) {
+                return nil;
+            }
         }
         if (item.doNotFetchScreenshotReason == LookinFetchScreenshotPermitted) {
             if (item.isExpandable && item.isExpanded) {

@@ -653,7 +653,16 @@ extern NSString *const LKAppShowConsoleNotificationName;
             item.title = NSLocalizedString(@"Print", nil);
             item;
         })];
-        [menu addItem:[NSMenuItem separatorItem]];        
+        [menu addItem:[NSMenuItem separatorItem]];   
+        
+        [menu addItem:({
+            NSMenuItem *item = [NSMenuItem new];
+            item.target = self;
+            item.action = @selector(_handleRefreshItem:);
+            item.title = NSLocalizedString(@"Refresh", nil);
+            item;
+        })];
+        [menu addItem:[NSMenuItem separatorItem]];
     }
 
     if (displayItem.isExpandable) {
@@ -719,6 +728,18 @@ extern NSString *const LKAppShowConsoleNotificationName;
 - (void)_handlePrintItem:(NSMenuItem *)menuItem {
     LookinDisplayItem *item = self.rightClickingDisplayItem;
     [[NSNotificationCenter defaultCenter] postNotificationName:LKAppShowConsoleNotificationName object:item];
+}
+
+- (void)_handleRefreshItem:(NSMenuItem *)menuItem {
+    LookinDisplayItem *item = self.rightClickingDisplayItem;
+    NSMutableArray *items = [NSMutableArray array];
+    BOOL allNodesRefresh = [LKPreferenceManager mainManager].refreshMode == LookinRefreshModeAllItems;
+    [item enumerateSelfAndChildren:^(LookinDisplayItem * _Nonnull item) {
+        if (allNodesRefresh || item.displayingInHierarchy) {
+            [items addObject:item];
+        }
+    }];
+    [self.dataSource reloadWithItems:items forced:YES];
 }
 
 - (void)_handleFocusCurrentItem:(NSMenuItem *)menuItem {
