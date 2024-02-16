@@ -109,7 +109,7 @@
 
 - (BOOL)updateForItemsIfNeed:(NSArray<LookinDisplayItem *> *)items forced:(BOOL)forced {
     LKInspectableApp *app = [LKAppsManager sharedInstance].inspectingApp;
-    if (!app || !self.dataSource.flatItems.count) {
+    if (!app || !self.dataSource.flatItems.count || self.isSyncing) {
         return NO;
     }
     
