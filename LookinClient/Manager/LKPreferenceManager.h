@@ -29,11 +29,6 @@ typedef NS_ENUM(NSInteger, LookinDoubleClickBehavior) {
     LookinDoubleClickBehaviorFocus
 };
 
-typedef NS_ENUM(NSInteger, LookinRefreshMode) {
-    LookinRefreshModeAllItems,
-    LookinRefreshModeDisplayingItems
-};
-
 typedef NS_ENUM(NSInteger, LookinPreferredCallStackType) {
     LookinPreferredCallStackTypeDefault,    // 格式化 + 简略
     LookinPreferredCallStackTypeFormattedCompletely, // 格式化 + 完整
@@ -57,8 +52,6 @@ typedef NS_ENUM(NSInteger, LookinMeasureState) {
 @property(nonatomic, assign) LookinPreferredAppeanranceType appearanceType;
 
 @property(nonatomic, assign) LookinDoubleClickBehavior doubleClickBehavior;
-
-@property(nonatomic, assign) LookinRefreshMode refreshMode;
 
 /// 有效值为 0 ～ 4
 @property(nonatomic, assign) NSInteger expansionIndex;

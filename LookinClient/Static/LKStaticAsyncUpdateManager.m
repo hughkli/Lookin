@@ -181,7 +181,7 @@
         }
     }].mutableCopy;
     
-    if ([LKPreferenceManager mainManager].refreshMode == LookinRefreshModeAllItems) {
+    if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue == NO) {
         [self.dataSource.flatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
             if (item.isUserCustom) {
                 return;

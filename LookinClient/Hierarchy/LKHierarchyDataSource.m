@@ -551,7 +551,7 @@
     }
     item.isExpanded = NO;
     [self buildDisplayingFlatItems];
-    if ([LKPreferenceManager mainManager].refreshMode == LookinRefreshModeDisplayingItems) {
+    if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue) {
         [self reloadWithItems:self.displayingFlatItems forced:NO];
     }
 }
@@ -565,7 +565,7 @@
     }
     item.isExpanded = YES;
     [self buildDisplayingFlatItems];
-    if ([LKPreferenceManager mainManager].refreshMode == LookinRefreshModeDisplayingItems) {
+    if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue) {
         [self reloadWithItems:self.displayingFlatItems forced:NO];
     }
 }
@@ -578,7 +578,7 @@
     }];
     
     [self buildDisplayingFlatItems];
-    if ([LKPreferenceManager mainManager].refreshMode == LookinRefreshModeDisplayingItems) {
+    if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue) {
         [self reloadWithItems:self.displayingFlatItems forced:NO];
     }
 }
@@ -599,7 +599,7 @@
     }
     
     [self buildDisplayingFlatItems];
-    if ([LKPreferenceManager mainManager].refreshMode == LookinRefreshModeDisplayingItems) {
+    if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue) {
         [self reloadWithItems:self.displayingFlatItems forced:NO];
     }
 }
@@ -618,7 +618,7 @@
         enumeratedItem.isExpanded = NO;
     }];
     [self buildDisplayingFlatItems];
-    if ([LKPreferenceManager mainManager].refreshMode == LookinRefreshModeDisplayingItems) {
+    if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue) {
         [self reloadWithItems:self.displayingFlatItems forced:NO];
     }
 }
