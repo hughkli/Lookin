@@ -27,6 +27,8 @@ NSToolbarItemIdentifier const LKToolBarIdentifier_Console = @"15";
 NSToolbarItemIdentifier const LKToolBarIdentifier_Rotation = @"16";
 NSToolbarItemIdentifier const LKToolBarIdentifier_Measure = @"17";
 NSToolbarItemIdentifier const LKToolBarIdentifier_Message = @"18";
+NSToolbarItemIdentifier const LKToolBarIdentifier_Turbo = @"19";
+
 
 static NSString * const Key_BindingPreferenceManager = @"PreferenceManager";
 static NSString * const Key_BindingAppInfo = @"AppInfo";
@@ -208,6 +210,24 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
         return item;
     }
     
+    if ([identifier isEqualToString:LKToolBarIdentifier_Turbo]) {
+        NSImage *image = NSImageMake(@"icon_turbo");
+        image.template = YES;
+
+        NSButton *button = [NSButton new];
+        [button setImage:image];
+        button.bezelStyle = NSBezelStyleTexturedRounded;
+        [button setButtonType:NSButtonTypePushOnPushOff];
+        
+        NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:LKToolBarIdentifier_Turbo];
+        item.label = NSLocalizedString(@"Turbo Mode", nil);
+        item.view = button;
+        item.minSize = NSMakeSize(60, 34);
+        
+        [manager.turboMode subscribe:self action:@selector(_handleTurboModeDidChange:) relatedObject:button sendAtOnce:YES];
+        return item;
+    }
+    
     if ([identifier isEqualToString:LKToolBarIdentifier_Add]) {
         NSImage *image = [NSImage imageNamed:NSImageNameAddTemplate];
         image.template = YES;
@@ -298,6 +318,12 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
     NSSlider *slider = param.relatedObject;
     CGFloat scale = param.doubleValue;
     slider.doubleValue = scale;
+}
+
+- (void)_handleTurboModeDidChange:(LookinMsgActionParams *)param {
+    NSButton *button = param.relatedObject;
+    BOOL boolValue = param.boolValue;
+    button.state = boolValue ? NSControlStateValueOn : NSControlStateValueOff;
 }
 
 - (void)_handleDimensionDidChange:(LookinMsgActionParams *)param {

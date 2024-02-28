@@ -20,6 +20,7 @@ extern NSToolbarItemIdentifier const LKToolBarIdentifier_Add;
 extern NSToolbarItemIdentifier const LKToolBarIdentifier_Remove;
 extern NSToolbarItemIdentifier const LKToolBarIdentifier_Measure;
 extern NSToolbarItemIdentifier const LKToolBarIdentifier_Message;
+extern NSToolbarItemIdentifier const LKToolBarIdentifier_Turbo;
 
 @class LKPreferenceManager, LookinAppInfo;
 
