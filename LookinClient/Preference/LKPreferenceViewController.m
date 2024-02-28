@@ -18,6 +18,7 @@
 @property(nonatomic, strong) LKPreferencePopupView *view_doubleClick;
 @property(nonatomic, strong) LKPreferencePopupView *view_appearance;
 @property(nonatomic, strong) LKPreferencePopupView *view_colorFormat;
+@property(nonatomic, strong) LKPreferencePopupView *view_refreshMode;
 @property(nonatomic, strong) LKPreferenceSwitchView *view_enableLog;
 @property(nonatomic, strong) LKPreferencePopupView *view_contrast;
 
@@ -65,6 +66,14 @@
     };
     [self.view addSubview:self.view_doubleClick];
     
+    NSString *refreshTips = NSLocalizedString(@"Choosing to refresh only visible view nodes can significantly improve the loading speed. However, in some scenarios, it may display abnormally.", nil);
+    self.view_refreshMode = [[LKPreferencePopupView alloc] initWithTitle:NSLocalizedString(@"Refresh mode", nil) message:refreshTips options:@[NSLocalizedString(@"Refresh all view nodes immediately", nil), NSLocalizedString(@"Refresh only visible view nodes", nil)]];
+    self.view_refreshMode.buttonX = controlX;
+    self.view_refreshMode.didChange = ^(NSUInteger selectedIndex) {
+        [LKPreferenceManager mainManager].refreshMode = selectedIndex;
+    };
+    [self.view addSubview:self.view_refreshMode];
+    
     self.view_enableLog = [[LKPreferenceSwitchView alloc] initWithTitle:NSLocalizedString(@"Share analytics with Lookin", nil) message:NSLocalizedString(@"Help to improve Lookin by automatically sending diagnostics and usage data.", nil)];
     self.view_enableLog.didChange = ^(BOOL isChecked) {
         [LKPreferenceManager mainManager].enableReport = isChecked;
@@ -93,6 +102,7 @@
 
     self.view_appearance.selectedIndex = manager.appearanceType;
     self.view_doubleClick.selectedIndex = manager.doubleClickBehavior;
+    self.view_refreshMode.selectedIndex = manager.refreshMode;
     self.view_enableLog.isChecked = manager.enableReport;
 }
 
@@ -107,8 +117,9 @@
     $(self.view_contrast).x(insets.left).toRight(insets.right).y(self.view_colorFormat.$maxY).height(65);
     
     $(self.view_doubleClick).x(insets.left).toRight(insets.right).y(self.view_contrast.$maxY).height(50);
+    $(self.view_refreshMode).x(insets.left).toRight(insets.right).y(self.view_doubleClick.$maxY).height(80);
     
-    __block CGFloat y = self.view_doubleClick.$maxY;
+    __block CGFloat y = self.view_refreshMode.$maxY;
     [$(self.view_enableLog).array enumerateObjectsUsingBlock:^(NSView *  _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
         $(view).x(115).toRight(insets.right).y(y).heightToFit;
         y = view.$maxY + 5;
@@ -124,6 +135,7 @@
     manager.enableReport = YES;
     manager.rgbaFormat = YES;
     manager.doubleClickBehavior = LookinDoubleClickBehaviorCollapse;
+    manager.refreshMode = LookinRefreshModeAllItems;
     manager.imageContrastLevel = 0;
     [self renderFromPreferenceManager];
     

@@ -18,6 +18,8 @@
 - (void)updateAll;
 /// 终止拉取
 - (void)endUpdatingAll;
+/// 部分刷新
+- (BOOL)updateForItemsIfNeed:(NSArray<LookinDisplayItem *> *)item forced:(BOOL)forced;
 /// 调用 updateAll 后，该 signal 会不断发出信号。data 是 RACTuple，tuple.first 是 NSNumber，表示已经收到的数据总数，tuple.second 也是 NSNumber，表示预期会接收到的数据总数
 @property(nonatomic, strong, readonly) RACSubject *updateAll_ProgressSignal;
 /// 调用 updateAll 且数据全部接收完成后，或遇到 error 会发出该信号

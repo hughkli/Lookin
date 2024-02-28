@@ -28,6 +28,7 @@ static NSString * const Key_RgbaFormat = @"egbaFormat";
 static NSString * const Key_ZInterspace = @"zInterspace_v095";
 static NSString * const Key_AppearanceType = @"appearanceType";
 static NSString * const Key_DoubleClickBehavior = @"doubleClickBehavior";
+static NSString * const Key_RefreshMode = @"refreshMode";
 static NSString * const Key_ExpansionIndex = @"expansionIndex";
 static NSString * const Key_ContrastLevel = @"contrastLevel";
 static NSString * const Key_SectionsShow = @"ss";
@@ -107,6 +108,14 @@ static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
         } else {
             _doubleClickBehavior = LookinDoubleClickBehaviorCollapse;
             [userDefaults setObject:@(_doubleClickBehavior) forKey:Key_DoubleClickBehavior];
+        }
+        
+        NSNumber *obj_refreshMode = [userDefaults objectForKey:Key_RefreshMode];
+        if (obj_refreshMode) {
+            _refreshMode = [obj_refreshMode intValue];
+        } else {
+            _refreshMode = LookinRefreshModeAllItems;
+            [userDefaults setObject:@(_refreshMode) forKey:Key_RefreshMode];
         }
         
         NSNumber *obj_rgbaFormat = [userDefaults objectForKey:Key_RgbaFormat];
@@ -243,6 +252,13 @@ static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
     _doubleClickBehavior = doubleClickBehavior;
     if (self.shouldStoreToLocal) {
         [[NSUserDefaults standardUserDefaults] setObject:@(doubleClickBehavior) forKey:Key_DoubleClickBehavior];
+    }
+}
+
+- (void)setRefreshMode:(LookinRefreshMode)refreshMode {
+    _refreshMode = refreshMode;
+    if (self.shouldStoreToLocal) {
+        [[NSUserDefaults standardUserDefaults] setObject:@(refreshMode) forKey:Key_RefreshMode];
     }
 }
 
