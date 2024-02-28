@@ -21,9 +21,13 @@
 "Preferences" = "偏好设置";
 "Appearance" = "外观";
 "Double click" = "双击图层";
+"Refresh mode" = "刷新模式";
 "Image contrast" = "图像对比度";
 "Adjust this option to use a deeper layer selection color." = "调整该选项以使用更深的图层选中色";
 "Expand or collapse layer" = "展开或折叠";
+"Refresh all view nodes immediately" = "立即刷新所有视图节点";
+"Refresh only visible view nodes" = "只刷新可见的视图节点";
+"Choosing to refresh only visible view nodes can significantly improve the loading speed. However, in some scenarios, it may display abnormally." = "选择只刷新可见视图节点的模式可以明显提高视图加载速度, 但在部分场景下可能显示异常.";
 "Focus on layer" = "聚焦";
 "Dark Mode" = "深色";
 "Light Mode" = "浅色";
@@ -43,6 +47,7 @@
 "Expand recursively" = "全部展开";
 "Collapse children" = "收起子图层";
 "Focus" = "聚焦";
+"Refresh" = "刷新";
 "Print" = "打印";
 "Hide screenshot this time" = "隐藏图像（仅本次）";
 "Hide screenshot forever…" = "永久隐藏图像…";
