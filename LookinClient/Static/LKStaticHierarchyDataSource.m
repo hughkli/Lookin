@@ -182,11 +182,4 @@
     return isNew;
 }
 
-#pragma mark - override
-- (void)reloadWithItems:(NSArray<LookinDisplayItem *> *)items forced:(BOOL)forced {
-    if ([[LKStaticAsyncUpdateManager sharedInstance] updateForItemsIfNeed:items forced:forced]) {
-        [self updateMessageStatus];
-    }
-}
-
 @end

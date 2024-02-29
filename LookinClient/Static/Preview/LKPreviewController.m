@@ -658,8 +658,8 @@ extern NSString *const LKAppShowConsoleNotificationName;
         [menu addItem:({
             NSMenuItem *item = [NSMenuItem new];
             item.target = self;
-            item.action = @selector(_handleRefreshItem:);
-            item.title = NSLocalizedString(@"Refresh", nil);
+            item.action = @selector(_handleReloadSelfAndChildrenItem:);
+            item.title = NSLocalizedString(@"Reload", nil);
             item;
         })];
         [menu addItem:[NSMenuItem separatorItem]];
@@ -730,7 +730,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
     [[NSNotificationCenter defaultCenter] postNotificationName:LKAppShowConsoleNotificationName object:item];
 }
 
-- (void)_handleRefreshItem:(NSMenuItem *)menuItem {
+- (void)_handleReloadSelfAndChildrenItem:(NSMenuItem *)menuItem {
     LookinDisplayItem *item = self.rightClickingDisplayItem;
     NSMutableArray *items = [NSMutableArray array];
     BOOL allNodesRefresh = ([LKPreferenceManager mainManager].turboMode.currentBOOLValue == NO);
@@ -739,7 +739,8 @@ extern NSString *const LKAppShowConsoleNotificationName;
             [items addObject:item];
         }
     }];
-    [self.dataSource reloadWithItems:items forced:YES];
+    NSAssert(NO, @"");
+//    [self.dataSource reloadWithItems:items forced:YES];
 }
 
 - (void)_handleFocusCurrentItem:(NSMenuItem *)menuItem {

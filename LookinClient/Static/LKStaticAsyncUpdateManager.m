@@ -355,4 +355,8 @@
     return [LKStaticHierarchyDataSource sharedInstance];
 }
 
+- (void)updateItemsWhichHasNotUpdated:(NSArray<LookinDisplayItem *> *)items {
+    
+}
+
 @end

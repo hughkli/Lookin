@@ -14,6 +14,7 @@
 #import "LKUserActionManager.h"
 #import "LookinDisplayItem+LookinClient.h"
 #import "LKDanceUIAttrMaker.h"
+#import "LKStaticAsyncUpdateManager.h"
 @import AppCenter;
 @import AppCenterAnalytics;
 
@@ -540,6 +541,10 @@
         }
     }];
     self.displayingFlatItems = displayingItems;
+    
+    if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue) {
+        [[LKStaticAsyncUpdateManager sharedInstance] updateItemsWhichHasNotUpdated:displayingItems];
+    }
 }
 
 - (void)collapseItem:(LookinDisplayItem *)item {
@@ -551,9 +556,6 @@
     }
     item.isExpanded = NO;
     [self buildDisplayingFlatItems];
-    if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue) {
-        [self reloadWithItems:self.displayingFlatItems forced:NO];
-    }
 }
 
 - (void)expandItem:(LookinDisplayItem *)item {
@@ -565,9 +567,6 @@
     }
     item.isExpanded = YES;
     [self buildDisplayingFlatItems];
-    if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue) {
-        [self reloadWithItems:self.displayingFlatItems forced:NO];
-    }
 }
 
 - (void)expandToShowItem:(LookinDisplayItem *)item {
@@ -578,9 +577,6 @@
     }];
     
     [self buildDisplayingFlatItems];
-    if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue) {
-        [self reloadWithItems:self.displayingFlatItems forced:NO];
-    }
 }
 
 - (void)expandItemsRootedByItem:(LookinDisplayItem *)item {
@@ -599,9 +595,6 @@
     }
     
     [self buildDisplayingFlatItems];
-    if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue) {
-        [self reloadWithItems:self.displayingFlatItems forced:NO];
-    }
 }
 
 - (void)collapseAllChildrenOfItem:(LookinDisplayItem *)item {
@@ -618,12 +611,7 @@
         enumeratedItem.isExpanded = NO;
     }];
     [self buildDisplayingFlatItems];
-    if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue) {
-        [self reloadWithItems:self.displayingFlatItems forced:NO];
-    }
 }
-
-- (void)reloadWithItems:(NSArray<LookinDisplayItem *> *)items forced:(BOOL)forced {}
 
 #pragma mark - Search
 
