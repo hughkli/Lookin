@@ -14,6 +14,8 @@
 
 + (instancetype)sharedInstance;
 
+- (void)update;
+
 /// 开始拉取
 - (void)updateAll;
 /// 终止拉取

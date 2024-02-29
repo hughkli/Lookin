@@ -36,10 +36,6 @@
     [self _pushWithType:LookinPush_CanceHierarchyDetails data:nil];
 }
 
-- (void)pushHierarchyDetailBringForwardTaskPackages:(NSArray<LookinStaticAsyncUpdateTasksPackage *> *)packages {
-    [self _pushWithType:LookinPush_BringForwardScreenshotTask data:packages];
-}
-
 - (RACSignal *)fetchModificationPatchWithTasks:(NSArray<LookinStaticAsyncUpdateTask *> *)tasks {
     return [self _requestWithType:LookinRequestTypeAttrModificationPatch data:tasks];
 }
