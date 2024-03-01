@@ -70,8 +70,12 @@
         }
     }];
     
-    [[LKStaticAsyncUpdateManager sharedInstance] updateAll];
     [self updateMessageStatus];
+
+    BOOL shouldUpdateAll = (LKPreferenceManager.mainManager.turboMode.currentBOOLValue == NO);
+    if (shouldUpdateAll) {
+        [[LKStaticAsyncUpdateManager sharedInstance] updateAll];        
+    }
 }
 
 - (void)modifyWithDisplayItemDetail:(LookinDisplayItemDetail *)detail {

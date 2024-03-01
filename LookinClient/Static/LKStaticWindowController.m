@@ -35,7 +35,7 @@
 @import AppCenter;
 @import AppCenterAnalytics;
 
-@interface LKStaticWindowController () <NSToolbarDelegate>
+@interface LKStaticWindowController () <NSToolbarDelegate, LKStaticAsyncUpdateManagerDelegate>
 
 @property(nonatomic, strong) NSMutableDictionary<NSString *, NSToolbarItem *> *toolbarItemsMap;
 
@@ -91,15 +91,6 @@
             }
             
             [self _showUSBLowSpeedTipsIfNeeded];
-        }];
-        [updateManager.updateAll_CompletionSignal subscribeNext:^(id  _Nullable x) {
-            @strongify(self);
-            self.isSyncingScreenshots = NO;
-            reloadItem.label = NSLocalizedString(@"Reload", nil);
-            
-            NSImage *image = NSImageMake(@"icon_reload");
-            image.template = YES;
-            reloadButton.image = image;
         }];
         
         [[[RACSignal combineLatest:@[RACObserve(self, isFetchingHierarchy),
@@ -252,7 +243,7 @@
         return;
     }
     
-    if (self.isFetchingHierarchy || self.isSyncingScreenshots) {
+    if (self.isFetchingHierarchy) {
         return;
     }
     
@@ -532,6 +523,38 @@
 
 - (void)handleTurnOnSwift {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://bytedance.feishu.cn/docx/GFRLdzpeKoakeyxvwgCcZ5XdnTb"]];
+}
+
+
+/// LKStaticAsyncUpdateManagerDelegate
+- (void)ongoingDetailUpdateTasksDidChange:(NSUInteger)tasksCount {
+    NSToolbarItem *reloadItem = self.toolbarItemsMap[LKToolBarIdentifier_Reload];
+    NSButton *reloadButton = (NSButton *)reloadItem.view;
+    
+    BOOL isFetching = (tasksCount > 0);
+    
+    if (isFetching) {
+        if (self.isSyncingScreenshots) {
+            // 继续维持 fetch 状态
+        } else {
+            // 进入 fetch 状态
+            self.isSyncingScreenshots = YES;
+            
+        }
+    } else {
+        if (self.isSyncingScreenshots) {
+            // 退出 fetch 状态
+            self.isSyncingScreenshots = NO;
+            reloadItem.label = NSLocalizedString(@"Reload", nil);
+            
+            NSImage *image = NSImageMake(@"icon_reload");
+            image.template = YES;
+            reloadButton.image = image;
+        } else {
+            // 继续维持“非 fetch”状态
+        }
+    }
+
 }
 
 @end

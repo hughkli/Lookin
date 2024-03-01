@@ -543,7 +543,7 @@
     self.displayingFlatItems = displayingItems;
     
     if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue) {
-        [[LKStaticAsyncUpdateManager sharedInstance] updateItemsWhichHasNotUpdated:displayingItems];
+        [[LKStaticAsyncUpdateManager sharedInstance] updateVisibleItems];
     }
 }
 

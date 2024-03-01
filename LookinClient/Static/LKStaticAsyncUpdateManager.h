@@ -10,23 +10,29 @@
 
 @class LookinDisplayItem, LookinStaticDisplayItem;
 
+@protocol LKStaticAsyncUpdateManagerDelegate <NSObject>
+
+/// 当剩余未完成的 task 数量变化时，该方法会被调用
+- (void)ongoingDetailUpdateTasksDidChange:(NSUInteger)tasksCount;
+
+@end
+
 @interface LKStaticAsyncUpdateManager : NSObject
 
 + (instancetype)sharedInstance;
 
-- (void)update;
+@property(nonatomic, weak) id<LKStaticAsyncUpdateManagerDelegate> delegate;
 
-/// 开始拉取
+/// 关闭“极速模式”时，reload 之后应该调用该方法来拉取所有 items 的 detail 数据
 - (void)updateAll;
 /// 终止拉取
 - (void)endUpdatingAll;
 
-/// 部分刷新
-- (BOOL)updateForItemsIfNeed:(NSArray<LookinDisplayItem *> *)item forced:(BOOL)forced;
+/// 打开“极速模式”时，每次 displayingItems 变化时，都应该调用该方法来拉取可见 items 的 detail 数据（已经拉取过 detail 的 items 不会再次被拉取）
+- (void)updateForDisplayingItems;
+
 /// 调用 updateAll 后，该 signal 会不断发出信号。data 是 RACTuple，tuple.first 是 NSNumber，表示已经收到的数据总数，tuple.second 也是 NSNumber，表示预期会接收到的数据总数
 @property(nonatomic, strong, readonly) RACSubject *updateAll_ProgressSignal;
-/// 调用 updateAll 且数据全部接收完成后，或遇到 error 会发出该信号
-@property(nonatomic, strong, readonly) RACSubject *updateAll_CompletionSignal;
 /// 调用 updateAll 后遇到 error 会发出该信号
 @property(nonatomic, strong, readonly) RACSubject *updateAll_ErrorSignal;
 
