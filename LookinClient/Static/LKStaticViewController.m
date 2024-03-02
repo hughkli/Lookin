@@ -43,6 +43,7 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
 @property(nonatomic, strong) LKTipsView *tutorialTipView;
 @property(nonatomic, strong) LKTipsView *customViewTipView;
 @property(nonatomic, strong) LKYellowTipsView *focusTipView;
+@property(nonatomic, strong) LKTipsView *fastModeTipView;
 
 @property(nonatomic, strong) LKDashboardViewController *dashboardController;
 @property(nonatomic, strong) LKStaticHierarchyController *hierarchyController;
@@ -120,6 +121,15 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     self.focusTipView.target = self;
     self.focusTipView.clickAction = @selector(_handleExitFocusTipView);
     [self.view addSubview:self.focusTipView];
+    
+    self.fastModeTipView = [LKTipsView new];
+    self.fastModeTipView.image = NSImageMake(@"Icon_Inspiration_small");
+    self.fastModeTipView.title = NSLocalizedString(@"Fast refresh mode is enabled, which may result in layer consistency issues.", nil);
+    self.fastModeTipView.hidden = YES;
+    self.fastModeTipView.buttonText = NSLocalizedString(@"Details", nil);
+    self.fastModeTipView.target = self;
+    self.fastModeTipView.clickAction = @selector(_handleFastModeTipViewClick);
+    [self.view addSubview:self.fastModeTipView];
     
     self.noPreviewTipView = [LKTipsView new];
     self.noPreviewTipView.image = NSImageMake(@"icon_hide");
@@ -211,6 +221,7 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
         [self.progressView resetToZero];
         AlertError(error, self.view.window);
     }];
+    [preferenceManager.fastMode subscribe:self action:@selector(_handleFastModeChange:) relatedObject:nil sendAtOnce:YES];
     
     [[LKPreferenceManager mainManager] reportStatistics];
 }
@@ -226,7 +237,7 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     $(self.progressView).fullWidth.height(3).y(windowTitleHeight);
 
     __block CGFloat tipsY = windowTitleHeight + 10;
-    [$(self.connectionTipsView, self.imageSyncTipsView, self.tooLargeToSyncScreenshotTipsView, self.noPreviewTipView, self.focusTipView, self.userConfigNoPreviewTipsView, self.tutorialTipView, self.customViewTipView).visibles.array enumerateObjectsUsingBlock:^(LKTipsView *tipsView, NSUInteger idx, BOOL * _Nonnull stop) {
+    [$(self.connectionTipsView, self.imageSyncTipsView, self.tooLargeToSyncScreenshotTipsView, self.noPreviewTipView, self.focusTipView, self.userConfigNoPreviewTipsView, self.tutorialTipView, self.customViewTipView, self.fastModeTipView).visibles.array enumerateObjectsUsingBlock:^(LKTipsView *tipsView, NSUInteger idx, BOOL * _Nonnull stop) {
         CGFloat midX = self.hierarchyController.view.$width + (self.viewsPreviewController.view.$width - DashboardViewWidth) / 2.0;
         $(tipsView).sizeToFit.y(tipsY).midX(midX);
         tipsY = tipsView.$maxY + 5;
@@ -398,6 +409,36 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     [[self dataSource] endFocus];
 }
 
+- (void)_handleFastModeTipViewClick {
+    NSMenu *menu = [NSMenu new];
+    
+    
+    NSMenuItem *menuItem = [NSMenuItem new];
+    menuItem.title = NSLocalizedString(@"View feature description", nil);
+    menuItem.target = self;
+    menuItem.action = @selector(handleFastModeDocumentation);
+    [menu addItem:menuItem];
+    
+    [menu addItem:[NSMenuItem separatorItem]];
+    
+    NSMenuItem *menuItem2 = [NSMenuItem new];
+    menuItem2.title = NSLocalizedString(@"Don't remind me again", nil);
+    menuItem2.target = self;
+    menuItem2.action = @selector(handleIgnoreFastModeTip);
+    [menu addItem:menuItem2];
+    
+    [NSMenu popUpContextMenu:menu withEvent:NSApplication.sharedApplication.currentEvent forView:self.fastModeTipView.button];
+}
+
+- (void)handleFastModeDocumentation {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://qxh1ndiez2w.feishu.cn/wiki/BPihwfigUigWLQk1Epmc5SFenEe"]];
+}
+
+- (void)handleIgnoreFastModeTip {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IgnoreFastModeTips"];
+    self.fastModeTipView.hidden = YES;
+}
+
 - (void)_handleUserConfigNoPreviewTipView {
     [LKHelper openCustomConfigWebsite];
 }
@@ -407,6 +448,16 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     BOOL isMeasure = (state != LookinMeasureState_no);
     self.dashboardController.view.hidden = isMeasure;
     self.measureController.view.hidden = !isMeasure;
+}
+
+- (void)_handleFastModeChange:(LookinMsgActionParams *)param {
+    if (!param.boolValue) {
+        self.fastModeTipView.hidden = YES;
+        return;
+    }
+    BOOL shouldIgnoreTips = [[NSUserDefaults standardUserDefaults] boolForKey:@"IgnoreFastModeTips"];
+    self.fastModeTipView.hidden = shouldIgnoreTips;
+    [self.view setNeedsLayout:YES];
 }
 
 - (void)handleSelectItemDidChange {

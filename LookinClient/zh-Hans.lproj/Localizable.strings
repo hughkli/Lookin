@@ -206,3 +206,6 @@
 "Cancel measure after key up." = "松开键盘后退出测距模式";
 "Fast Mode" = "快速模式";
 "Request timeout, layer data transmission failed." = "请求超时，图层数据传输失败。";
+"Fast refresh mode is enabled, which may result in layer consistency issues." = "快速刷新模式已打开，可能导致图层一致性问题";
+"View feature description" = "👉 查看功能说明";
+"Don't remind me again" = "🚫 不再提示";

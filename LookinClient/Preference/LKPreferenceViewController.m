@@ -130,6 +130,7 @@
 #if DEBUG
     [[LKMessageManager sharedInstance] reset];
     [[LKPreferenceManager mainManager] reset];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IgnoreFastModeTips"];
 #endif
 }
 
