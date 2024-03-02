@@ -545,7 +545,7 @@
     }];
     self.displayingFlatItems = displayingItems;
     
-    if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue) {
+    if ([LKPreferenceManager mainManager].fastMode.currentBOOLValue) {
         [[LKStaticAsyncUpdateManager sharedInstance] updateForDisplayingItems];
     }
 }

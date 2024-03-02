@@ -91,7 +91,7 @@
 }
 
 - (void)updateAll {
-    NSAssert(!LKPreferenceManager.mainManager.turboMode.currentBOOLValue, @"");
+    NSAssert(!LKPreferenceManager.mainManager.fastMode.currentBOOLValue, @"");
     
     LKInspectableApp *app = [LKAppsManager sharedInstance].inspectingApp;
     if (!app || !self.dataSource.flatItems.count) {
@@ -305,7 +305,7 @@
 }
 
 - (void)updateForDisplayingItems {
-    NSAssert(LKPreferenceManager.mainManager.turboMode.currentValue, @"");
+    NSAssert(LKPreferenceManager.mainManager.fastMode.currentValue, @"");
 
     LKInspectableApp *app = [LKAppsManager sharedInstance].inspectingApp;
     if (!app) {

@@ -72,7 +72,7 @@
     
     [self updateMessageStatus];
 
-    BOOL shouldUpdateAll = (LKPreferenceManager.mainManager.turboMode.currentBOOLValue == NO);
+    BOOL shouldUpdateAll = (LKPreferenceManager.mainManager.fastMode.currentBOOLValue == NO);
     if (shouldUpdateAll) {
         [[LKStaticAsyncUpdateManager sharedInstance] updateAll];        
     }

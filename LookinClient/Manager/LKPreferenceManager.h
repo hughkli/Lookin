@@ -80,7 +80,7 @@ typedef NS_ENUM(NSInteger, LookinMeasureState) {
 
 @property(nonatomic, strong, readonly) LookinBOOLMsgAttribute *freeRotation;
 
-@property(nonatomic, strong, readonly) LookinBOOLMsgAttribute *turboMode;
+@property(nonatomic, strong, readonly) LookinBOOLMsgAttribute *fastMode;
 
 /// 上次接收到 iOS app 里传过来的 color config 和 collapsedClasses 信息的时间，用来统计
 @property(nonatomic, assign) NSTimeInterval receivingConfigTime_Color;

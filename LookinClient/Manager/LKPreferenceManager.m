@@ -36,7 +36,7 @@ static NSString * const Key_PreferredExportCompression = @"preferredExportCompre
 static NSString * const Key_CallStackType = @"callStackType";
 static NSString * const Key_SyncConsoleTarget = @"syncConsoleTarget";
 static NSString * const Key_FreeRotation = @"FreeRotation";
-static NSString * const Key_TurboMode = @"turboMode";
+static NSString * const Key_FastMode = @"fastMode";
 static NSString * const Key_ReceivingConfigTime_Color = @"ConfigTime_Color";
 static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
 
@@ -171,14 +171,14 @@ static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
         }
         [self.freeRotation subscribe:self action:@selector(_handleFreeRotationDidChange:) relatedObject:nil];
         
-        NSNumber *obj_turboMode = [userDefaults objectForKey:Key_TurboMode];
-        if (obj_turboMode != nil) {
-            _turboMode = [LookinBOOLMsgAttribute attributeWithBOOL:obj_turboMode.boolValue];
+        NSNumber *obj_fastMode = [userDefaults objectForKey:Key_FastMode];
+        if (obj_fastMode != nil) {
+            _fastMode = [LookinBOOLMsgAttribute attributeWithBOOL:obj_fastMode.boolValue];
         } else {
-            _turboMode = [LookinBOOLMsgAttribute attributeWithBOOL:NO];
-            [userDefaults setObject:@(_turboMode.currentBOOLValue) forKey:Key_FreeRotation];
+            _fastMode = [LookinBOOLMsgAttribute attributeWithBOOL:NO];
+            [userDefaults setObject:@(_fastMode.currentBOOLValue) forKey:Key_FreeRotation];
         }
-        [self.turboMode subscribe:self action:@selector(_handleTurboModeDidChange:) relatedObject:nil];
+        [self.fastMode subscribe:self action:@selector(_handleFastModeDidChange:) relatedObject:nil];
         
         self.storedSectionShowConfig = [[userDefaults objectForKey:Key_SectionsShow] mutableCopy];
         if (!self.storedSectionShowConfig) {
@@ -330,12 +330,12 @@ static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
     [[NSUserDefaults standardUserDefaults] setObject:@(boolValue) forKey:Key_FreeRotation];
 }
 
-- (void)_handleTurboModeDidChange:(LookinMsgActionParams *)param {
+- (void)_handleFastModeDidChange:(LookinMsgActionParams *)param {
     if (!self.shouldStoreToLocal) {
         return;
     }
     BOOL boolValue = param.boolValue;
-    [[NSUserDefaults standardUserDefaults] setObject:@(boolValue) forKey:Key_TurboMode];
+    [[NSUserDefaults standardUserDefaults] setObject:@(boolValue) forKey:Key_FastMode];
 }
 
 
@@ -492,6 +492,7 @@ static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
         @"ShowHidden": [NSString stringWithFormat:@"%@", @(self.showHiddenItems.currentBOOLValue)],
         @"RGBA": [NSString stringWithFormat:@"%@", @(self.rgbaFormat)],
         @"FreeRotation": [NSString stringWithFormat:@"%@", @(self.freeRotation.currentBOOLValue)],
+        @"FastMode": [NSString stringWithFormat:@"%@", @(self.fastMode.currentBOOLValue)]
     }];
 }
 

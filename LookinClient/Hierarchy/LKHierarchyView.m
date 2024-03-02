@@ -446,7 +446,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
     LKHierarchyRowView *view = [menuItem.menu lookin_getBindObjectForKey:kMenuBindKey_RowView];
     LookinDisplayItem *item = view.displayItem;
     NSMutableArray *items = [NSMutableArray array];
-    BOOL allNodesRefresh = ([LKPreferenceManager mainManager].turboMode.currentBOOLValue == NO);
+    BOOL allNodesRefresh = ([LKPreferenceManager mainManager].fastMode.currentBOOLValue == NO);
     [item enumerateSelfAndChildren:^(LookinDisplayItem * _Nonnull item) {
         if (allNodesRefresh || item.displayingInHierarchy) {
             [items addObject:item];

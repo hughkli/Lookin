@@ -733,7 +733,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
 - (void)_handleReloadSelfAndChildrenItem:(NSMenuItem *)menuItem {
     LookinDisplayItem *item = self.rightClickingDisplayItem;
     NSMutableArray *items = [NSMutableArray array];
-    BOOL allNodesRefresh = ([LKPreferenceManager mainManager].turboMode.currentBOOLValue == NO);
+    BOOL allNodesRefresh = ([LKPreferenceManager mainManager].fastMode.currentBOOLValue == NO);
     [item enumerateSelfAndChildren:^(LookinDisplayItem * _Nonnull item) {
         if (allNodesRefresh || item.displayingInHierarchy) {
             [items addObject:item];

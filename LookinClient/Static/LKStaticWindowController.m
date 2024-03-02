@@ -201,7 +201,7 @@
             item.action = @selector(_handleMessage:);
         } else if ([item.itemIdentifier isEqualToString:LKToolBarIdentifier_Turbo]) {
             item.target = self;
-            item.action = @selector(handleTurboMode);
+            item.action = @selector(handleFastMode);
         }
     }
     return item;
@@ -272,9 +272,9 @@
     self.viewController.showConsole = !self.viewController.showConsole;
 }
 
-- (void)handleTurboMode {
-    BOOL boolValue = [LKPreferenceManager mainManager].turboMode.currentBOOLValue;
-    [[LKPreferenceManager mainManager].turboMode setBOOLValue:!boolValue ignoreSubscriber:nil];
+- (void)handleFastMode {
+    BOOL boolValue = [LKPreferenceManager mainManager].fastMode.currentBOOLValue;
+    [[LKPreferenceManager mainManager].fastMode setBOOLValue:!boolValue ignoreSubscriber:nil];
 }
 
 - (void)_handleMessage:(NSButton *)button {

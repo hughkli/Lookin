@@ -224,7 +224,7 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
         item.view = button;
         item.minSize = NSMakeSize(60, 34);
         
-        [manager.turboMode subscribe:self action:@selector(_handleTurboModeDidChange:) relatedObject:button sendAtOnce:YES];
+        [manager.fastMode subscribe:self action:@selector(_handleFastModeDidChange:) relatedObject:button sendAtOnce:YES];
         return item;
     }
     
@@ -320,7 +320,7 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
     slider.doubleValue = scale;
 }
 
-- (void)_handleTurboModeDidChange:(LookinMsgActionParams *)param {
+- (void)_handleFastModeDidChange:(LookinMsgActionParams *)param {
     NSButton *button = param.relatedObject;
     BOOL boolValue = param.boolValue;
     button.state = boolValue ? NSControlStateValueOn : NSControlStateValueOff;
