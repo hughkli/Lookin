@@ -204,4 +204,5 @@
 "High" = "高";
 "Navigate…" = "跳转至文件…";
 "Cancel measure after key up." = "松开键盘后退出测距模式";
-"Turbo Mode" = "极速模式";
+"Fast Mode" = "快速模式";
+"Request timeout, layer data transmission failed." = "请求超时，图层数据传输失败。";

@@ -109,6 +109,7 @@
         _itemDidChangeAttrGroup = [RACSubject subject];
         _itemDidChangeNoPreview = [RACSubject subject];
         _didReloadHierarchyInfo = [RACSubject subject];
+        _willReloadHierarchyInfo = [RACSubject subject];
         _didReloadFlatItemsWithSearchOrFocus = [RACSubject subject];
         
         @weakify(self);
@@ -122,6 +123,8 @@
 
 - (void)reloadWithHierarchyInfo:(LookinHierarchyInfo *)info keepState:(BOOL)keepState {
     self.rawHierarchyInfo = info;
+    
+    [self.willReloadHierarchyInfo sendNext:nil];
 
     if (info.colorAlias.count) {
         [LKPreferenceManager mainManager].receivingConfigTime_Color = [[NSDate date] timeIntervalSince1970];
@@ -543,7 +546,7 @@
     self.displayingFlatItems = displayingItems;
     
     if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue) {
-        [[LKStaticAsyncUpdateManager sharedInstance] updateVisibleItems];
+        [[LKStaticAsyncUpdateManager sharedInstance] updateForDisplayingItems];
     }
 }
 

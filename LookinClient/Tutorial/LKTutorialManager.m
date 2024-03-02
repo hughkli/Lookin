@@ -10,7 +10,7 @@
 #import "LKTutorialPopoverController.h"
 #import "LKHelper.h"
 
-static NSString * const Key_USBLowSpeed = @"Tut_1";
+//static NSString * const Key_USBLowSpeed = @"Tut_1";
 static NSString * const Key_TogglePreview = @"Tut_2";
 static NSString * const Key_QuickSelection = @"Tut_5";
 static NSString * const Key_MoveWithSpace = @"Tut_6";
@@ -41,7 +41,6 @@ static NSString * const Key_DoubleClickBehavior = @"Tut_DoubleClickBehavior";
     if (self = [super init]) {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         
-        _USBLowSpeed = [userDefaults boolForKey:Key_USBLowSpeed];
         _togglePreview = [userDefaults boolForKey:Key_TogglePreview];
         _quickSelection = [userDefaults boolForKey:Key_QuickSelection];
         _moveWithSpace = [userDefaults boolForKey:Key_MoveWithSpace];
@@ -55,14 +54,6 @@ static NSString * const Key_DoubleClickBehavior = @"Tut_DoubleClickBehavior";
 - (void)setHasAskedDoubleClickBehavior:(BOOL)hasAskedDoubleClickBehavior {
     _hasAskedDoubleClickBehavior = hasAskedDoubleClickBehavior;
     [[NSUserDefaults standardUserDefaults] setBool:hasAskedDoubleClickBehavior forKey:Key_DoubleClickBehavior];
-}
-
-- (void)setUSBLowSpeed:(BOOL)USBLowSpeed {
-    if (_USBLowSpeed == USBLowSpeed) {
-        return;
-    }
-    _USBLowSpeed = USBLowSpeed;
-    [[NSUserDefaults standardUserDefaults] setBool:USBLowSpeed forKey:Key_USBLowSpeed];
 }
 
 - (void)setTogglePreview:(BOOL)togglePreview {

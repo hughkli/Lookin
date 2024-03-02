@@ -11,12 +11,17 @@
 @implementation LKVersionComparer
 
 + (BOOL)compareWithNewest:(NSString *)latest user:(NSString *)user {
-    NSInteger latestNumber = [latest lookin_numbericOSVersion];
-    NSInteger userNumber = [user lookin_numbericOSVersion];
-    if (latestNumber == 0 || userNumber == 0) {
-        return YES;
+    return [self compareWithExpectedVersion:latest realVersion:user];
+}
+
++ (BOOL)compareWithExpectedVersion:(NSString *)expectedVersion realVersion:(NSString *)realVersion {
+    NSInteger expectedNumber = [expectedVersion lookin_numbericOSVersion];
+    NSInteger realNumber = [realVersion lookin_numbericOSVersion];
+    if (expectedNumber == 0 || realNumber == 0) {
+        NSAssert(NO, @"");
+        return NO;
     }
-    if (userNumber >= latestNumber) {
+    if (realNumber >= expectedNumber) {
         return YES;
     }
     return NO;

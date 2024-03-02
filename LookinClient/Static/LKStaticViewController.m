@@ -190,10 +190,6 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     }];
     
     LKStaticAsyncUpdateManager *updateMng = [LKStaticAsyncUpdateManager sharedInstance];
-    [updateMng.updateAll_ErrorSignal subscribeNext:^(NSError *error) {
-        @strongify(self);
-        AlertError(error, self.view.window);
-    }];
     [updateMng.modifyingUpdateProgressSignal subscribeNext:^(RACTwoTuple *x) {
         @strongify(self);
         NSUInteger received = ((NSNumber *)x.first).integerValue;

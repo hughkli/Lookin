@@ -25,6 +25,7 @@ typedef NS_ENUM(NSUInteger, LKHierarchyDataSourceState) {
  如果 keepState 为 YES，则会尽量维持刷新之前的折叠状态和选中态
  */
 - (void)reloadWithHierarchyInfo:(LookinHierarchyInfo *)info keepState:(BOOL)keepState;
+@property(nonatomic, strong, readonly) RACSubject *willReloadHierarchyInfo;
 @property(nonatomic, strong, readonly) RACSubject *didReloadHierarchyInfo;
 
 /// 一维数组，包含所有 hierarchy 树中可见和不可见的 displayItems

@@ -19,12 +19,44 @@
 #import "LKPerformanceReporter.h"
 #import "LookinDisplayItem+LookinClient.h"
 #import "LKPreferenceManager.h"
+#import "LKVersionComparer.h"
+
+@interface LKDetailUpdateRequest : NSObject
+
+@property(nonatomic, copy) NSArray<LookinStaticAsyncUpdateTasksPackage *> *packages;
+/// 已经收到回复的 task 的数量（但受限于目前的设计，无法知道具体是哪些 task 收到了回复）
+@property(nonatomic, assign) NSInteger finishedTasksCount;
+@property(nonatomic, assign) NSInteger tasksTotalCount;
+
+@end
+
+@implementation LKDetailUpdateRequest
+
+- (BOOL)queryIfContainsTask:(LookinStaticAsyncUpdateTask *)task {
+    for (LookinStaticAsyncUpdateTasksPackage *pack in self.packages) {
+        if ([pack.tasks containsObject:task]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (NSInteger)tasksTotalCount {
+    NSInteger count = 0;
+    for (LookinStaticAsyncUpdateTasksPackage *pack in self.packages) {
+        count += pack.tasks.count;
+    }
+    return count;
+}
+
+@end
 
 @interface LKStaticAsyncUpdateManager ()
 
-/// 已经发送出去、暂未收到回复的 task。这个标记位用来防止重复发送 task
-@property(nonatomic, strong) NSMutableArray<LookinStaticAsyncUpdateTask *> *ongoingTasks;
-@property(nonatomic, assign) BOOL isSyncing;
+/// 已经成功收到了所有回复的 request
+@property(nonatomic, strong) NSMutableArray<LKDetailUpdateRequest *> *succeededRequests;
+/// 已经发送出去、尚未结束的 request
+@property(nonatomic, strong) LKDetailUpdateRequest *ongoingRequest;
 
 @end
 
@@ -45,75 +77,45 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        _ongoingTasks = [NSMutableArray array];
-        _updateAll_ProgressSignal = [RACSubject subject];
-        _updateAll_ErrorSignal = [RACSubject subject];
+        self.succeededRequests = [NSMutableArray array];
         _modifyingUpdateProgressSignal = [RACSubject subject];
         _modifyingUpdateErrorSignal = [RACSubject subject];
+        
+        @weakify(self);
+        [[self dataSource].willReloadHierarchyInfo subscribeNext:^(id  _Nullable x) {
+            @strongify(self);
+            [self.succeededRequests removeAllObjects];
+        }];
     }
     return self;
 }
 
-- (void)update {
-    
-}
-
 - (void)updateAll {
-//    NSAssert(!LKPreferenceManager.mainManager.turboMode.currentValue, @"");
-//    
-//    LKInspectableApp *app = [LKAppsManager sharedInstance].inspectingApp;
-//    if (!app || !self.dataSource.flatItems.count) {
-//        return;
-//    }
-//    
-//    self.isSyncing = YES;
-//    
-//    [self.updateAll_ProgressSignal sendNext:[RACTuple tupleWithObjects:@0, @0, nil]];
-//    
-//    NSArray<LookinStaticAsyncUpdateTask *> *tasks = [self _makeScreenshotsAndAttrGroupsTasks];
-//    NSArray<LookinStaticAsyncUpdateTasksPackage *> *packages = [self _makePackagesFromTasks:tasks];
-//    
-//    NSUInteger totalTasksCount = tasks.count;
-//    __block NSUInteger receivedTasksCount = 0;
-//    @weakify(self);
-//    [[app fetchHierarchyDetailWithTaskPackages:packages] subscribeNext:^(NSArray<LookinDisplayItemDetail *> *details) {
-//        @strongify(self);
-//        [details enumerateObjectsUsingBlock:^(LookinDisplayItemDetail * _Nonnull detail, NSUInteger idx, BOOL * _Nonnull stop) {
-//            [[LKStaticHierarchyDataSource sharedInstance] modifyWithDisplayItemDetail:detail];
-//        }];
-//        receivedTasksCount += details.count;
-//        [self.updateAll_ProgressSignal sendNext:[RACTuple tupleWithObjects:@(receivedTasksCount), @(totalTasksCount), nil]];
-//        
-//    } error:^(NSError * _Nullable error) {
-//        @strongify(self);
-//        if (error.code == LookinErrCode_PingFailForTimeout) {
-//            error = LookinErrorMake(NSLocalizedString(@"Failed to sync screenshots due to the request timeout.", nil), LookinErrorText_Timeout);
-//        } else if (error.code == LookinErrCode_Timeout) {
-//            NSString *msgTitle = [NSString stringWithFormat:NSLocalizedString(@"Failed to sync remaining %@ screenshots due to the request timeout.", nil), @(totalTasksCount - receivedTasksCount)];
-//            NSString *msgDetail = NSLocalizedString(@"Perhaps your iOS app is paused with breakpoint in Xcode, blocked by other tasks in main thread, or moved to background state.\nToo large screenshots may also lead to this error.", nil);
-//            error = LookinErrorMake(msgTitle, msgDetail);
-//        }
-//        [self.updateAll_CompletionSignal sendNext:nil];
-//        [[RACScheduler mainThreadScheduler] afterDelay:1 schedule:^{
-//            // 此时可能 StaticViewController 还没来得及被初始化导致错误 tips 显示不出来，所以稍等一下
-//            [self.updateAll_ErrorSignal sendNext:error];
-//        }];
-//        self.isSyncing = NO;
-//    } completed:^{
-//        // 注意，用户手动取消请求后，也会走到这里
-//        @strongify(self);
-//        [self.updateAll_CompletionSignal sendNext:nil];
-//        self.isSyncing = NO;
-//        
-//        [LKPerformanceReporter.sharedInstance didComplete];
-//    }];
+    NSAssert(!LKPreferenceManager.mainManager.turboMode.currentBOOLValue, @"");
+    
+    LKInspectableApp *app = [LKAppsManager sharedInstance].inspectingApp;
+    if (!app || !self.dataSource.flatItems.count) {
+        return;
+    }
+    [self endUpdating];
+    
+    NSArray<LookinStaticAsyncUpdateTask *> *newTasks = [self makeMaximumTasks];
+    if (newTasks.count == 0) {
+        return;
+    }
+    [self sendTasks:newTasks];
 }
 
-- (void)endUpdatingAll {
+- (void)endUpdating {
+    if (!self.ongoingRequest) {
+        return;
+    }
+    NSLog(@"AsyncUpdate - endUpdating");
+    // 这句会触发 sendTasks 方法里的 completed 事件，进而导致 delegate 被通知
     [InspectingApp cancelHierarchyDetailFetching];
 }
 
-- (NSArray<LookinStaticAsyncUpdateTask *> *)_makeScreenshotsAndAttrGroupsTasks {
+- (NSArray<LookinStaticAsyncUpdateTask *> *)makeMaximumTasks {
     // tasks 里的元素顺序很重要：index 更小的 task 会优先被拉取回来展示。所以我们优先把用户可见的图层加进来，这样用户体验更好
     NSMutableArray<LookinStaticAsyncUpdateTask *> *tasks = [(NSArray<LookinDisplayItem *> *)self.dataSource.displayingFlatItems lookin_map:^id(NSUInteger idx, LookinDisplayItem *item) {
         if (item.isUserCustom) {
@@ -125,66 +127,35 @@
             } else {
                 return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeGroupScreenshot];
             }
-            
         } else {
             return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
         }
     }].mutableCopy;
     
-    if ([LKPreferenceManager mainManager].turboMode.currentBOOLValue == NO) {
-        [self.dataSource.flatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (item.isUserCustom) {
-                return;
-            }
-            if (item.doNotFetchScreenshotReason == LookinFetchScreenshotPermitted) {
-                LookinStaticAsyncUpdateTask *task = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeGroupScreenshot];
-                if (![tasks containsObject:task]) {
-                    [tasks addObject:task];
-                }
-                
-                if (item.isExpandable) {
-                    LookinStaticAsyncUpdateTask *task2 = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeSoloScreenshot];
-                    if (![tasks containsObject:task2]) {
-                        [tasks addObject:task2];
-                    }
-                }
-            } else {
-                LookinStaticAsyncUpdateTask *task = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
-                if (![tasks containsObject:task]) {
-                    [tasks addObject:task];
-                }
-            }
-        }];
-    }
-    
-    return tasks.copy;
-}
-
-- (NSArray<LookinStaticAsyncUpdateTask *> *)_makeScreenshotsAndAttrGroupsTasksByItems:(NSArray<LookinDisplayItem *> *)items forced:(BOOL)forced {
-    NSArray<LookinStaticAsyncUpdateTask *> *tasks = [items lookin_map:^id(NSUInteger idx, LookinDisplayItem *item) {
+    [self.dataSource.flatItems enumerateObjectsUsingBlock:^(LookinDisplayItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
         if (item.isUserCustom) {
-            return nil;
-        }
-        if (!forced) {
-            if ((item.soloScreenshot != nil && item.isExpanded)
-                || (item.groupScreenshot != nil && !item.isExpanded)
-                || !item.shouldCaptureImage
-                || (item.frame.size.width == 0 || item.frame.size.height == 0)) {
-                return nil;
-            }
+            return;
         }
         if (item.doNotFetchScreenshotReason == LookinFetchScreenshotPermitted) {
-            if (item.isExpandable && item.isExpanded) {
-                return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeSoloScreenshot];
-            } else {
-                return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeGroupScreenshot];
+            LookinStaticAsyncUpdateTask *task = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeGroupScreenshot];
+            if (![tasks containsObject:task]) {
+                [tasks addObject:task];
             }
             
+            if (item.isExpandable) {
+                LookinStaticAsyncUpdateTask *task2 = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeSoloScreenshot];
+                if (![tasks containsObject:task2]) {
+                    [tasks addObject:task2];
+                }
+            }
         } else {
-            return [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
+            LookinStaticAsyncUpdateTask *task = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot];
+            if (![tasks containsObject:task]) {
+                [tasks addObject:task];
+            }
         }
-    }];
-    return tasks;
+    }];    
+    return tasks.copy;
 }
 
 - (NSArray<LookinStaticAsyncUpdateTasksPackage *> *)_makePackagesFromTasks:(NSArray<LookinStaticAsyncUpdateTask *> *)tasks {
@@ -295,7 +266,7 @@
         
         LookinStaticAsyncUpdateTask *newTask = nil;
         if (item.doNotFetchScreenshotReason == LookinFetchScreenshotPermitted) {
-            // 该图层应该有图像，所以应该拉取图像（顺带会把 attr 也拉过来，这有可能导致重复拉取 attr 不过这个浪费的时间很少）
+            // 该图层应该有图像（但是现在没有），所以应该拉取图像
             if (item.isExpandable && item.isExpanded) {
                 newTask = [self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeSoloScreenshot];
             } else {
@@ -314,16 +285,23 @@
         if (!newTask) {
             return nil;
         }
-        if ([self.ongoingTasks containsObject:newTask]) {
-            return nil;
+        
+        /// Client 1.0.7 & Server 1.2.7 开始支持 attrRequest 这个参数
+        if (item.attributesGroupList.count == 0) {
+            newTask.attrRequest = LookinDetailUpdateTaskAttrRequest_Need;
+        } else {
+            newTask.attrRequest = LookinDetailUpdateTaskAttrRequest_NotNeed;
+        }
+        
+        for (LKDetailUpdateRequest *req in self.succeededRequests) {
+            if ([req queryIfContainsTask:newTask]) {
+                // 该 task 已经请求成功过，不再重复请求
+                return nil;
+            }
         }
         return newTask;
     }];
     return tasks;
-}
-
-- (void)updateItemsWhichHasNotUpdated:(NSArray<LookinDisplayItem *> *)items {
-
 }
 
 - (void)updateForDisplayingItems {
@@ -341,71 +319,72 @@
     if (newTasks.count == 0) {
         return;
     }
+    // 相同请求不能并发，因此必须先把之前的请求先取消掉
+    [self endUpdating];
     [self sendTasks:newTasks];
 }
 
 - (void)sendTasks:(NSArray<LookinStaticAsyncUpdateTask *> *)newTasks {
     LKInspectableApp *app = [LKAppsManager sharedInstance].inspectingApp;
-    if (!app) {
+    if (!app || newTasks.count == 0) {
         return;
     }
-    
-    [self.ongoingTasks addObjectsFromArray:newTasks];
-    [self.delegate ongoingDetailUpdateTasksDidChange:self.ongoingTasks.count];
-    
     NSArray<LookinStaticAsyncUpdateTasksPackage *> *packages = [self _makePackagesFromTasks:newTasks];
+    self.ongoingRequest = [LKDetailUpdateRequest new];
+    self.ongoingRequest.packages = packages;
+    
+    [self notifyTasksCountToDelegate];
+    
+    NSLog(@"AsyncUpdate - Will send %@ tasks.", @(newTasks.count));
     
     @weakify(self);
     [[app fetchHierarchyDetailWithTaskPackages:packages] subscribeNext:^(NSArray<LookinDisplayItemDetail *> *details) {
         @strongify(self);
         [details enumerateObjectsUsingBlock:^(LookinDisplayItemDetail * _Nonnull detail, NSUInteger idx, BOOL * _Nonnull stop) {
-            [self handleReceivingDetail:detail];
+            [[LKStaticHierarchyDataSource sharedInstance] modifyWithDisplayItemDetail:detail];
         }];
+        self.ongoingRequest.finishedTasksCount += details.count;
+        [self notifyTasksCountToDelegate];
         
     } error:^(NSError * _Nullable error) {
         @strongify(self);
-        if (error.code == LookinErrCode_PingFailForTimeout) {
-            error = LookinErrorMake(NSLocalizedString(@"Failed to sync screenshots due to the request timeout.", nil), LookinErrorText_Timeout);
-        } else if (error.code == LookinErrCode_Timeout) {
-            NSString *msgTitle = [NSString stringWithFormat:NSLocalizedString(@"Failed to sync remaining %@ screenshots due to the request timeout.", nil), @(self.ongoingTasks.count)];
-            NSString *msgDetail = NSLocalizedString(@"Perhaps your iOS app is paused with breakpoint in Xcode, blocked by other tasks in main thread, or moved to background state.\nToo large screenshots may also lead to this error.", nil);
-            error = LookinErrorMake(msgTitle, msgDetail);
-        }
+        self.ongoingRequest = nil;
+        [self notifyTasksCountToDelegate];
         
-
+        NSString *msgTitle = [NSString stringWithFormat:NSLocalizedString(@"Request timeout, layer data transmission failed.", nil)];
+        NSString *msgDetail = NSLocalizedString(@"Perhaps your iOS app is paused with breakpoint in Xcode, blocked by other tasks in main thread, or moved to background state.\nToo large screenshots may also lead to this error.", nil);
+        error = LookinErrorMake(msgTitle, msgDetail);
         [[RACScheduler mainThreadScheduler] afterDelay:1 schedule:^{
             // 此时可能 StaticViewController 还没来得及被初始化导致错误 tips 显示不出来，所以稍等一下
-            [self.updateAll_ErrorSignal sendNext:error];
+            [self.delegate detailUpdateReceivedError:error];
         }];
-        self.isSyncing = NO;
     } completed:^{
         // 注意，用户手动取消请求后，也会走到这里
         @strongify(self);
-
-        self.isSyncing = NO;
-        
+        if (self.ongoingRequest) {
+            BOOL userCancel = (self.ongoingRequest.tasksTotalCount > self.ongoingRequest.finishedTasksCount);
+            if (!userCancel) {
+                [self.succeededRequests addObject:self.ongoingRequest];
+            }
+            self.ongoingRequest = nil;
+        } else {
+            NSAssert(NO, @"");
+        }
+        [self notifyTasksCountToDelegate];
         [LKPerformanceReporter.sharedInstance didComplete];
     }];
 }
 
-- (void)handleReceivingDetail:(LookinDisplayItemDetail *)detail {
-    [[LKStaticHierarchyDataSource sharedInstance] modifyWithDisplayItemDetail:detail];
-    [self.ongoingTasks lookin_removeObjectsPassingTest:^BOOL(NSUInteger idx, LookinStaticAsyncUpdateTask *task) {
-        if (task.oid != detail.displayItemOid) {
-            return NO;
-        }
-        switch (task.taskType) {
-            case LookinStaticAsyncUpdateTaskTypeNoScreenshot:
-                return YES;
-            case LookinStaticAsyncUpdateTaskTypeSoloScreenshot:
-                return (detail.soloScreenshot != nil);
-            case LookinStaticAsyncUpdateTaskTypeGroupScreenshot:
-                return (detail.groupScreenshot != nil);
-        }
-        NSAssert(NO, @"");
-        return NO;
-    }];
-    [self.delegate ongoingDetailUpdateTasksDidChange:self.ongoingTasks.count];
+- (void)notifyTasksCountToDelegate {
+    NSUInteger totalCount = 0;
+
+    for (LookinStaticAsyncUpdateTasksPackage *pack in self.ongoingRequest.packages) {
+        totalCount += pack.tasks.count;
+    }
+    NSUInteger finishedCount = self.ongoingRequest.finishedTasksCount;
+
+    NSLog(@"AsyncUpdate - notify delagate: %@/%@", @(finishedCount), @(totalCount));
+    [self.delegate detailUpdateTasksTotalCount:totalCount finishedCount:finishedCount];
 }
 
 @end

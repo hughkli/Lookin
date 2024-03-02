@@ -220,7 +220,7 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
         [button setButtonType:NSButtonTypePushOnPushOff];
         
         NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:LKToolBarIdentifier_Turbo];
-        item.label = NSLocalizedString(@"Turbo Mode", nil);
+        item.label = NSLocalizedString(@"Fast Mode", nil);
         item.view = button;
         item.minSize = NSMakeSize(60, 34);
         
