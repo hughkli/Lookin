@@ -283,6 +283,56 @@ extern NSString *const LKAppShowConsoleNotificationName;
     
     [menu removeAllItems];
 
+    // 复制文字
+    NSMutableArray<NSString *> *stringsToCopy = [NSMutableArray array];
+    
+    BOOL doNotCopyTitle = NO;
+    if ([displayItem.title hasPrefix:@"UI"] || [displayItem.title hasPrefix:@"CA"]) {
+        if (displayItem.title.length < 10) {
+            // 不显示常见的 UIView、CALayer 等系统类，避免干扰
+            doNotCopyTitle = YES;
+        }
+    }
+    if (!doNotCopyTitle) {
+        [stringsToCopy addObject:displayItem.title];
+
+    }
+    NSString *hostViewControllerName = displayItem.hostViewControllerObject.lk_simpleDemangledClassName;
+    if (hostViewControllerName.length) {
+        [stringsToCopy addObject:hostViewControllerName];
+    }
+    if (displayItem.displayingObject.ivarTraces.count) {
+        NSArray<NSString *> *ivarNames = [[displayItem.displayingObject.ivarTraces lookin_map:^id(NSUInteger idx, LookinIvarTrace *value) {
+            NSString *name = value.ivarName;
+            if ([name hasPrefix:@"_"]) {
+                name = [name substringFromIndex:1];
+            }
+            return name;
+        }] lookin_nonredundantArray];
+        if (ivarNames.count) {
+            [stringsToCopy addObjectsFromArray:ivarNames];
+        }
+    }
+    [stringsToCopy enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx == 0) {
+            [menu addItem:[NSMenuItem separatorItem]];
+        }
+        if (obj.length == 0) {
+            NSAssert(NO, @"LKHierarchyView, menuNeedsUpdate, stringsToCopy length is zero.");
+            return;
+        }
+        [menu addItem:({
+            NSMenuItem *item = [NSMenuItem new];
+            item.target = self;
+            item.action = @selector(_handleCopyDisplayItemName:);
+            item.representedObject = obj;
+            item.title = [NSString stringWithFormat:NSLocalizedString(@"Copy text \"%@\"", nil), obj];
+            item;
+        })];
+    }];
+    
+    [menu addItem:[NSMenuItem separatorItem]];
+    
     if (!displayItem.isUserCustom) {
         [menu addItem:({
             NSMenuItem *item = [NSMenuItem new];
@@ -363,54 +413,6 @@ extern NSString *const LKAppShowConsoleNotificationName;
             item;
         })];        
     }
-
-    // 复制文字
-    NSMutableArray<NSString *> *stringsToCopy = [NSMutableArray array];
-    
-    BOOL doNotCopyTitle = NO;
-    if ([displayItem.title hasPrefix:@"UI"] || [displayItem.title hasPrefix:@"CA"]) {
-        if (displayItem.title.length < 10) {
-            // 不显示常见的 UIView、CALayer 等系统类，避免干扰
-            doNotCopyTitle = YES;
-        }
-    }
-    if (!doNotCopyTitle) {
-        [stringsToCopy addObject:displayItem.title];
-
-    }
-    NSString *hostViewControllerName = displayItem.hostViewControllerObject.lk_simpleDemangledClassName;
-    if (hostViewControllerName.length) {
-        [stringsToCopy addObject:hostViewControllerName];
-    }
-    if (displayItem.displayingObject.ivarTraces.count) {
-        NSArray<NSString *> *ivarNames = [[displayItem.displayingObject.ivarTraces lookin_map:^id(NSUInteger idx, LookinIvarTrace *value) {
-            NSString *name = value.ivarName;
-            if ([name hasPrefix:@"_"]) {
-                name = [name substringFromIndex:1];
-            }
-            return name;
-        }] lookin_nonredundantArray];
-        if (ivarNames.count) {
-            [stringsToCopy addObjectsFromArray:ivarNames];
-        }
-    }
-    [stringsToCopy enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (idx == 0) {
-            [menu addItem:[NSMenuItem separatorItem]];
-        }
-        if (obj.length == 0) {
-            NSAssert(NO, @"LKHierarchyView, menuNeedsUpdate, stringsToCopy length is zero.");
-            return;
-        }
-        [menu addItem:({
-            NSMenuItem *item = [NSMenuItem new];
-            item.target = self;
-            item.action = @selector(_handleCopyDisplayItemName:);
-            item.representedObject = obj;
-            item.title = [NSString stringWithFormat:NSLocalizedString(@"Copy text \"%@\"", nil), obj];
-            item;
-        })];
-    }];
     
     if (!displayItem.isUserCustom && !displayItem.inNoPreviewHierarchy) {
         [menu addItem:[NSMenuItem separatorItem]];
