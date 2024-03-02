@@ -12,6 +12,7 @@
 #import "LKDashboardCardView.h"
 #import "LKDashboardViewController.h"
 #import "LookinDashboardBlueprint.h"
+#import "LKDashboardTextControlEditingFlag.h"
 
 @interface LKDashboardAttributeNumberInputView () <NSTextFieldDelegate>
 
@@ -135,6 +136,10 @@
 }
 
 - (void)controlTextDidEndEditing:(NSNotification *)notification {
+    if (LKDashboardTextControlEditingFlag.sharedInstance.shouldIgnoreTextEditingChangeEvent) {
+        NSLog(@"忽略 controlTextDidEndEditing 事件，驳回");
+        return;
+    }
     id expectedValue = [LKNumberInputView parsedValueWithString:self.inputView.textFieldView.textField.stringValue attrType:self.attribute.attrType];
     if (!expectedValue) {
         NSLog(@"输入格式校验不通过，驳回");

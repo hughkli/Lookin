@@ -10,6 +10,7 @@
 #import "LKNumberInputView.h"
 #import "LKTextFieldView.h"
 #import "LKDashboardViewController.h"
+#import "LKDashboardTextControlEditingFlag.h"
 
 @interface LKDashboardAttributeInsetsView () <NSTextFieldDelegate>
 
@@ -91,6 +92,10 @@
 
 - (void)controlTextDidEndEditing:(NSNotification *)notification {
     if (![self canEdit]) {
+        return;
+    }
+    if (LKDashboardTextControlEditingFlag.sharedInstance.shouldIgnoreTextEditingChangeEvent) {
+        NSLog(@"忽略 controlTextDidEndEditing 事件，驳回");
         return;
     }
     NSTextField *editingTextField = notification.object;

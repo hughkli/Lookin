@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		094E413CB04F29F94551D070 /* Pods_LookinClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A3B0CB06C22A05EDC913F3 /* Pods_LookinClient.framework */; };
+		1822E2CB2B9396B50007C0B2 /* LKDashboardTextControlEditingFlag.m in Sources */ = {isa = PBXBuildFile; fileRef = 1822E2CA2B9396B50007C0B2 /* LKDashboardTextControlEditingFlag.m */; };
 		183875EB2B2F339B005FE951 /* LKTableViewHorizontalScrollWidthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 183875EA2B2F339B005FE951 /* LKTableViewHorizontalScrollWidthManager.m */; };
 		1892DD1C2AF258890016D61B /* LookinDisplayItem+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892DD1B2AF258890016D61B /* LookinDisplayItem+LookinClient.m */; };
 		1892DD292AF25EDE0016D61B /* LookinMsgTargetAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892DD252AF25EDE0016D61B /* LookinMsgTargetAction.m */; };
@@ -214,6 +215,8 @@
 
 /* Begin PBXFileReference section */
 		07695A2606130B23B91F553C /* Pods-LookinTestflight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookinTestflight.release.xcconfig"; path = "Target Support Files/Pods-LookinTestflight/Pods-LookinTestflight.release.xcconfig"; sourceTree = "<group>"; };
+		1822E2C92B9396B50007C0B2 /* LKDashboardTextControlEditingFlag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKDashboardTextControlEditingFlag.h; sourceTree = "<group>"; };
+		1822E2CA2B9396B50007C0B2 /* LKDashboardTextControlEditingFlag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKDashboardTextControlEditingFlag.m; sourceTree = "<group>"; };
 		183875E92B2F339B005FE951 /* LKTableViewHorizontalScrollWidthManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKTableViewHorizontalScrollWidthManager.h; sourceTree = "<group>"; };
 		183875EA2B2F339B005FE951 /* LKTableViewHorizontalScrollWidthManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKTableViewHorizontalScrollWidthManager.m; sourceTree = "<group>"; };
 		1892DD1A2AF258890016D61B /* LookinDisplayItem+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LookinDisplayItem+LookinClient.h"; sourceTree = "<group>"; };
@@ -671,6 +674,8 @@
 			isa = PBXGroup;
 			children = (
 				AA05CCD8221ED5F60086CDD1 /* LKDashboardAttributeColorView.h */,
+				1822E2C92B9396B50007C0B2 /* LKDashboardTextControlEditingFlag.h */,
+				1822E2CA2B9396B50007C0B2 /* LKDashboardTextControlEditingFlag.m */,
 				AAB636BE22B3854100885A2C /* LKDashboardAttributeClassView.h */,
 				AAB636BF22B3854100885A2C /* LKDashboardAttributeClassView.m */,
 				AAB636C122B3981200885A2C /* LKDashboardAttributeRelationView.h */,
@@ -1340,6 +1345,7 @@
 				AAD387342288632100042229 /* LKHierarchyController.m in Sources */,
 				AAA8C15F21CC17680017A345 /* LKLaunchAppView.m in Sources */,
 				AAA8C15921CC17680017A345 /* LKPreviewStageView.m in Sources */,
+				1822E2CB2B9396B50007C0B2 /* LKDashboardTextControlEditingFlag.m in Sources */,
 				AA30216021F32908000B0084 /* LKColorIndicatorLayer.m in Sources */,
 				D4052AC9235CBD090033C961 /* LKMeasureTutorialView.m in Sources */,
 				AA049A1721E61B85008C6366 /* LKMenuPopoverSettingController.m in Sources */,
