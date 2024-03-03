@@ -39,7 +39,7 @@
         [self addSubview:self.iconImageView];
     
         self.textField = [NSTextField new];
-        self.textField.placeholderString = @"搜索属性或方法";
+        self.textField.placeholderString = NSLocalizedString(@"properties or methods", nil);
         self.textField.delegate = self;
         self.textField.focusRingType = NSFocusRingTypeNone;
         self.textField.editable = YES;

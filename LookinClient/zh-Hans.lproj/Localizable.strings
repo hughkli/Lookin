@@ -215,3 +215,4 @@
 "Please upgrade the LookinServer SDK version in your iOS project to 1.2.7 or higher." = "请先将你的 iOS 项目中的 LookinServer SDK 版本升级至 1.2.7 或更高版本。";
 "Some layer data failed to transmit." = "某些图层信息传输失败";
 "It may be due to changes in the layer structure within the iOS app. You can try reloading the entire structure in Lookin." = "可能因为 iOS App 中的图层结构有变化，可尝试在 Lookin 中整体重新刷新。";
+"properties or methods" = "搜索属性或方法";
