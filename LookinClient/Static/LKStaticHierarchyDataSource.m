@@ -19,11 +19,14 @@
 #import "LKMessageManager.h"
 #import "LKServerVersionRequestor.h"
 #import "LKVersionComparer.h"
+#import "LKAppsManager.h"
+#import "LKDanceUIAttrMaker.h"
 @import AppCenter;
 @import AppCenterAnalytics;
 
 @interface LKStaticHierarchyDataSource ()
 
+@property(nonatomic, assign) BOOL shouldIgnoreFastModeAutoUpdate;
 @property(nonatomic, assign) BOOL isUsingDanceUI;
 
 @end
@@ -134,6 +137,52 @@
     if (attrChanged) {
         [self.itemDidChangeAttrGroup sendNext:displayItem];        
     }
+    if (detail.subitems && (displayItem.subitems.count > 0 || detail.subitems.count > 0)) {
+        // 如果没有这个标记位的话，待会儿的 buildDisplayingItem 在 fastMode 下会触发 update task，而此时上一个 update task 其实还没有结束（此时还在 sendTask 的 subscribe 阶段、还没有到 completion 阶段），因此就会同时有两个 update task，而 task 理论上是不能并发的。所以我们这里先简单的用一个标记位防止一下。
+        self.shouldIgnoreFastModeAutoUpdate = YES;
+        
+        // 可能在 search 或 focus 状态，先退出，否则状态维护太麻烦
+        switch (self.state) {
+            case LKHierarchyDataSourceStateFocus:
+                [self endFocus];
+                break;
+            case LKHierarchyDataSourceStateSearch:
+                [self endSearch];
+                break;
+            default:
+                break;
+        }
+        
+        displayItem.subitems = detail.subitems;
+        // 根据 subitems 属性打平为二维数组，同时给每个 item 设置 indentLevel
+        self.rawFlatItems = [LookinDisplayItem flatItemsFromHierarchicalItems:self.rawHierarchyInfo.displayItems];
+        self.flatItems = self.rawFlatItems;
+        [self.didReloadHierarchyInfo sendNext:nil];
+        
+        [displayItem enumerateSelfAndChildren:^(LookinDisplayItem * _Nonnull obj) {
+            if (obj == displayItem) {
+                return;
+            }
+            if (!obj.isUserCustom && !obj.shouldCaptureImage) {
+                [obj enumerateSelfAndChildren:^(LookinDisplayItem *item) {
+                    item.noPreview = YES;
+                    item.doNotFetchScreenshotReason = LookinDoNotFetchScreenshotForUserConfig;
+                }];
+            }
+            if (obj.customInfo.danceuiSource.length > 0) {
+                [LKDanceUIAttrMaker makeDanceUIJumpAttribute:obj danceSource:obj.customInfo.danceuiSource];
+            }
+        }];
+        [self buildDisplayingFlatItems];
+        self.shouldIgnoreFastModeAutoUpdate = NO;
+    }
+}
+
+- (void)buildDisplayingFlatItems {
+    [super buildDisplayingFlatItems];
+    if ([LKPreferenceManager mainManager].fastMode.currentBOOLValue && !self.shouldIgnoreFastModeAutoUpdate) {
+        [[LKStaticAsyncUpdateManager sharedInstance] updateForDisplayingItems];
+    }
 }
 
 - (LKPreferenceManager *)preferenceManager {
@@ -184,6 +233,10 @@
     [MSACAnalytics trackEvent:@"ServerVersion" withProperties:@{@"version":userVersion}];
     BOOL isNew = [LKVersionComparer compareWithNewest:newestVersion user:userVersion];
     return isNew;
+}
+
+- (BOOL)isReadOnly {
+    return NO;
 }
 
 @end

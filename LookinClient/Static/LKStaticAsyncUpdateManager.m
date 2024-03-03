@@ -20,13 +20,17 @@
 #import "LookinDisplayItem+LookinClient.h"
 #import "LKPreferenceManager.h"
 #import "LKVersionComparer.h"
+#import "LKReloadSingleItemUpdateTaskMaker.h"
+#import "LKReloadItemAndChildrenUpdateTaskMaker.h"
 
 @interface LKDetailUpdateRequest : NSObject
 
 @property(nonatomic, copy) NSArray<LookinStaticAsyncUpdateTasksPackage *> *packages;
 /// 已经收到回复的 task 的数量（但受限于目前的设计，无法知道具体是哪些 task 收到了回复）
+/// detail 有 failureCode 时，也仍然会被算到 finishedTasksCount 里面
 @property(nonatomic, assign) NSInteger finishedTasksCount;
 @property(nonatomic, assign) NSInteger tasksTotalCount;
+@property(nonatomic, assign) NSInteger failedTasksCount;
 
 @end
 
@@ -39,6 +43,18 @@
         }
     }
     return NO;
+}
+
+- (void)removeTaskWithItem:(LookinDisplayItem *)item {
+    for (LookinStaticAsyncUpdateTasksPackage *pack in self.packages) {
+        pack.tasks = [pack.tasks lookin_filter:^BOOL(LookinStaticAsyncUpdateTask *task) {
+            if (task.oid == item.layerObject.oid) {
+                return NO;
+            } else {
+                return YES;
+            }
+        }];
+    }
 }
 
 - (NSInteger)tasksTotalCount {
@@ -103,7 +119,7 @@
     if (newTasks.count == 0) {
         return;
     }
-    [self sendTasks:newTasks];
+    [self sendTasks:newTasks completion:nil];
 }
 
 - (void)endUpdating {
@@ -319,16 +335,17 @@
     if (newTasks.count == 0) {
         return;
     }
-    // 相同请求不能并发，因此必须先把之前的请求先取消掉
-    [self endUpdating];
-    [self sendTasks:newTasks];
+    [self sendTasks:newTasks completion:nil];
 }
 
-- (void)sendTasks:(NSArray<LookinStaticAsyncUpdateTask *> *)newTasks {
+- (void)sendTasks:(NSArray<LookinStaticAsyncUpdateTask *> *)newTasks completion:(void (^)(void))completionBlock {
     LKInspectableApp *app = [LKAppsManager sharedInstance].inspectingApp;
     if (!app || newTasks.count == 0) {
         return;
     }
+    // 相同请求不能并发，因此必须先把之前的请求先取消掉
+    [self endUpdating];
+    
     NSArray<LookinStaticAsyncUpdateTasksPackage *> *packages = [self _makePackagesFromTasks:newTasks];
     self.ongoingRequest = [LKDetailUpdateRequest new];
     self.ongoingRequest.packages = packages;
@@ -341,7 +358,11 @@
     [[app fetchHierarchyDetailWithTaskPackages:packages] subscribeNext:^(NSArray<LookinDisplayItemDetail *> *details) {
         @strongify(self);
         [details enumerateObjectsUsingBlock:^(LookinDisplayItemDetail * _Nonnull detail, NSUInteger idx, BOOL * _Nonnull stop) {
-            [[LKStaticHierarchyDataSource sharedInstance] modifyWithDisplayItemDetail:detail];
+            if (detail.failureCode == -1) {
+                self.ongoingRequest.failedTasksCount += 1;
+            } else {
+                [[LKStaticHierarchyDataSource sharedInstance] modifyWithDisplayItemDetail:detail];
+            }
         }];
         self.ongoingRequest.finishedTasksCount += details.count;
         [self notifyTasksCountToDelegate];
@@ -366,12 +387,22 @@
             if (!userCancel) {
                 [self.succeededRequests addObject:self.ongoingRequest];
             }
+            
+            if (self.ongoingRequest.failedTasksCount > 0) {
+                NSError *error = LookinErrorMake(NSLocalizedString(@"Some layer data failed to transmit.", nil), NSLocalizedString(@"It may be due to changes in the layer structure within the iOS app. You can try reloading the entire structure in Lookin.", nil));
+                [self.delegate detailUpdateReceivedError:error];
+            }
+            
             self.ongoingRequest = nil;
         } else {
             NSAssert(NO, @"");
         }
         [self notifyTasksCountToDelegate];
         [LKPerformanceReporter.sharedInstance didComplete];
+        
+        if (completionBlock) {
+            completionBlock();
+        }
     }];
 }
 
@@ -385,6 +416,63 @@
 
     NSLog(@"AsyncUpdate - notify delagate: %@/%@", @(finishedCount), @(totalCount));
     [self.delegate detailUpdateTasksTotalCount:totalCount finishedCount:finishedCount];
+}
+
+- (void)reloadSingleDisplayItem:(LookinDisplayItem *)item {
+    NSArray *tasks = [LKReloadSingleItemUpdateTaskMaker makeWithItem:item];
+    if (tasks.count == 0) {
+        return;
+    }
+    [self sendTasks:tasks completion:nil];
+}
+
+- (void)reloadDisplayItemAndChildren:(LookinDisplayItem *)rootItem {
+    // 先更新 rootItem 的 basis + attr + subitems
+    NSArray *tasks = [LKReloadItemAndChildrenUpdateTaskMaker makeWithItem:rootItem];
+    if (tasks.count == 0) {
+        return;
+    }
+    [rootItem enumerateSelfAndChildren:^(LookinDisplayItem * _Nonnull item) {
+        // 把 screenshots 以及完成的任务记录都删掉，因为稍后我们要重新拉取
+        // 虽然待会儿返回的新 children 是新的 displayItem 实例，但新的 displayItem 实例的 oid 很可能没有变化，而 task 的 equal 是根据 oid 来计算的
+        item.soloScreenshot = nil;
+        item.groupScreenshot = nil;
+        [self.succeededRequests enumerateObjectsUsingBlock:^(LKDetailUpdateRequest * _Nonnull req, NSUInteger idx, BOOL * _Nonnull stop) {
+            [req removeTaskWithItem:item];
+        }];
+    }];
+    
+    [self sendTasks:tasks completion:^{
+        // 更新 rootItem 以及 children 的图层详情
+        [self updateAfterReloadingItemAndChildren:rootItem];
+    }];
+}
+
+- (void)updateAfterReloadingItemAndChildren:(LookinDisplayItem *)rootItem {
+    // 拉取 rootItem 以及 children 的 screenshots + attr
+    if (LKPreferenceManager.mainManager.fastMode.currentBOOLValue) {
+        [self updateForDisplayingItems];
+    } else {
+        NSMutableArray<LookinStaticAsyncUpdateTask *> *tasks = [NSMutableArray array];
+        [rootItem enumerateSelfAndChildren:^(LookinDisplayItem * _Nonnull item) {
+            if (item.isUserCustom) {
+                return;
+            }
+            if (item.doNotFetchScreenshotReason == LookinFetchScreenshotPermitted) {
+                [tasks addObject:[self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeGroupScreenshot]];
+                if (item.isExpandable) {
+                    [tasks addObject:[self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeSoloScreenshot]];
+                }
+            } else {
+                [tasks addObject:[self _taskFromDisplayItem:item type:LookinStaticAsyncUpdateTaskTypeNoScreenshot]];
+            }
+        }];
+        [self sendTasks:tasks completion:nil];
+    }
+}
+
+- (BOOL)isUpdating {
+    return self.ongoingRequest != nil;
 }
 
 @end

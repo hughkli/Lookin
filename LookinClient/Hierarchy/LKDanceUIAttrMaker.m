@@ -27,7 +27,7 @@
         }
     }];
     if (alreadyHas) {
-        NSAssert(NO, @"");
+//        NSAssert(NO, @"");
         return;
     }
     LookinAttribute *attr = [LookinAttribute new];

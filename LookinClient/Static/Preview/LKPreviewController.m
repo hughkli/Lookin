@@ -22,6 +22,7 @@
 #import "LKPreviewView.h"
 #import "LKUserActionManager.h"
 #import "LKHierarchyDataSource+KeyDown.h"
+#import "LKStaticAsyncUpdateManager.h"
 
 extern NSString *const LKAppShowConsoleNotificationName;
 
@@ -74,7 +75,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
             self.previewView.isDarkMode = isDarkMode;
         };
         [self.view addSubview:self.previewView];
-
+        
         // 这里通过 [RACSignal return:nil] 来立即执行一次渲染
         [[RACSignal merge:@[[RACSignal return:nil],
                             self.dataSource.didReloadHierarchyInfo,
@@ -114,16 +115,16 @@ extern NSString *const LKAppShowConsoleNotificationName;
         self.panRecognizer = [[LKPreviewPanGestureRecognizer alloc] initWithTarget:self action:@selector(_handlePanGesture:)];
         self.panRecognizer.delegate = self;
         [self.previewView addGestureRecognizer:self.panRecognizer];
-
+        
         self.clickRecognizer = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(_handleClickGesture:)];
         self.clickRecognizer.numberOfClicksRequired = 1;
         self.clickRecognizer.delegate = self;
         [self.previewView addGestureRecognizer:self.clickRecognizer];
-
+        
         self.doubleClickRecognizer = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(_handleDoubleClick:)];
         self.doubleClickRecognizer.numberOfClicksRequired = 2;
         [self.previewView addGestureRecognizer:self.doubleClickRecognizer];
-
+        
         self.rightClickRecognizer = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(_handleRightClick:)];
         self.rightClickRecognizer.buttonMask = 0x2;
         self.rightClickRecognizer.numberOfClicksRequired = 1;
@@ -172,7 +173,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
             @strongify(self);
             [self.previewView didSelectItem:item];
         }];
-    
+        
         [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowDidResignKeyNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
             @strongify(self);
             if (note.object == self.view.window) {
@@ -200,7 +201,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
     /// 向左多延伸一个 dashboard 的视觉宽度（由于一般向右旋转，所以少延伸个 20 似乎更好看一点），向下多延伸一个 titleBar 高度，从而让 preview 在视觉上居中
     CGFloat titleBarHeight = [LKNavigationManager sharedInstance].windowTitleBarHeight;
     $(self.previewView).width(self.view.$width + DashboardViewWidth - DashboardHorInset - 20).right(0).height(self.view.$height + titleBarHeight).y(0);
-//    $(self.previewView).fullFrame;
+    //    $(self.previewView).fullFrame;
     
     BOOL hasLayouted = [self lookin_getBindBOOLForKey:@"hasLayouted"];
     if (!hasLayouted) {
@@ -392,7 +393,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
     }
 }
 
-- (void)_handleClickGesture:(NSClickGestureRecognizer *)recognizer {    
+- (void)_handleClickGesture:(NSClickGestureRecognizer *)recognizer {
     if (self.dataSource.shouldAvoidChangingPreviewSelectionDueToDashboardSearch) {
         return;
     }
@@ -404,7 +405,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
     
     NSPoint point = [recognizer locationInView:self.previewView];
     LookinDisplayItem *item = [self.previewView displayItemAtPoint:point];
-
+    
     if (self.dataSource.selectedItem == item) {
         return;
     }
@@ -437,7 +438,7 @@ extern NSString *const LKAppShowConsoleNotificationName;
     
     NSPoint point = [recognizer locationInView:self.previewView];
     LookinDisplayItem *item = [self.previewView displayItemAtPoint:point];
-
+    
     if (!item.displayingInHierarchy) {
         return;
     }
@@ -530,11 +531,11 @@ extern NSString *const LKAppShowConsoleNotificationName;
         self.isKeyingDownSpace = YES;
         return;
     }
-
+    
     if ([self.dataSource keyDown:event]) {
         return;
     }
-
+    
     [super keyDown:event];
 }
 
@@ -653,18 +654,32 @@ extern NSString *const LKAppShowConsoleNotificationName;
             item.title = NSLocalizedString(@"Print", nil);
             item;
         })];
-        [menu addItem:[NSMenuItem separatorItem]];   
-        
-        [menu addItem:({
-            NSMenuItem *item = [NSMenuItem new];
-            item.target = self;
-            item.action = @selector(_handleReloadSelfAndChildrenItem:);
-            item.title = NSLocalizedString(@"Reload", nil);
-            item;
-        })];
         [menu addItem:[NSMenuItem separatorItem]];
+        
+        if (!self.dataSource.isReadOnly) {
+            BOOL isUpdating = [LKStaticAsyncUpdateManager sharedInstance].isUpdating;
+            [menu addItem:({
+                NSMenuItem *item = [NSMenuItem new];
+                item.title = NSLocalizedString(@"Reload layer", nil);
+                if (!isUpdating) {
+                    item.target = self;
+                    item.action = @selector(_handleReloadSelfItem:);
+                }
+                item;
+            })];
+            [menu addItem:({
+                NSMenuItem *item = [NSMenuItem new];
+                item.title = NSLocalizedString(@"Reload layer and its children", nil);
+                if (!isUpdating) {
+                    item.target = self;
+                    item.action = @selector(_handleReloadSelfAndChildrenItem:);
+                }
+                item;
+            })];
+            [menu addItem:[NSMenuItem separatorItem]];
+        }
     }
-
+    
     if (displayItem.isExpandable) {
         if (displayItem.isExpanded) {
             [menu addItem:({
@@ -698,19 +713,19 @@ extern NSString *const LKAppShowConsoleNotificationName;
     if (!displayItem.isUserCustom && displayItem.groupScreenshot) {
         [menu addItem:({
             NSMenuItem *item = [NSMenuItem new];
+            item.target = self;
+            item.action = @selector(_handleHideScreenshotForever);
+            item.title = NSLocalizedString(@"Hide screenshot forever…", nil);
+            item;
+        })];
+        [menu addItem:[NSMenuItem separatorItem]];
+        
+        [menu addItem:({
+            NSMenuItem *item = [NSMenuItem new];
             item.enabled = YES;
             item.target = self;
             item.action = @selector(_handleExportScreenshot:);
             item.title = NSLocalizedString(@"Export screenshot…", nil);
-            item;
-        })];
-        
-        [menu addItem:[NSMenuItem separatorItem]];
-        [menu addItem:({
-            NSMenuItem *item = [NSMenuItem new];
-            item.target = self;
-            item.action = @selector(_handleHideScreenshotForever);
-            item.title = NSLocalizedString(@"Hide screenshot forever…", nil);
             item;
         })];
     }
@@ -730,17 +745,20 @@ extern NSString *const LKAppShowConsoleNotificationName;
     [[NSNotificationCenter defaultCenter] postNotificationName:LKAppShowConsoleNotificationName object:item];
 }
 
+- (void)_handleReloadSelfItem:(NSMenuItem *)menuItem {
+    LookinDisplayItem *item = self.rightClickingDisplayItem;
+    if (!item) {
+        return;
+    }
+    [[LKStaticAsyncUpdateManager sharedInstance] reloadSingleDisplayItem:item];
+}
+
 - (void)_handleReloadSelfAndChildrenItem:(NSMenuItem *)menuItem {
     LookinDisplayItem *item = self.rightClickingDisplayItem;
-    NSMutableArray *items = [NSMutableArray array];
-    BOOL allNodesRefresh = ([LKPreferenceManager mainManager].fastMode.currentBOOLValue == NO);
-    [item enumerateSelfAndChildren:^(LookinDisplayItem * _Nonnull item) {
-        if (allNodesRefresh || item.displayingInHierarchy) {
-            [items addObject:item];
-        }
-    }];
-    NSAssert(NO, @"");
-//    [self.dataSource reloadWithItems:items forced:YES];
+    if (!item) {
+        return;
+    }
+    [[LKStaticAsyncUpdateManager sharedInstance] reloadDisplayItemAndChildren:item];
 }
 
 - (void)_handleFocusCurrentItem:(NSMenuItem *)menuItem {

@@ -209,3 +209,9 @@
 "Fast refresh mode is enabled, which may result in layer consistency issues." = "快速刷新模式已打开，可能导致图层一致性问题";
 "View feature description" = "👉 查看功能说明";
 "Don't remind me again" = "🚫 不再提示";
+"Reload layer" = "刷新该图层";
+"Reload layer and its children" = "刷新该图层及子图层";
+"Operation failed." = "操作失败";
+"Please upgrade the LookinServer SDK version in your iOS project to 1.2.7 or higher." = "请先将你的 iOS 项目中的 LookinServer SDK 版本升级至 1.2.7 或更高版本。";
+"Some layer data failed to transmit." = "某些图层信息传输失败";
+"It may be due to changes in the layer structure within the iOS app. You can try reloading the entire structure in Lookin." = "可能因为 iOS App 中的图层结构有变化，可尝试在 Lookin 中整体重新刷新。";

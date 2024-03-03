@@ -40,4 +40,10 @@
 /// updateAfterModifyingDisplayItem 遇到了错误，data 为 NSError
 @property(nonatomic, strong, readonly) RACSubject *modifyingUpdateErrorSignal;
 
+- (BOOL)isUpdating;
+
+/// 重新拉取一个 displayItem 的数据（图像+Attr），不包括子图层
+- (void)reloadSingleDisplayItem:(LookinDisplayItem *)item;
+- (void)reloadDisplayItemAndChildren:(LookinDisplayItem *)rootItem;
+
 @end

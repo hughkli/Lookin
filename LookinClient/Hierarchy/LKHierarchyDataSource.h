@@ -28,8 +28,11 @@ typedef NS_ENUM(NSUInteger, LKHierarchyDataSourceState) {
 @property(nonatomic, strong, readonly) RACSubject *willReloadHierarchyInfo;
 @property(nonatomic, strong, readonly) RACSubject *didReloadHierarchyInfo;
 
+@property(nonatomic, copy) NSArray<LookinDisplayItem *> *rawFlatItems;
+
 /// 一维数组，包含所有 hierarchy 树中可见和不可见的 displayItems
-@property(nonatomic, copy, readonly) NSArray<LookinDisplayItem *> *flatItems;
+/// 搜索或聚焦状态下，flatItems 是 rawFlatItems 的子集（normal 状态下，flatItems 和 rawFlatItems 等价）
+@property(nonatomic, copy) NSArray<LookinDisplayItem *> *flatItems;
 
 /// 一维数组，只包括在 hierarchy 树中因为未被折叠而可见的 displayItems
 /// 业务可以 observe 该属性
@@ -98,6 +101,11 @@ typedef NS_ENUM(NSUInteger, LKHierarchyDataSourceState) {
 @property(nonatomic, assign) BOOL shouldAvoidChangingPreviewSelectionDueToDashboardSearch;
 
 @property(nonatomic, assign, readonly) BOOL serverSideIsSwiftProject;
+
+/// 只读模式下（比如打开一个文件），该方法返回 YES
+- (BOOL)isReadOnly;
+
+- (void)buildDisplayingFlatItems;
 
 #pragma mark - Search or Focus
 

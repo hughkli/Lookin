@@ -211,3 +211,9 @@
 "Fast refresh mode is enabled, which may result in layer consistency issues." = "Fast refresh mode is enabled, which may result in layer consistency issues.";
 "View feature description" = "View feature description";
 "Don't remind me again" = "Don't remind me again";
+"Reload layer" = "Reload layer";
+"Reload layer and its children" = "Reload layer and its children";
+"Operation failed." = "Operation failed.";
+"Please upgrade the LookinServer SDK version in your iOS project to 1.2.7 or higher." = "Please upgrade the LookinServer SDK version in your iOS project to 1.2.7 or higher.";
+"Some layer data failed to transmit." = "Some layer data failed to transmit.";
+"It may be due to changes in the layer structure within the iOS app. You can try reloading the entire structure in Lookin." = "It may be due to changes in the layer structure within the iOS app. You can try reloading the entire structure in Lookin.";

@@ -17,6 +17,7 @@
 #import "LKTutorialManager.h"
 #import "LKTextFieldView.h"
 #import "LKTipsView.h"
+#import "LKStaticAsyncUpdateManager.h"
 
 static NSString * const kMenuBindKey_RowView = @"view";
 static CGFloat const kRowHeight = 28;
@@ -291,22 +292,39 @@ extern NSString *const LKAppShowConsoleNotificationName;
             item.title = NSLocalizedString(@"Focus", nil);
             item;
         })];
-        [menu addItem:({
-            NSMenuItem *item = [NSMenuItem new];
-            item.target = self;
-            item.action = @selector(_handlePrintItem:);
-            item.title = NSLocalizedString(@"Print", nil);
-            item;
-        })];
+        if (!self.dataSource.isReadOnly) {
+            [menu addItem:({
+                NSMenuItem *item = [NSMenuItem new];
+                item.target = self;
+                item.action = @selector(_handlePrintItem:);
+                item.title = NSLocalizedString(@"Print", nil);
+                item;
+            })];
+        }
+        
         [menu addItem:[NSMenuItem separatorItem]];
         
-        [menu addItem:({
-            NSMenuItem *item = [NSMenuItem new];
-            item.target = self;
-            item.action = @selector(_handleReloadSelfAndChildrenItem:);
-            item.title = NSLocalizedString(@"Reload", nil);
-            item;
-        })];
+        if (!self.dataSource.isReadOnly) {
+            BOOL isUpdating = [LKStaticAsyncUpdateManager sharedInstance].isUpdating;
+            [menu addItem:({
+                NSMenuItem *item = [NSMenuItem new];
+                item.title = NSLocalizedString(@"Reload layer", nil);
+                if (!isUpdating) {
+                    item.target = self;
+                    item.action = @selector(_handleReloadSelfItem:);
+                }
+                item;
+            })];
+            [menu addItem:({
+                NSMenuItem *item = [NSMenuItem new];
+                item.title = NSLocalizedString(@"Reload layer and its children", nil);
+                if (!isUpdating) {
+                    item.target = self;
+                    item.action = @selector(_handleReloadSelfAndChildrenItem:);
+                }
+                item;
+            })];
+        }
     }
     
     // 复制文字
@@ -444,18 +462,22 @@ extern NSString *const LKAppShowConsoleNotificationName;
     [[NSNotificationCenter defaultCenter] postNotificationName:LKAppShowConsoleNotificationName object:item];
 }
 
+- (void)_handleReloadSelfItem:(NSMenuItem *)menuItem {
+    LKHierarchyRowView *view = [menuItem.menu lookin_getBindObjectForKey:kMenuBindKey_RowView];
+    LookinDisplayItem *item = view.displayItem;
+    if (!item) {
+        return;
+    }
+    [[LKStaticAsyncUpdateManager sharedInstance] reloadSingleDisplayItem:item];
+}
+
 - (void)_handleReloadSelfAndChildrenItem:(NSMenuItem *)menuItem {
     LKHierarchyRowView *view = [menuItem.menu lookin_getBindObjectForKey:kMenuBindKey_RowView];
     LookinDisplayItem *item = view.displayItem;
-    NSMutableArray *items = [NSMutableArray array];
-    BOOL allNodesRefresh = ([LKPreferenceManager mainManager].fastMode.currentBOOLValue == NO);
-    [item enumerateSelfAndChildren:^(LookinDisplayItem * _Nonnull item) {
-        if (allNodesRefresh || item.displayingInHierarchy) {
-            [items addObject:item];
-        }
-    }];
-    NSAssert(NO, @"");
-//    [self.dataSource reloadWithItems:items forced:YES];
+    if (!item) {
+        return;
+    }
+    [[LKStaticAsyncUpdateManager sharedInstance] reloadDisplayItemAndChildren:item];
 }
 
 - (void)_handleFocusCurrentItem:(NSMenuItem *)menuItem {
@@ -593,5 +615,12 @@ extern NSString *const LKAppShowConsoleNotificationName;
     return [self.displayItems lookin_hasIndex:row] ? self.displayItems[row] : nil;
 }
 
+- (LKStaticHierarchyDataSource *)realtimeDataSource {
+    if (![self.dataSource isKindOfClass:[LKStaticHierarchyDataSource class]]) {
+        NSAssert(NO, @"");
+        return nil;
+    }
+    return (LKStaticHierarchyDataSource *)self.dataSource;
+}
 
 @end
