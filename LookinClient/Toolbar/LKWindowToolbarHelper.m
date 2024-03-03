@@ -27,7 +27,7 @@ NSToolbarItemIdentifier const LKToolBarIdentifier_Console = @"15";
 NSToolbarItemIdentifier const LKToolBarIdentifier_Rotation = @"16";
 NSToolbarItemIdentifier const LKToolBarIdentifier_Measure = @"17";
 NSToolbarItemIdentifier const LKToolBarIdentifier_Message = @"18";
-NSToolbarItemIdentifier const LKToolBarIdentifier_Turbo = @"19";
+NSToolbarItemIdentifier const LKToolBarIdentifier_FastMode = @"19";
 
 
 static NSString * const Key_BindingPreferenceManager = @"PreferenceManager";
@@ -210,7 +210,7 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
         return item;
     }
     
-    if ([identifier isEqualToString:LKToolBarIdentifier_Turbo]) {
+    if ([identifier isEqualToString:LKToolBarIdentifier_FastMode]) {
         NSImage *image = NSImageMake(@"icon_turbo");
         image.template = YES;
 
@@ -219,7 +219,7 @@ static NSString * const Key_BindingAppInfo = @"AppInfo";
         button.bezelStyle = NSBezelStyleTexturedRounded;
         [button setButtonType:NSButtonTypePushOnPushOff];
         
-        NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:LKToolBarIdentifier_Turbo];
+        NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:LKToolBarIdentifier_FastMode];
         item.label = NSLocalizedString(@"Fast Mode", nil);
         item.view = button;
         item.minSize = NSMakeSize(60, 34);

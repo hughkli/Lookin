@@ -80,7 +80,7 @@
         [[[RACSignal combineLatest:@[RACObserve(self, isFetchingHierarchy),
                                      RACObserve(self, isFetchingDetails)]] distinctUntilChanged] subscribeNext:^(RACTuple * _Nullable x) {
             @strongify(self);
-            [@[LKToolBarIdentifier_App, LKToolBarIdentifier_Console, LKToolBarIdentifier_Turbo] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [@[LKToolBarIdentifier_App, LKToolBarIdentifier_Console, LKToolBarIdentifier_FastMode] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 NSToolbarItem *item = self.toolbarItemsMap[obj];
                 if (self.isFetchingHierarchy || self.isFetchingDetails) {
                     item.enabled = NO;
@@ -158,7 +158,7 @@
 }
 
 - (NSArray<NSToolbarItemIdentifier> *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar {
-    NSMutableArray *ret = @[LKToolBarIdentifier_Reload, LKToolBarIdentifier_Turbo, LKToolBarIdentifier_App, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Dimension, LKToolBarIdentifier_Rotation, LKToolBarIdentifier_Setting, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Scale, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Measure, LKToolBarIdentifier_Console].mutableCopy;
+    NSMutableArray *ret = @[LKToolBarIdentifier_Reload, LKToolBarIdentifier_FastMode, LKToolBarIdentifier_App, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Dimension, LKToolBarIdentifier_Rotation, LKToolBarIdentifier_Setting, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Scale, NSToolbarFlexibleSpaceItemIdentifier, LKToolBarIdentifier_Measure, LKToolBarIdentifier_Console].mutableCopy;
     if ([[[LKMessageManager sharedInstance] queryMessages] count] > 0) {
         [ret addObject:LKToolBarIdentifier_Message];
         [MSACAnalytics trackEvent:@"Show Notification"];
@@ -199,7 +199,7 @@
             item.label = NSLocalizedString(@"Notifications", nil);
             item.target = self;
             item.action = @selector(_handleMessage:);
-        } else if ([item.itemIdentifier isEqualToString:LKToolBarIdentifier_Turbo]) {
+        } else if ([item.itemIdentifier isEqualToString:LKToolBarIdentifier_FastMode]) {
             item.target = self;
             item.action = @selector(handleFastMode);
         }
