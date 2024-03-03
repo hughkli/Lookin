@@ -7,13 +7,13 @@ PODS:
   - AppCenter/Core (4.4.2)
   - AppCenter/Crashes (4.4.2):
     - AppCenter/Core
-  - LookinShared (1.2.6)
+  - LookinShared (1.2.7)
   - ReactiveObjC (3.1.0)
   - Sparkle (1.27.1)
 
 DEPENDENCIES:
   - AppCenter
-  - LookinShared (from `../LookinServer/`)
+  - LookinShared (from `https://github.com/QMUI/LookinServer.git`, branch `release/1.2.7`)
   - ReactiveObjC (= 3.1.0)
   - Sparkle (~> 1.0)
 
@@ -25,14 +25,20 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   LookinShared:
-    :path: "../LookinServer/"
+    :branch: release/1.2.7
+    :git: https://github.com/QMUI/LookinServer.git
+
+CHECKOUT OPTIONS:
+  LookinShared:
+    :commit: 985e8afe77aa2f3fab599da4f9882f6e43eed919
+    :git: https://github.com/QMUI/LookinServer.git
 
 SPEC CHECKSUMS:
   AppCenter: b0eca112a27b71e97488ffa1949ee38c7abd4b79
-  LookinShared: 94844c84d1d9c1e05e3bfe5de13cee9a387cf913
+  LookinShared: 300ced445af0883f1e1e73f27e55acd570299fe1
   ReactiveObjC: 2a38ea15335de4119d8b17caf1db1484f61db902
   Sparkle: 23f98b268284c8c03e6228230fc8f1807ef041d5
 
-PODFILE CHECKSUM: 282097373e79e20d3f1a3bc62189375888a5ccb4
+PODFILE CHECKSUM: 93ff2f7fa5186fc479d80a014414bdd94817b3d4
 
 COCOAPODS: 1.13.0
