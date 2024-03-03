@@ -50,6 +50,3 @@ macOS 端软件：https://github.com/hughkli/Lookin/
 
 # 开发节奏
 由于 Lookin 仅仅是我正职之外的业余项目，所以其 Bugfix 或功能迭代可能会非常慢。
-
-# 工作机会
-如果你也是 iOS/Android 客户端开发，并且有换工作的意向，那么诚挚邀请你加入我的部门：https://bytedance.feishu.cn/docx/SAcgdoQuAouyXAxAqy8cmrT2n4b
