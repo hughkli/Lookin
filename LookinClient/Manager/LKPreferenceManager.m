@@ -176,7 +176,7 @@ static NSString * const Key_ReceivingConfigTime_Class = @"ConfigTime_Class";
             _fastMode = [LookinBOOLMsgAttribute attributeWithBOOL:obj_fastMode.boolValue];
         } else {
             _fastMode = [LookinBOOLMsgAttribute attributeWithBOOL:NO];
-            [userDefaults setObject:@(_fastMode.currentBOOLValue) forKey:Key_FreeRotation];
+            [userDefaults setObject:@(_fastMode.currentBOOLValue) forKey:Key_FastMode];
         }
         [self.fastMode subscribe:self action:@selector(_handleFastModeDidChange:) relatedObject:nil];
         
