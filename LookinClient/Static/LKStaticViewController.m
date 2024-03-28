@@ -25,6 +25,7 @@
 #import "LKTutorialManager.h"
 #import "LKPreferenceManager.h"
 #import "LKMeasureController.h"
+#import "LKWarningManager.h"
 @import AppCenter;
 @import AppCenterAnalytics;
 
@@ -304,6 +305,8 @@ NSString *const LKAppShowConsoleNotificationName = @"LKAppShowConsoleNotificatio
     if (TutorialMng.hasAlreadyShowedTipsThisLaunch) {
         return;
     }
+    [[LKWarningManager sharedInstance] notifyMainWorkspaceDidAppear];
+    [[LKWarningManager sharedInstance] showWarningIfNeeded];
 }
 
 - (void)showQuickSelectionTutorialTips {

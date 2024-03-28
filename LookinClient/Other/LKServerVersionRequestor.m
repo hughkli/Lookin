@@ -7,6 +7,7 @@
 //
 
 #import "LKServerVersionRequestor.h"
+#import "LKWarningManager.h"
 
 @implementation LKServerVersionRequestor
 
@@ -44,13 +45,21 @@
             return;
         }
         NSString *version = json[@"currentVersion"];
-        if (!version) {
+        if (version) {
+            dispatch_async(dispatch_get_main_queue(),  ^{
+                [self handleReceiveVersion:version];
+            });
+        } else {
             NSLog(@"No currentVersion");
-            return;
         }
-        dispatch_async(dispatch_get_main_queue(),  ^{
-            [self handleReceiveVersion:version];
-        });
+        
+        NSDictionary *warnDict = json[@"warning"];
+        if (warnDict) {
+            [[LKWarningManager sharedInstance] handleReceiveServerInfo:warnDict];
+            dispatch_async(dispatch_get_main_queue(),  ^{
+                [[LKWarningManager sharedInstance] showWarningIfNeeded];
+            });
+        }
     }];
     [dataTask resume];
 }

@@ -14,6 +14,8 @@
 		1892DD292AF25EDE0016D61B /* LookinMsgTargetAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892DD252AF25EDE0016D61B /* LookinMsgTargetAction.m */; };
 		1892DD2A2AF25EDE0016D61B /* LookinMsgAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892DD282AF25EDE0016D61B /* LookinMsgAttribute.m */; };
 		601AD5E52A64D6110013F490 /* LKHierarchyDataSource+KeyDown.m in Sources */ = {isa = PBXBuildFile; fileRef = 601AD5E42A64D6110013F490 /* LKHierarchyDataSource+KeyDown.m */; };
+		7BF42D612BB5829B0048739A /* LKWarningManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF42D602BB5829B0048739A /* LKWarningManager.m */; };
+		7BF42D652BB59A870048739A /* LKWarningItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF42D642BB59A870048739A /* LKWarningItem.m */; };
 		7BFFDF0F2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFFDF0E2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.m */; };
 		7BFFDF122AF12E940039B828 /* LookinAttributesSection+LookinClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFFDF112AF12E940039B828 /* LookinAttributesSection+LookinClient.m */; };
 		7BFFDF152AF134240039B828 /* LKDashboardSectionViewPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFFDF142AF134240039B828 /* LKDashboardSectionViewPool.m */; };
@@ -231,6 +233,10 @@
 		5E8E4C9C392BAAF93643C21E /* Pods-LookinClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LookinClient.release.xcconfig"; path = "Target Support Files/Pods-LookinClient/Pods-LookinClient.release.xcconfig"; sourceTree = "<group>"; };
 		601AD5E32A64D6110013F490 /* LKHierarchyDataSource+KeyDown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LKHierarchyDataSource+KeyDown.h"; sourceTree = "<group>"; };
 		601AD5E42A64D6110013F490 /* LKHierarchyDataSource+KeyDown.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LKHierarchyDataSource+KeyDown.m"; sourceTree = "<group>"; };
+		7BF42D5F2BB5829B0048739A /* LKWarningManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKWarningManager.h; sourceTree = "<group>"; };
+		7BF42D602BB5829B0048739A /* LKWarningManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKWarningManager.m; sourceTree = "<group>"; };
+		7BF42D632BB59A870048739A /* LKWarningItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKWarningItem.h; sourceTree = "<group>"; };
+		7BF42D642BB59A870048739A /* LKWarningItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKWarningItem.m; sourceTree = "<group>"; };
 		7BFFDF0D2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LookinAttributesGroup+LookinClient.h"; sourceTree = "<group>"; };
 		7BFFDF0E2AF12AA10039B828 /* LookinAttributesGroup+LookinClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LookinAttributesGroup+LookinClient.m"; sourceTree = "<group>"; };
 		7BFFDF102AF12E940039B828 /* LookinAttributesSection+LookinClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LookinAttributesSection+LookinClient.h"; sourceTree = "<group>"; };
@@ -617,6 +623,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		7BF42D622BB5829F0048739A /* Warning */ = {
+			isa = PBXGroup;
+			children = (
+				7BF42D5F2BB5829B0048739A /* LKWarningManager.h */,
+				7BF42D632BB59A870048739A /* LKWarningItem.h */,
+				7BF42D642BB59A870048739A /* LKWarningItem.m */,
+				7BF42D602BB5829B0048739A /* LKWarningManager.m */,
+			);
+			path = Warning;
+			sourceTree = "<group>";
+		};
 		A26EF68527F89F83005A9E4E /* ShortCocoa */ = {
 			isa = PBXGroup;
 			children = (
@@ -867,6 +884,7 @@
 				AAA8C0D621CC17680017A345 /* Dashboard */,
 				AAA8C0C221CC17670017A345 /* Hierarchy */,
 				AAA8C11421CC17680017A345 /* Launch */,
+				7BF42D622BB5829F0048739A /* Warning */,
 				AAA8C0D221CC17680017A345 /* Static */,
 				AAD3872E2288614B00042229 /* Read */,
 				AAEE450821DF81C800BF2650 /* Preference */,
@@ -1345,6 +1363,7 @@
 				AAD387312288624600042229 /* LKReadViewController.m in Sources */,
 				AAA8C12221CC17680017A345 /* LKLabel.m in Sources */,
 				A74C630C2B54131F0068FBB8 /* LKSwiftDemangler.swift in Sources */,
+				7BF42D612BB5829B0048739A /* LKWarningManager.m in Sources */,
 				AABE9005224169D200030361 /* LKAppMenuManager.m in Sources */,
 				AAF418C522BA2C9600111554 /* LKConsoleSelectPopoverItemControl.m in Sources */,
 				AAA8C12721CC17680017A345 /* LKImageControl.m in Sources */,
@@ -1444,6 +1463,7 @@
 				AA34A15E233F884D00513829 /* LKConstraintPopoverController.m in Sources */,
 				AAA8C15B21CC17680017A345 /* LKStaticViewController.m in Sources */,
 				AAE61CC822A4F7B100B3FB9F /* LKInputSearchSuggestionItem.m in Sources */,
+				7BF42D652BB59A870048739A /* LKWarningItem.m in Sources */,
 				AA05CCDA221ED5F60086CDD1 /* LKDashboardAttributeColorView.m in Sources */,
 				AA5606302322AEA7008C82CF /* LKDashboardSearchMethodsDataSource.m in Sources */,
 				AA39054D23694C3100CA7646 /* LKAboutWindowController.m in Sources */,
